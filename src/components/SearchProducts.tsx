@@ -22,7 +22,7 @@ export const SearchProducts = () => {
 
     return (
         <form onSubmit={handleSubmission}
-              className="mt-4 max-w-[800px] mx-auto flex items-center bg-white rounded border border-gray-300">
+              className="mt-4 mx-auto flex items-center bg-white rounded border border-gray-300">
             <div className="p-2">
                 <BsSearch/>
             </div>

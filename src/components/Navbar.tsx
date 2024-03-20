@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import EpharmLogo from "../assets/e-pharm.png";
+import Logo from "../assets/e-pharm.png";
 import LanguageSelector from "./LanguageSelector.tsx";
 import { BsCart, BsPerson, BsPersonPlus } from "react-icons/bs";
 import { useTranslation } from "react-i18next";
@@ -11,9 +11,9 @@ export const Navbar = () => {
     const [t] = useTranslation("global");
 
     return (
-        <div className=" flex bg-white p-3 items-center px-12">
+        <div className="flex bg-white p-3 items-center">
             <NavLink to={"/"} className="flex space-x-2 items-center">
-                <img src={EpharmLogo} alt="logo" className="h-12" />
+                <img src={Logo} alt="logo" className="h-12" />
                 <h1 className="text-2xl font-medium">E-Pharm</h1>
             </NavLink>
             <div className="flex ml-auto space-x-6 items-center">

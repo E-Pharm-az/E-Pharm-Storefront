@@ -9,6 +9,7 @@ import Layout from "./components/Layout.tsx";
 import Profile from "./components/Profile.tsx";
 import RequireAuth from "./components/RequireAuth.tsx";
 import PersistLogin from "./components/PersistLogin.tsx";
+import Cart from "./components/Cart.tsx";
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
                     <Route path={"/product-page"} element={<ProductPage/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/signup" element={<Signup/>}/>
+                    <Route path="/cart" element={<Cart/>}/>
 
                     <Route element={<RequireAuth/>}>
                         <Route path="/profile" element={<Profile/>}/>

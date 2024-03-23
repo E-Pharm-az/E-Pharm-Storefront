@@ -9,6 +9,7 @@ import global_ru from "./translation/ru/global.json";
 import {I18nextProvider} from "react-i18next";
 import {AuthProvider} from "./context/AuthProvider.tsx";
 import {BrowserRouter} from "react-router-dom";
+import {CartProvider} from "./context/CartProvider.tsx";
 
 i18next.init({
     interpolation: {escapeValue: false},
@@ -26,12 +27,15 @@ i18next.init({
     },
 });
 
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
         <BrowserRouter>
             <I18nextProvider i18n={i18next}>
                 <AuthProvider>
-                    <App/>
+                    <CartProvider>
+                        <App/>
+                    </CartProvider>
                 </AuthProvider>
             </I18nextProvider>
         </BrowserRouter>

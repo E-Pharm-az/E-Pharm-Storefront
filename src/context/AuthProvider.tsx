@@ -1,4 +1,4 @@
-import {createContext, useState} from "react";
+import {createContext, Dispatch, ReactNode, SetStateAction, useState} from "react";
 
 export interface TokenResponse {
     token: string;
@@ -21,7 +21,7 @@ export interface AuthUser {
 
 interface AuthContextType {
     auth: AuthUser | null;
-    setAuth: React.Dispatch<React.SetStateAction<AuthUser | null>>;
+    setAuth: Dispatch<SetStateAction<AuthUser | null>>;
     isAuthenticated: () => boolean;
     logout: () => void;
 }
@@ -33,7 +33,7 @@ const AuthContext = createContext<AuthContextType>({
     logout: () => {}
 });
 
-export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [auth, setAuth] = useState<AuthUser | null>(null);
 
     const isAuthenticated = (): boolean => {

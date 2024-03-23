@@ -4,7 +4,7 @@ import Footer from "./Footer.tsx";
 
 const Layout = () => {
     return (
-        <main className="container mx-auto">
+        <main className="container mx-auto px-4">
             <Navbar/>
             <Outlet/>
             <Footer/>

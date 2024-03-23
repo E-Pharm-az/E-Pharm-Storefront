@@ -1,12 +1,10 @@
-import {useEffect, useRef, useState, useContext} from "react";
+import {useEffect, useRef, useState, useContext, FormEvent} from "react";
 import {BsArrowRepeat} from "react-icons/bs";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
-import apiClient from "../services/api-client.ts";
-import AuthContext, {TokenPayload, TokenResponse} from "../context/AuthProvider.tsx";
+import apiClient from "../../services/api-client.ts";
+import AuthContext, {TokenPayload, TokenResponse} from "../../context/AuthProvider.tsx";
 import {jwtDecode} from "jwt-decode";
-
-
 
 const Login = () => {
     const {setAuth} = useContext(AuthContext);
@@ -33,7 +31,7 @@ const Login = () => {
         setError("");
     }, [email, password]);
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setLoading(true);
 
@@ -71,7 +69,7 @@ const Login = () => {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+        <div className="py-8 mx-auto w-full md:w-[600px]">
             {loading && (
                 <div
                     className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-100 bg-opacity-50 z-50">
@@ -79,7 +77,7 @@ const Login = () => {
                 </div>
             )}
 
-            <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0">
+            <div className="bg-white rounded-lg shadow dark:border md:mt-0 xl:p-0">
                 <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                     <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                         {t("login.title")}

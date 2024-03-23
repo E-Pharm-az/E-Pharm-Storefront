@@ -1,12 +1,16 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {BsArrowRepeat, BsEye, BsEyeSlash} from "react-icons/bs";
-import {useState} from "react";
-import apiClient from "../services/api-client.ts";
+import {ChangeEvent, FormEvent, useContext, useState} from "react";
+import apiClient from "../../services/api-client.ts";
+import AuthContext, {TokenPayload, TokenResponse} from "../../context/AuthProvider.tsx";
+import {jwtDecode} from "jwt-decode";
 
 const Signup = () => {
-    const [showPassword, setShowPassword] = useState(false);
     const [t] = useTranslation("global");
+    const {setAuth} = useContext(AuthContext);
+    const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState({
         firstname: "",
         lastname: "",
@@ -20,7 +24,7 @@ const Signup = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const {name, value} = e.target;
         setFormData(prevState => ({
             ...prevState,
@@ -28,23 +32,49 @@ const Signup = () => {
         }));
     };
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setLoading(true);
         setError(null);
 
         if (formData.password === formData.confirmPassword) {
             try {
-                const response = await apiClient.post("/user/register", formData);
+                const {firstname, lastname, fin, email, phone, password} = formData;
+
+                const response = await apiClient.post("/user/register", {
+                        FirstName: firstname,
+                        LastName: lastname,
+                        Fin: fin,
+                        Email: email,
+                        PhoneNumber: phone,
+                        Password: password
+                    },
+                    {
+                        headers: {'Content-Type': 'application/json'},
+                        withCredentials: true,
+                    });
                 if (response.status === 200) {
-                    console.log("User registered successfully");
+                    const response = await apiClient.post<TokenResponse>("/auth/login/store", {email, password},
+                        {
+                            withCredentials: true,
+                            headers: {'Content-Type': 'application/json'}
+                        });
+
+                    const decodedToken = jwtDecode<TokenPayload>(response.data.token)
+
+                    setAuth({
+                        tokenResponse: response.data,
+                        id: decodedToken.jti,
+                        email: decodedToken.email,
+                        firstname: decodedToken.sub
+                    });
+
+                    navigate("/");
                 }
-            }
-            catch (error) {
+            } catch (error) {
                 setError(error.message);
             }
-        }
-        else {
+        } else {
             setError("Passwords do not match");
         }
         setLoading(false);
@@ -57,16 +87,15 @@ const Signup = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+        <div className="py-8 mx-auto w-full md:w-[600px]">
             {loading && (
                 <div
                     className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-100 bg-opacity-50 z-50">
                     <BsArrowRepeat className="animate-spin text-blue-500 mr-2"/>
                 </div>
             )}
-
-            <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0">
-                <form className="p-6 space-y-4 md:space-y-6 sm:p-8">
+            <div className="bg-white rounded-lg shadow dark:border md:mt-0 xl:p-0">
+                <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                     <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                         {t("signup.title")}
                     </h1>
@@ -150,7 +179,7 @@ const Signup = () => {
                                   className="ml-1 font-medium text-primary-600 hover:underline dark:text-primary-500">{t("signup.login")}</Link>
                         </p>
                     </form>
-                </form>
+                </div>
             </div>
         </div>
     )

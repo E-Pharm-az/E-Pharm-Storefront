@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
 import {Product} from "./Products.tsx";
-import apiClient from "../services/api-client.ts";
+import apiClient from "../../services/api-client.ts";
 import {BsArrowRepeat, BsImage} from "react-icons/bs";
 
 const ProductPage = () => {

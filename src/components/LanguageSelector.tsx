@@ -32,14 +32,14 @@ const LanguageSelector = () => {
     };
 
     return (
-        <div className="relative inline-block text-left hover:cursor-pointer">
-            <div className="flex items-center" onClick={() => setShowDropdown(!showDropdown)}>
+        <div className="relative inline-block text-left  hover:cursor-pointer">
+            <div className="flex items-center hover:opacity-70 transition" onClick={() => setShowDropdown(!showDropdown)}>
                 <BsGlobe className="w-5 h-5 mr-1"/>
                 <span className="capitalize">{selectedLanguage.code}</span>
             </div>
             {showDropdown && (
                 <div
-                    className="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                    className="origin-top-right z-10 absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                     <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                         {languages.map((language) => (
                             <div

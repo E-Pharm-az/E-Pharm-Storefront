@@ -10,9 +10,8 @@ const useRefreshToken = () => {
         const response = await apiClient.get<TokenResponse>("/auth/refresh-token", {withCredentials: true});
         const decodedToken = jwtDecode<TokenPayload>(response.data.token);
 
-        setAuth((prev) => {
+        setAuth(() => {
             return {
-                ...prev,
                 tokenResponse: response.data,
                 id: decodedToken.jti,
                 email: decodedToken.email,

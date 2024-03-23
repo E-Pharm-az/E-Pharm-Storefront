@@ -2,7 +2,7 @@ import Logo from "../assets/e-pharm.png";
 
 const Footer = () => {
     return (
-        <footer className="bg-white py-10 md:py-20">
+        <footer className="bg-white py-8">
             <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-20 mb-10 md:mb-20">
                 <a href="#!" className="flex flex-col items-center">
                     <img src={Logo} alt="E-Pharm Logo" className="w-44"/>

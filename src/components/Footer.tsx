@@ -70,7 +70,7 @@ const Footer = () => {
                     </p>
                 </div>
             </div>
-            <div className="container flex flex-col-reverse items-start justify-between sm:flex-row sm:items-center gap-4 px-4">
+            <div className="container flex flex-col-reverse items-start justify-between sm:flex-row sm:items-center gap-4 px-4 md:pb-0 pb-20">
                 <div className="text-gray-600 text-sm font-medium">Copyright © E-Pharm 2024</div>
                 <div className="flex gap-4 text-sm flex-col sm:flex-row">
                     <a href="#!" className="text-gray-600 font-medium">Terms & Conditions</a>

@@ -3,10 +3,12 @@ import {NavLink} from "react-router-dom";
 import Logo from "../assets/e-pharm.png";
 import LanguageSelector from "./LanguageSelector.tsx";
 import {BsCart, BsPerson, BsPersonPlus} from "react-icons/bs";
+import { FaHome, FaStore } from "react-icons/fa";
 import {useTranslation} from "react-i18next";
 import AuthContext from "../context/AuthProvider.tsx";
 import {SearchProducts} from "./SearchProducts.tsx";
 import CartContext from "../context/CartProvider.tsx";
+import { FaCartShopping, FaUser } from "react-icons/fa6";
 
 export const MobileNavbar = () => {
     const {auth} = useContext(AuthContext);
@@ -36,19 +38,35 @@ export const MobileNavbar = () => {
                         </>
                     ) : (
                         <>
-                            {/* <NavLink to={"/login"} className="hover:opacity-70 transition flex items-center">
+                            <NavLink to={"/login"} className="hover:opacity-70 transition items-center sm:flex hidden">
                                 <BsPerson className="w-5 h-5 mr-2"/>
-                                <span>{t("nav.login")}</span>
-                            </NavLink> */}
-                            {/* <NavLink to={"/signup"} className="hover:opacity-70 transition flex items-center">
+                            </NavLink>
+                            <NavLink to={"/signup"} className="hover:opacity-70 transition flex items-center hidden">
                                 <BsPersonPlus className="w-5 h-5 mr-2"/>
                                 <span>{t("nav.signup")}</span>
-                            </NavLink> */}
+                            </NavLink>
                         </>
                     )}
                 </div>
             </div>
             <SearchProducts/>
+            <div className="mobile-bottom w-full fixed bottom-0 left-0 ">
+                <div className="flex items-center justify-between h-20 bg-white border border-gray-300 rounded-t-xl">
+                    <NavLink to={"/"} className="flex-grow flex justify-center">
+                        <FaHome style={{ height: "28px",width: "28px"}}/>
+                    </NavLink>
+                    <NavLink to={"/products"} className="flex-grow flex justify-center">
+                        <FaStore style={{ height: "25px",width: "25px"}}/>
+                    </NavLink>
+                    <NavLink to={"/cart"} className="flex-grow flex justify-center">
+                        <FaCartShopping style={{ height: "25px",width: "25px"}}/>
+                    </NavLink>
+                    <NavLink to={"/login"} className="flex-grow flex justify-center">
+                        <FaUser style={{ height: "25px",width: "25px"}} />
+                    </NavLink>
+                </div>
+                
+            </div>
         </nav>
     )
 }

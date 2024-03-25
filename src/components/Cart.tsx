@@ -18,7 +18,7 @@ const Cart = () => {
     };
 
     return (
-        <div className="md:grid md:grid-cols-5 md:gap-8 space-y-4 md:space-y-0">
+        <div className="container md:grid md:grid-cols-5 md:gap-8 space-y-4 md:space-y-0 py-8">
             <div className="col-span-3 border border-gray-200 rounded-md">
                 <div className="flex items-center p-4 space-x-1">
                     <p>{cart.length}</p>

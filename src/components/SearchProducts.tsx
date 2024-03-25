@@ -19,10 +19,10 @@ export const SearchProducts = () => {
     };
 
     return (
-        <form onSubmit={handleSubmission} className="w-full mx-auto flex items-center rounded-xl border border-gray-300">
+        <form onSubmit={handleSubmission} className="w-full flex items-center rounded-xl border border-gray-300">
             <input
                 type="text"
-                className={`flex-grow p-2 rounded-xl text-xs ${isInputActive ? "focus:outline-none" : ""}`}
+                className={`flex-grow p-2 rounded-xl text-sm font-medium ${isInputActive ? "focus:outline-none" : ""}`}
                 placeholder={t("home.placeholder")}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onClick={activateInput}

@@ -3,7 +3,7 @@ import Logo from "../assets/e-pharm.png";
 const Footer = () => {
     return (
         <footer className="bg-white py-8">
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-20 mb-10 md:mb-20">
+            <div className="container grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-4 mb-10 md:mb-20 px-4">
                 <a href="#!" className="flex flex-col items-center">
                     <img src={Logo} alt="E-Pharm Logo" className="w-44"/>
                 </a>
@@ -55,7 +55,7 @@ const Footer = () => {
                             className="flex-grow py-3 px-4 bg-white border border-gray-400 rounded-lg placeholder-gray-500 focus:outline-none focus:border-gray-600"
                         />
                         <button
-                            className="py-3 px-6 bg-green-500 text-white font-semibold rounded-lg transition duration-300 hover:bg-green-600 focus:outline-none focus:bg-green-600">
+                            className="py-3 px-6 bg-[#61a60e] text-white font-medium rounded-lg transition duration-300 focus:outline-none focus:bg-green-600">
                             Sign Up
                         </button>
                     </form>
@@ -64,17 +64,17 @@ const Footer = () => {
                         emails about E-Pharm’s products, services, sales, and special offers. You can unsubscribe at
                         any time by clicking on the unsubscribe link in each email. For more information on our use
                         of your personal information and your rights, see our{" "}
-                        <a href="#!" className="text-green-500 underline">
+                        <a href="#!" className="text-[#61a60e] underline">
                             Privacy Policy.
                         </a>
                     </p>
                 </div>
             </div>
-            <div className="flex justify-between items-center">
-                <div className="text-gray-600 text-sm">Copyright © E-Pharm 2024</div>
-                <div className="flex gap-6 text-sm">
-                    <a href="#!" className="text-gray-600">Terms & Conditions</a>
-                    <a href="#!" className="text-gray-600">Privacy Policy</a>
+            <div className="container flex flex-col-reverse items-start justify-between sm:flex-row sm:items-center gap-4 px-4">
+                <div className="text-gray-600 text-sm font-medium">Copyright © E-Pharm 2024</div>
+                <div className="flex gap-4 text-sm flex-col sm:flex-row">
+                    <a href="#!" className="text-gray-600 font-medium">Terms & Conditions</a>
+                    <a href="#!" className="text-gray-600 font-medium">Privacy Policy</a>
                 </div>
             </div>
         </footer>

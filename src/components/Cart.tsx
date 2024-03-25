@@ -84,7 +84,7 @@ const Cart = () => {
                     <button
                         onClick={handleCheckout}
                         disabled={cart.length === 0}
-                        className="w-full bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 disabled:hover:bg-green-500 disabled:opacity-75 disabled:cursor-not-allowed transition font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white">
+                        className="w-full bg-[#61a60e] focus:ring-4 focus:outline-none focus:ring-green-300 disabled:opacity-75 disabled:cursor-not-allowed transition font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white">
                         Proceed to Checkout
                     </button>
                 </div>

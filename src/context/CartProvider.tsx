@@ -94,7 +94,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     return (
         <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart, getProductIdsFromCart }}>
             {showNotification && (
-                <div className="fixed bottom-10 left-0 right-0 w-full border-green-600 border rounded mx-auto md:w-[300px] flex items-center justify-center z-20 bg-green-500 text-white text-center py-2">
+                <div className="fixed top-4 right-0 w-60 border-green-600 border rounded flex items-center justify-center z-20 bg-green-500 text-white text-center py-2">
                     <BsCheck className="w-6 h-6 bg-green-600 rounded-full p-1 mr-2" />
                     <p className="text-white">Item added to cart</p>
                 </div>

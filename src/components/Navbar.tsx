@@ -29,20 +29,16 @@ export const Navbar = () => {
                 </NavLink>
                 {auth ? (
                     <>
-                        <NavLink to={"/profile"} className="hover:opacity-70 transition flex items-center">
+                        <NavLink to={"/profile"} className="hover:opacity-70 transition flex items-center flex-shrink-0">
                             <BsPerson className="w-5 h-5 mr-2"/>
                             <p>{t("nav.hi")} {auth.firstname}</p>
                         </NavLink>
                     </>
                 ) : (
                     <>
-                        <NavLink to={"/login"} className="hover:opacity-70 transition flex items-center">
+                        <NavLink to={"/login"} className="hover:opacity-70 transition flex items-center flex-shrink-0">
                             <BsPerson className="w-5 h-5 mr-2"/>
                             <span>{t("nav.login")}</span>
-                        </NavLink>
-                        <NavLink to={"/signup"} className="hover:opacity-70 transition flex items-center">
-                            <BsPersonPlus className="w-5 h-5 mr-2"/>
-                            <span>{t("nav.signup")}</span>
                         </NavLink>
                     </>
                 )}

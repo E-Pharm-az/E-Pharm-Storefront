@@ -49,7 +49,7 @@ export const MobileNavbar = () => {
                 </div>
             </div>
             <SearchProducts/>
-            <div className="mobile-bottom w-full fixed bottom-0 left-0 ">
+            <div className="mobile-bottom w-full fixed bottom-0 left-0 z-40">
                 <div className="flex items-center justify-between gap-4 h-20 bg-white border border-gray-300 rounded-t-xl">
                     <NavLink to={"/"} className="flex h-full items-center flex-grow flex justify-center">
                         <Home color="#61a60e" size={28}/>

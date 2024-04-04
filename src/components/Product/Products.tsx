@@ -4,8 +4,6 @@ import apiClient from "../../services/api-client.ts";
 import {BsArrowRepeat, BsImage} from "react-icons/bs";
 import CartContext from "../../context/CartProvider.tsx";
 
-
-
 export interface Product {
     id: number;
     pharmaCompanyId: number;
@@ -30,9 +28,6 @@ export interface Product {
     packagingLength: number;
     packagingWeight: number;
 }
-
-
-
 
 const Products = () => {
     const {addToCart} = useContext(CartContext);

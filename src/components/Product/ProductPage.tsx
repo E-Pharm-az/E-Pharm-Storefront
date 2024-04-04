@@ -17,9 +17,7 @@ const ProductPage = () => {
 
     const navigate = useNavigate();
     const [count, setCount] = useState(1);
-    const [totalProductPrice, setTotalProductPrice] = useState<
-        number | undefined
-    >(product?.price);
+    const [totalProductPrice, setTotalProductPrice] = useState<number | undefined>(product?.price);
     const [addToCartBtnClicked, setAddToCartBtnClicked] = useState(false);
     const [addToCartBtnText, setAddToCartBtnText] = useState("Add to Cart");
 

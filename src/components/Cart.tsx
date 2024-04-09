@@ -107,7 +107,7 @@ const Cart = () => {
             <div className="col-span-2 border border-gray-200 rounded-md h-fit">
                 <div className="p-4 flex items-center space-x-1 border-b border-gray-200">
                     <p>Cart total:</p>
-                    <p>{totalPrice.toFixed(2)} AZN</p>
+                    <p>{(totalPrice / 100).toFixed(2)} AZN</p>
                 </div>
                 <div className="p-4">
                     <button

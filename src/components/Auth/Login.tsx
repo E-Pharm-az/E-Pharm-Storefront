@@ -1,10 +1,11 @@
 import {useEffect, useRef, useState, useContext, FormEvent} from "react";
-import {BsArrowRepeat} from "react-icons/bs";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import apiClient from "../../services/api-client.ts";
 import AuthContext, {TokenPayload, TokenResponse} from "../../context/AuthProvider.tsx";
 import {jwtDecode} from "jwt-decode";
+import {Loader} from "lucide-react";
+import axios from "axios";
 
 const Login = () => {
     const {setAuth} = useContext(AuthContext);
@@ -55,13 +56,19 @@ const Login = () => {
             setPassword("")
 
             navigate(from, {replace: true});
-        } catch (error ) {
-            if (error?.response) {
-                setError("No server response");
-            } else if (error?.response?.status === 400) {
-                setError("Invalid email or password");
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                if (error.response) {
+                    if (error.response.status === 400) {
+                        setError("Invalid email or password");
+                    } else {
+                        setError("No server response");
+                    }
+                } else {
+                    setError("Login failed")
+                }
             } else {
-                setError("Login failed")
+                setError("An unexpected error occurred");
             }
             errorRef.current?.focus();
         }
@@ -73,7 +80,7 @@ const Login = () => {
             {loading && (
                 <div
                     className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-100 bg-opacity-50 z-50">
-                    <BsArrowRepeat className="animate-spin text-blue-500 mr-2"/>
+                    <Loader className="animate-spin text-blue-500 mr-2"/>
                 </div>
             )}
 

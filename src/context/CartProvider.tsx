@@ -1,5 +1,5 @@
 import {createContext, ReactNode, useEffect, useState} from "react";
-import {BsCheck} from "react-icons/bs";
+import {Check} from "lucide-react";
 
 export interface CartItem {
     id: number;
@@ -95,7 +95,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart, getProductIdsFromCart }}>
             {showNotification && (
                 <div className="fixed top-4 right-0 w-60 border-green-600 border rounded flex items-center justify-center z-20 bg-green-500 text-white text-center py-2">
-                    <BsCheck className="w-6 h-6 bg-green-600 rounded-full p-1 mr-2" />
+                    <Check className="w-6 h-6 bg-green-600 rounded-full p-1 mr-2" />
                     <p className="text-white">Item added to cart</p>
                 </div>
             )}

@@ -1,11 +1,11 @@
-import { useEffect, useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
-import { Product } from "./Products.tsx";
+import {useEffect, useState, useContext} from "react";
+import {useNavigate} from "react-router-dom";
+import {useLocation} from "react-router-dom";
+import {Product} from "./Products.tsx";
 import apiClient from "../../services/api-client.ts";
-import { BsArrowRepeat, BsImage } from "react-icons/bs";
 
 import CartContext from "../../context/CartProvider.tsx";
+import {Image, Loader} from "lucide-react";
 
 const ProductPage = () => {
     const [product, setProduct] = useState<Product>();
@@ -13,11 +13,11 @@ const ProductPage = () => {
     const location = useLocation();
     const search = new URLSearchParams(location.search);
     const productId = search.get("search");
-    const { addToCart } = useContext(CartContext);
+    const {addToCart} = useContext(CartContext);
 
     const navigate = useNavigate();
     const [count, setCount] = useState(1);
-    const [totalProductPrice, setTotalProductPrice] = useState<number | undefined>(product?.price);
+    const [totalProductPrice, setTotalProductPrice] = useState<number>(product?.price ?? 0);
     const [addToCartBtnClicked, setAddToCartBtnClicked] = useState(false);
     const [addToCartBtnText, setAddToCartBtnText] = useState("Add to Cart");
 
@@ -53,14 +53,14 @@ const ProductPage = () => {
 
     const handleAddToCart = (
         e: React.MouseEvent<HTMLButtonElement>,
-        product: Product,
+        product: Product | undefined,
     ) => {
         if (!addToCartBtnClicked && product) {
             e.stopPropagation();
             addToCart({
                 id: product.id,
-                imageUrl: product.productImageUrl,
-                name: product.productName,
+                imageUrl: product.imageUrl,
+                name: product.name,
                 price: product.price,
                 quantity: count,
             });
@@ -75,41 +75,33 @@ const ProductPage = () => {
         <div className="container flex flex-col md:flex-row justify-between gap-8 py-12">
             <div className="flex-grow md:max-w-[600px] max-w-full">
                 {loading && (
-                    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-100 bg-opacity-50 z-50">
-                        <BsArrowRepeat className="animate-spin text-blue-500 mr-2" />
+                    <div
+                        className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-100 bg-opacity-50 z-50">
+                        <Loader className="animate-spin text-blue-500 mr-2"/>
                         <span>Loading...</span>
                     </div>
                 )}
                 {product && (
                     <div className="flex flex-col md:flex-row gap-8 bg-white shadow-md border rounded-md p-6">
-                        <div className="">
-                            {product.productImageUrl ? (
-                                <div className="shadow-md border rounded-md mb-4">
-                                    <img
-                                        src={product.productImageUrl}
-                                        alt={product.productName}
-                                        className="w-[280px] h-auto  mx-auto"
-                                    />
-                                </div>
-                            ) : (
-                                <div className="flex items-center justify-center w-full h-60 mb-4 bg-gray-200 rounded-md">
-                                    <BsImage className="text-gray-400 text-4xl" />
-                                </div>
-                            )}
-                        </div>
-
+                        {product.imageUrl ? (
+                            <div className="shadow-md border rounded-md mb-4">
+                                <img
+                                    src={product.imageUrl}
+                                    alt={product.name}
+                                    className="w-[280px] h-auto  mx-auto"
+                                />
+                            </div>
+                        ) : (
+                            <div className="flex items-center justify-center w-full h-60 mb-4 bg-gray-200 rounded-md">
+                                <Image className="text-gray-400 text-4xl"/>
+                            </div>
+                        )}
                         <div className="flex flex-col">
                             <h1 className="text-2xl sm:text-3xl font-semibold mb-4">
-                                {product && product.productName}
+                                {product && product.name}
                             </h1>
                             <p className="text-gray-600 font-medium mb-4">
                                 Strength: {product && product.strengthMg} mg
-                            </p>
-                            <p className="text-gray-600 font-medium mb-4">
-                                Product Code: {product && product.barcode}
-                            </p>
-                            <p className="text-gray-600 font-medium mb-4">
-                                Barcode: {product && product.barcode}
                             </p>
                         </div>
                     </div>

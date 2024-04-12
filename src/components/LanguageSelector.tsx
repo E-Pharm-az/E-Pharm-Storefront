@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
-import {BsGlobe} from "react-icons/bs";
 import {useTranslation} from "react-i18next";
+import {Globe} from "lucide-react";
 
 type Language = {
     code: string;
@@ -34,7 +34,7 @@ const LanguageSelector = () => {
     return (
         <div className="relative inline-block text-left  hover:cursor-pointer">
             <div className="flex items-center hover:opacity-70 transition" onClick={() => setShowDropdown(!showDropdown)}>
-                <BsGlobe className="w-5 h-5 mr-1"/>
+                <Globe className="w-5 h-5 mr-1"/>
                 <span className="capitalize">{selectedLanguage.code}</span>
             </div>
             {showDropdown && (

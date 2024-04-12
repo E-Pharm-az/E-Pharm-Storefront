@@ -10,9 +10,9 @@ import Profile from "./components/Profile.tsx";
 import RequireAuth from "./components/Auth/RequireAuth.tsx";
 import PersistLogin from "./components/Auth/PersistLogin.tsx";
 import Cart from "./components/Cart.tsx";
-import Payment from "./components/Payment.tsx";
 import ConfirmEmail from "./components/Auth/ConfirmEmail.tsx";
 import AuthLayout from "./components/AuthLayout.tsx";
+import Checkout from "./components/Checkout.tsx";
 
 function App() {
     return (
@@ -31,12 +31,10 @@ function App() {
                     <Route path="*" element={<NotFound/>}/>
                 </Route>
 
-                 <Route element={<RequireAuth/>}>
-                    <Route path="/payment" element={<Payment/>}/>
-                 </Route>
              </Route>
 
             <Route element={<AuthLayout/>}>
+                <Route path="/checkout" element={<Checkout/>}/>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/signup" element={<Signup/>}/>
                 <Route path="/confirm-email" element={<ConfirmEmail/>}/>

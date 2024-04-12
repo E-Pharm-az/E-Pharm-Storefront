@@ -1,15 +1,12 @@
-import { BsBag, BsPin, BsTrash } from "react-icons/bs";
 import CartContext from "../context/CartProvider.tsx";
 import { ChangeEvent, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {Pin, ShoppingCart, Trash} from "lucide-react";
 
 const Cart = () => {
     const { cart, addToCart, removeFromCart } = useContext(CartContext);
     const [shippingAddress, setShippingAddress] = useState<string>("");
-    const totalPrice = cart.reduce(
-        (total, item) => total + item.price * item.quantity,
-        0
-    );
+    const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
     const navigate = useNavigate();
 
     const handleShippingAddressChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -17,7 +14,7 @@ const Cart = () => {
     };
 
     const handleCheckout = async () => {
-        navigate("/payment");
+        navigate("/checkout");
     };
 
     return (
@@ -29,7 +26,7 @@ const Cart = () => {
                 </div>
                 <div className="p-4 flex flex-col sm:flex-row item-start sm:items-center border-t border-b border-gray-200 gap-2">
                     <div className="flex items-center gap-1">
-                        <BsPin className="w-5 h-5" />
+                        <Pin className="w-5 h-5" />
                         <p className="flex-shrink-0">Deliver to:</p>
                     </div>
                     <input
@@ -45,7 +42,7 @@ const Cart = () => {
                 {cart.length === 0 ? (
                     <div className="h-[230px] flex items-center justify-center">
                         <div>
-                            <BsBag className="mx-auto w-12 h-12 mb-2" />
+                            <ShoppingCart className="mx-auto w-12 h-12 mb-2" />
                             <p className={""}>Your cart is empty</p>
                         </div>
                     </div>
@@ -62,7 +59,7 @@ const Cart = () => {
                             >
                                 <div className="flex items-center space-x-2">
                                     <img
-                                        src={item.imageUrl}
+                                        src="https://southstardrug.com.ph/cdn/shop/files/Midol.jpg?v=1706145522"
                                         alt={item.name}
                                         className="w-16 h-16"
                                     />
@@ -74,7 +71,7 @@ const Cart = () => {
                                     </div>
                                 </div>
                                 <div className="">
-                                    <BsTrash
+                                    <Trash
                                         onClick={() => removeFromCart(item.id)}
                                         className="ml-auto mb-6 w-5 h-5 text-gray-600 cursor-pointer"
                                     />

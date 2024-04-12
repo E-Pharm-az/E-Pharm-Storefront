@@ -34,7 +34,8 @@ const PersistLogin = () => {
                     <Loader className="animate-spin text-blue-500 mr-2"/>
                     <span>Loading...</span>
                 </div>
-                : <Outlet/>}
+                : <Outlet/>
+            }
         </>
     );
 };

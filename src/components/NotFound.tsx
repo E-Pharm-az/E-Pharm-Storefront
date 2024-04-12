@@ -1,12 +1,16 @@
+import {useLocation, useNavigate} from "react-router-dom";
+import {useEffect} from "react";
+
 const NotFound = () => {
-    return(
-        <div className="flex items-center justify-center h-screen ">
-            <div className="text-center">
-                <h1 className="text-4xl font-bold mb-4">404 Not Found</h1>
-                <p className="text-gray-600">Oops! The page you are looking for does not exist.</p>
-            </div>
-        </div>
-    )
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+
+    useEffect(() => {
+        navigate(from, {replace: true});
+    }, []);
+
+    return(<></>);
 }
 
 export default NotFound;

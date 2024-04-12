@@ -10,6 +10,7 @@ import {I18nextProvider} from "react-i18next";
 import {AuthProvider} from "./context/AuthProvider.tsx";
 import {BrowserRouter} from "react-router-dom";
 import {CartProvider} from "./context/CartProvider.tsx";
+import {PayPalScriptProvider} from "@paypal/react-paypal-js";
 
 i18next.init({
     interpolation: {escapeValue: false},
@@ -33,9 +34,14 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <BrowserRouter>
             <I18nextProvider i18n={i18next}>
                 <AuthProvider>
-                    <CartProvider>
-                        <App/>
-                    </CartProvider>
+                    <PayPalScriptProvider options={{
+                        clientId: "AQYOcvO9w4UvyZSGLV4OUm4C8KlX6aU_kSgRLSb6GRziLMmISjHqfkVk65ZRufkXVQEkDyn-ZwOasD9k",
+                        currency: "USD"
+                    }}>
+                        <CartProvider>
+                            <App/>
+                        </CartProvider>
+                    </PayPalScriptProvider>
                 </AuthProvider>
             </I18nextProvider>
         </BrowserRouter>

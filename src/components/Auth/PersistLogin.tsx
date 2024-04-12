@@ -2,7 +2,7 @@ import {useContext, useEffect, useState} from "react";
 import useRefreshToken from "../../hooks/useRefreshToken.ts";
 import AuthContext from "../../context/AuthProvider.tsx";
 import {Outlet} from "react-router-dom";
-import {BsArrowRepeat} from "react-icons/bs";
+import {Loader} from "lucide-react";
 
 const PersistLogin = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -31,10 +31,11 @@ const PersistLogin = () => {
         <>
             {isLoading ?
                 <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-100 bg-opacity-50 z-50">
-                    <BsArrowRepeat className="animate-spin text-blue-500 mr-2"/>
+                    <Loader className="animate-spin text-blue-500 mr-2"/>
                     <span>Loading...</span>
                 </div>
-                : <Outlet/>}
+                : <Outlet/>
+            }
         </>
     );
 };

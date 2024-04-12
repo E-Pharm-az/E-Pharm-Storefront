@@ -2,7 +2,7 @@ import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import apiClient from "../../services/api-client.ts";
 import Logo from "../../assets/e-pharm.png";
-import {BsArrowRepeat} from "react-icons/bs";
+import {Loader} from "lucide-react";
 
 const ConfirmEmail = () => {
     const location = useLocation();
@@ -47,7 +47,7 @@ const ConfirmEmail = () => {
             {loading && (
                 <div
                     className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-100 bg-opacity-50 z-50">
-                    <BsArrowRepeat className="animate-spin text-blue-500 mr-2"/>
+                    <Loader className="animate-spin text-blue-500 mr-2"/>
                 </div>
             )}
             {error && (
@@ -58,7 +58,7 @@ const ConfirmEmail = () => {
             )}
             <div className="space-y-4 w-full  md:w-max-[500px]">
                 <img src={Logo} alt="logo" className="w-16 h-16"/>
-                <p className="font-semibold text-xl">Account confirmation</p>
+                <p className="font-semibold text-xl">Account confirmation Successful</p>
                 {onSuccess ? (
                     <>
                         <p>Your account has been confirmed, please precede to login.</p>

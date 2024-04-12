@@ -1,7 +1,7 @@
-import {BsSearch} from "react-icons/bs";
 import {FormEvent, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
+import {Search} from "lucide-react";
 
 export const SearchProducts = () => {
     const history = useNavigate();
@@ -30,8 +30,7 @@ export const SearchProducts = () => {
             />
             <button type="submit" className="p-2"
                     disabled={!searchQuery.trim()}>
-                <BsSearch/>
-
+                <Search/>
             </button>
         </form>
     )

@@ -1,8 +1,9 @@
 import {Link} from "react-router-dom";
 import {useTranslation} from "react-i18next";
-import {BsArrowRepeat, BsEye, BsEyeSlash} from "react-icons/bs";
+import {Loader, Eye, EyeOff} from "lucide-react";
 import {ChangeEvent, FormEvent, useState} from "react";
 import apiClient from "../../services/api-client.ts";
+import axios from "axios";
 
 const Signup = () => {
     const [t] = useTranslation("global");
@@ -54,7 +55,19 @@ const Signup = () => {
                     setConfirmEmail(true);
                 }
             } catch (error) {
-                setError(error.message);
+                if (axios.isAxiosError(error)) {
+                    if (error.response) {
+                        if (error.response.status === 400) {
+                            setError("Invalid email or password");
+                        } else {
+                            setError("No server response");
+                        }
+                    } else {
+                        setError("Login failed")
+                    }
+                } else {
+                    setError("An unexpected error occurred");
+                }
             }
         } else {
             setError("Passwords do not match");
@@ -73,7 +86,7 @@ const Signup = () => {
             {loading && (
                 <div
                     className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-100 bg-opacity-50 z-50">
-                    <BsArrowRepeat className="animate-spin text-blue-500 mr-2"/>
+                    <Loader className="animate-spin text-blue-500 mr-2"/>
                 </div>
             )}
             {confirmEmail ? (
@@ -149,7 +162,7 @@ const Signup = () => {
                                         onClick={() => togglePasswordVisibility('password')}
                                         disabled={!formData.password}
                                     >
-                                        {showPassword ? <BsEyeSlash/> : <BsEye/>}
+                                        {showPassword ? <EyeOff/> : <Eye/>}
                                     </button>
                                 </div>
                             </div>
@@ -163,13 +176,13 @@ const Signup = () => {
                                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                                        required={true}/>
                             </div>
-                            <button type="submit"
-                                    className="w-full text-white bg-[#61a60e] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">
+                            <button type="submit" className="w-full text-white bg-[#61a60e] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">
                                 {t("signup.cta")}
                             </button>
                             <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                                <Link to={"/login"}
-                                      className="ml-1 font-medium text-primary-600 hover:underline dark:text-primary-500">{t("signup.login")}</Link>
+                                <Link to={"/login"} className="ml-1 font-medium text-primary-600 hover:underline dark:text-primary-500">
+                                    {t("signup.login")}
+                                </Link>
                             </p>
                         </form>
                     </div>

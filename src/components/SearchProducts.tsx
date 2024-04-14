@@ -28,8 +28,7 @@ export const SearchProducts = () => {
                 onClick={activateInput}
                 onFocus={activateInput}
             />
-            <button type="submit" className="p-2"
-                    disabled={!searchQuery.trim()}>
+            <button type="submit" className="p-2 disabled:opacity-30 disabled:cursor-default" disabled={!searchQuery.trim()}>
                 <Search/>
             </button>
         </form>

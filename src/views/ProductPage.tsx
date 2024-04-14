@@ -2,9 +2,9 @@ import {useEffect, useState, useContext} from "react";
 import {useNavigate} from "react-router-dom";
 import {useLocation} from "react-router-dom";
 import {Product} from "./Products.tsx";
-import apiClient from "../../services/api-client.ts";
+import apiClient from "../services/api-client.ts";
 
-import CartContext from "../../context/CartProvider.tsx";
+import CartContext from "../context/CartProvider.tsx";
 import {Image, Loader} from "lucide-react";
 
 const ProductPage = () => {

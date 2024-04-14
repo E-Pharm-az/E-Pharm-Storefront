@@ -2,7 +2,7 @@ import {Link} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {Loader, Eye, EyeOff} from "lucide-react";
 import {ChangeEvent, FormEvent, useState} from "react";
-import apiClient from "../../services/api-client.ts";
+import apiClient from "../services/api-client.ts";
 import axios from "axios";
 
 const Signup = () => {

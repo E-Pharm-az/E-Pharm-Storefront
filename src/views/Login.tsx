@@ -1,8 +1,8 @@
 import {useEffect, useRef, useState, useContext, FormEvent} from "react";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
-import apiClient from "../../services/api-client.ts";
-import AuthContext, {TokenPayload, TokenResponse} from "../../context/AuthProvider.tsx";
+import apiClient from "../services/api-client.ts";
+import AuthContext, {TokenPayload, TokenResponse} from "../context/AuthProvider.tsx";
 import {jwtDecode} from "jwt-decode";
 import {Loader} from "lucide-react";
 import axios from "axios";

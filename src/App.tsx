@@ -1,18 +1,17 @@
 import {Routes, Route} from "react-router-dom";
-import Home from "./components/Home.tsx";
-import Products from "./components/Product/Products.tsx";
-import NotFound from "./components/NotFound.tsx";
-import ProductPage from "./components/Product/ProductPage.tsx";
-import Signup from "./components/Auth/Signup.tsx";
-import Login from "./components/Auth/Login.tsx";
-import Layout from "./components/Layout.tsx";
-import Profile from "./components/Profile.tsx";
+import Home from "./views/Home.tsx";
+import Products from "./views/Products.tsx";
+import NotFound from "./views/NotFound.tsx";
+import ProductPage from "./views/ProductPage.tsx";
+import Signup from "./views/Signup.tsx";
+import Login from "./views/Login.tsx";
+import Layout from "./layouts/Layout.tsx";
+import Profile from "./views/Profile.tsx";
 import RequireAuth from "./components/Auth/RequireAuth.tsx";
 import PersistLogin from "./components/Auth/PersistLogin.tsx";
-import Cart from "./components/Cart.tsx";
-import ConfirmEmail from "./components/Auth/ConfirmEmail.tsx";
-import AuthLayout from "./components/AuthLayout.tsx";
-import Checkout from "./components/Checkout.tsx";
+import Cart from "./views/Cart.tsx";
+import ConfirmEmail from "./views/ConfirmEmail.tsx";
+import AuthLayout from "./layouts/AuthLayout.tsx";
 
 function App() {
     return (
@@ -34,7 +33,6 @@ function App() {
              </Route>
 
             <Route element={<AuthLayout/>}>
-                <Route path="/checkout" element={<Checkout/>}/>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/signup" element={<Signup/>}/>
                 <Route path="/confirm-email" element={<ConfirmEmail/>}/>

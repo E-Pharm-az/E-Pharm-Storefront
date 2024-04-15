@@ -1,0 +1,30 @@
+{
+  "home": {
+    "title": "Search for medication",
+    "description": "Just type the name of the medication you are looking for and we will find it for you",
+    "placeholder": "Search for medication",
+    "cta": "Search"
+  },
+  "nav": {
+    "login": "Sign in",
+    "signup": "Signup",
+    "cart": "Cart",
+    "hi" : "Hi"
+  },
+  "signup": {
+    "firstname": "Name",
+    "lastname": "Family name",
+    "title": "Create an account",
+    "fin": "Fin",
+    "email": "Your email",
+    "phone": "Phone number",
+    "password": "Password",
+    "confirm": "Confirm password",
+    "cta": "Create an account",
+    "login": "Already have an account? Login"
+  },
+  "login": {
+    "title": "Login",
+    "signup": "Not a user? Create an account here"
+  }
+}

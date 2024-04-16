@@ -13,11 +13,13 @@ import Cart from "./views/Cart.tsx";
 import ConfirmEmail from "./views/ConfirmEmail.tsx";
 import AuthLayout from "./layouts/AuthLayout.tsx";
 import {SpeedInsights} from "@vercel/speed-insights/react";
+import { Analytics } from "@vercel/analytics/react"
 
 function App() {
     return (
         <>
             <SpeedInsights/>
+            <Analytics/>
             <Routes>
                 <Route element={<PersistLogin/>}>
                     <Route path={"/"} element={<Layout/>}>

@@ -12,33 +12,37 @@ import PersistLogin from "./components/Auth/PersistLogin.tsx";
 import Cart from "./views/Cart.tsx";
 import ConfirmEmail from "./views/ConfirmEmail.tsx";
 import AuthLayout from "./layouts/AuthLayout.tsx";
+import {SpeedInsights} from "@vercel/speed-insights/react";
 
 function App() {
     return (
-        <Routes>
-             <Route element={<PersistLogin/>}>
-                <Route path={"/"} element={<Layout/>}>
-                    <Route path="/" element={<Home/>}/>
-                    <Route path={"/products"} element={<Products/>}/>
-                    <Route path={"/product-page"} element={<ProductPage/>}/>
-                    <Route path="/cart" element={<Cart/>}/>
+        <>
+            <SpeedInsights/>
+            <Routes>
+                <Route element={<PersistLogin/>}>
+                    <Route path={"/"} element={<Layout/>}>
+                        <Route path="/" element={<Home/>}/>
+                        <Route path={"/products"} element={<Products/>}/>
+                        <Route path={"/product-page"} element={<ProductPage/>}/>
+                        <Route path="/cart" element={<Cart/>}/>
 
-                     <Route element={<RequireAuth/>}>
-                        <Route path="/profile" element={<Profile/>}/>
-                     </Route>
+                        <Route element={<RequireAuth/>}>
+                            <Route path="/profile" element={<Profile/>}/>
+                        </Route>
 
-                    <Route path="*" element={<NotFound/>}/>
+                        <Route path="*" element={<NotFound/>}/>
+                    </Route>
+
                 </Route>
 
-             </Route>
+                <Route element={<AuthLayout/>}>
+                    <Route path="/login" element={<Login/>}/>
+                    <Route path="/signup" element={<Signup/>}/>
+                    <Route path="/confirm-email" element={<ConfirmEmail/>}/>
+                </Route>
 
-            <Route element={<AuthLayout/>}>
-                <Route path="/login" element={<Login/>}/>
-                <Route path="/signup" element={<Signup/>}/>
-                <Route path="/confirm-email" element={<ConfirmEmail/>}/>
-            </Route>
-
-        </Routes>
+            </Routes>
+        </>
     )
 }
 

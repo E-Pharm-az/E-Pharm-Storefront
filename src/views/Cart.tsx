@@ -54,7 +54,7 @@ const Cart = () => {
                             >
                                 <div className="flex items-center space-x-2">
                                     <img
-                                        src="https://southstardrug.com.ph/cdn/shop/files/Midol.jpg?v=1706145522"
+                                        src={item.imageUrl}
                                         alt={item.name}
                                         className="w-16 h-16"
                                     />

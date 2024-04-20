@@ -1,5 +1,4 @@
 import {createContext, ReactNode, useEffect, useState} from "react";
-import {Check} from "lucide-react";
 
 export interface CartItem {
     id: number;
@@ -12,6 +11,7 @@ export interface CartItem {
 interface CartContextType {
     cart: CartItem[];
     addToCart: (item: CartItem, quantity?: number) => void;
+    updateCart: (item: CartItem, quantity: number) => void;
     removeFromCart: (id: number) => void;
     clearCart: () => void;
     getProductIdsFromCart: () => number[];
@@ -19,67 +19,62 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType>({
     cart: [],
-    addToCart: () => {
-    },
-    removeFromCart: () => {
-    },
-    clearCart: () => {
-    },
-    getProductIdsFromCart: () => [
-    ]
+    addToCart: () => {},
+    updateCart: () => {},
+    removeFromCart: () => {},
+    clearCart: () => {},
+    getProductIdsFromCart: () => []
 });
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
-    const [showNotification, setShowNotification] = useState(false);
+    const [showNotification, setShowNotification] = useState(true);
+    const [addedItem, setAddedItem] = useState<CartItem | null>({
+        id: 3,
+        imageUrl: "https://pics.walgreens.com/prodimg/649980/900.jpg",
+        name: "Product",
+        price: 12000,
+        quantity: 2,
+    });
     const [cart, setCart] = useState<CartItem[]>(() => {
         const storedCart = localStorage.getItem("cartItems");
-        if (storedCart) {
-            try {
-                const parsedCart = JSON.parse(storedCart);
-                if (Array.isArray(parsedCart)) {
-                    return parsedCart;
-                } else {
-                    console.error("Invalid cart data in local storage.");
-                }
-            } catch (error) {
-                console.error("Error parsing cart data from local storage:", error);
-            }
+        try {
+            return storedCart ? JSON.parse(storedCart) : [];
+        } catch (error) {
+            console.error("Error parsing cart data from local storage:", error);
+            return [];
         }
-        return [];
     });
 
     useEffect(() => {
         localStorage.setItem('cartItems', JSON.stringify(cart));
     }, [cart]);
 
-    const getProductIdsFromCart = (): number[] => {
-        const productIds: number[] = [];
-        cart.forEach(item => {
-            for (let i = 0; i < item.quantity; i++) {
-                productIds.push(item.id);
-            }
-        });
-        return productIds;
-    };
-
-    const addToCart = (item: CartItem, quantity?: number) => {
+    const updateCart = (item: CartItem, quantity: number) => {
         const updatedCart = [...cart];
         const itemIndex = updatedCart.findIndex(i => i.id === item.id);
 
         if (itemIndex === -1) {
-            updatedCart.push({ ...item, quantity: 1 });
+            updatedCart.push({ ...item, quantity });
         } else {
-            if (quantity) {
-                updatedCart[itemIndex].quantity = quantity;
-            }
-            else {
-                updatedCart[itemIndex].quantity++;
-            }
+            updatedCart[itemIndex].quantity = quantity;
         }
 
         setCart(updatedCart);
+        setAddedItem(item);
+        console.log(item);
         setShowNotification(true);
-        setTimeout(() => setShowNotification(false), 3000);
+        // setTimeout(() => setShowNotification(false), 3000);
+    };
+
+    const addToCart = (item: CartItem, quantity: number = 1) => {
+        const cartItem = cart.find(i => i.id === item.id);
+
+        if (cartItem) {
+            updateCart(item, cartItem.quantity + quantity);
+        }
+        else {
+            updateCart(item, quantity);
+        }
     };
 
     const removeFromCart = (id: number) => {
@@ -91,12 +86,22 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         setCart([]);
     };
 
+    const getProductIdsFromCart = (): number[] => {
+        const productIds: number[] = [];
+        cart.forEach(item => {
+            for (let i = 0; i < item.quantity; i++) {
+                productIds.push(item.id);
+            }
+        });
+        return productIds;
+    };
+
     return (
-        <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart, getProductIdsFromCart }}>
+        <CartContext.Provider value={{ cart, addToCart, updateCart, removeFromCart, clearCart, getProductIdsFromCart }}>
             {showNotification && (
-                <div className="fixed top-4 right-0 left-0 mx-auto  w-60 border-green-600 border rounded flex items-center justify-center z-20 bg-green-500 text-white text-center py-2">
-                    <Check className="w-6 h-6 bg-green-600 rounded-full p-1 mr-2" />
-                    <p className="text-white font-medium">Item added to cart</p>
+                <div className="fixed top-4 right-0 left-0 mx-auto max-w-80 border-neutral-600 border rounded flex items-center justify-between z-100 bg-white text-black text-center py-2 px-4">
+                    <img className="w-12 h-12 items-center" src={addedItem?.imageUrl} alt={addedItem?.name}/>
+                    <p className="font-medium">{addedItem?.name} added to cart</p>
                 </div>
             )}
             {children}

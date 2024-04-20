@@ -12,25 +12,36 @@ const PersistLogin = () => {
     useEffect(() => {
         let isMounted = true;
 
-        const verifyRefreshToken = async () => {
-            try {
-                await refreshToken();
-            } catch (error) {
-                console.log("Error refreshing token", error);
-            } finally {
+        const loadPersistedData = async () => {
+            const isPersisted = localStorage.getItem("persist");
+            if (isPersisted !== null) {
+                try {
+                    if (!auth?.tokenResponse.token && isMounted) {
+                        await refreshToken();
+                    }
+                } catch (error) {
+                    console.error("Error refreshing token", error);
+                } finally {
+                    localStorage.setItem("persist", "true");
+                    setIsLoading(false);
+                }
+            } else {
                 setIsLoading(false);
             }
-        }
+        };
 
-        !auth?.tokenResponse.token && isMounted ? verifyRefreshToken() : setIsLoading(false);
+        loadPersistedData();
 
-        return () => {isMounted = false;}
-    }, [])
+        return () => {
+            isMounted = false;
+        };
+    }, [auth?.tokenResponse.token, refreshToken]);
 
     return (
         <>
             {isLoading ?
-                <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-100 bg-opacity-50 z-50">
+                <div
+                    className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-100 bg-opacity-50 z-50">
                     <Loader className="animate-spin text-blue-500 mr-2"/>
                     <span>Loading...</span>
                 </div>

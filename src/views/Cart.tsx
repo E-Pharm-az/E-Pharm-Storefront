@@ -1,15 +1,18 @@
-import CartContext from "../context/CartProvider.tsx";
+import CartContext, {CartItem} from "../context/CartProvider.tsx";
 import {ChangeEvent, useContext, useState} from "react";
 import {Pin, ShoppingCart, Trash} from "lucide-react";
 
 const Cart = () => {
-    const {cart, addToCart, removeFromCart} = useContext(CartContext);
+    const {cart, updateCart, removeFromCart} = useContext(CartContext);
     const [shippingAddress, setShippingAddress] = useState<string>("");
     const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
 
     const handleShippingAddressChange = (e: ChangeEvent<HTMLInputElement>) => {
         setShippingAddress(e.target.value);
     };
+
+    const handleCountChange = (item: CartItem, count: string) =>
+        updateCart(item, parseInt(count));
 
     return (
         <div className="container md:grid md:grid-cols-5 md:gap-8 space-y-4 md:space-y-0 py-8">
@@ -72,12 +75,7 @@ const Cart = () => {
                                     />
                                     <select
                                         value={item.quantity}
-                                        onChange={(e) =>
-                                            addToCart(
-                                                item,
-                                                parseInt(e.target.value)
-                                            )
-                                        }
+                                        onChange={(e) => handleCountChange(item, e.target.value)}
                                         className="px-2 py-1 border border-gray-300 rounded-md focus:ring-4 focus:ring-blue-300 focus:outline-none"
                                     >
                                         {[...Array(20).keys()].map((num) => (
@@ -95,7 +93,6 @@ const Cart = () => {
                     </div>
                 )}
             </div>
-
             <div className="col-span-2 border border-gray-200 rounded-md h-fit">
                 <div className="p-4 flex items-center space-x-1 border-b border-gray-200">
                     <p>Cart total:</p>

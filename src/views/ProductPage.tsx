@@ -3,23 +3,18 @@ import {useNavigate} from "react-router-dom";
 import {useLocation} from "react-router-dom";
 import {Product} from "./Products.tsx";
 import apiClient from "../services/api-client.ts";
-
 import CartContext from "../context/CartProvider.tsx";
 import {Image, Loader} from "lucide-react";
 
 const ProductPage = () => {
-    const [product, setProduct] = useState<Product>();
-    const [loading, setLoading] = useState(false);
     const location = useLocation();
+    const navigate = useNavigate();
     const search = new URLSearchParams(location.search);
     const productId = search.get("search");
     const {addToCart} = useContext(CartContext);
-
-    const navigate = useNavigate();
+    const [product, setProduct] = useState<Product | null>(null);
+    const [loading, setLoading] = useState(false);
     const [count, setCount] = useState(1);
-    const [totalProductPrice, setTotalProductPrice] = useState<number>(product?.price ?? 0);
-    const [addToCartBtnClicked, setAddToCartBtnClicked] = useState(false);
-    const [addToCartBtnText, setAddToCartBtnText] = useState("Add to Cart");
 
     useEffect(() => {
         setLoading(true);
@@ -40,32 +35,32 @@ const ProductPage = () => {
     const handleMinusClick = () => {
         if (count > 1 && product) {
             setCount(count - 1);
-            setTotalProductPrice(totalProductPrice - (product.price || 0));
         }
     };
 
     const handleAddClick = () => {
         if (product) {
             setCount(count + 1);
-            setTotalProductPrice(totalProductPrice + (product.price || 0));
         }
     };
 
     const handleAddToCart = (
         e: React.MouseEvent<HTMLButtonElement>,
-        product: Product | undefined,
+        product: Product | null,
     ) => {
-        if (!addToCartBtnClicked && product) {
+        if (product) {
             e.stopPropagation();
-            addToCart({
+
+            const cart = {
                 id: product.id,
                 imageUrl: product.imageUrl,
                 name: product.name,
                 price: product.price,
                 quantity: count,
-            });
-            setAddToCartBtnClicked(true);
-            setAddToCartBtnText("Go to Cart");
+            };
+
+            addToCart(cart, count);
+
         } else {
             navigate("/cart");
         }
@@ -82,9 +77,9 @@ const ProductPage = () => {
                     </div>
                 )}
                 {product && (
-                    <div className="flex flex-col md:flex-row gap-8 bg-white shadow-md border rounded-md p-6">
+                    <div className="flex flex-col md:flex-row gap-8 bg-white border rounded-md p-6">
                         {product.imageUrl ? (
-                            <div className="shadow-md border rounded-md mb-4">
+                            <div className="border rounded-md mb-4">
                                 <img
                                     src={product.imageUrl}
                                     alt={product.name}
@@ -112,7 +107,8 @@ const ProductPage = () => {
                     </div>
                 )}
             </div>
-            <div className="flex flex-col gap-4 w-full md:w-60 h-max p-4 border">
+
+            <div className="flex flex-col gap-4 w-full md:w-60 h-max p-4 border rounded-md">
                 <div className="flex justify-between">
                     <div className="flex">
                         <button
@@ -132,7 +128,7 @@ const ProductPage = () => {
                         </button>
                     </div>
                     <div className="text-xl font-semibold">
-                        {(totalProductPrice / 100).toFixed(2)} AZN
+                        {((product?.price ?? 0) * count / 100).toFixed(2)} AZN
                     </div>
                 </div>
                 <div className="pt-4 border-t">
@@ -140,7 +136,7 @@ const ProductPage = () => {
                         className="bg-[#61a60e] font-medium text-white text-sm tracking-wide w-full py-2 rounded-md"
                         onClick={(e) => handleAddToCart(e, product)}
                     >
-                        {addToCartBtnText}
+                        Add to cart
                     </button>
                 </div>
             </div>

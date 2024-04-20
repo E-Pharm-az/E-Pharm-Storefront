@@ -27,14 +27,8 @@ const CartContext = createContext<CartContextType>({
 });
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
-    const [showNotification, setShowNotification] = useState(true);
-    const [addedItem, setAddedItem] = useState<CartItem | null>({
-        id: 3,
-        imageUrl: "https://pics.walgreens.com/prodimg/649980/900.jpg",
-        name: "Product",
-        price: 12000,
-        quantity: 2,
-    });
+    const [showNotification, setShowNotification] = useState(false);
+    const [addedItem, setAddedItem] = useState<CartItem | null>(null);
     const [cart, setCart] = useState<CartItem[]>(() => {
         const storedCart = localStorage.getItem("cartItems");
         try {
@@ -61,9 +55,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
         setCart(updatedCart);
         setAddedItem(item);
-        console.log(item);
         setShowNotification(true);
-        // setTimeout(() => setShowNotification(false), 3000);
+        setTimeout(() => setShowNotification(false), 3000);
     };
 
     const addToCart = (item: CartItem, quantity: number = 1) => {

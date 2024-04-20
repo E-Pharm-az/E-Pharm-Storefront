@@ -1,4 +1,18 @@
 import {createContext, ReactNode, useEffect, useState} from "react";
+import {Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle} from "@/components/ui/sheet"
+import {
+    Drawer,
+    DrawerClose,
+    DrawerContent,
+    DrawerDescription,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerTitle,
+} from "@/components/ui/drawer"
+
+import {Link} from "react-router-dom";
+import useMediaQuery from "@/hooks/useMediaQuery.ts";
+
 
 export interface CartItem {
     id: number;
@@ -19,22 +33,26 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType>({
     cart: [],
-    addToCart: () => {},
-    updateCart: () => {},
-    removeFromCart: () => {},
-    clearCart: () => {},
+    addToCart: () => {
+    },
+    updateCart: () => {
+    },
+    removeFromCart: () => {
+    },
+    clearCart: () => {
+    },
     getProductIdsFromCart: () => []
 });
 
-export const CartProvider = ({ children }: { children: ReactNode }) => {
-    const [showNotification, setShowNotification] = useState(false);
-    const [addedItem, setAddedItem] = useState<CartItem | null>(null);
+export const CartProvider = ({children}: { children: ReactNode }) => {
+    const [showNotification, setShowNotification] = useState<boolean>(false);
+    const isDesktop = useMediaQuery("(min-width: 768px)")
+    const [addedItem, setAddedItem] = useState<CartItem>({id: 0, name: "", imageUrl: "", price: 0, quantity: 0});
     const [cart, setCart] = useState<CartItem[]>(() => {
         const storedCart = localStorage.getItem("cartItems");
         try {
             return storedCart ? JSON.parse(storedCart) : [];
         } catch (error) {
-            console.error("Error parsing cart data from local storage:", error);
             return [];
         }
     });
@@ -48,7 +66,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         const itemIndex = updatedCart.findIndex(i => i.id === item.id);
 
         if (itemIndex === -1) {
-            updatedCart.push({ ...item, quantity });
+            updatedCart.push({...item, quantity});
         } else {
             updatedCart[itemIndex].quantity = quantity;
         }
@@ -56,7 +74,6 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         setCart(updatedCart);
         setAddedItem(item);
         setShowNotification(true);
-        setTimeout(() => setShowNotification(false), 3000);
     };
 
     const addToCart = (item: CartItem, quantity: number = 1) => {
@@ -64,8 +81,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
         if (cartItem) {
             updateCart(item, cartItem.quantity + quantity);
-        }
-        else {
+        } else {
             updateCart(item, quantity);
         }
     };
@@ -90,12 +106,64 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     };
 
     return (
-        <CartContext.Provider value={{ cart, addToCart, updateCart, removeFromCart, clearCart, getProductIdsFromCart }}>
-            {showNotification && (
-                <div className="fixed top-4 right-0 left-0 mx-auto max-w-80 border-neutral-600 border rounded flex items-center justify-between z-100 bg-white text-black text-center py-2 px-4">
-                    <img className="w-12 h-12 items-center" src={addedItem?.imageUrl} alt={addedItem?.name}/>
-                    <p className="font-medium">{addedItem?.name} added to cart</p>
-                </div>
+        <CartContext.Provider value={{cart, addToCart, updateCart, removeFromCart, clearCart, getProductIdsFromCart}}>
+            {isDesktop ? (
+                <Sheet open={showNotification} onOpenChange={() => setShowNotification(!showNotification)}>
+                    <SheetContent>
+                        <SheetHeader>
+                            <SheetTitle>Item added to cart</SheetTitle>
+                            <div className="grid grid-cols-3 pb-6">
+                                <img className="p-2 w-24 h-24 col-span-1 border border-neutral-200 rounded"
+                                     src={addedItem?.imageUrl} alt={addedItem?.name}/>
+                                <div className="col-span-2">
+                                    <p className="font-medium text-xl text-black">{addedItem?.name}</p>
+                                    <p>Quantity: {addedItem?.quantity}</p>
+                                    <p>Price: {(addedItem?.price * addedItem.quantity / 100).toFixed(2)} AZN</p>
+                                </div>
+                            </div>
+                            <div className="space-y-2">
+                                <Link to="/cart" onClick={() => setShowNotification(false)}
+                                      className="w-full flex bg-[#61a60e] focus:ring-4 focus:outline-none focus:ring-green-300 transition font-medium rounded-lg text-sm px-5 py-2.5 text-white">
+                                    <p className="mx-auto">Proceed to Checkout</p>
+                                </Link>
+                                <button
+                                    onClick={() => setShowNotification(false)}
+                                    className="w-full border-2 border-neutral-700 bg-white focus:ring-4 focus:outline-none focus:ring-neutral-3000 transition font-medium rounded-lg text-sm px-5 py-2.5 text-center text-black"
+                                >
+                                    Continue shopping
+                                </button>
+                            </div>
+                        </SheetHeader>
+                    </SheetContent>
+                </Sheet>
+            ) : (
+                <Drawer open={showNotification} onOpenChange={(open) => setShowNotification(open)}>
+                    <DrawerContent>
+                        <DrawerHeader className="text-left">
+                            <DrawerTitle>Item added to cart</DrawerTitle>
+                        </DrawerHeader>
+                        <DrawerFooter className="pt-2">
+                                <img className="p-2 w-full h-48 col-span-1 border border-neutral-200 rounded object-contain" src={addedItem?.imageUrl} alt={addedItem?.name}/>
+                                <div className="mb-6">
+                                    <p className="font-medium text-xl text-black">{addedItem?.name}</p>
+                                    <p>Quantity: {addedItem?.quantity}</p>
+                                    <p>Price: {(addedItem?.price * addedItem.quantity / 100).toFixed(2)} AZN</p>
+                                </div>
+                            <Link to="/cart" onClick={() => setShowNotification(false)}
+                                  className="w-full flex bg-[#61a60e] focus:ring-4 focus:outline-none focus:ring-green-300 transition font-medium rounded-lg text-sm px-5 py-2.5 text-white">
+                                <p className="mx-auto">Proceed to Checkout</p>
+                            </Link>
+                            <DrawerClose asChild>
+                                <button
+                                    onClick={() => setShowNotification(false)}
+                                    className="w-full border-2 border-neutral-700 bg-white focus:ring-4 focus:outline-none focus:ring-neutral-3000 transition font-medium rounded-lg text-sm px-5 py-2.5 text-center text-black"
+                                >
+                                    Continue shopping
+                                </button>
+                            </DrawerClose>
+                        </DrawerFooter>
+                    </DrawerContent>
+                </Drawer>
             )}
             {children}
         </CartContext.Provider>

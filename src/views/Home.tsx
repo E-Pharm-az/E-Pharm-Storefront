@@ -20,7 +20,7 @@ const Home = () => {
                 <p className="text-center font-medium">
                     Or browse by condition
                 </p>
-                <div className="flex space-x-2 items-center justify-center overflow-x-scroll">
+                <div className="flex space-x-2 items-center md:justify-center overflow-x-scroll">
                     <Link to={"/"}
                           className="border border-neutral-300 bg-white text-sm md:text-base text-nowrap py-1 px-4 md:py-2 rounded-xl font-medium flex-nowrap inline-block">
                         Anxiety

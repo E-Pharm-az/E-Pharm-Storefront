@@ -1,10 +1,9 @@
 import {createContext, ReactNode, useEffect, useState} from "react";
-import {Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle} from "@/components/ui/sheet"
+import {Sheet, SheetContent, SheetHeader, SheetTitle} from "@/components/ui/sheet"
 import {
     Drawer,
     DrawerClose,
     DrawerContent,
-    DrawerDescription,
     DrawerFooter,
     DrawerHeader,
     DrawerTitle,

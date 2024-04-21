@@ -26,5 +26,54 @@
   "login": {
     "title": "Login",
     "signup": "Not a user? Create an account here"
+  },
+  "footer":{
+    "about": "About",
+    "help" : "Help",
+    "doctors-advice": "Doctor`s advice",
+    "contacts": "Contacts",
+    "Terms & Conditions": "Terms & Conditions",
+    "Privacy Policy": "Privacy Policy",
+    "About Us": "About Us",
+    "License and details" : "License and details",
+    "Our partners": "Our partners",
+    "Our team and doctors": "Our team and doctors",
+    "FAQ": "FAQ",
+    "How to make an order": "How to make an order",
+    "Delivery rules": "Delivery rules",
+    "Payment Methods": "Payment Methods",
+    "Articles about health": "Articles about health",
+    "Doctors' recommendations": "Doctors' recommendations",
+    "Healthy lifestyle": "Healthy lifestyle",
+    "Pharmacy addresses": "Pharmacy addresses",
+    "Feedback form": "Feedback form",
+    "Contact doctor": "Contact doctor",
+    "Working hours": "Working hours",
+    "form-title": "Be one of the first to register to receive a promo code in your inbox",
+    "form-subtitle": "Enter Email Address Your email address will be used to send you Health Newsletters and emails about E-Pharm’s products, services, sales, and special offers. You can unsubscribe at any time by clicking on the unsubscribe link in each email. For more information on our use of your personal information and your rights, see our",
+    "form-privacy-policy-link": "Privacy Policy",
+    "form-input-placeholder": "Enter your e-mail address",
+    "form-button-text": "Sign Up"
+  },
+  "cart":{
+    "item": "Item",
+    "items": "Items",
+    "in-your-cart": "in your cart",
+    "deliver": "Deliver to",
+    "deliver-address": "Enter your address...",
+    "empty-cart": "Your cart is empty",
+    "cart-total": "Cart total",
+    "cart-btn-text": "Proceed to Checkout"
+  },
+  "cart-provider":{
+    "item-added-to-cart": "Item added to cart",
+    "quanity": "Quanity",
+    "price": "Price",
+    "proceed-to-checkout": "Proceed to Checkout",
+    "continue-shopping": "Continue shopping"
+  },
+  "product-page":{
+    "product-not-found": "Product not found",
+    "product-add-to-cart-btn": "Add to cart"
   }
 }

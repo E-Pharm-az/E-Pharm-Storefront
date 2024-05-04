@@ -1,6 +1,7 @@
 import {useEffect, useState, useContext} from "react";
 import {useNavigate} from "react-router-dom";
 import {useLocation} from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {Product} from "./Products.tsx";
 import apiClient from "../services/api-client.ts";
 import CartContext from "../context/CartProvider.tsx";
@@ -15,6 +16,7 @@ const ProductPage = () => {
     const [product, setProduct] = useState<Product | null>(null);
     const [loading, setLoading] = useState(false);
     const [count, setCount] = useState(1);
+    const [t] = useTranslation("global");
 
     useEffect(() => {
         setLoading(true);
@@ -102,8 +104,8 @@ const ProductPage = () => {
                     </div>
                 )}
                 {!loading && !product && (
-                    <div className="py-8 text-center text-gray-600">
-                        Product not found.
+                    <div className="text-center text-gray-600 py-8">
+                        {t("product-page.product-not-found")}.
                     </div>
                 )}
             </div>
@@ -136,7 +138,7 @@ const ProductPage = () => {
                         className="bg-[#61a60e] font-medium text-white text-sm tracking-wide w-full py-2 rounded-md"
                         onClick={(e) => handleAddToCart(e, product)}
                     >
-                        Add to cart
+                        {t("product-page.product-add-to-cart-btn")}
                     </button>
                 </div>
             </div>

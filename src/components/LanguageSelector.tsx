@@ -72,19 +72,19 @@ const LanguageSelector: FC = () => {
     return (
         <div className="relative inline-block" ref={dropdownRef}>
             <div
-                className="flex items-center text-left hover:cursor-pointer hover:opacity-70 transition"
+                className="flex items-center text-left transition hover:cursor-pointer hover:opacity-70"
                 onClick={() => setShowDropdown(!showDropdown)}
             >
-                <Globe className="w-5 h-5 mr-1" />
+                <Globe className="mr-1 h-5 w-5" />
                 <span className="capitalize">{selectedLanguage.code}</span>
             </div>
             {showDropdown && (
                 <div
-                    className="fixed left-0 top-0 right-0 bottom-0 flex bg-black bg-opacity-50 items-center justify-center z-50 md:block md:bg-transparent md:absolute md:left-auto md:top-10"
+                    className="fixed top-0 right-0 bottom-0 left-0 z-50 flex items-center justify-center bg-black bg-opacity-50 md:absolute md:top-10 md:left-auto md:block md:bg-transparent"
                     onClick={() => setShowDropdown(!showDropdown)}
                 >
                     <div
-                        className="p-2 w-2/3 space-y-2 bg-white rounded md:w-full md:border md:border-neutral-300 md:shadow-xl"
+                        className="w-2/3 rounded bg-white p-2 space-y-2 md:w-full md:border md:border-neutral-300 md:shadow-xl"
                         role="menu"
                         aria-orientation="vertical"
                         aria-labelledby="options-menu"
@@ -93,7 +93,7 @@ const LanguageSelector: FC = () => {
                             <div
                                 key={language.code}
                                 onClick={() => handleLanguageSelect(language)}
-                                className="block w-full px-4 py-2 text-xl md:text-sm  rounded text-gray-700 hover:bg-neutral-300 cursor-pointer"
+                                className="block w-full cursor-pointer rounded px-4 py-2 text-xl text-gray-700 hover:bg-neutral-300 md:text-sm"
                                 role="menuitem"
                             >
                                 {language.name}

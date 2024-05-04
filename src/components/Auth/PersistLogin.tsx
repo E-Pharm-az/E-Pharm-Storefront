@@ -41,8 +41,8 @@ const PersistLogin = () => {
         <>
             {isLoading ?
                 <div
-                    className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-100 bg-opacity-50 z-50">
-                    <Loader className="animate-spin text-blue-500 mr-2"/>
+                    className="fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-gray-100 bg-opacity-50">
+                    <Loader className="mr-2 animate-spin text-blue-500"/>
                     <span>Loading...</span>
                 </div>
                 : <Outlet/>

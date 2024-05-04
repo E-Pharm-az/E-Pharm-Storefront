@@ -11,7 +11,7 @@ const Footer = () => {
 
     return (
         <footer className="bg-white py-8">
-            <div className="container grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-4 mb-10 md:mb-20 px-4">
+            <div className="container mb-10 grid grid-cols-1 gap-8 px-4 md:mb-20 md:grid-cols-4 md:gap-4">
                 <div className="flex flex-col gap-4">
                     <div
                         className="flex justify-between items-center"
@@ -56,7 +56,7 @@ const Footer = () => {
                             </a>
                         </li>
                     </ul>
-                    <div className="block md:hidden bg-neutral-200 h-0.5 rounded-full"></div>
+                    <div className="block rounded-full bg-neutral-200 h-0.5 md:hidden"></div>
                 </div>
                 <div className="flex flex-col gap-4">
                     <div
@@ -102,7 +102,7 @@ const Footer = () => {
                             </a>
                         </li>
                     </ul>
-                    <div className="block md:hidden bg-neutral-200 h-0.5 rounded-full"></div>
+                    <div className="block rounded-full bg-neutral-200 h-0.5 md:hidden"></div>
                 </div>
                 <div className="flex flex-col gap-4">
                     <div
@@ -143,7 +143,7 @@ const Footer = () => {
                             </a>
                         </li>
                     </ul>
-                    <div className="block md:hidden bg-neutral-200 h-0.5 rounded-full"></div>
+                    <div className="block rounded-full bg-neutral-200 h-0.5 md:hidden"></div>
                 </div>
                 <div className="flex flex-col gap-4">
                     <div
@@ -189,7 +189,7 @@ const Footer = () => {
                             </a>
                         </li>
                     </ul>
-                    <div className="block md:hidden bg-neutral-200 h-0.5 rounded-full"></div>
+                    <div className="block rounded-full bg-neutral-200 h-0.5 md:hidden"></div>
                 </div>
             </div>
             <div className="bg-gray-100 py-10 px-6 md:px-12 mb-10 md:mb-20 rounded-lg">
@@ -197,12 +197,12 @@ const Footer = () => {
                     <h2 className="text-md md:text-lg font-semibold text-gray-800 mb-4">
                         {t("footer.form-title")}
                     </h2>
-                    <form className="flex flex-col md:flex-row gap-4">
+                    <form className="flex flex-col gap-4 md:flex-row">
                         <input
                             type="text"
                             placeholder={t("footer.form-input-placeholder")}
                             autoComplete="off"
-                            className="flex-grow py-3 px-4 bg-white border border-gray-400 rounded-lg placeholder-gray-500 focus:outline-none focus:border-gray-600"
+                            className="flex-grow rounded-lg border border-gray-400 bg-white px-4 py-3 placeholder-gray-500 focus:border-gray-600 focus:outline-none"
                         />
                         <button className="py-3 px-6 bg-[#61a60e] text-white font-medium rounded-lg transition duration-300 focus:outline-none focus:bg-green-600">
                             {t("footer.form-button-text")}

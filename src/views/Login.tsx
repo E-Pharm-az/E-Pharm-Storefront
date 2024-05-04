@@ -76,23 +76,23 @@ const Login = () => {
     }
 
     return (
-        <div className="py-8 mx-auto w-full md:w-[600px]">
+        <div className="mx-auto w-full py-8 md:w-[600px]">
             {loading && (
                 <div
-                    className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-100 bg-opacity-50 z-50">
-                    <Loader className="animate-spin text-blue-500 mr-2"/>
+                    className="fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-gray-100 bg-opacity-50">
+                    <Loader className="mr-2 animate-spin text-blue-500"/>
                 </div>
             )}
 
-            <div className="bg-white rounded-lg shadow dark:border md:mt-0 xl:p-0">
-                <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+            <div className="rounded-lg bg-white shadow dark:border md:mt-0 xl:p-0">
+                <div className="p-6 space-y-4 sm:p-8 md:space-y-6">
                     <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                         {t("login.title")}
                     </h1>
                     <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
                         {error && <div className="text-center text-red-500">{error}</div>}
                         <div>
-                            <label className="block mb-2 text-sm font-medium text-gray-900 ">
+                            <label className="mb-2 block text-sm font-medium text-gray-900">
                                 {t("signup.email")}
                             </label>
                             <input type="email"
@@ -102,16 +102,17 @@ const Login = () => {
                                    placeholder="name@example.com"
                                    required
                                    value={email}
-                                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "/>
+                                   className="block w-full rounded-lg border border-gray-300 bg-gray-50 text-gray-900 p-2.5 focus:ring-primary-600 focus:border-primary-600 sm:text-sm"/>
                         </div>
                         <div>
-                            <label className="block mb-2 text-sm font-medium text-gray-900">{t("signup.password")}</label>
+                            <label
+                                className="mb-2 block text-sm font-medium text-gray-900">{t("signup.password")}</label>
                             <input type="password"
                                    name="password"
                                    onChange={(e) => setPassword(e.target.value)}
                                    value={password}
                                    placeholder="••••••••"
-                                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                                   className="block w-full rounded-lg border border-gray-300 bg-gray-50 text-gray-900 p-2.5 focus:ring-primary-600 focus:border-primary-600 sm:text-sm"
                                    required/>
                         </div>
                         <button type="submit"

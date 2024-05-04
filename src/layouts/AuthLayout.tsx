@@ -5,8 +5,8 @@ const AuthLayout = () => {
     return (
         <main>
             <div className="fixed top-2 left-2">
-                <Link to="/" className="py-2 px-4 hover:bg-neutral-200 transition rounded-full flex space-x-4 items-center">
-                    <ChevronLeft className="w-6 h-6"/>
+                <Link to="/" className="flex items-center rounded-full px-4 py-2 transition space-x-4 hover:bg-neutral-200">
+                    <ChevronLeft className="h-6 w-6"/>
                     Home
                 </Link>
             </div>

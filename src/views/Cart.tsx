@@ -17,14 +17,14 @@ const Cart = () => {
         updateCart(item, parseInt(count));
 
     return (
-        <div className="container md:grid md:grid-cols-5 md:gap-8 space-y-4 md:space-y-0 py-8">
-            <div className="col-span-3 border border-gray-200 rounded-md">
+        <div className="container py-8 space-y-4 md:space-y-0 md:grid md:grid-cols-5 md:gap-8">
+            <div className="col-span-3 rounded-md border border-gray-200">
                 <div className="flex items-center p-4 space-x-1">
                     <p>{cart.length}</p>
                     <p>{cart.length === 1 ? t("cart.item") : t("cart.items")} {t("cart.in-your-cart")}</p>
                 </div>
                 <div
-                    className="p-4 flex flex-col sm:flex-row item-start sm:items-center border-t border-b border-gray-200 gap-2">
+                    className="flex flex-col gap-2 border-t border-b border-gray-200 p-4 item-start sm:flex-row sm:items-center">
                     <div className="flex items-center gap-1">
                         <Pin className="w-5 h-5"/>
                         <p className="flex-shrink-0">{t("cart.deliver")}:</p>
@@ -40,7 +40,7 @@ const Cart = () => {
                 </div>
 
                 {cart.length === 0 ? (
-                    <div className="h-[230px] flex items-center justify-center">
+                    <div className="flex items-center justify-center h-[230px]">
                         <div>
                             <ShoppingCart className="mx-auto w-12 h-12 mb-2"/>
                             <p className={""}>{t("cart.empty-cart")}</p>
@@ -61,7 +61,7 @@ const Cart = () => {
                                     <img
                                         src={item.imageUrl}
                                         alt={item.name}
-                                        className="w-16 h-16"
+                                        className="h-16 w-16"
                                     />
                                     <div>
                                         <p className="font-semibold">
@@ -73,12 +73,12 @@ const Cart = () => {
                                 <div className="">
                                     <Trash
                                         onClick={() => removeFromCart(item.id)}
-                                        className="ml-auto mb-6 w-5 h-5 text-gray-600 cursor-pointer"
+                                        className="mb-6 ml-auto h-5 w-5 cursor-pointer text-gray-600"
                                     />
                                     <select
                                         value={item.quantity}
                                         onChange={(e) => handleCountChange(item, e.target.value)}
-                                        className="px-2 py-1 border border-gray-300 rounded-md focus:ring-4 focus:ring-blue-300 focus:outline-none"
+                                        className="rounded-md border border-gray-300 px-2 py-1 focus:outline-none focus:ring-4 focus:ring-blue-300"
                                     >
                                         {[...Array(20).keys()].map((num) => (
                                             <option

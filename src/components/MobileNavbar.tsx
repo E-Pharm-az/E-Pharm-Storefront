@@ -9,18 +9,18 @@ export const MobileNavbar = () => {
     const {cart} = useContext(CartContext);
 
     return (
-        <nav className="mobile-nav w-full flex flex-col gap-4 bg-white p-4 md:hidden">
-            <div className="w-full flex justify-between">
-                <NavLink to={"/"} className="flex space-x-1 items-center flex-shrink-0">
+        <nav className="flex w-full flex-col gap-4 bg-white p-4 mobile-nav md:hidden">
+            <div className="flex w-full justify-between">
+                <NavLink to={"/"} className="flex flex-shrink-0 items-center space-x-1">
                     <img src={Logo} alt="logo" className="h-12"/>
-                    <h1 className="text-2xl sm:text-2xl font-medium">E-Pharm</h1>
+                    <h1 className="text-2xl font-medium sm:text-2xl">E-Pharm</h1>
                 </NavLink>
-                <div className="flex gap-2 items-center">
+                <div className="flex items-center gap-2">
                     <LanguageSelector/>
                 </div>
             </div>
-            <div className="mobile-bottom w-full fixed bottom-0 left-0 right-0 z-40">
-                <div className="flex w-full items-center justify-between gap-4 px-8 h-20 bg-white border border-gray-300 rounded-t-xl">
+            <div className="fixed right-0 bottom-0 left-0 z-40 w-full mobile-bottom">
+                <div className="flex h-20 w-full items-center justify-between gap-4 rounded-t-xl border border-gray-300 bg-white px-8">
                     <NavLink to={"/"} className="flex h-full items-center justify-center">
                         <Home color="#61a60e" size={28}/>
                     </NavLink>
@@ -29,7 +29,7 @@ export const MobileNavbar = () => {
                     </NavLink>
                     <NavLink to={"/cart"} className="relative flex items-center justify-center">
                         {cart.length > 0 && (
-                            <p className="absolute text-white text-xs -top-4 -left-4 Z-1 px-2 py-1 bg-red-500 rounded-full mr-2">{cart.length}</p>
+                            <p className="absolute -top-4 -left-4 mr-2 rounded-full bg-red-500 px-2 py-1 text-xs text-white Z-1">{cart.length}</p>
                         )}
                         <ShoppingCart color="#61a60e" size={28}/>
                     </NavLink>

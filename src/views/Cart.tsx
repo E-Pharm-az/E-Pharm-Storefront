@@ -15,16 +15,16 @@ const Cart = () => {
         updateCart(item, parseInt(count));
 
     return (
-        <div className="container md:grid md:grid-cols-5 md:gap-8 space-y-4 md:space-y-0 py-8">
-            <div className="col-span-3 border border-gray-200 rounded-md">
+        <div className="container py-8 space-y-4 md:space-y-0 md:grid md:grid-cols-5 md:gap-8">
+            <div className="col-span-3 rounded-md border border-gray-200">
                 <div className="flex items-center p-4 space-x-1">
                     <p>{cart.length}</p>
                     <p>{cart.length === 1 ? "Item" : "Items"} in your cart</p>
                 </div>
                 <div
-                    className="p-4 flex flex-col sm:flex-row item-start sm:items-center border-t border-b border-gray-200 gap-2">
+                    className="flex flex-col gap-2 border-t border-b border-gray-200 p-4 item-start sm:flex-row sm:items-center">
                     <div className="flex items-center gap-1">
-                        <Pin className="w-5 h-5"/>
+                        <Pin className="h-5 w-5"/>
                         <p className="flex-shrink-0">Deliver to:</p>
                     </div>
                     <input
@@ -32,15 +32,15 @@ const Cart = () => {
                         name="address"
                         onChange={handleShippingAddressChange}
                         value={shippingAddress}
-                        className="flex-grow p-2 border focus:ring-indigo-500 focus:border-indigo-500 shadow-sm sm:text-sm border-gray-200 rounded-md"
+                        className="flex-grow rounded-md border border-gray-200 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                         placeholder="Enter your address..."
                     />
                 </div>
 
                 {cart.length === 0 ? (
-                    <div className="h-[230px] flex items-center justify-center">
+                    <div className="flex items-center justify-center h-[230px]">
                         <div>
-                            <ShoppingCart className="mx-auto w-12 h-12 mb-2"/>
+                            <ShoppingCart className="mx-auto mb-2 h-12 w-12"/>
                             <p className={""}>Your cart is empty</p>
                         </div>
                     </div>
@@ -59,7 +59,7 @@ const Cart = () => {
                                     <img
                                         src={item.imageUrl}
                                         alt={item.name}
-                                        className="w-16 h-16"
+                                        className="h-16 w-16"
                                     />
                                     <div>
                                         <p className="font-semibold">
@@ -71,12 +71,12 @@ const Cart = () => {
                                 <div className="">
                                     <Trash
                                         onClick={() => removeFromCart(item.id)}
-                                        className="ml-auto mb-6 w-5 h-5 text-gray-600 cursor-pointer"
+                                        className="mb-6 ml-auto h-5 w-5 cursor-pointer text-gray-600"
                                     />
                                     <select
                                         value={item.quantity}
                                         onChange={(e) => handleCountChange(item, e.target.value)}
-                                        className="px-2 py-1 border border-gray-300 rounded-md focus:ring-4 focus:ring-blue-300 focus:outline-none"
+                                        className="rounded-md border border-gray-300 px-2 py-1 focus:outline-none focus:ring-4 focus:ring-blue-300"
                                     >
                                         {[...Array(20).keys()].map((num) => (
                                             <option
@@ -93,8 +93,8 @@ const Cart = () => {
                     </div>
                 )}
             </div>
-            <div className="col-span-2 border border-gray-200 rounded-md h-fit">
-                <div className="p-4 flex items-center space-x-1 border-b border-gray-200">
+            <div className="col-span-2 h-fit rounded-md border border-gray-200">
+                <div className="flex items-center border-b border-gray-200 p-4 space-x-1">
                     <p>Cart total:</p>
                     <p>{(totalPrice / 100).toFixed(2)} AZN</p>
                 </div>

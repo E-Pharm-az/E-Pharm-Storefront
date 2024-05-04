@@ -67,61 +67,61 @@ const ProductPage = () => {
     };
 
     return (
-        <div className="container flex flex-col md:flex-row justify-between gap-8 py-12">
-            <div className="flex-grow md:max-w-[600px] max-w-full">
+        <div className="container flex flex-col justify-between gap-8 py-12 md:flex-row">
+            <div className="max-w-full flex-grow md:max-w-[600px]">
                 {loading && (
                     <div
-                        className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-100 bg-opacity-50 z-50">
-                        <Loader className="animate-spin text-blue-500 mr-2"/>
+                        className="fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-gray-100 bg-opacity-50">
+                        <Loader className="mr-2 animate-spin text-blue-500"/>
                         <span>Loading...</span>
                     </div>
                 )}
                 {product && (
-                    <div className="flex flex-col md:flex-row gap-8 bg-white border rounded-md p-6">
+                    <div className="flex flex-col gap-8 rounded-md border bg-white p-6 md:flex-row">
                         {product.imageUrl ? (
-                            <div className="border rounded-md mb-4">
+                            <div className="mb-4 rounded-md border">
                                 <img
                                     src={product.imageUrl}
                                     alt={product.name}
-                                    className="w-[280px] h-auto  mx-auto"
+                                    className="mx-auto h-auto w-[280px]"
                                 />
                             </div>
                         ) : (
-                            <div className="flex items-center justify-center w-full h-60 mb-4 bg-gray-200 rounded-md">
-                                <Image className="text-gray-400 text-4xl"/>
+                            <div className="mb-4 flex h-60 w-full items-center justify-center rounded-md bg-gray-200">
+                                <Image className="text-4xl text-gray-400"/>
                             </div>
                         )}
                         <div className="flex flex-col">
-                            <h1 className="text-2xl sm:text-3xl font-semibold mb-4">
+                            <h1 className="mb-4 text-2xl font-semibold sm:text-3xl">
                                 {product && product.name}
                             </h1>
-                            <p className="text-gray-600 font-medium mb-4">
+                            <p className="mb-4 font-medium text-gray-600">
                                 Strength: {product && product.strengthMg} mg
                             </p>
                         </div>
                     </div>
                 )}
                 {!loading && !product && (
-                    <div className="text-center text-gray-600 py-8">
+                    <div className="py-8 text-center text-gray-600">
                         Product not found.
                     </div>
                 )}
             </div>
 
-            <div className="flex flex-col gap-4 w-full md:w-60 h-max p-4 border rounded-md">
+            <div className="flex h-max w-full flex-col gap-4 rounded-md border p-4 md:w-60">
                 <div className="flex justify-between">
                     <div className="flex">
                         <button
-                            className="w-7 h-7 border rounded"
+                            className="h-7 w-7 rounded border"
                             onClick={handleMinusClick}
                         >
                             -
                         </button>
-                        <span className="count w-7 h-7 text-center leading-[28px]">
+                        <span className="h-7 w-7 text-center count leading-[28px]">
                             {count}
                         </span>
                         <button
-                            className="w-7 h-7 border rounded"
+                            className="h-7 w-7 rounded border"
                             onClick={handleAddClick}
                         >
                             +
@@ -131,7 +131,7 @@ const ProductPage = () => {
                         {((product?.price ?? 0) * count / 100).toFixed(2)} AZN
                     </div>
                 </div>
-                <div className="pt-4 border-t">
+                <div className="border-t pt-4">
                     <button
                         className="bg-[#61a60e] font-medium text-white text-sm tracking-wide w-full py-2 rounded-md"
                         onClick={(e) => handleAddToCart(e, product)}

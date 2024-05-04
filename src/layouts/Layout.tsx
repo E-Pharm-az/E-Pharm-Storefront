@@ -11,7 +11,7 @@ const Layout = () => {
 
     return (
         <main className="mx-auto">
-            <Navbar/>
+            <Navbar />
             <MobileNavbar/>
             <Outlet/>
             <Footer/>

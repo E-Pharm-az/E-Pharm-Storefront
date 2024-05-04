@@ -112,10 +112,10 @@ export const CartProvider = ({children}: { children: ReactNode }) => {
                         <SheetHeader>
                             <SheetTitle>Item added to cart</SheetTitle>
                             <div className="grid grid-cols-3 pb-6">
-                                <img className="p-2 w-24 h-24 col-span-1 border border-neutral-200 rounded"
+                                <img className="col-span-1 h-24 w-24 rounded border border-neutral-200 p-2"
                                      src={addedItem?.imageUrl} alt={addedItem?.name}/>
                                 <div className="col-span-2">
-                                    <p className="font-medium text-xl text-black">{addedItem?.name}</p>
+                                    <p className="text-xl font-medium text-black">{addedItem?.name}</p>
                                     <p>Quantity: {addedItem?.quantity}</p>
                                     <p>Price: {(addedItem?.price * addedItem.quantity / 100).toFixed(2)} AZN</p>
                                 </div>
@@ -127,7 +127,7 @@ export const CartProvider = ({children}: { children: ReactNode }) => {
                                 </Link>
                                 <button
                                     onClick={() => setShowNotification(false)}
-                                    className="w-full border-2 border-neutral-700 bg-white focus:ring-4 focus:outline-none focus:ring-neutral-3000 transition font-medium rounded-lg text-sm px-5 py-2.5 text-center text-black"
+                                    className="w-full rounded-lg border-2 border-neutral-700 bg-white px-5 text-center text-sm font-medium text-black transition py-2.5 focus:ring-neutral-3000 focus:outline-none focus:ring-4"
                                 >
                                     Continue shopping
                                 </button>
@@ -142,9 +142,9 @@ export const CartProvider = ({children}: { children: ReactNode }) => {
                             <DrawerTitle>Item added to cart</DrawerTitle>
                         </DrawerHeader>
                         <DrawerFooter className="pt-2">
-                                <img className="p-2 w-full h-48 col-span-1 border border-neutral-200 rounded object-contain" src={addedItem?.imageUrl} alt={addedItem?.name}/>
+                                <img className="col-span-1 h-48 w-full rounded border border-neutral-200 object-contain p-2" src={addedItem?.imageUrl} alt={addedItem?.name}/>
                                 <div className="mb-6">
-                                    <p className="font-medium text-xl text-black">{addedItem?.name}</p>
+                                    <p className="text-xl font-medium text-black">{addedItem?.name}</p>
                                     <p>Quantity: {addedItem?.quantity}</p>
                                     <p>Price: {(addedItem?.price * addedItem.quantity / 100).toFixed(2)} AZN</p>
                                 </div>
@@ -155,7 +155,7 @@ export const CartProvider = ({children}: { children: ReactNode }) => {
                             <DrawerClose asChild>
                                 <button
                                     onClick={() => setShowNotification(false)}
-                                    className="w-full border-2 border-neutral-700 bg-white focus:ring-4 focus:outline-none focus:ring-neutral-3000 transition font-medium rounded-lg text-sm px-5 py-2.5 text-center text-black"
+                                    className="w-full rounded-lg border-2 border-neutral-700 bg-white px-5 text-center text-sm font-medium text-black transition py-2.5 focus:ring-neutral-3000 focus:outline-none focus:ring-4"
                                 >
                                     Continue shopping
                                 </button>

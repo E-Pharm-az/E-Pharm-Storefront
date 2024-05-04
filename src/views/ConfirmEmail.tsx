@@ -46,23 +46,23 @@ const ConfirmEmail = () => {
         <div>
             {loading && (
                 <div
-                    className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-100 bg-opacity-50 z-50">
-                    <Loader className="animate-spin text-blue-500 mr-2"/>
+                    className="fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-gray-100 bg-opacity-50">
+                    <Loader className="mr-2 animate-spin text-blue-500"/>
                 </div>
             )}
             {error && (
                 <div
-                    className="fixed top-2 left-0 mx-auto shadow right-0 w-[500px] text-center bg-red-500 p-2 rounded border-2 border-red-600 text-white">
+                    className="fixed top-2 right-0 left-0 mx-auto rounded border-2 border-red-600 bg-red-500 p-2 text-center text-white shadow w-[500px]">
                     <p>{error}</p>
                 </div>
             )}
-            <div className="space-y-4 w-full  md:w-max-[500px]">
-                <img src={Logo} alt="logo" className="w-16 h-16"/>
-                <p className="font-semibold text-xl">Account confirmation Successful</p>
+            <div className="w-full space-y-4 md:w-max-[500px]">
+                <img src={Logo} alt="logo" className="h-16 w-16"/>
+                <p className="text-xl font-semibold">Account confirmation Successful</p>
                 {onSuccess ? (
                     <>
                         <p>Your account has been confirmed, please precede to login.</p>
-                        <Link to="/login" className="py-3 px-6 block text-center  bg-lime-600 w-full text-white font-medium rounded-lg border border-lime-500 focus:outline-none hover:bg-lime-700 focus:bg-lime-700 transition duration-300">
+                        <Link to="/login" className="block w-full rounded-lg border border-lime-500 bg-lime-600 px-6 py-3 text-center font-medium text-white transition duration-300 hover:bg-lime-700 focus:bg-lime-700 focus:outline-none">
                             Go to login
                         </Link>
                     </>
@@ -70,7 +70,7 @@ const ConfirmEmail = () => {
                     <>
                         <p>To confirm your account, please follow the button below.</p>
                         <button
-                            className="py-3 px-6 bg-lime-600 w-full text-white font-medium rounded-lg border border-lime-500 focus:outline-none hover:bg-lime-700 focus:bg-lime-700 transition duration-300"
+                            className="w-full rounded-lg border border-lime-500 bg-lime-600 px-6 py-3 font-medium text-white transition duration-300 hover:bg-lime-700 focus:bg-lime-700 focus:outline-none"
                             onClick={confirmEmail}>
                             Confirm Account
                         </button>

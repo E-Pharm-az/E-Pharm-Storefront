@@ -62,15 +62,15 @@ const Products = () => {
     };
 
     return (
-        <div className="container py-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 relative">
+        <div className="container relative grid grid-cols-1 gap-4 py-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {loading && (
-                <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-100 bg-opacity-50 z-50">
-                    <Loader className="animate-spin text-blue-500 mr-2" />
+                <div className="fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-gray-100 bg-opacity-50">
+                    <Loader className="mr-2 animate-spin text-blue-500" />
                     <span>Loading...</span>
                 </div>
             )}
             {products.length === 0 && !loading ? (
-                <div className="text-center text-gray-600 py-8">
+                <div className="py-8 text-center text-gray-600">
                     No products found.
                 </div>
             ) : (
@@ -78,40 +78,40 @@ const Products = () => {
                     <div
                         key={product.id}
                         onClick={() => HandleSelectProduct(product.id)}
-                        className="bg-white md:h-[420px] border border-gray-300 shadow-md rounded-md p-4 flex flex-col justify-between hover:cursor-pointer hover:shadow-lg transition"
+                        className="flex flex-col justify-between rounded-md border border-gray-300 bg-white p-4 shadow-md transition hover:cursor-pointer hover:shadow-lg md:h-[420px]"
                     >
-                        <div className="flex flex-col mb-4">
+                        <div className="mb-4 flex flex-col">
                             {product.imageUrl ? (
                                 <div
-                                    className="flex items-center justify-center mx-auto h-48 w-48 mb-4 rounded-md border border-gray-300 overflow-hidden">
+                                    className="mx-auto mb-4 flex h-48 w-48 items-center justify-center overflow-hidden rounded-md border border-gray-300">
                                     <img
                                         src={product.imageUrl}
                                         alt={product.name}
-                                        className="w-full h-auto mb-4"
+                                        className="mb-4 h-auto w-full"
                                     />
                                 </div>
                             ) : (
                                 <div
-                                    className="flex items-center justify-center mx-auto h-48 w-48 mb-4 rounded-md border border-gray-300 overflow-hidden">
-                                    <Image className="text-gray-400 text-4xl"/>
+                                    className="mx-auto mb-4 flex h-48 w-48 items-center justify-center overflow-hidden rounded-md border border-gray-300">
+                                    <Image className="text-4xl text-gray-400"/>
                                 </div>
                             )}
                             <h1 className="text-xl font-semibold">
                                 {product.name}
                             </h1>
-                            <p className="text-gray-600 font-medium text-sm mb-2">
+                            <p className="mb-2 text-sm font-medium text-gray-600">
                                 {product.description}
                             </p>
                         </div>
                         <div>
-                            <p className="text-gray-600 mb-2 text-lg font-semibold">
+                            <p className="mb-2 text-lg font-semibold text-gray-600">
                                 {(product.price / 100).toFixed(2)} AZN
                             </p>
                             <button
                                 onClick={(e) => handleAddToCart(e, product)}
                                 className="w-full bg-[#61a60e] flex justify-center items-canter gap-2 font-medium rounded text-sm px-5 py-2.5 text-center text-white"
                             >
-                                <ShoppingCart className="w-5 h-5" />
+                                <ShoppingCart className="h-5 w-5" />
                                 <span>Add to cart</span>
                             </button>
                         </div>

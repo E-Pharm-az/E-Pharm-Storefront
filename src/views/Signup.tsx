@@ -82,17 +82,17 @@ const Signup = () => {
     };
 
     return (
-        <div className="py-8 mx-auto w-full md:w-[600px]">
+        <div className="mx-auto w-full py-8 md:w-[600px]">
             {loading && (
                 <div
-                    className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-100 bg-opacity-50 z-50">
-                    <Loader className="animate-spin text-blue-500 mr-2"/>
+                    className="fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-gray-100 bg-opacity-50">
+                    <Loader className="mr-2 animate-spin text-blue-500"/>
                 </div>
             )}
             {confirmEmail ? (
-                <div className="bg-white rounded-lg shadow dark:border md:mt-0 p-4 text-center">
+                <div className="rounded-lg bg-white p-4 text-center shadow dark:border md:mt-0">
                     <div className="mb-4">
-                        <h1 className="font-bold text-xl">Check your email</h1>
+                        <h1 className="text-xl font-bold">Check your email</h1>
                         <p>We have just send a verification link to {formData.email}</p>
                     </div>
                     <Link to="/login" className="py-3 px-6 bg-[#61a60e] block w-fit mx-auto text-white font-medium rounded-lg transition duration-300 focus:outline-none focus:bg-green-600">
@@ -100,61 +100,61 @@ const Signup = () => {
                     </Link>
                 </div>
             ) : (
-                <div className="bg-white rounded-lg shadow dark:border md:mt-0 xl:p-0">
-                    <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+                <div className="rounded-lg bg-white shadow dark:border md:mt-0 xl:p-0">
+                    <div className="p-6 space-y-4 sm:p-8 md:space-y-6">
                         <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                             {t("signup.title")}
                         </h1>
                         <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
                             {error && <div className="text-center text-red-500">{error}</div>}
                             <div>
-                                <label className="block mb-2 text-sm font-medium text-gray-900 ">
+                                <label className="mb-2 block text-sm font-medium text-gray-900">
                                     {t("signup.firstname")}
                                 </label>
                                 <input type="text" name="firstname" value={formData.firstname} onChange={handleChange}
-                                       className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                                       className="block w-full rounded-lg border border-gray-300 bg-gray-50 text-gray-900 p-2.5 focus:ring-primary-600 focus:border-primary-600 sm:text-sm"
                                        placeholder="John" required={true}/>
                             </div>
                             <div>
-                                <label className="block mb-2 text-sm font-medium text-gray-900 ">
+                                <label className="mb-2 block text-sm font-medium text-gray-900">
                                     {t("signup.lastname")}
                                 </label>
                                 <input type="text" name="lastname" value={formData.lastname} onChange={handleChange}
-                                       className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                                       className="block w-full rounded-lg border border-gray-300 bg-gray-50 text-gray-900 p-2.5 focus:ring-primary-600 focus:border-primary-600 sm:text-sm"
                                        placeholder="Doe" required={true}/>
                             </div>
                             <div>
-                                <label className="block mb-2 text-sm font-medium text-gray-900 ">
+                                <label className="mb-2 block text-sm font-medium text-gray-900">
                                     {t("signup.fin")}
                                 </label>
                                 <input type="text" name="fin" value={formData.fin} onChange={handleChange}
-                                       className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                                       className="block w-full rounded-lg border border-gray-300 bg-gray-50 text-gray-900 p-2.5 focus:ring-primary-600 focus:border-primary-600 sm:text-sm"
                                        placeholder="123456" required={true}/>
                             </div>
                             <div>
-                                <label className="block mb-2 text-sm font-medium text-gray-900 ">
+                                <label className="mb-2 block text-sm font-medium text-gray-900">
                                     {t("signup.email")}
                                 </label>
                                 <input type="email" name="email" value={formData.email} onChange={handleChange}
-                                       className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                                       className="block w-full rounded-lg border border-gray-300 bg-gray-50 text-gray-900 p-2.5 focus:ring-primary-600 focus:border-primary-600 sm:text-sm"
                                        placeholder="name@example.com" required={true}/>
                             </div>
                             <div>
-                                <label className="block mb-2 text-sm font-medium text-gray-900">
+                                <label className="mb-2 block text-sm font-medium text-gray-900">
                                     {t("signup.phone")}
                                 </label>
                                 <input type="tel" name="phone" value={formData.phone} onChange={handleChange}
-                                       className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                                       className="block w-full rounded-lg border border-gray-300 bg-gray-50 text-gray-900 p-2.5 focus:ring-primary-600 focus:border-primary-600 sm:text-sm"
                                        placeholder="+994 50 123 45 67" required={true}/>
                             </div>
                             <div>
                                 <label
-                                    className="block mb-2 text-sm font-medium text-gray-900">{t("signup.password")}</label>
+                                    className="mb-2 block text-sm font-medium text-gray-900">{t("signup.password")}</label>
                                 <div className="relative">
                                     <input type={showPassword ? "text" : "password"} name="password"
                                            value={formData.password} onChange={handleChange}
                                            placeholder="••••••••"
-                                           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                                           className="block w-full rounded-lg border border-gray-300 bg-gray-50 text-gray-900 p-2.5 focus:ring-primary-600 focus:border-primary-600 sm:text-sm"
                                            required={true}/>
                                     <button
                                         type="button"
@@ -167,13 +167,13 @@ const Signup = () => {
                                 </div>
                             </div>
                             <div>
-                                <label className="block mb-2 text-sm font-medium text-gray-900">
+                                <label className="mb-2 block text-sm font-medium text-gray-900">
                                     {t("signup.confirm")}
                                 </label>
                                 <input type={showPassword ? "text" : "password"} name="confirmPassword"
                                        value={formData.confirmPassword} onChange={handleChange}
                                        placeholder="••••••••"
-                                       className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                                       className="block w-full rounded-lg border border-gray-300 bg-gray-50 text-gray-900 p-2.5 focus:ring-primary-600 focus:border-primary-600 sm:text-sm"
                                        required={true}/>
                             </div>
                             <button type="submit" className="w-full text-white bg-[#61a60e] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">

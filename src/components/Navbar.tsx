@@ -7,7 +7,6 @@ import AuthContext from "../context/AuthProvider.tsx";
 import CartContext from "../context/CartProvider.tsx";
 import {ShoppingCart, UserRound} from "lucide-react";
 import {SearchProducts} from "./SearchProducts.tsx";
-import { gsap } from 'gsap';
 
 export const Navbar = () => {
     const {auth} = useContext(AuthContext);

@@ -1,6 +1,6 @@
 import {useContext} from "react";
 import {NavLink} from "react-router-dom";
-import Logo from "../assets/logo.svg";
+import Logo from "../assets/logo.png";
 import LanguageSelector from "./LanguageSelector.tsx";
 import CartContext from "../context/CartProvider.tsx";
 import {Home, ShoppingCart, UserRound, Search} from "lucide-react";

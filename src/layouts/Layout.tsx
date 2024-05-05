@@ -11,7 +11,9 @@ const Layout = () => {
 
     return (
         <main className="mx-auto">
-            <Navbar />
+            <div className="md:mb-[65px]">
+                <Navbar />
+            </div>
             <MobileNavbar/>
             <Outlet/>
             <Footer/>

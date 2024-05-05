@@ -11,7 +11,7 @@ const ProductPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const search = new URLSearchParams(location.search);
-    const productId = search.get("search");
+    const productId = search.get("product-id");
     const {addToCart} = useContext(CartContext);
     const [product, setProduct] = useState<Product | null>(null);
     const [loading, setLoading] = useState(false);

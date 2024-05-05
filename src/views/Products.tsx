@@ -1,5 +1,5 @@
-import { useContext, useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, {useContext, useEffect, useState} from "react";
+import {useLocation, useNavigate} from "react-router-dom";
 import apiClient from "../services/api-client.ts";
 import CartContext from "../context/CartProvider.tsx";
 import {Image, Loader, ShoppingCart} from "lucide-react";
@@ -19,7 +19,7 @@ export interface Product {
 }
 
 const Products = () => {
-    const { addToCart } = useContext(CartContext);
+    const {addToCart} = useContext(CartContext);
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(false);
     const location = useLocation();
@@ -44,7 +44,7 @@ const Products = () => {
     }, [searchQuery]);
 
     const HandleSelectProduct = (id: number) => {
-        history(`/product-page?search=${id}`);
+        history(`/product-page?product-id=${id}`);
     };
 
     const handleAddToCart = (
@@ -64,8 +64,9 @@ const Products = () => {
     return (
         <div className="container relative grid grid-cols-1 gap-4 py-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {loading && (
-                <div className="fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-gray-100 bg-opacity-50">
-                    <Loader className="mr-2 animate-spin text-blue-500" />
+                <div
+                    className="fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-gray-100 bg-opacity-50">
+                    <Loader className="mr-2 animate-spin text-blue-500"/>
                     <span>Loading...</span>
                 </div>
             )}
@@ -87,7 +88,7 @@ const Products = () => {
                                     <img
                                         src={product.imageUrl}
                                         alt={product.name}
-                                        className="mb-4 h-auto w-full"
+                                        className="mx-auto h-auto"
                                     />
                                 </div>
                             ) : (
@@ -111,7 +112,7 @@ const Products = () => {
                                 onClick={(e) => handleAddToCart(e, product)}
                                 className="w-full bg-[#61a60e] flex justify-center items-canter gap-2 font-medium rounded text-sm px-5 py-2.5 text-center text-white"
                             >
-                                <ShoppingCart className="h-5 w-5" />
+                                <ShoppingCart className="h-5 w-5"/>
                                 <span>Add to cart</span>
                             </button>
                         </div>

@@ -7,7 +7,6 @@ import AuthContext from "../context/AuthProvider.tsx";
 import CartContext from "../context/CartProvider.tsx";
 import {ShoppingCart, UserRound} from "lucide-react";
 import {SearchProducts} from "./SearchProducts.tsx";
-import {useGSAP} from "@gsap/react";
 import gsap from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger"
 
@@ -22,33 +21,34 @@ export const Navbar = () => {
     const navBarRef = useRef<HTMLDivElement>(null);
     const [isNavBarScrolled, setIsNavBarScrolled] = useState<boolean>(false);
 
-    useGSAP(() => {
-        gsap.to(navBarRef.current, {
-            duration: 1,
-            ease: "none", // Use a smooth ease function
-            scrollTrigger: {
-                start: "270px 65px",
-                end: "100% -100%",
-                // markers: true,
-                toggleActions: "play reverse play reverse",
-                onToggle: ({isActive}) => {
-                    setIsNavBarScrolled(isActive)
-                    if (location.pathname === '/') {
-                        setShowSearch(isActive);
-                    }
-                }
-            }
-        });
-    });
-
     useEffect(() => {
         const queryParams = new URLSearchParams(location.search);
+        console.log(location.pathname);
         setShowSearch(location.pathname !== '/' || queryParams.get('search') !== null);
+    }, [location]);
+
+    useEffect(() => {
+        if (navBarRef.current) {
+            gsap.registerPlugin(ScrollTrigger);
+            gsap.to(navBarRef.current, {
+                duration: 1,
+                ease: "none",
+                scrollTrigger: {
+                    start: "20px 65px",
+                    end: "100% -100%",
+                    // markers: true,
+                    toggleActions: "play reverse play reverse",
+                    onToggle: ({ isActive }) => {
+                        setIsNavBarScrolled(isActive);
+                    }
+                }
+            });
+        }
     }, [location]);
 
     return (
         <nav ref={navBarRef}
-             className={`bg-white hidden items-center justify-between ease-in-out border-b z-10 px-4 py-2 transition-all space-x-2 md:flex md:fixed md:top-0 md:right-0 md:left-0 ${isNavBarScrolled && "shadow-md"}`}
+             className={`bg-white hidden items-center justify-between ease-in-out z-10 px-4 py-2 transition-all space-x-2 md:flex md:fixed md:top-0 md:right-0 md:left-0 ${isNavBarScrolled && "shadow-md border-b"}`}
         >
             <NavLink to={"/"} className="flex flex-shrink-0 items-center space-x-1">
                 <img src={Logo} alt="logo" className="h-12"/>

@@ -11,7 +11,7 @@ const Layout = () => {
 
     return (
         <main className="mx-auto">
-            <div className="md:mb-[65px]">
+            <div className="md:mb-[64px]">
                 <Navbar />
             </div>
             <MobileNavbar/>

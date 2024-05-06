@@ -23,7 +23,6 @@ export const Navbar = () => {
 
     useEffect(() => {
         const queryParams = new URLSearchParams(location.search);
-        console.log(location.pathname);
         setShowSearch(location.pathname !== '/' || queryParams.get('search') !== null);
     }, [location]);
 

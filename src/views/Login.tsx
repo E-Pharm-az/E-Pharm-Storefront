@@ -54,6 +54,7 @@ const Login = () => {
 
             setEmail("");
             setPassword("")
+            localStorage.setItem("persist", "true");
 
             navigate(from, {replace: true});
         } catch (error) {

@@ -13,7 +13,7 @@ import Cart from "./views/Cart.tsx";
 import ConfirmEmail from "./views/ConfirmEmail.tsx";
 import AuthLayout from "./layouts/AuthLayout.tsx";
 import {SpeedInsights} from "@vercel/speed-insights/react";
-import { Analytics } from "@vercel/analytics/react"
+import {Analytics} from "@vercel/analytics/react"
 
 function App() {
     return (
@@ -35,14 +35,12 @@ function App() {
                         <Route path="*" element={<NotFound/>}/>
                     </Route>
 
+                    <Route element={<AuthLayout/>}>
+                        <Route path="/login" element={<Login/>}/>
+                        <Route path="/signup" element={<Signup/>}/>
+                        <Route path="/confirm-email" element={<ConfirmEmail/>}/>
+                    </Route>
                 </Route>
-
-                <Route element={<AuthLayout/>}>
-                    <Route path="/login" element={<Login/>}/>
-                    <Route path="/signup" element={<Signup/>}/>
-                    <Route path="/confirm-email" element={<ConfirmEmail/>}/>
-                </Route>
-
             </Routes>
         </>
     )

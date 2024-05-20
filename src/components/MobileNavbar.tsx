@@ -4,7 +4,7 @@ import Logo from "../assets/logo.png";
 import LanguageSelector from "./LanguageSelector.tsx";
 import CartContext from "../context/CartProvider.tsx";
 import {Home, ShoppingCart, UserRound, Search} from "lucide-react";
-import AuthContext from "@/context/AuthProvider.tsx";
+import AuthContext from "../context/AuthProvider.tsx";
 
 export const MobileNavbar = () => {
     const {cart} = useContext(CartContext);
@@ -35,7 +35,8 @@ export const MobileNavbar = () => {
                         )}
                         <ShoppingCart color="#61a60e" size={28}/>
                     </NavLink>
-                    <NavLink to={auth ? "/login" : "/profile"} className="flex h-full items-center justify-center">
+                    
+                    <NavLink to={auth ? "/profile" : "/login"} className="flex h-full items-center justify-center">
                         <UserRound color="#61a60e" size={28}/>
                     </NavLink>
                 </div>

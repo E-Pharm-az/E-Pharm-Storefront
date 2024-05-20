@@ -1,5 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import apiClient from "../services/api-client.ts";
 import CartContext from "../context/CartProvider.tsx";
 import {Image, Loader, ShoppingCart} from "lucide-react";
@@ -26,6 +27,7 @@ const Products = () => {
     const history = useNavigate();
     const search = new URLSearchParams(location.search);
     const searchQuery = search.get("search");
+    const [t] = useTranslation("global")
 
     useEffect(() => {
         setLoading(true);
@@ -72,7 +74,7 @@ const Products = () => {
             )}
             {products.length === 0 && !loading ? (
                 <div className="py-8 text-center text-gray-600">
-                    No products found.
+                    {t("products.no-products-found")}
                 </div>
             ) : (
                 products.map((product) => (
@@ -113,7 +115,7 @@ const Products = () => {
                                 className="w-full bg-[#61a60e] flex justify-center items-canter gap-2 font-medium rounded text-sm px-5 py-2.5 text-center text-white"
                             >
                                 <ShoppingCart className="h-5 w-5"/>
-                                <span>Add to cart</span>
+                                <span>{t("products.add-to-cart-btn")}</span>
                             </button>
                         </div>
                     </div>

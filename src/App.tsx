@@ -14,10 +14,12 @@ import ConfirmEmail from "./views/ConfirmEmail.tsx";
 import AuthLayout from "./layouts/AuthLayout.tsx";
 import {SpeedInsights} from "@vercel/speed-insights/react";
 import {Analytics} from "@vercel/analytics/react"
+import ScrollToTop from "./utils/scrollToTop.ts"
 
 function App() {
     return (
         <>
+            <ScrollToTop />
             <SpeedInsights/>
             <Analytics/>
             <Routes>

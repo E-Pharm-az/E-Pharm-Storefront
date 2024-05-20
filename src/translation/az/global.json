@@ -21,7 +21,13 @@
     "password": "Şifrə",
     "confirm": "Təkrar şifrə",
     "cta": "Hesab yarat",
-    "login": "Hesabınız var? Daxil olun"
+    "login": "Hesabınız var? Daxil olun",
+    "passwordError": "Parol bir böyük hərf, bir rəqəm və bir xüsusi simvol daxil olmaqla ən azı 8 simvoldan ibarət olmalıdır (məsələn, !@#$%^&*).",
+    "invalidEmailOrPassword": "Yanlış e-poçt və ya parol",
+    "noServerResponse": "Server cavabı yoxdur",
+    "loginFailed": "Giriş uğursuz oldu",
+    "unexpectedError": "Gözlənilməz xəta baş verdi",
+    "passwordsDoNotMatch": "Parollar uyğun gəlmir"
   },
   "login": {
     "title": "Daxil ol",
@@ -44,9 +50,9 @@
     "Payment Methods": "Ödəmə metodları",
     "Articles about health": "Sağlamlıq haqqında məqalələr",
     "Doctors' recommendations": "Həkim tövsiyələri",
-    "Healthy lifestyle": "ЗSağlam həyat tərzi",
+    "Healthy lifestyle": "Sağlam həyat tərzi",
     "Pharmacy addresses": "Aptek ünvanları",
-    "Feedback form": "ФƏlaqə forması",
+    "Feedback form": "Əlaqə forması",
     "Contact doctor": "Həkiminizlə əlaqə saxlayın",
     "Working hours": "İş saatları",
     "form-title": "Elekton poçt qutunuza promo kodu almaq üçün ilk qeydiyyatdan keçənlərdən biri olun",
@@ -71,6 +77,10 @@
     "price": "Qiymət",
     "proceed-to-checkout": "Sifarişi resmiləşdir",
     "continue-shopping": "Alış-verişə davam edin"
+  },
+  "products":{
+    "no-products-found": "Məhsul tapılmayıb",
+    "add-to-cart-btn": "Səbətə at"
   },
   "product-page":{
     "product-not-found": "Məhsul tapılmayıb",

@@ -21,7 +21,14 @@
     "password": "Password",
     "confirm": "Confirm password",
     "cta": "Create an account",
-    "login": "Already have an account? Login"
+    "login": "Already have an account? Login",
+    "passwordError": "The password must contain at least 8 characters, including one capital letter, one number, and one special character (for example, !@#$%^&*).",
+    "invalidEmailOrPassword": "Invalid email or password",
+    "noServerResponse": "No server response",
+    "loginFailed": "Login failed",
+    "unexpectedError": "An unexpected error occurred",
+    "passwordsDoNotMatch": "Passwords do not match"
+    
   },
   "login": {
     "title": "Login",
@@ -71,6 +78,10 @@
     "price": "Price",
     "proceed-to-checkout": "Proceed to Checkout",
     "continue-shopping": "Continue shopping"
+  },
+  "products":{
+    "no-products-found": "No products found",
+    "add-to-cart-btn": "Add to cart"
   },
   "product-page":{
     "product-not-found": "Product not found",

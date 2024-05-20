@@ -21,6 +21,7 @@ const Signup = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [confirmEmail, setConfirmEmail] = useState<boolean>(false);
+    const [passwordError, setPasswordError] = useState<string>('');
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const {name, value} = e.target;
@@ -28,6 +29,24 @@ const Signup = () => {
             ...prevState,
             [name]: value
         }));
+    };
+
+
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+  
+    const handleChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = e.target;
+      setFormData(prevState => ({
+        ...prevState,
+        [name]: value
+      }));
+  
+      // Validate password
+      if (!passwordRegex.test(value) && value.length > 0) {
+        setPasswordError(t("signup.passwordError"));
+      } else {
+        setPasswordError('');
+      }
     };
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -58,19 +77,19 @@ const Signup = () => {
                 if (axios.isAxiosError(error)) {
                     if (error.response) {
                         if (error.response.status === 400) {
-                            setError("Invalid email or password");
+                            setError(t("signup.invalidEmailOrPassword"));
                         } else {
-                            setError("No server response");
+                            setError(t("signup.noServerResponse"));
                         }
                     } else {
-                        setError("Login failed")
+                        setError(t("signup.loginFailed"))
                     }
                 } else {
-                    setError("An unexpected error occurred");
+                    setError(t("signup.unexpectedError"));
                 }
             }
         } else {
-            setError("Passwords do not match");
+            setError(t("signup.passwordsDoNotMatch"));
         }
         setLoading(false);
     };
@@ -152,7 +171,7 @@ const Signup = () => {
                                     className="mb-2 block text-sm font-medium text-gray-900">{t("signup.password")}</label>
                                 <div className="relative">
                                     <input type={showPassword ? "text" : "password"} name="password"
-                                           value={formData.password} onChange={handleChange}
+                                           value={formData.password} onChange={handleChangePassword}
                                            placeholder="••••••••"
                                            className="block w-full rounded-lg border border-gray-300 bg-gray-50 text-gray-900 p-2.5 focus:ring-primary-600 focus:border-primary-600 sm:text-sm"
                                            required={true}/>
@@ -165,6 +184,7 @@ const Signup = () => {
                                         {showPassword ? <EyeOff/> : <Eye/>}
                                     </button>
                                 </div>
+                                {passwordError && <div style={{ color: 'red' }}>{passwordError}</div>}
                             </div>
                             <div>
                                 <label className="mb-2 block text-sm font-medium text-gray-900">
@@ -176,6 +196,7 @@ const Signup = () => {
                                        className="block w-full rounded-lg border border-gray-300 bg-gray-50 text-gray-900 p-2.5 focus:ring-primary-600 focus:border-primary-600 sm:text-sm"
                                        required={true}/>
                             </div>
+                            {error && <div style={{ color: 'red' }}>{error}</div>}
                             <button type="submit" className="w-full text-white bg-[#61a60e] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">
                                 {t("signup.cta")}
                             </button>

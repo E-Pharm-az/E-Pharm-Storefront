@@ -135,12 +135,12 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
                             </SheetTitle>
                             <div className="grid grid-cols-3 pb-6">
                                 <img
-                                    className="p-2 w-24 h-24 col-span-1 border border-neutral-200 rounded"
+                                    className="col-span-1 h-24 w-24 rounded border border-neutral-200 p-2"
                                     src={addedItem?.imageUrl}
                                     alt={addedItem?.name}
                                 />
                                 <div className="col-span-2">
-                                    <p className="font-medium text-xl text-black">
+                                    <p className="text-xl font-medium text-black">
                                         {addedItem?.name}
                                     </p>
                                     <p>
@@ -170,7 +170,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
                                 </Link>
                                 <button
                                     onClick={() => setShowNotification(false)}
-                                    className="w-full border-2 border-neutral-700 bg-white transition font-medium rounded-lg text-sm px-5 py-2.5 text-center text-black"
+                                    className="w-full rounded-lg border-2 border-neutral-700 bg-white px-5 text-center text-sm font-medium text-black transition py-2.5"
                                 >
                                     {t("cart-provider.continue-shopping")}
                                 </button>
@@ -191,12 +191,12 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
                         </DrawerHeader>
                         <DrawerFooter className="pt-2">
                             <img
-                                className="p-2 w-full h-48 col-span-1 border border-neutral-200 rounded object-contain"
+                                className="col-span-1 h-48 w-full rounded border border-neutral-200 object-contain p-2"
                                 src={addedItem?.imageUrl}
                                 alt={addedItem?.name}
                             />
                             <div className="mb-6">
-                                <p className="font-medium text-xl text-black">
+                                <p className="text-xl font-medium text-black">
                                     {addedItem?.name}
                                 </p>
                                 <p>
@@ -225,7 +225,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
                             <DrawerClose asChild>
                                 <button
                                     onClick={() => setShowNotification(false)}
-                                    className="w-full border-2 bg-white transition font-medium rounded-lg text-sm px-5 py-2.5 text-center text-black"
+                                    className="w-full rounded-lg border-2 bg-white px-5 text-center text-sm font-medium text-black transition py-2.5"
                                 >
                                     {t("cart-provider.continue-shopping")}
                                 </button>

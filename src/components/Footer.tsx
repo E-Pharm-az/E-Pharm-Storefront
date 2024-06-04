@@ -14,7 +14,7 @@ const Footer = () => {
             <div className="container mb-10 grid grid-cols-1 gap-8 px-4 md:mb-20 md:grid-cols-4 md:gap-4">
                 <div className="flex flex-col gap-4">
                     <div
-                        className="flex justify-between items-center"
+                        className="flex items-center justify-between"
                         onClick={() => setShowAbout(!showAbout)}
                     >
                         <h2
@@ -25,9 +25,9 @@ const Footer = () => {
                             {t("footer.about")}
                         </h2>
                         {showAbout ? (
-                            <ChevronUp className="block md:hidden h-6 w-6 text-neutral-400" />
+                            <ChevronUp className="block h-6 w-6 text-neutral-400 md:hidden" />
                         ) : (
-                            <ChevronDown className="block md:hidden h-6 w-6 text-neutral-400" />
+                            <ChevronDown className="block h-6 w-6 text-neutral-400 md:hidden" />
                         )}
                     </div>
                     <ul
@@ -60,7 +60,7 @@ const Footer = () => {
                 </div>
                 <div className="flex flex-col gap-4">
                     <div
-                        className="flex justify-between items-center"
+                        className="flex items-center justify-between"
                         onClick={() => setShowHelp(!showHelp)}
                     >
                         <h2
@@ -71,9 +71,9 @@ const Footer = () => {
                             {t("footer.help")}
                         </h2>
                         {showHelp ? (
-                            <ChevronUp className="block md:hidden h-6 w-6 text-neutral-400" />
+                            <ChevronUp className="block h-6 w-6 text-neutral-400 md:hidden" />
                         ) : (
-                            <ChevronDown className="block md:hidden h-6 w-6 text-neutral-400" />
+                            <ChevronDown className="block h-6 w-6 text-neutral-400 md:hidden" />
                         )}
                     </div>
                     <ul
@@ -106,7 +106,7 @@ const Footer = () => {
                 </div>
                 <div className="flex flex-col gap-4">
                     <div
-                        className="flex justify-between items-center"
+                        className="flex items-center justify-between"
                         onClick={() => setShowAdvice(!showAdvice)}
                     >
                         <h2
@@ -117,9 +117,9 @@ const Footer = () => {
                             {t("footer.doctors-advice")}
                         </h2>
                         {showAdvice ? (
-                            <ChevronUp className="block md:hidden h-6 w-6 text-neutral-400" />
+                            <ChevronUp className="block h-6 w-6 text-neutral-400 md:hidden" />
                         ) : (
-                            <ChevronDown className="block md:hidden h-6 w-6 text-neutral-400" />
+                            <ChevronDown className="block h-6 w-6 text-neutral-400 md:hidden" />
                         )}
                     </div>
                     <ul
@@ -147,7 +147,7 @@ const Footer = () => {
                 </div>
                 <div className="flex flex-col gap-4">
                     <div
-                        className="flex justify-between items-center"
+                        className="flex items-center justify-between"
                         onClick={() => setShowContact(!showContact)}
                     >
                         <h2
@@ -158,9 +158,9 @@ const Footer = () => {
                             {t("footer.contacts")}
                         </h2>
                         {showContact ? (
-                            <ChevronUp className="block md:hidden h-6 w-6 text-neutral-400" />
+                            <ChevronUp className="block h-6 w-6 text-neutral-400 md:hidden" />
                         ) : (
-                            <ChevronDown className="block md:hidden h-6 w-6 text-neutral-400" />
+                            <ChevronDown className="block h-6 w-6 text-neutral-400 md:hidden" />
                         )}
                     </div>
                     <ul
@@ -192,9 +192,9 @@ const Footer = () => {
                     <div className="block rounded-full bg-neutral-200 h-0.5 md:hidden"></div>
                 </div>
             </div>
-            <div className="bg-gray-100 py-10 px-6 md:px-12 mb-10 md:mb-20 rounded-lg">
-                <div className="max-w-2xl mx-auto">
-                    <h2 className="text-md md:text-lg font-semibold text-gray-800 mb-4">
+            <div className="mb-10 rounded-lg bg-gray-100 px-6 py-10 md:mb-20 md:px-12">
+                <div className="mx-auto max-w-2xl">
+                    <h2 className="mb-4 font-semibold text-gray-800 text-md md:text-lg">
                         {t("footer.form-title")}
                     </h2>
                     <form className="flex flex-col gap-4 md:flex-row">
@@ -208,7 +208,7 @@ const Footer = () => {
                             {t("footer.form-button-text")}
                         </button>
                     </form>
-                    <p className="text-sm text-gray-600 mt-4">
+                    <p className="mt-4 text-sm text-gray-600">
                         {t("footer.form-subtitle")}{" "}
                         <a href="#!" className="text-[#61a60e] underline">
                            {t("footer.form-privacy-policy-link")}.
@@ -216,15 +216,15 @@ const Footer = () => {
                     </p>
                 </div>
             </div>
-            <div className="container flex flex-col-reverse items-start justify-between sm:flex-row sm:items-center gap-4 px-4 md:pb-0 pb-20">
-                <div className="text-gray-600 text-sm font-medium">
+            <div className="container flex flex-col-reverse items-start justify-between gap-4 px-4 pb-20 sm:flex-row sm:items-center md:pb-0">
+                <div className="text-sm font-medium text-gray-600">
                     Copyright © E-Pharm 2024
                 </div>
-                <div className="flex gap-4 text-sm flex-col sm:flex-row">
-                    <a href="#!" className="text-gray-600 font-medium">
+                <div className="flex flex-col gap-4 text-sm sm:flex-row">
+                    <a href="#!" className="font-medium text-gray-600">
                         {t("footer.Terms & Conditions")}
                     </a>
-                    <a href="#!" className="text-gray-600 font-medium">
+                    <a href="#!" className="font-medium text-gray-600">
                         {t("footer.Privacy Policy")}
                     </a>
                 </div>

@@ -11,6 +11,13 @@
     "cart": "Cart",
     "hi": "Hi"
   },
+  "auth": {
+    "title": "Enter your email to join us or sign in.",
+    "placeholder": "",
+    "tos": "By continuing, I agree to E-Pharm's Privacy Policy and Terms of Use.",
+    "cta": "Continue",
+    "unexpectedError": "An unexpected error occurred"
+  },
   "signup": {
     "title": "What's your email?",
     "placeholder": "Enter email",

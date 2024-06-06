@@ -76,7 +76,7 @@ export const Navbar = () => {
                     </>
                 ) : (
                     <>
-                        <NavLink to={"/login"}
+                        <NavLink to={"/auth"}
                                  className="flex flex-shrink-0 items-center transition hover:opacity-70">
                             <UserRound className="mr-2 h-5 w-5"/>
                             <span>{t("nav.login")}</span>

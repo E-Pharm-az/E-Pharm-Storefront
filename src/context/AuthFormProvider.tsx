@@ -1,29 +1,32 @@
-import React, { createContext, useState, useEffect, ReactNode } from "react";
+import { createContext, useState, useEffect, ReactNode, FC } from "react";
 
 interface FormData {
   email: string;
-  name: string;
+  firstName: string;
+  lastName: string;
   address: string;
   password: string;
 }
 
-interface FormContextProps {
-  formData: FormData;
-  updateFormData: (data: Partial<FormData>) => void;
-}
-
 const defaultFormData: FormData = {
   email: "",
-  name: "",
+  firstName: "",
+  lastName: "",
   address: "",
   password: "",
 };
 
-const FormContext = createContext<FormContextProps | undefined>(undefined);
+interface FormContextType {
+  formData: FormData;
+  updateFormData: (data: Partial<FormData>) => void;
+}
 
-const SignupFormProvider: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
+const FormContext = createContext<FormContextType>({
+  formData: defaultFormData,
+  updateFormData: () => {},
+});
+
+export const AuthFormProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [formData, setFormData] = useState<FormData>(() => {
     const savedData = localStorage.getItem("formData");
     return savedData ? JSON.parse(savedData) : defaultFormData;
@@ -47,4 +50,4 @@ const SignupFormProvider: React.FC<{ children: ReactNode }> = ({
   );
 };
 
-export { FormContext, SignupFormProvider };
+export default FormContext;

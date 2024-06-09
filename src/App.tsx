@@ -17,7 +17,8 @@ import { Analytics } from "@vercel/analytics/react";
 import ScrollToTop from "./utils/scrollToTop.ts";
 import ForgotPassword from "@/views/ForgotPassword.tsx";
 import ChangePassword from "@/views/ChangePassword.tsx";
-import Auth from "@/views/auth/Auth.tsx";
+import EmailLookup from "@/views/auth/EmailLookup.tsx";
+import VerifyEmail from "@/views/auth/VerifyEmail.tsx";
 
 function App() {
   return (
@@ -47,7 +48,8 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/confirm-email" element={<ConfirmEmail />} />
 
-            <Route path="/auth" element={<Auth/>} />
+            <Route path="/email-lookup" element={<EmailLookup />} />
+            <Route path="/verify-email" element={<VerifyEmail />} />
             {/*<Route path="/login" element={LoginStep} />*/}
             {/*<Route path="/signup/step1" element={SignupStep1} />*/}
             {/*<Route path="/signup/step2" element={SignupStep2} />*/}

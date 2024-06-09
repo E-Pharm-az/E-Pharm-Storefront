@@ -11,12 +11,19 @@
     "cart": "Cart",
     "hi": "Hi"
   },
-  "auth": {
+  "email-lookup": {
     "title": "Enter your email to join us or sign in.",
-    "placeholder": "",
+    "placeholder": "Email",
     "tos": "By continuing, I agree to E-Pharm's Privacy Policy and Terms of Use.",
     "cta": "Continue",
     "unexpectedError": "An unexpected error occurred"
+  },
+  "verify-email": {
+    "title": "Lets verify your email.",
+    "detail": "We've sent a code to",
+    "code": "Code",
+    "edit": "Edit",
+    "resend": "Resend"
   },
   "signup": {
     "title": "What's your email?",

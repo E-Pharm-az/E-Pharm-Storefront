@@ -11,6 +11,20 @@
     "cart": "Корзина",
     "hi": "Привет"
   },
+  "email-lookup": {
+    "title": "Введите ваш электронный адрес, чтобы присоединиться к нам или войти.",
+    "placeholder": "Электронная почта",
+    "tos": "Продолжая, я соглашаюсь с Политикой конфиденциальности и Условиями использования E-Pharm.",
+    "cta": "Продолжить",
+    "unexpectedError": "Произошла непредвиденная ошибка"
+  },
+  "verify-email": {
+    "title": "Давайте подтвердим ваш электронный адрес.",
+    "detail": "Мы отправили код на",
+    "code": "Код",
+    "edit": "Изменить",
+    "resend": "Повторить"
+  },
   "signup": {
     "title": "Ваш электронный адрес?",
     "placeholder": "Введите электронную почту",
@@ -56,15 +70,15 @@
     "cancel": "Отмена",
     "cto": "Сбросить пароль"
   },
-  "footer":{
+  "footer": {
     "about": "О нас",
-    "help" : "Помощь",
+    "help": "Помощь",
     "doctors-advice": "Совет врача",
     "contacts": "Связь",
     "Terms & Conditions": "Условия использования",
     "Privacy Policy": "Политика конфиденциальности",
     "About Us": "О нас",
-    "License and details" : "Лицензии и подробности",
+    "License and details": "Лицензии и подробности",
     "Our partners": "Наши партнёры",
     "Our team and doctors": "Наша команда и врачи",
     "FAQ": "Часто задаваемые вопросы",
@@ -84,7 +98,7 @@
     "form-input-placeholder": "Введите адресс электроной почты",
     "form-button-text": "Подписаться"
   },
-  "cart":{
+  "cart": {
     "item": "товар",
     "items": "товаров",
     "in-your-cart": "в вашей корзине",
@@ -94,18 +108,18 @@
     "cart-total": "Всего в корзине",
     "cart-btn-text": "Перейти к оформлению заказа"
   },
-  "cart-provider":{
+  "cart-provider": {
     "item-added-to-cart": "Товар добавлен в корзину",
     "quanity": "Количество",
     "price": "Цена",
     "proceed-to-checkout": "Перейти к оформлению заказа",
     "continue-shopping": "Продолжить покупки"
   },
-  "products":{
+  "products": {
     "no-products-found": "Товары не найдены",
     "add-to-cart-btn": "Добавить в корзину"
   },
-  "product-page":{
+  "product-page": {
     "product-not-found": "Товар не найден",
     "product-add-to-cart-btn": "Добавить в корзину"
   }

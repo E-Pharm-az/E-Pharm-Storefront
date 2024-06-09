@@ -1,4 +1,5 @@
-import { createContext, useState, useEffect, ReactNode, FC } from "react";
+import { createContext, useState, ReactNode, FC } from "react";
+import {produce} from "immer";
 
 interface FormData {
   email: string;
@@ -27,20 +28,14 @@ const FormContext = createContext<FormContextType>({
 });
 
 export const AuthFormProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const [formData, setFormData] = useState<FormData>(() => {
-    const savedData = localStorage.getItem("formData");
-    return savedData ? JSON.parse(savedData) : defaultFormData;
-  });
-
-  useEffect(() => {
-    localStorage.setItem("formData", JSON.stringify(formData));
-  }, [formData]);
+  const [formData, setFormData] = useState<FormData>(defaultFormData);
 
   const updateFormData = (data: Partial<FormData>) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      ...data,
-    }));
+    setFormData((prevData) =>
+      produce(prevData, (draft) => {
+        Object.assign(draft, data);
+      }),
+    );
   };
 
   return (

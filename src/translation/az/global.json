@@ -11,6 +11,20 @@
     "cart": "Səbət",
     "hi": "Salam"
   },
+  "email-lookup": {
+    "title": "Bizə qoşulmaq və ya daxil olmaq üçün elektron poçtunuzu daxil edin.",
+    "placeholder": "Elektron poçt",
+    "tos": "Davam etməklə, E-Pharm-ın Məxfilik Siyasəti və İstifadə Şərtləri ilə razılaşıram.",
+    "cta": "Davam et",
+    "unexpectedError": "Gözlənilməz səhv baş verdi"
+  },
+  "verify-email": {
+    "title": "Gəlin elektron poçtunuzu təsdiqləyək.",
+    "detail": "Biz kod göndərdik",
+    "code": "Kod",
+    "edit": "Dəyişdir",
+    "resend": "Göndər"
+  },
   "signup": {
     "firstname": "Ad",
     "lastname": "Soyad",

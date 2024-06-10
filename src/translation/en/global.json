@@ -23,7 +23,8 @@
     "detail": "We've sent a code to",
     "code": "Code",
     "edit": "Edit",
-    "resend": "Resend"
+    "resend": "Resend",
+    "continue": "Continue"
   },
   "signup": {
     "title": "What's your email?",

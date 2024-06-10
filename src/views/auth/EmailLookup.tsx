@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/Button.tsx";
-import {useContext, useEffect} from "react";
+import { useContext } from "react";
 import FormContext from "@/context/AuthFormProvider.tsx";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -32,7 +32,7 @@ const EmailLookup = () => {
 
     try {
       const response = await apiClient.get(
-        `/auth/lookup/store/${formData.email}`,
+        `/auth/lookup/store/${data.email}`,
       );
 
       if (response.status === 200) {
@@ -41,7 +41,12 @@ const EmailLookup = () => {
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response?.status === 404) {
-          navigate("/verify-email");
+          try {
+            await apiClient.post("user/register", { Email: data.email });
+            navigate("/verify-email");
+          } catch (error) {
+            setError(t("email-lookup.unexpectedError"));
+          }
         }
       } else {
         setError(t("email-lookup.unexpectedError"));
@@ -50,7 +55,7 @@ const EmailLookup = () => {
   };
 
   return (
-    <div className="mx-auto w-full py-8 sm:py-0 sm:w-[400px]">
+    <div className="mx-auto w-fit py-8 sm:py-0 sm:max-w-[400px]">
       <div className="grid gap-6 p-6 sm:p-0">
         <h1 className="text-3xl font-medium leading-tight tracking-tight text-gray-900">
           {t("email-lookup.title")}
@@ -67,7 +72,9 @@ const EmailLookup = () => {
               <p className="text-red-500 text-sm">{errors.email.message}</p>
             )}
           </div>
-          <p className="text-sm text-muted-foreground">{t("email-lookup.tos")}</p>
+          <p className="text-sm text-muted-foreground">
+            {t("email-lookup.tos")}
+          </p>
           <Button type="submit">{t("email-lookup.cta")}</Button>
         </form>
       </div>

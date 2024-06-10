@@ -23,7 +23,8 @@
     "detail": "Biz kod göndərdik",
     "code": "Kod",
     "edit": "Dəyişdir",
-    "resend": "Göndər"
+    "resend": "Göndər",
+    "continue": "Davam et"
   },
   "signup": {
     "firstname": "Ad",

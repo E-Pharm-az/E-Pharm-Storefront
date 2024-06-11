@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import apiClient from "../services/api-client.ts";
-import Logo from "../assets/e-pharm.png";
+import apiClient from "../../services/api-client.ts";
+import Logo from "../../assets/e-pharm.png";
 import { Loader } from "lucide-react";
 
 const ConfirmEmail = () => {

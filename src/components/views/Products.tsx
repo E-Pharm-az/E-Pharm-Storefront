@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import apiClient from "../services/api-client.ts";
-import CartContext from "../context/CartProvider.tsx";
+import apiClient from "../../services/api-client.ts";
+import CartContext from "../../context/CartProvider.tsx";
 import { Image, Loader, ShoppingCart } from "lucide-react";
 
 export interface Product {

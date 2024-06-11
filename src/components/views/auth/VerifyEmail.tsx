@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import {ChangeEvent, useContext, useEffect, useState} from "react";
+import { useContext, useEffect, useState } from "react";
 import FormContext from "@/context/AuthFormProvider.tsx";
 import ErrorContext from "@/context/ErrorProvider.tsx";
 import {
@@ -16,7 +16,7 @@ const CODE_LENGTH = 6;
 const VerifyEmail = () => {
   const [t] = useTranslation("global");
   const { setError } = useContext(ErrorContext);
-  const { formData } = useContext(FormContext);
+  const { formData, updateFormData } = useContext(FormContext);
   const [code, setCode] = useState<string>("");
   const navigate = useNavigate();
 
@@ -36,7 +36,8 @@ const VerifyEmail = () => {
           email: formData.email,
           code: value,
         });
-        navigate("/");
+        updateFormData({ isAccountConfirmed: true });
+        navigate("/signup");
       } catch (error) {
         setError(t("verify-email.unexpectedError"));
       }

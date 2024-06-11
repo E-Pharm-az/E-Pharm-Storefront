@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { SearchProducts } from "../components/SearchProducts.tsx";
+import { SearchProducts } from "../SearchProducts.tsx";
 
 const Home = () => {
   const [t] = useTranslation("global");

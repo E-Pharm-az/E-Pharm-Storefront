@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Product } from "./Products.tsx";
-import apiClient from "../services/api-client.ts";
-import CartContext from "../context/CartProvider.tsx";
+import apiClient from "../../services/api-client.ts";
+import CartContext from "../../context/CartProvider.tsx";
 import { Image, Loader } from "lucide-react";
 
 const ProductPage = () => {

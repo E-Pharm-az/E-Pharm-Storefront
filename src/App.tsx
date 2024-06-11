@@ -1,24 +1,24 @@
 import { Routes, Route } from "react-router-dom";
-import Home from "./views/Home.tsx";
-import Products from "./views/Products.tsx";
-import NotFound from "./views/NotFound.tsx";
-import ProductPage from "./views/ProductPage.tsx";
-import Signup from "./views/Signup.tsx";
-import Login from "./views/Login.tsx";
+import Home from "@/components/views/Home.tsx";
+import Products from "@/components/views/Products.tsx";
+import NotFound from "@/components/views/NotFound.tsx";
+import ProductPage from "@/components/views/ProductPage.tsx";
+import Signup from "@/components/views/auth/Signup.tsx";
+import Login from "@/components/views/Login.tsx";
 import Layout from "./layouts/Layout.tsx";
-import Profile from "./views/Profile.tsx";
-import RequireAuth from "./components/Auth/RequireAuth.tsx";
-import PersistLogin from "./components/Auth/PersistLogin.tsx";
-import Cart from "./views/Cart.tsx";
-import ConfirmEmail from "./views/ConfirmEmail.tsx";
+import Profile from "@/components/views/Profile.tsx";
+import RequireAuth from "@/components/RequireAuth.tsx";
+import PersistLogin from "@/components/PersistLogin.tsx";
+import Cart from "@/components/views/Cart.tsx";
+import ConfirmEmail from "@/components/views/ConfirmEmail.tsx";
 import AuthLayout from "./layouts/AuthLayout.tsx";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { Analytics } from "@vercel/analytics/react";
 import ScrollToTop from "./utils/scrollToTop.ts";
-import ForgotPassword from "@/views/ForgotPassword.tsx";
-import ChangePassword from "@/views/ChangePassword.tsx";
-import EmailLookup from "@/views/auth/EmailLookup.tsx";
-import VerifyEmail from "@/views/auth/VerifyEmail.tsx";
+import ForgotPassword from "@/components/views/ForgotPassword.tsx";
+import ChangePassword from "@/components/views/ChangePassword.tsx";
+import EmailLookup from "@/components/views/auth/EmailLookup.tsx";
+import VerifyEmail from "@/components/views/auth/VerifyEmail.tsx";
 
 function App() {
   return (

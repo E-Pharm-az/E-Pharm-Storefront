@@ -1,6 +1,6 @@
 import {useContext, useEffect, useState} from "react";
-import useRefreshToken from "../../hooks/useRefreshToken.ts";
-import AuthContext from "../../context/AuthProvider.tsx";
+import useRefreshToken from "../hooks/useRefreshToken.ts";
+import AuthContext from "../context/AuthProvider.tsx";
 import {Outlet} from "react-router-dom";
 import {Loader} from "lucide-react";
 

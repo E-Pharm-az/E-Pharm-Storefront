@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import apiClient from "@/services/api-client.ts";
 import ErrorContext from "@/context/ErrorProvider.tsx";
 import axios from "axios";
+import {Input} from "@/components/ui/Input.tsx";
 
 interface EmailFormData {
   email: string;
@@ -62,11 +63,10 @@ const EmailLookup = () => {
         </h1>
         <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6">
           <div className="grid gap-1">
-            <input
+            <Input
               type="email"
               {...register("email", { required: "Email is required" })}
-              className="block w-full rounded-lg border border-gray-300 bg-gray-50 text-gray-900 p-2.5 focus:ring-primary-600 focus:border-primary-600 sm:text-sm"
-              placeholder={t("email-lookup.placeholder")}
+              label={t("email-lookup.placeholder")}
             />
             {errors.email && (
               <p className="text-red-500 text-sm">{errors.email.message}</p>

@@ -3,6 +3,7 @@ import {produce} from "immer";
 
 interface FormData {
   email: string;
+  isAccountConfirmed: boolean;
   firstName: string;
   lastName: string;
   address: string;
@@ -11,6 +12,7 @@ interface FormData {
 
 const defaultFormData: FormData = {
   email: "",
+  isAccountConfirmed: false,
   firstName: "",
   lastName: "",
   address: "",

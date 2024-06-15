@@ -32,22 +32,18 @@ const EmailLookup = () => {
     updateFormData({ email: data.email });
 
     try {
-      const response = await apiClient.get(
-        `/auth/lookup/store/${data.email}`,
-      );
+      const response = await apiClient.post("/user/register", {
+        email: data.email,
+      });
 
       if (response.status === 200) {
-        navigate("/login");
+        navigate("/verify-email");
       }
+
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        if (error.response?.status === 404) {
-          try {
-            await apiClient.post("user/register", { Email: data.email });
-            navigate("/verify-email");
-          } catch (error) {
-            setError(t("email-lookup.unexpectedError"));
-          }
+        if (error.response?.status === 409) {
+          navigate("/login");
         }
       } else {
         setError(t("email-lookup.unexpectedError"));

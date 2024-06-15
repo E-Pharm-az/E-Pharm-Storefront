@@ -1,13 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Loader, Eye, EyeOff, X } from "lucide-react";
+import { Eye, EyeOff, X } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
 import { Button } from "@/components/ui/Button.tsx";
 import FormContext from "@/context/AuthFormProvider.tsx";
 import ErrorContext from "@/context/ErrorProvider.tsx";
 import { useForm } from "react-hook-form";
 import { Checkbox } from "@/components/ui/checkbox.tsx";
-import {Input} from "@/components/ui/Input.tsx";
+import { Input } from "@/components/ui/Input.tsx";
+import apiClient from "@/services/api-client.ts";
+import axios from "axios";
 
 interface FormData {
   firstName: string;
@@ -20,7 +22,6 @@ interface FormData {
 const Signup = () => {
   const [t] = useTranslation("global");
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
   const { setError } = useContext(ErrorContext);
   const { formData } = useContext(FormContext);
   const navigate = useNavigate();
@@ -29,37 +30,64 @@ const Signup = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
+    watch,
   } = useForm<FormData>({
     defaultValues: {
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      address: formData.address,
-      password: formData.password,
       isTosAccepted: false,
-    },
+    }
   });
 
-  // useEffect(() => {
-  //   // require confirmed email to be on this page
-  //   if (!formData.email && !formData.isAccountConfirmed) {
-  //     navigate("/email-lookup");
-  //   }
-  // }, []);
+  useEffect(() => {
+    // require confirmed email to be on this page
+    console.log(formData.code);
+    if (!formData.email && !formData.isAccountConfirmed) {
+      navigate("/email-lookup");
+    }
+  }, []);
 
   const onSubmit = async (data: FormData) => {
-    console.log(data);
+    try {
+      const response = await apiClient.post("/user/initialize-user", {
+        email: formData.email,
+        code: formData.code,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        address: data.address,
+        password: data.password,
+      });
+      if (response.status === 200) {
+        navigate("/");
+      }
+    }
+    catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          if (error.response.status === 400) {
+            setError(t("signup.invalidEmailOrPassword"));
+          } else {
+            setError(t("signup.noServerResponse"));
+          }
+        } else {
+          setError(t("signup.loginFailed"));
+        }
+      } else {
+        setError(t("signup.unexpectedError"));
+      }
+    }
+  };
+
+  const isTosAccepted = watch("isTosAccepted", false);
+
+  const handleCheckboxChange = (checked: boolean) => {
+    setValue("isTosAccepted", checked);
   };
 
   return (
     <div className="mx-auto w-full py-8 sm:w-[400px]">
-      {loading && (
-        <div className="fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-gray-100 bg-opacity-50">
-          <Loader className="mr-2 animate-spin text-blue-500" />
-        </div>
-      )}
       <div className="bg-white md:mt-0 xl:p-0">
         <div className="p-6 space-y-4 sm:p-8">
-          <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900">
+          <h1 className="text-3xl font-medium leading-tight tracking-tight text-gray-900">
             {t("signup.title")}
           </h1>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -67,10 +95,12 @@ const Signup = () => {
               <div>
                 <Input
                   type="text"
+                  label={t("signup.firstname")}
                   autoComplete="given-name"
+                  autoCorrect="off"
                   autoCapitalize="on"
                   {...register("firstName", { required: "Required" })}
-                  label={t("signup.firstname")}
+                  className={`${errors.firstName && "border-red-500"}`}
                 />
                 <p className="w-full h-3 text-xs text-red-500">
                   {errors.firstName?.message}
@@ -79,9 +109,11 @@ const Signup = () => {
               <div>
                 <Input
                   type="text"
+                  label={t("signup.lastname")}
+                  autoCorrect="off"
                   autoComplete="family-name"
                   {...register("lastName", { required: "Required" })}
-                  label={t("signup.lastname")}
+                  className={`${errors.lastName && "border-red-500"}`}
                 />
                 <p className="w-full h-3 text-xs text-red-500">
                   {errors.lastName?.message}
@@ -92,39 +124,52 @@ const Signup = () => {
               <div className="relative">
                 <Input
                   type={showPassword ? "text" : "password"}
-                  autoComplete="new-password"
-                  {...register("password", { required: true })}
                   label={t("signup.password")}
+                  autoCorrect="off"
+                  autoComplete="new-password"
+                  {...register("password", {
+                    required: true,
+                    validate: {
+                      minLength: (value: string) => value.length >= 8,
+                      complex: (value: string) =>
+                        /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])/.test(value),
+                    },
+                  })}
+                  className={`${errors.password && "border-red-500"}`}
                 />
                 <button
                   type="button"
-                  className="absolute top-1/2 right-3 -translate-y-1/2 focus:outline-none"
+                  className="absolute top-1/2 right-3 -translate-y-1/2 focus:outline-none text-muted-foreground"
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? <EyeOff /> : <Eye />}
                 </button>
               </div>
-              <div className="ml-2 flex gap-1">
-                <X className="h-4 w-4 text-muted-foreground" />
-                <p className="text-xs text-muted-foreground">
-                  {t("signup.first-pswd-req")}
-                </p>
+              <div
+                className={`ml-2 flex gap-1 ${errors.password?.type === "required" || errors.password?.type === "minLength" ? "text-red-500" : "text-muted-foreground"}`}
+              >
+                <X className="h-4 w-4" />
+                <p className="text-xs">{t("signup.first-pswd-req")}</p>
               </div>
-              <div className="ml-2 flex gap-1">
-                <X className="h-4 w-4 text-muted-foreground" />
-                <p className="text-xs text-muted-foreground">
-                  {t("signup.second-pswd-req")}
-                </p>
+              <div
+                className={`ml-2 flex gap-1 ${errors.password?.type === "required" || errors.password?.type === "complex" ? "text-red-500" : "text-muted-foreground"}`}
+              >
+                <X className="h-4 w-4" />
+                <p className="text-xs">{t("signup.second-pswd-req")}</p>
               </div>
             </div>
             <Input
               type="text"
+              label={t("signup.address")}
               autoComplete="address-line1"
               {...register("address", { required: true })}
-              label={t("signup.address")}
             />
             <div className="flex gap-2 items-start">
-              <Checkbox {...register("isTosAccepted", { required: true })} />
+              <Checkbox
+                {...register("isTosAccepted", { required: true })}
+                checked={isTosAccepted}
+                onCheckedChange={handleCheckboxChange}
+              />
               <p
                 className={`text-sm ${errors.isTosAccepted && "text-red-500"}`}
               >

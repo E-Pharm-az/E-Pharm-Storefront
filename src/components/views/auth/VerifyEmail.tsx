@@ -36,7 +36,8 @@ const VerifyEmail = () => {
           email: formData.email,
           code: value,
         });
-        updateFormData({ isAccountConfirmed: true });
+        console.log(parseInt(code));
+        updateFormData({ code: parseInt(code), isAccountConfirmed: true });
         navigate("/signup");
       } catch (error) {
         setError(t("verify-email.unexpectedError"));

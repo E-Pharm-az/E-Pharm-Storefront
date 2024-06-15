@@ -39,7 +39,6 @@ const EmailLookup = () => {
       if (response.status === 200) {
         navigate("/verify-email");
       }
-
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response?.status === 409) {

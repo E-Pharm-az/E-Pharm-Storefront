@@ -5,14 +5,12 @@ interface FormData {
   email: string;
   code: number;
   isAccountConfirmed: boolean;
-  password: string;
 }
 
 const defaultFormData: FormData = {
   email: "",
   code: 0,
   isAccountConfirmed: false,
-  password: "",
 };
 
 interface FormContextType {

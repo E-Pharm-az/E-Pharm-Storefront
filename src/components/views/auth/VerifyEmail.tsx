@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/input-otp.tsx";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
 import apiClient from "@/services/api-client.ts";
+import {c} from "vite/dist/node/types.d-FdqQ54oU";
 
 const CODE_LENGTH = 6;
 
@@ -27,29 +28,32 @@ const VerifyEmail = () => {
     }
   }, []);
 
-  const handleChange = async (value: string) => {
-    setCode(value);
-
-    if (value.length === CODE_LENGTH) {
+  useEffect(() => {
+    const sentOPT = async () => {
       try {
         await apiClient.post("auth/confirm-email", {
           email: formData.email,
-          code: value,
+          code: code
         });
-        console.log(parseInt(code));
-        updateFormData({ code: parseInt(code), isAccountConfirmed: true });
-        navigate("/signup");
+        updateFormData({code: parseInt(code), isAccountConfirmed: true});
+        navigate("/signup")
       } catch (error) {
         setError(t("verify-email.unexpectedError"));
       }
     }
-  };
+
+    if (code.length === CODE_LENGTH) {
+      sentOPT();
+    }
+  }, [code]);
+
 
   const resendOTP = async () => {
     try {
       await apiClient.post("auth/resend-confirmation-email", {
         email: formData.email,
       });
+
     } catch (error) {
       setError(t("verify-email.unexpectedError"));
     }
@@ -73,7 +77,7 @@ const VerifyEmail = () => {
           <div className="flex h-[42px] gap-4 items-center">
             <InputOTP
               value={code}
-              onChange={handleChange}
+              onChange={(value) => setCode(value)}
               className="mx-auto"
               pattern={REGEXP_ONLY_DIGITS}
               maxLength={CODE_LENGTH}

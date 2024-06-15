@@ -40,7 +40,6 @@ const Signup = () => {
 
   useEffect(() => {
     // require confirmed email to be on this page
-    console.log(formData.code);
     if (!formData.email && !formData.isAccountConfirmed) {
       navigate("/email-lookup");
     }

@@ -10,7 +10,6 @@ import Profile from "@/components/views/Profile.tsx";
 import RequireAuth from "@/components/RequireAuth.tsx";
 import PersistLogin from "@/components/PersistLogin.tsx";
 import Cart from "@/components/views/Cart.tsx";
-import ConfirmEmail from "@/components/views/ConfirmEmail.tsx";
 import AuthLayout from "./layouts/AuthLayout.tsx";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { Analytics } from "@vercel/analytics/react";
@@ -46,14 +45,8 @@ function App() {
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/change-password" element={<ChangePassword />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/confirm-email" element={<ConfirmEmail />} />
-
             <Route path="/email-lookup" element={<EmailLookup />} />
-            <Route path="/verify-email" element={<VerifyEmail />} />
-            {/*<Route path="/login" element={LoginStep} />*/}
-            {/*<Route path="/signup/step1" element={SignupStep1} />*/}
-            {/*<Route path="/signup/step2" element={SignupStep2} />*/}
-            {/*<Route path="/signup/step3" element={SignupStep3} />*/}
+            <Route path="/verify-email" element={<VerifyEmail/>}/>
           </Route>
         </Route>
       </Routes>

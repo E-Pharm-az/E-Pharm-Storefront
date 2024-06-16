@@ -53,6 +53,17 @@
     "password": "Şifrə",
     "signup": "İstifadəçi deyilsiniz? Burada hesab yaradın"
   },
+  "change-password": {
+    "title": "Şifrəni yenilə",
+    "subtitle": "Biz kod göndərdik",
+    "edit": "Dəyişdir",
+    "code": "Kod*",
+    "password": "Şifrə*",
+    "first-pswd-req": "Minimum 8 simvol",
+    "second-pswd-req": "Böyük, kiçik hərflər və bir rəqəm",
+    "cancel": "Ləğv et",
+    "cto": "Şifrəni yenilə"
+  },
   "footer": {
     "about": "Haqqımızda",
     "help": "Kömək",

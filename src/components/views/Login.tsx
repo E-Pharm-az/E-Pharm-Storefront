@@ -81,40 +81,37 @@ const Login = () => {
   };
 
   return (
-    <div className="mx-auto py-8 sm:py-0 w-full sm:w-[400px]">
-      <div className="grid gap-6 p-6 sm:p-0">
+    <div className="mx-auto py-8 sm:py-0 w-full grid gap-6 p-6 sm:p-0 sm:w-[400px]">
+      <div className="grid gap-2">
         <h1 className="text-3xl font-medium leading-tight tracking-tight text-gray-900">
           {t("login.title")}
         </h1>
-        <form onSubmit={handleSubmit} className="grid gap-4">
-          <div className="flex flex-wrap gap-2">
-            <label className="">{formData.email}</label>
-            <Link
-              to="/email-lookup"
-              className="underline text-muted-foreground"
-            >
-              {t("login.edit")}
-            </Link>
-          </div>
-          <div>
-            <Input
-              label={t("login.password")}
-              type="password"
-              autoCorrect="off"
-              autoComplete="new-password"
-              name="password"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-            />
-            <Link to="/change-password">
-              <p className="text-sm text-gray-500 font-medium text-primary-600 hover:underline">
-                {t("login.forgot-password")}
-              </p>
-            </Link>
-          </div>
-          <Button type="submit">{t("login.title")}</Button>
-        </form>
+        <div className="flex flex-wrap gap-x-1">
+          <label>{formData.email}</label>
+          <Link to="/email-lookup" className="underline text-muted-foreground">
+            {t("login.edit")}
+          </Link>
+        </div>
       </div>
+      <form onSubmit={handleSubmit} className="grid gap-4">
+        <div className="grid gap-2">
+          <Input
+            label={t("login.password")}
+            type="password"
+            autoCorrect="off"
+            autoComplete="new-password"
+            name="password"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+          />
+          <Link to="/change-password">
+            <p className="text-sm text-gray-500 font-medium text-primary-600 hover:underline">
+              {t("login.forgot-password")}
+            </p>
+          </Link>
+        </div>
+        <Button type="submit">{t("login.title")}</Button>
+      </form>
     </div>
   );
 };

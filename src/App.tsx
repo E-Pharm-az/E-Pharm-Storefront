@@ -14,7 +14,6 @@ import AuthLayout from "./layouts/AuthLayout.tsx";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { Analytics } from "@vercel/analytics/react";
 import ScrollToTop from "./utils/scrollToTop.ts";
-import ForgotPassword from "@/components/views/ForgotPassword.tsx";
 import ChangePassword from "@/components/views/ChangePassword.tsx";
 import EmailLookup from "@/components/views/EmailLookup.tsx";
 import VerifyEmail from "@/components/views/VerifyEmail.tsx";
@@ -42,12 +41,9 @@ function App() {
 
           <Route element={<AuthLayout />}>
             <Route path="/email-lookup" element={<EmailLookup />} />
-            <Route path="/verify-email" element={<VerifyEmail/>}/>
-            <Route path="/signup" element={<Signup/>}/>
-
+            <Route path="/verify-email" element={<VerifyEmail />} />
+            <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
-
-            <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/change-password" element={<ChangePassword />} />
           </Route>
         </Route>

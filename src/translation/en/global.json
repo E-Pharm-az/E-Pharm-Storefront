@@ -62,16 +62,17 @@
     "noServerResponse": "No server response",
     "unexpectedError": "An unexpected error occurred",
     "email-sent": "Email was sent.",
-    "email-sent-detail": "We have sent you an email containing instructions on how to reset your password."
+    "email-sent-detail": "We've sent you an email containing instructions on how to reset your password."
   },
   "change-password": {
     "title": "Reset password",
-    "detail": "Enter your new password to change it",
-    "password": "Password",
-    "confirmPassword": "Confirm password",
+    "subtitle": "We've sent a code to",
+    "edit": "Edit",
+    "code": "Code*",
+    "password": "Password*",
+    "first-pswd-req": "Minimum 8 characters",
+    "second-pswd-req": "Uppercase, lowercase letters, and one number",
     "cancel": "Cancel",
-    "password-placeholder": "Enter your password",
-    "confirm-password-placeholder": "Confirm your password",
     "cto": "Reset password"
   },
   "footer": {

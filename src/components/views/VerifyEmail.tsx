@@ -12,7 +12,7 @@ import { REGEXP_ONLY_DIGITS } from "input-otp";
 import apiClient from "@/services/api-client.ts";
 import {AxiosError} from "axios";
 
-const CODE_LENGTH = 6;
+export const CODE_LENGTH = 6;
 
 const VerifyEmail = () => {
   const [t] = useTranslation("global");

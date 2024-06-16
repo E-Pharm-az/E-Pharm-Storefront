@@ -56,28 +56,24 @@ const EmailLookup = () => {
   };
 
   return (
-    <div className="mx-auto w-fit py-8 sm:py-0 sm:max-w-[400px]">
-      <div className="grid gap-6 p-6 sm:p-0">
-        <h1 className="text-3xl font-medium leading-tight tracking-tight text-gray-900">
-          {t("email-lookup.title")}
-        </h1>
-        <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6">
-          <div className="grid gap-1">
-            <Input
-              type="email"
-              {...register("email", { required: "Email is required" })}
-              label={t("email-lookup.placeholder")}
-            />
-            {errors.email && (
-              <p className="text-red-500 text-sm">{errors.email.message}</p>
-            )}
-          </div>
-          <p className="text-sm text-muted-foreground">
-            {t("email-lookup.tos")}
-          </p>
-          <Button type="submit">{t("email-lookup.cta")}</Button>
-        </form>
-      </div>
+    <div className="mx-auto w-fit py-8 sm:py-0 grid gap-6 p-6 sm:p-0 sm:max-w-[400px]">
+      <h1 className="text-3xl font-medium leading-tight tracking-tight text-gray-900">
+        {t("email-lookup.title")}
+      </h1>
+      <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6">
+        <div className="grid gap-1">
+          <Input
+            type="email"
+            {...register("email", { required: "Email is required" })}
+            label={t("email-lookup.placeholder")}
+          />
+          {errors.email && (
+            <p className="text-red-500 text-sm">{errors.email.message}</p>
+          )}
+        </div>
+        <p className="text-sm text-muted-foreground">{t("email-lookup.tos")}</p>
+        <Button type="submit">{t("email-lookup.cta")}</Button>
+      </form>
     </div>
   );
 };

@@ -66,11 +66,12 @@
   },
   "change-password": {
     "title": "Сбросить пароль",
-    "detail": "Введите новый пароль, чтобы изменить его",
-    "password": "Пароль",
-    "confirmPassword": "Подтвердите пароль",
-    "password-placeholder": "Введите ваш пароль",
-    "confirm-password-placeholder": "Подтвердите ваш пароль",
+    "subtitle": "Мы отправили код на",
+    "edit": "Изменить",
+    "code": "Код*",
+    "password": "Пароль*",
+    "first-pswd-req": "Минимум 8 символов",
+    "second-pswd-req": "Заглавные, строчные буквы и одна цифра",
     "cancel": "Отмена",
     "cto": "Сбросить пароль"
   },

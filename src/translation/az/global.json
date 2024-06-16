@@ -36,6 +36,9 @@
     "address": "Ünvan",
     "tos": "E-Pharm-ın Məxfilik Siyasəti və İstifadə Şərtləri ilə razıyam.",
     "continue": "Davam",
+    "account-created-title": "E-Pharm-a xoş gəldiniz",
+    "account-created-subtitle": "Evinizə çatdırılan geniş sağlamlıq məhsulları və əczaçılıq vasitələrini kəşf edin.",
+    "account-created-cta": "Davam",
     "passwordError": "Parol bir böyük hərf, bir rəqəm və bir xüsusi simvol daxil olmaqla ən azı 8 simvoldan ibarət olmalıdır (məsələn, !@#$%^&*).",
     "invalidEmailOrPassword": "Yanlış e-poçt və ya parol",
     "noServerResponse": "Server cavabı yoxdur",
@@ -44,18 +47,21 @@
     "passwordsDoNotMatch": "Parollar uyğun gəlmir"
   },
   "login": {
-    "title": "Daxil ol",
-    "signup": "İstifadəçi deyil? Burada hesab yaradın"
+    "title": "Şifrəniz nədir?",
+    "edit": "Dəyişdir",
+    "forgot-password": "Şifrəni unutmusunuz?",
+    "password": "Şifrə",
+    "signup": "İstifadəçi deyilsiniz? Burada hesab yaradın"
   },
-  "footer":{
+  "footer": {
     "about": "Haqqımızda",
-    "help" : "Kömək",
+    "help": "Kömək",
     "doctors-advice": "Həkim məsləhəti",
     "contacts": "Əlaqə",
     "Terms & Conditions": "İstifadə qaydaları",
     "Privacy Policy": "Gizlilik siyasəti",
     "About Us": "Bizim haqqımızda",
-    "License and details" : "Lisenziyalar və təfərrüatlar",
+    "License and details": "Lisenziyalar və təfərrüatlar",
     "Our partners": "Bizim tərəfdaşlarımız",
     "Our team and doctors": "Komandamız və həkimlərimiz",
     "FAQ": "Tez-tez verilən suallar",
@@ -75,7 +81,7 @@
     "form-input-placeholder": "E-poçt ünvanınızı daxil edin",
     "form-button-text": "Abunə ol"
   },
-  "cart":{
+  "cart": {
     "item": "məhsul",
     "items": "məhsul",
     "in-your-cart": "səbətinizdə",
@@ -85,18 +91,18 @@
     "cart-total": "Səbət cəmi",
     "cart-btn-text": "Sifarişi resmiləşdir"
   },
-  "cart-provider":{
+  "cart-provider": {
     "item-added-to-cart": "Məhsul səbətə əlavə edildi",
     "quanity": "Kəmiyyət",
     "price": "Qiymət",
     "proceed-to-checkout": "Sifarişi resmiləşdir",
     "continue-shopping": "Alış-verişə davam edin"
   },
-  "products":{
+  "products": {
     "no-products-found": "Məhsul tapılmayıb",
     "add-to-cart-btn": "Səbətə at"
   },
-  "product-page":{
+  "product-page": {
     "product-not-found": "Məhsul tapılmayıb",
     "product-add-to-cart-btn": "Səbətə at"
   }

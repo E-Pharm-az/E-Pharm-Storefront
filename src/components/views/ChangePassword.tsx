@@ -21,17 +21,7 @@ const ChangePassword = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   useEffect(() => {
-    const searchParams = new URLSearchParams(location.search);
-    const userIdParam = searchParams.get("userId");
-    const tokenParam = searchParams.get("token");
-
-    if (userIdParam && tokenParam) {
-      setUserId(userIdParam);
-      setToken(tokenParam);
-    } else {
-      navigate("/");
-    }
-  }, [location.search, navigate]);
+  }, []);
 
   useEffect(() => {
     if (passwordRef.current) {

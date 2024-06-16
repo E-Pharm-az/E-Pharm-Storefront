@@ -1,13 +1,13 @@
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/Button.tsx";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import FormContext from "@/context/AuthFormProvider.tsx";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import apiClient from "@/services/api-client.ts";
 import ErrorContext from "@/context/ErrorProvider.tsx";
 import axios from "axios";
-import {Input} from "@/components/ui/Input.tsx";
+import { Input } from "@/components/ui/Input.tsx";
 
 interface EmailFormData {
   email: string;
@@ -22,11 +22,16 @@ const EmailLookup = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setFocus,
   } = useForm<EmailFormData>({
     defaultValues: {
       email: formData.email,
     },
   });
+
+  useEffect(() => {
+    setFocus("email");
+  }, []);
 
   const onSubmit = async (data: EmailFormData) => {
     updateFormData({ email: data.email });

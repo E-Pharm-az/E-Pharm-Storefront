@@ -3,7 +3,7 @@ import Home from "@/components/views/Home.tsx";
 import Products from "@/components/views/Products.tsx";
 import NotFound from "@/components/views/NotFound.tsx";
 import ProductPage from "@/components/views/ProductPage.tsx";
-import Signup from "@/components/views/auth/Signup.tsx";
+import Signup from "@/components/views/Signup.tsx";
 import Login from "@/components/views/Login.tsx";
 import Layout from "./layouts/Layout.tsx";
 import Profile from "@/components/views/Profile.tsx";
@@ -16,8 +16,8 @@ import { Analytics } from "@vercel/analytics/react";
 import ScrollToTop from "./utils/scrollToTop.ts";
 import ForgotPassword from "@/components/views/ForgotPassword.tsx";
 import ChangePassword from "@/components/views/ChangePassword.tsx";
-import EmailLookup from "@/components/views/auth/EmailLookup.tsx";
-import VerifyEmail from "@/components/views/auth/VerifyEmail.tsx";
+import EmailLookup from "@/components/views/EmailLookup.tsx";
+import VerifyEmail from "@/components/views/VerifyEmail.tsx";
 
 function App() {
   return (
@@ -41,12 +41,14 @@ function App() {
           </Route>
 
           <Route element={<AuthLayout />}>
-            <Route path="/login" element={<Login />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/change-password" element={<ChangePassword />} />
-            <Route path="/signup" element={<Signup />} />
             <Route path="/email-lookup" element={<EmailLookup />} />
             <Route path="/verify-email" element={<VerifyEmail/>}/>
+            <Route path="/signup" element={<Signup/>}/>
+
+            <Route path="/login" element={<Login />} />
+
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/change-password" element={<ChangePassword />} />
           </Route>
         </Route>
       </Routes>

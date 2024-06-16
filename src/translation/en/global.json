@@ -36,6 +36,9 @@
     "address": "Address",
     "tos": "I agree to E-Pharm's Privacy Policy and Terms of Use.",
     "continue": "Continue",
+    "account-created-title": "Welcome to E-Pharm",
+    "account-created-subtitle": "Discover a wide range of health products and pharmaceuticals delivered to your door.",
+    "account-created-cta": "Continue",
     "passwordError": "The password must contain at least 8 characters, including one capital letter, one number, and one special character (for example, !@#$%^&*).",
     "invalidEmailOrPassword": "Invalid email or password",
     "noServerResponse": "No server response",
@@ -44,8 +47,10 @@
     "passwordsDoNotMatch": "Passwords do not match"
   },
   "login": {
-    "title": "Login",
+    "title": "Whats your password?",
+    "edit": "Edit",
     "forgot-password": "Forgot password?",
+    "password": "Password",
     "signup": "Not a user? Create an account here"
   },
   "forgot-password": {

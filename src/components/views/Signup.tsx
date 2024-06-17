@@ -11,6 +11,9 @@ import { Input } from "@/components/ui/Input.tsx";
 import Logo from "@/assets/logo.png";
 import apiClient from "@/services/api-client.ts";
 import axios from "axios";
+import LoaderContext from "@/context/LoaderProvider.tsx";
+import { jwtDecode } from "jwt-decode";
+import AuthContext, { TokenPayload } from "@/context/AuthProvider.tsx";
 
 interface FormData {
   firstName: string;
@@ -23,8 +26,10 @@ interface FormData {
 const Signup = () => {
   const [t] = useTranslation("global");
   const navigate = useNavigate();
+  const { loading, setLoading } = useContext(LoaderContext);
   const { setError } = useContext(ErrorContext);
   const { formData } = useContext(FormContext);
+  const { setAuth } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const [accountSetupCompleted, setAccountSetupCompleted] = useState(false);
 
@@ -54,6 +59,7 @@ const Signup = () => {
   };
 
   const onSubmit = async (data: FormData) => {
+    setLoading(true);
     try {
       const response = await apiClient.post("/user/initialize-user", {
         email: formData.email,
@@ -77,20 +83,33 @@ const Signup = () => {
           },
         );
       }
+
+      const decodedToken = jwtDecode<TokenPayload>(response.data.token);
+
+      setAuth({
+        tokenResponse: response.data,
+        id: decodedToken.jti,
+        email: decodedToken.email,
+        firstname: decodedToken.sub,
+      });
+
+      localStorage.setItem("persist", "true");
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response) {
           if (error.response.status === 400) {
-            setError(t("signup.invalidEmailOrPassword"));
+            setError(t("errors.invalidEmailOrPassword"));
           } else {
-            setError(t("signup.noServerResponse"));
+            setError(t("errors.noServerResponse"));
           }
         } else {
-          setError(t("signup.loginFailed"));
+          setError(t("errors.loginFailed"));
         }
       } else {
-        setError(t("signup.unexpectedError"));
+        setError(t("errors.unexpectedError"));
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -127,8 +146,9 @@ const Signup = () => {
                   autoComplete="given-name"
                   autoCorrect="off"
                   autoCapitalize="on"
+                  disabled={loading}
                   {...register("firstName", { required: "Required" })}
-                  className={`${errors.firstName && "border-red-500"}`}
+                  className={`${errors.firstName && "border-red-500 focus:border-red-500"}`}
                 />
                 <label className="w-full h-3 text-xs text-red-500">
                   {errors.firstName?.message}
@@ -140,8 +160,9 @@ const Signup = () => {
                   label={t("signup.lastname")}
                   autoCorrect="off"
                   autoComplete="family-name"
+                  disabled={loading}
+                  className={`${errors.lastName && "border-red-500 focus:border-red-500"}`}
                   {...register("lastName", { required: "Required" })}
-                  className={`${errors.lastName && "border-red-500"}`}
                 />
                 <p className="w-full h-3 text-xs text-red-500">
                   {errors.lastName?.message}
@@ -150,12 +171,18 @@ const Signup = () => {
             </div>
             <div className="grid gap-2">
               <div className="relative">
-                <input className="hidden" disabled={true} type="email" value={formData.email} />
+                <input
+                  className="hidden"
+                  disabled={true}
+                  type="email"
+                  value={formData.email}
+                />
                 <Input
                   type={showPassword ? "text" : "password"}
                   label={t("signup.password")}
                   autoCorrect="off"
                   autoComplete="new-password"
+                  disabled={loading}
                   {...register("password", {
                     required: true,
                     validate: {
@@ -164,7 +191,7 @@ const Signup = () => {
                         /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])/.test(value),
                     },
                   })}
-                  className={`${errors.password && "border-red-500"}`}
+                  className={`${errors.password && "border-red-500 focus:border-red-500"}`}
                 />
                 <button
                   type="button"
@@ -191,6 +218,8 @@ const Signup = () => {
               type="text"
               label={t("signup.address")}
               autoComplete="address-line1"
+              disabled={loading}
+              className={`${errors.address && "border-red-500 focus:border-red-500"}`}
               {...register("address", { required: true })}
             />
             <div className="flex gap-2 items-start">
@@ -198,6 +227,7 @@ const Signup = () => {
                 {...register("isTosAccepted", { required: true })}
                 checked={isTosAccepted}
                 onCheckedChange={handleCheckboxChange}
+                disabled={loading}
               />
               <p
                 className={`text-sm ${errors.isTosAccepted && "text-red-500"}`}
@@ -205,7 +235,9 @@ const Signup = () => {
                 {t("signup.tos")}
               </p>
             </div>
-            <Button type="submit">{t("signup.continue")}</Button>
+            <Button type="submit" disabled={loading}>
+              {t("signup.continue")}
+            </Button>
           </form>
         </>
       )}

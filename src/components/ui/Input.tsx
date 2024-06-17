@@ -13,7 +13,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         <input
           type={type}
           className={cn(
-            "peer block w-full outline-0 rounded-lg border border-gray-300 bg-gray-50 text-gray-900 p-2.5 focus:border-primary-600 sm:text-sm",
+            "peer block w-full outline-0 rounded-lg border border-neutral-400 focus:border-black bg-neutral-50 text-gray-900 p-2.5 sm:text-sm transition-all disabled:bg-gray-100 disabled:cursor-not-allowed",
             className,
           )}
           placeholder=""

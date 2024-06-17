@@ -3,6 +3,12 @@
     "required": "Required",
     "continue": "Continue"
   },
+  "errors": {
+    "invalidEmailOrPassword": "Invalid email or password",
+    "noServerResponse": "No server response",
+    "loginFailed": "Login failed",
+    "unexpectedError": "An unexpected error occurred"
+  },
   "home": {
     "title": "Search for medication",
     "description": "Just type the name of the medication you are looking for and we will find it for you",
@@ -19,8 +25,7 @@
     "title": "Enter your email to join us or sign in.",
     "placeholder": "Email",
     "tos": "By continuing, I agree to E-Pharm's Privacy Policy and Terms of Use.",
-    "cta": "Continue",
-    "unexpectedError": "An unexpected error occurred"
+    "cta": "Continue"
   },
   "verify-email": {
     "title": "Lets verify your email.",
@@ -42,13 +47,7 @@
     "continue": "Continue",
     "account-created-title": "Welcome to E-Pharm",
     "account-created-subtitle": "Discover a wide range of health products and pharmaceuticals delivered to your door.",
-    "account-created-cta": "Continue",
-    "passwordError": "The password must contain at least 8 characters, including one capital letter, one number, and one special character (for example, !@#$%^&*).",
-    "invalidEmailOrPassword": "Invalid email or password",
-    "noServerResponse": "No server response",
-    "loginFailed": "Login failed",
-    "unexpectedError": "An unexpected error occurred",
-    "passwordsDoNotMatch": "Passwords do not match"
+    "account-created-cta": "Continue"
   },
   "login": {
     "title": "Whats your password?",
@@ -63,8 +62,6 @@
     "cta": "Continue",
     "placeholder": "Enter your email",
     "back": "Back to login",
-    "noServerResponse": "No server response",
-    "unexpectedError": "An unexpected error occurred",
     "email-sent": "Email was sent.",
     "email-sent-detail": "We've sent you an email containing instructions on how to reset your password."
   },

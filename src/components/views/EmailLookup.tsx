@@ -8,6 +8,7 @@ import apiClient from "@/services/api-client.ts";
 import ErrorContext from "@/context/ErrorProvider.tsx";
 import axios from "axios";
 import { Input } from "@/components/ui/Input.tsx";
+import LoaderContext from "@/context/LoaderProvider.tsx";
 
 interface EmailFormData {
   email: string;
@@ -17,6 +18,7 @@ const EmailLookup = () => {
   const [t] = useTranslation("global");
   const navigate = useNavigate();
   const { setError } = useContext(ErrorContext);
+  const { loading, setLoading } = useContext(LoaderContext);
   const { formData, updateFormData } = useContext(FormContext);
   const {
     register,
@@ -35,6 +37,7 @@ const EmailLookup = () => {
 
   const onSubmit = async (data: EmailFormData) => {
     updateFormData({ email: data.email });
+    setLoading(true);
 
     try {
       const response = await apiClient.post("/user/register", {
@@ -50,8 +53,10 @@ const EmailLookup = () => {
           navigate("/login");
         }
       } else {
-        setError(t("email-lookup.unexpectedError"));
+        setError(t("errors.unexpectedError"));
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -64,15 +69,21 @@ const EmailLookup = () => {
         <div className="grid gap-1">
           <Input
             type="email"
-            {...register("email", { required: true })}
             label={t("email-lookup.placeholder")}
+            autoCorrect="off"
+            autoComplete="email"
+            disabled={loading}
+            className={errors.email && "border-red-500 focus:border-red-500"}
+            {...register("email", { required: true })}
           />
           <label className="w-full h-3 text-xs text-red-500">
             {errors.email?.type === "required" && t("common.required")}
           </label>
         </div>
         <p className="text-sm text-muted-foreground">{t("email-lookup.tos")}</p>
-        <Button type="submit">{t("email-lookup.cta")}</Button>
+        <Button type="submit" disabled={loading}>
+          {t("email-lookup.cta")}
+        </Button>
       </form>
     </div>
   );

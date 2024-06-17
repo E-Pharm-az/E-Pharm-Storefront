@@ -10,7 +10,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "hover:translate-y-1 bg-accent text-white border-2 border-lime-500 hover:bg-lime-700 hover:border-lime-600 hover:text-opacity-80 relative",
+          "hover:translate-y-1 bg-accent text-white border-2 border-lime-500 hover:bg-lime-700 hover:border-lime-600 hover:text-opacity-80 disabled:translate-y-1 disabled:bg-lime-700 disabled:border-lime-600 disabled:text-opacity-80 disabled:cursor-not-allowed",
       },
       size: {
         default: "text-sm px-5 py-2.5 gap-2",

@@ -9,6 +9,7 @@ import FormContext from "@/context/AuthFormProvider.tsx";
 import ErrorContext from "@/context/ErrorProvider.tsx";
 import { Input } from "@/components/ui/Input.tsx";
 import { useForm } from "react-hook-form";
+import LoaderContext from "@/context/LoaderProvider.tsx";
 
 interface FormData {
   code: string;
@@ -20,6 +21,7 @@ const TIMEOUT_SECONDS = 15;
 const ChangePassword = () => {
   const [t] = useTranslation("global");
   const { setError } = useContext(ErrorContext);
+  const { loading, setLoading } = useContext(LoaderContext);
   const { formData } = useContext(FormContext);
   const navigate = useNavigate();
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -54,6 +56,7 @@ const ChangePassword = () => {
   }, [timeoutSeconds]);
 
   const initiatePasswordChange = useCallback(async () => {
+    setLoading(true);
     try {
       await apiClient.post("/user/initiate-password-change", {
         email: formData.email,
@@ -62,10 +65,12 @@ const ChangePassword = () => {
       disabledButton();
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        setError(t("forgot-password.noServerResponse"));
+        setError(t("errors.noServerResponse"));
       } else {
-        setError(t("forgot-password.unexpectedError"));
+        setError(t("errors.unexpectedError"));
       }
+    } finally {
+      setLoading(false);
     }
   }, [formData.email, setError, t]);
 
@@ -84,6 +89,7 @@ const ChangePassword = () => {
   }, []);
 
   const onSubmit = async (data: FormData) => {
+    setLoading(true);
     try {
       const response = await apiClient.post("/user/change-password", {
         email: formData.email,
@@ -100,6 +106,8 @@ const ChangePassword = () => {
       } else {
         setError("Unexpected error");
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -139,6 +147,7 @@ const ChangePassword = () => {
                   label={t("change-password.code")}
                   autoCorrect="off"
                   autoComplete="off"
+                  disabled={loading}
                   {...register("code", {
                     required: t("common.required"),
                     validate: {
@@ -168,6 +177,7 @@ const ChangePassword = () => {
                   label={t("change-password.new-password")}
                   autoCorrect="off"
                   autoComplete="new-password"
+                  disabled={loading}
                   {...register("password", {
                     required: true,
                     validate: {
@@ -203,7 +213,9 @@ const ChangePassword = () => {
                 </label>
               </div>
             </div>
-            <Button type="submit">{t("change-password.cto")}</Button>
+            <Button type="submit" disabled={loading}>
+              {t("change-password.cto")}
+            </Button>
           </form>
           <Link to="/login">
             <p className="text-sm text-gray-500 font-medium text-primary-600 hover:underline">

@@ -11,15 +11,39 @@ import {
 import { REGEXP_ONLY_DIGITS } from "input-otp";
 import apiClient from "@/services/api-client.ts";
 import { AxiosError } from "axios";
+import LoaderContext from "@/context/LoaderProvider.tsx";
 
 export const CODE_LENGTH = 6;
+const TIMEOUT_SECONDS = 15;
 
 const VerifyEmail = () => {
   const [t] = useTranslation("global");
+  const navigate = useNavigate();
   const { setError } = useContext(ErrorContext);
+  const { loading, setLoading } = useContext(LoaderContext);
   const { formData, updateFormData } = useContext(FormContext);
   const [code, setCode] = useState<string>("");
-  const navigate = useNavigate();
+  const [timeoutSeconds, setTimeoutSeconds] = useState(0);
+
+  const disabledButton = () => {
+    setTimeoutSeconds(TIMEOUT_SECONDS);
+  };
+
+  useEffect(() => {
+    if (timeoutSeconds <= 0) return;
+
+    const secondsInterval = setInterval(() => {
+      setTimeoutSeconds((prev) => {
+        if (prev <= 1) {
+          clearInterval(secondsInterval);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(secondsInterval); // Cleanup on component unmount
+  }, [timeoutSeconds]);
 
   useEffect(() => {
     // require email to be on this page
@@ -30,6 +54,7 @@ const VerifyEmail = () => {
 
   useEffect(() => {
     if (code.length === CODE_LENGTH) {
+      setLoading(true);
       const sentOPT = async () => {
         try {
           await apiClient.post("auth/confirm-email", {
@@ -41,8 +66,10 @@ const VerifyEmail = () => {
         } catch (error: unknown) {
           if (error instanceof AxiosError) {
             setCode("");
-            setError(t("verify-email.unexpectedError"));
+            setError(t("errors.unexpectedError"));
           }
+        } finally {
+          setLoading(false);
         }
       };
 
@@ -55,8 +82,9 @@ const VerifyEmail = () => {
       await apiClient.post("auth/resend-confirmation-email", {
         email: formData.email,
       });
+      disabledButton();
     } catch (error) {
-      setError(t("verify-email.unexpectedError"));
+      setError(t("errors.unexpectedError"));
     }
   };
 
@@ -78,6 +106,7 @@ const VerifyEmail = () => {
           <InputOTP
             value={code}
             onChange={(value) => setCode(value)}
+            disabled={loading}
             className="mx-auto"
             pattern={REGEXP_ONLY_DIGITS}
             maxLength={CODE_LENGTH}
@@ -92,14 +121,17 @@ const VerifyEmail = () => {
             </InputOTPGroup>
           </InputOTP>
         </div>
-        <button
-          type="button"
-          onClick={resendOTP}
-          disabled={false}
-          className="flex gap-2 items-center bg-muted px-3 py-2 font-medium rounded-full w-fit text-sm transition-all disabled:cursor-not-allowed disabled:text-muted-foreground"
-        >
-          <p>{t("verify-email.resend")}</p>
-        </button>
+        <div className="flex gap-2 items-center">
+          <button
+            type="button"
+            onClick={resendOTP}
+            disabled={loading || timeoutSeconds > 0}
+            className="flex gap-2 items-center bg-muted px-3 py-2 font-medium rounded-full w-fit text-sm transition-all disabled:cursor-not-allowed disabled:text-muted-foreground"
+          >
+            <p>{t("verify-email.resend")}</p>
+          </button>
+          {timeoutSeconds > 0 && <label>{timeoutSeconds}</label>}
+        </div>
       </form>
     </div>
   );

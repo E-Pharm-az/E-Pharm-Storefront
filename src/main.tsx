@@ -11,6 +11,7 @@ import { BrowserRouter } from "react-router-dom";
 import { CartProvider } from "./context/CartProvider.tsx";
 import { AuthFormProvider } from "@/context/AuthFormProvider.tsx";
 import { ErrorProvider } from "@/context/ErrorProvider.tsx";
+import { LoaderProvider } from "@/context/LoaderProvider.tsx";
 
 i18next.init({
   interpolation: { escapeValue: false },
@@ -31,15 +32,17 @@ i18next.init({
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
     <ErrorProvider>
-      <I18nextProvider i18n={i18next}>
-        <AuthProvider>
-          <AuthFormProvider>
-            <CartProvider>
-              <App />
-            </CartProvider>
-          </AuthFormProvider>
-        </AuthProvider>
-      </I18nextProvider>
+      <LoaderProvider>
+        <I18nextProvider i18n={i18next}>
+          <AuthProvider>
+            <AuthFormProvider>
+              <CartProvider>
+                <App />
+              </CartProvider>
+            </AuthFormProvider>
+          </AuthProvider>
+        </I18nextProvider>
+      </LoaderProvider>
     </ErrorProvider>
   </BrowserRouter>,
 );

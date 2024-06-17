@@ -3,6 +3,12 @@
     "required": "Vacibdir",
     "continue": "Davam et"
   },
+  "errors": {
+    "invalidEmailOrPassword": "Yanlış e-poçt və ya şifrə",
+    "noServerResponse": "Serverdən cavab yoxdur",
+    "loginFailed": "Giriş uğursuz oldu",
+    "unexpectedError": "Gözlənilməz xəta baş verdi"
+  },
   "home": {
     "title": "Dərman axtar",
     "description": "Axtardığınız dərmanın adını yalnızca yazın və biz onu tapacağıq",
@@ -19,8 +25,7 @@
     "title": "Bizə qoşulmaq və ya daxil olmaq üçün elektron poçtunuzu daxil edin.",
     "placeholder": "Elektron poçt",
     "tos": "Davam etməklə, E-Pharm-ın Məxfilik Siyasəti və İstifadə Şərtləri ilə razılaşıram.",
-    "cta": "Davam et",
-    "unexpectedError": "Gözlənilməz səhv baş verdi"
+    "cta": "Davam et"
   },
   "verify-email": {
     "title": "Gəlin elektron poçtunuzu təsdiqləyək.",
@@ -42,13 +47,7 @@
     "continue": "Davam",
     "account-created-title": "E-Pharm-a xoş gəldiniz",
     "account-created-subtitle": "Evinizə çatdırılan geniş sağlamlıq məhsulları və əczaçılıq vasitələrini kəşf edin.",
-    "account-created-cta": "Davam",
-    "passwordError": "Parol bir böyük hərf, bir rəqəm və bir xüsusi simvol daxil olmaqla ən azı 8 simvoldan ibarət olmalıdır (məsələn, !@#$%^&*).",
-    "invalidEmailOrPassword": "Yanlış e-poçt və ya parol",
-    "noServerResponse": "Server cavabı yoxdur",
-    "loginFailed": "Giriş uğursuz oldu",
-    "unexpectedError": "Gözlənilməz xəta baş verdi",
-    "passwordsDoNotMatch": "Parollar uyğun gəlmir"
+    "account-created-cta": "Davam"
   },
   "login": {
     "title": "Şifrəniz nədir?",

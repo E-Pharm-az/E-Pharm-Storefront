@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { Eye, EyeOff, RotateCcw, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/Button.tsx";
@@ -15,6 +15,8 @@ interface FormData {
   password: string;
 }
 
+const TIMEOUT_SECONDS = 15;
+
 const ChangePassword = () => {
   const [t] = useTranslation("global");
   const { setError } = useContext(ErrorContext);
@@ -22,7 +24,8 @@ const ChangePassword = () => {
   const navigate = useNavigate();
   const passwordRef = useRef<HTMLInputElement>(null);
   const [onSuccess, setOnSuccess] = useState(false);
-  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [timeoutSeconds, setTimeoutSeconds] = useState(0);
 
   const {
     register,
@@ -30,19 +33,33 @@ const ChangePassword = () => {
     formState: { errors },
   } = useForm<FormData>();
 
-  useEffect(() => {
-    if (!formData.email) {
-      navigate("/email-lookup");
-    } else {
-      // initiatePasswordChange();
-    }
-  }, []);
+  const disabledButton = () => {
+    setTimeoutSeconds(TIMEOUT_SECONDS);
+  };
 
-  const initiatePasswordChange = async () => {
+  useEffect(() => {
+    if (timeoutSeconds <= 0) return;
+
+    const secondsInterval = setInterval(() => {
+      setTimeoutSeconds((prev) => {
+        if (prev <= 1) {
+          clearInterval(secondsInterval);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(secondsInterval); // Cleanup on component unmount
+  }, [timeoutSeconds]);
+
+  const initiatePasswordChange = useCallback(async () => {
     try {
       await apiClient.post("/user/initiate-password-change", {
         email: formData.email,
       });
+      console.log("initiatePasswordChange");
+      disabledButton();
     } catch (error) {
       if (axios.isAxiosError(error)) {
         setError(t("forgot-password.noServerResponse"));
@@ -50,7 +67,15 @@ const ChangePassword = () => {
         setError(t("forgot-password.unexpectedError"));
       }
     }
-  };
+  }, [formData.email, setError, t]);
+
+  useEffect(() => {
+    if (!formData.email) {
+      navigate("/email-lookup");
+    } else {
+      initiatePasswordChange();
+    }
+  }, [formData.email, initiatePasswordChange, navigate]);
 
   useEffect(() => {
     if (passwordRef.current) {
@@ -62,7 +87,7 @@ const ChangePassword = () => {
     try {
       const response = await apiClient.post("/user/change-password", {
         email: formData.email,
-        code: data.code,
+        code: parseInt(data.code),
         password: data.password,
       });
 
@@ -107,35 +132,40 @@ const ChangePassword = () => {
             </div>
           </div>
           <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
-            <div className="relative">
-              <Input
-                type="text"
-                label={t("change-password.code")}
-                autoCorrect="off"
-                autoComplete="off"
-                {...register("password", {
-                  required: true,
-                  validate: {
-                    minLength: (value: string) => value.length >= 8,
-                    complex: (value: string) =>
-                      /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])/.test(value),
-                  },
-                })}
-                className={`${errors.password && "border-red-500"}`}
-              />
-              <button
-                type="button"
-                className="absolute top-1/2 right-3 -translate-y-1/2 focus:outline-none text-muted-foreground"
-                onClick={initiatePasswordChange}
-              >
-                <RotateCcw />
-              </button>
+            <div className="grid gap-1">
+              <div className="relative">
+                <Input
+                  type="text"
+                  label={t("change-password.code")}
+                  autoCorrect="off"
+                  autoComplete="off"
+                  {...register("code", {
+                    required: t("common.required"),
+                    validate: {
+                      minLength: (value: string) => value.length === 6,
+                    },
+                  })}
+                  className={`${errors.password && "border-red-500"}`}
+                />
+                <button
+                  type="button"
+                  className="absolute top-1/2 right-3 -translate-y-1/2 felx flex gap-2 focus:outline-none text-muted-foreground disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled={timeoutSeconds > 0}
+                  onClick={initiatePasswordChange}
+                >
+                  {timeoutSeconds > 0 && <label>{timeoutSeconds}</label>}
+                  <RotateCcw />
+                </button>
+              </div>
+              <label className="w-full h-3 text-xs text-red-500">
+                {errors.code?.message}
+              </label>
             </div>
             <div className="grid gap-2">
               <div className="relative">
                 <Input
                   type={showPassword ? "text" : "password"}
-                  label={t("change-password.password")}
+                  label={t("change-password.new-password")}
                   autoCorrect="off"
                   autoComplete="new-password"
                   {...register("password", {
@@ -146,7 +176,7 @@ const ChangePassword = () => {
                         /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])/.test(value),
                     },
                   })}
-                  className={`${errors.password && "border-red-500"}`}
+                  className={`${errors.code && "border-red-500"}`}
                 />
                 <button
                   type="button"
@@ -160,15 +190,17 @@ const ChangePassword = () => {
                 className={`ml-2 flex gap-1 ${errors.password?.type === "required" || errors.password?.type === "minLength" ? "text-red-500" : "text-muted-foreground"}`}
               >
                 <X className="h-4 w-4" />
-                <p className="text-xs">{t("change-password.first-pswd-req")}</p>
+                <label className="text-xs">
+                  {t("change-password.first-pswd-req")}
+                </label>
               </div>
               <div
                 className={`ml-2 flex gap-1 ${errors.password?.type === "required" || errors.password?.type === "complex" ? "text-red-500" : "text-muted-foreground"}`}
               >
                 <X className="h-4 w-4" />
-                <p className="text-xs">
+                <label className="text-xs">
                   {t("change-password.second-pswd-req")}
-                </p>
+                </label>
               </div>
             </div>
             <Button type="submit">{t("change-password.cto")}</Button>

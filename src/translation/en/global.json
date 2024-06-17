@@ -1,4 +1,8 @@
 {
+  "common": {
+    "required": "Required",
+    "continue": "Continue"
+  },
   "home": {
     "title": "Search for medication",
     "description": "Just type the name of the medication you are looking for and we will find it for you",
@@ -69,7 +73,7 @@
     "subtitle": "We've sent a code to",
     "edit": "Edit",
     "code": "Code*",
-    "password": "Password*",
+    "new-password": "New password*",
     "first-pswd-req": "Minimum 8 characters",
     "second-pswd-req": "Uppercase, lowercase letters, and one number",
     "cancel": "Cancel",

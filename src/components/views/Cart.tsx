@@ -2,6 +2,7 @@ import CartContext, { CartItem } from "../../context/CartProvider.tsx";
 import { ChangeEvent, useContext, useState } from "react";
 import { Pin, ShoppingCart, Trash } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { Button } from "@/components/ui/Button.tsx";
 
 const Cart = () => {
   const { cart, updateCart, removeFromCart } = useContext(CartContext);
@@ -99,12 +100,9 @@ const Cart = () => {
           <p>{(totalPrice / 100).toFixed(2)} AZN</p>
         </div>
         <div className="p-4">
-          <button
-            disabled={cart.length === 0}
-            className="w-full bg-[#61a60e] disabled:opacity-75 disabled:cursor-not-allowed transition font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white"
-          >
+          <Button disabled={cart.length === 0}>
             {t("cart.cart-btn-text")}
-          </button>
+          </Button>
         </div>
       </div>
     </div>

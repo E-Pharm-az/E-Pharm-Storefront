@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import apiClient from "../../services/api-client.ts";
 import CartContext from "../../context/CartProvider.tsx";
 import { Image, Loader, ShoppingCart } from "lucide-react";
+import {Button} from "@/components/ui/Button.tsx";
 
 export interface Product {
   id: number;
@@ -105,13 +106,10 @@ const Products = () => {
               <p className="mb-2 text-lg font-semibold text-gray-600">
                 {(product.price / 100).toFixed(2)} AZN
               </p>
-              <button
-                onClick={(e) => handleAddToCart(e, product)}
-                className="w-full bg-[#61a60e] flex justify-center items-canter gap-2 font-medium rounded text-sm px-5 py-2.5 text-center text-white"
-              >
+              <Button className="" onClick={(e) => handleAddToCart(e, product)}>
                 <ShoppingCart className="h-5 w-5" />
                 <span>{t("products.add-to-cart-btn")}</span>
-              </button>
+              </Button>
             </div>
           </div>
         ))

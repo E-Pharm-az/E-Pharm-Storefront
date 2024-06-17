@@ -1,4 +1,8 @@
 {
+  "common": {
+    "required": "Vacibdir",
+    "continue": "Davam et"
+  },
   "home": {
     "title": "Dərman axtar",
     "description": "Axtardığınız dərmanın adını yalnızca yazın və biz onu tapacağıq",
@@ -58,7 +62,7 @@
     "subtitle": "Biz kod göndərdik",
     "edit": "Dəyişdir",
     "code": "Kod*",
-    "password": "Şifrə*",
+    "new-password": "Yeni şifrə*",
     "first-pswd-req": "Minimum 8 simvol",
     "second-pswd-req": "Böyük, kiçik hərflər və bir rəqəm",
     "cancel": "Ləğv et",

@@ -95,6 +95,12 @@ const Login = () => {
       </div>
       <form onSubmit={handleSubmit} className="grid gap-4">
         <div className="grid gap-2">
+          <input
+            className="hidden"
+            disabled={true}
+            type="email"
+            value={formData.email}
+          />
           <Input
             label={t("login.password")}
             type="password"
@@ -110,7 +116,7 @@ const Login = () => {
             </p>
           </Link>
         </div>
-        <Button type="submit">{t("login.title")}</Button>
+        <Button type="submit">{t("common.continue")}</Button>
       </form>
     </div>
   );

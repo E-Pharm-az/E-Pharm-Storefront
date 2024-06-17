@@ -95,121 +95,120 @@ const Signup = () => {
   };
 
   return (
-    <div className="mx-auto w-full py-8 sm:w-[400px]">
-      <div className="p-6 space-y-4 sm:p-8">
-        {accountSetupCompleted ? (
-          <div className="items-center justify-center text-center grid gap-6">
-            <div className="grid gap-2">
-              <img
-                src={Logo}
-                alt="logo"
-                className="h-10 pointer-events-none mx-auto"
-              />
-              <h1 className="text-3xl font-medium leading-tight tracking-tight text-gray-900">
-                {t("signup.account-created-title")}
-              </h1>
-              <p>{t("signup.account-created-subtitle")}</p>
-            </div>
-            <Link to="/" className="block">
-              <Button>{t("signup.account-created-cta")}</Button>
-            </Link>
-          </div>
-        ) : (
-          <>
+    <div className="mx-auto w-full py-8 sm:w-[400px] p-6 space-y-4 sm:p-8">
+      {accountSetupCompleted ? (
+        <div className="items-center justify-center text-center grid gap-6">
+          <div className="grid gap-2">
+            <img
+              src={Logo}
+              alt="logo"
+              className="h-10 pointer-events-none mx-auto"
+            />
             <h1 className="text-3xl font-medium leading-tight tracking-tight text-gray-900">
-              {t("signup.title")}
+              {t("signup.account-created-title")}
             </h1>
-            <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
-              <div className="flex gap-2">
-                <div>
-                  <Input
-                    type="text"
-                    label={t("signup.firstname")}
-                    autoComplete="given-name"
-                    autoCorrect="off"
-                    autoCapitalize="on"
-                    {...register("firstName", { required: "Required" })}
-                    className={`${errors.firstName && "border-red-500"}`}
-                  />
-                  <p className="w-full h-3 text-xs text-red-500">
-                    {errors.firstName?.message}
-                  </p>
-                </div>
-                <div>
-                  <Input
-                    type="text"
-                    label={t("signup.lastname")}
-                    autoCorrect="off"
-                    autoComplete="family-name"
-                    {...register("lastName", { required: "Required" })}
-                    className={`${errors.lastName && "border-red-500"}`}
-                  />
-                  <p className="w-full h-3 text-xs text-red-500">
-                    {errors.lastName?.message}
-                  </p>
-                </div>
-              </div>
-              <div className="grid gap-2">
-                <div className="relative">
-                  <Input
-                    type={showPassword ? "text" : "password"}
-                    label={t("signup.password")}
-                    autoCorrect="off"
-                    autoComplete="new-password"
-                    {...register("password", {
-                      required: true,
-                      validate: {
-                        minLength: (value: string) => value.length >= 8,
-                        complex: (value: string) =>
-                          /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])/.test(value),
-                      },
-                    })}
-                    className={`${errors.password && "border-red-500"}`}
-                  />
-                  <button
-                    type="button"
-                    className="absolute top-1/2 right-3 -translate-y-1/2 focus:outline-none text-muted-foreground"
-                    onClick={() => setShowPassword(!showPassword)}
-                  >
-                    {showPassword ? <EyeOff /> : <Eye />}
-                  </button>
-                </div>
-                <div
-                  className={`ml-2 flex gap-1 ${errors.password?.type === "required" || errors.password?.type === "minLength" ? "text-red-500" : "text-muted-foreground"}`}
-                >
-                  <X className="h-4 w-4" />
-                  <p className="text-xs">{t("signup.first-pswd-req")}</p>
-                </div>
-                <div
-                  className={`ml-2 flex gap-1 ${errors.password?.type === "required" || errors.password?.type === "complex" ? "text-red-500" : "text-muted-foreground"}`}
-                >
-                  <X className="h-4 w-4" />
-                  <p className="text-xs">{t("signup.second-pswd-req")}</p>
-                </div>
-              </div>
-              <Input
-                type="text"
-                label={t("signup.address")}
-                autoComplete="address-line1"
-                {...register("address", { required: true })}
-              />
-              <div className="flex gap-2 items-start">
-                <Checkbox
-                  {...register("isTosAccepted", { required: true })}
-                  checked={isTosAccepted}
-                  onCheckedChange={handleCheckboxChange}
+            <p>{t("signup.account-created-subtitle")}</p>
+          </div>
+          <Link to="/" className="block">
+            <Button>{t("signup.account-created-cta")}</Button>
+          </Link>
+        </div>
+      ) : (
+        <>
+          <h1 className="text-3xl font-medium leading-tight tracking-tight text-gray-900">
+            {t("signup.title")}
+          </h1>
+          <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
+            <div className="flex gap-2">
+              <div>
+                <Input
+                  type="text"
+                  label={t("signup.firstname")}
+                  autoComplete="given-name"
+                  autoCorrect="off"
+                  autoCapitalize="on"
+                  {...register("firstName", { required: "Required" })}
+                  className={`${errors.firstName && "border-red-500"}`}
                 />
-                <p
-                  className={`text-sm ${errors.isTosAccepted && "text-red-500"}`}
-                >
-                  {t("signup.tos")}
+                <label className="w-full h-3 text-xs text-red-500">
+                  {errors.firstName?.message}
+                </label>
+              </div>
+              <div>
+                <Input
+                  type="text"
+                  label={t("signup.lastname")}
+                  autoCorrect="off"
+                  autoComplete="family-name"
+                  {...register("lastName", { required: "Required" })}
+                  className={`${errors.lastName && "border-red-500"}`}
+                />
+                <p className="w-full h-3 text-xs text-red-500">
+                  {errors.lastName?.message}
                 </p>
               </div>
-              <Button type="submit">{t("signup.continue")}</Button>
-            </form>
-          </>
-        )}
-      </div>
+            </div>
+            <div className="grid gap-2">
+              <div className="relative">
+                <input className="hidden" disabled={true} type="email" value={formData.email} />
+                <Input
+                  type={showPassword ? "text" : "password"}
+                  label={t("signup.password")}
+                  autoCorrect="off"
+                  autoComplete="new-password"
+                  {...register("password", {
+                    required: true,
+                    validate: {
+                      minLength: (value: string) => value.length >= 8,
+                      complex: (value: string) =>
+                        /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])/.test(value),
+                    },
+                  })}
+                  className={`${errors.password && "border-red-500"}`}
+                />
+                <button
+                  type="button"
+                  className="absolute top-1/2 right-3 -translate-y-1/2 focus:outline-none text-muted-foreground"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <EyeOff /> : <Eye />}
+                </button>
+              </div>
+              <div
+                className={`ml-2 flex gap-1 ${errors.password?.type === "required" || errors.password?.type === "minLength" ? "text-red-500" : "text-muted-foreground"}`}
+              >
+                <X className="h-4 w-4" />
+                <label className="text-xs">{t("signup.first-pswd-req")}</label>
+              </div>
+              <div
+                className={`ml-2 flex gap-1 ${errors.password?.type === "required" || errors.password?.type === "complex" ? "text-red-500" : "text-muted-foreground"}`}
+              >
+                <X className="h-4 w-4" />
+                <label className="text-xs">{t("signup.second-pswd-req")}</label>
+              </div>
+            </div>
+            <Input
+              type="text"
+              label={t("signup.address")}
+              autoComplete="address-line1"
+              {...register("address", { required: true })}
+            />
+            <div className="flex gap-2 items-start">
+              <Checkbox
+                {...register("isTosAccepted", { required: true })}
+                checked={isTosAccepted}
+                onCheckedChange={handleCheckboxChange}
+              />
+              <p
+                className={`text-sm ${errors.isTosAccepted && "text-red-500"}`}
+              >
+                {t("signup.tos")}
+              </p>
+            </div>
+            <Button type="submit">{t("signup.continue")}</Button>
+          </form>
+        </>
+      )}
     </div>
   );
 };

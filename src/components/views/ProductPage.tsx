@@ -6,6 +6,7 @@ import { Product } from "./Products.tsx";
 import apiClient from "../../services/api-client.ts";
 import CartContext from "../../context/CartProvider.tsx";
 import { Image, Loader } from "lucide-react";
+import { Button } from "@/components/ui/Button.tsx";
 
 const ProductPage = () => {
   const location = useLocation();
@@ -129,12 +130,9 @@ const ProductPage = () => {
           </div>
         </div>
         <div className="border-t pt-4">
-          <button
-            className="bg-[#61a60e] font-medium text-white text-sm tracking-wide w-full py-2 rounded-md"
-            onClick={(e) => handleAddToCart(e, product)}
-          >
+          <Button onClick={(e) => handleAddToCart(e, product)}>
             {t("product-page.product-add-to-cart-btn")}
-          </button>
+          </Button>
         </div>
       </div>
     </div>

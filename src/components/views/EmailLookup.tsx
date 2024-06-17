@@ -60,16 +60,16 @@ const EmailLookup = () => {
       <h1 className="text-3xl font-medium leading-tight tracking-tight text-gray-900">
         {t("email-lookup.title")}
       </h1>
-      <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6">
+      <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
         <div className="grid gap-1">
           <Input
             type="email"
-            {...register("email", { required: "Email is required" })}
+            {...register("email", { required: true })}
             label={t("email-lookup.placeholder")}
           />
-          {errors.email && (
-            <p className="text-red-500 text-sm">{errors.email.message}</p>
-          )}
+          <label className="w-full h-3 text-xs text-red-500">
+            {errors.email?.type === "required" && t("common.required")}
+          </label>
         </div>
         <p className="text-sm text-muted-foreground">{t("email-lookup.tos")}</p>
         <Button type="submit">{t("email-lookup.cta")}</Button>

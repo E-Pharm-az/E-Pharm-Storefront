@@ -45,12 +45,12 @@ const VerifyEmail = () => {
     return () => clearInterval(secondsInterval); // Cleanup on component unmount
   }, [timeoutSeconds]);
 
-  useEffect(() => {
-    // require email to be on this page
-    if (!formData.email) {
-      navigate("/email-lookup");
-    }
-  }, []);
+  // useEffect(() => {
+  //   // require email to be on this page
+  //   if (!formData.email) {
+  //     navigate("/email-lookup");
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (code.length === CODE_LENGTH) {
@@ -89,7 +89,7 @@ const VerifyEmail = () => {
   };
 
   return (
-    <div className="mx-auto py-8 sm:py-0 w-full sm:w-[400px] grid gap-6 p-6 sm:p-0">
+    <div className="mx-auto w-full py-8 sm:w-[400px] p-6 grid gap-4 sm:p-8">
       <h1 className="text-3xl font-medium leading-tight tracking-tight text-gray-900">
         {t("verify-email.title")}
       </h1>
@@ -100,27 +100,24 @@ const VerifyEmail = () => {
           {t("verify-email.edit")}
         </Link>
       </div>
-
-      <form className="grid gap-6">
-        <div className="flex h-[42px] gap-4 items-center">
-          <InputOTP
-            value={code}
-            onChange={(value) => setCode(value)}
-            disabled={loading}
-            className="mx-auto"
-            pattern={REGEXP_ONLY_DIGITS}
-            maxLength={CODE_LENGTH}
-          >
-            <InputOTPGroup>
-              <InputOTPSlot index={0} />
-              <InputOTPSlot index={1} />
-              <InputOTPSlot index={2} />
-              <InputOTPSlot index={3} />
-              <InputOTPSlot index={4} />
-              <InputOTPSlot index={5} />
-            </InputOTPGroup>
-          </InputOTP>
-        </div>
+      <div className="grid gap-6">
+        <InputOTP
+          value={code}
+          onChange={(value) => setCode(value)}
+          disabled={loading}
+          className="mx-auto"
+          pattern={REGEXP_ONLY_DIGITS}
+          maxLength={CODE_LENGTH}
+        >
+          <InputOTPGroup>
+            <InputOTPSlot index={0} />
+            <InputOTPSlot index={1} />
+            <InputOTPSlot index={2} />
+            <InputOTPSlot index={3} />
+            <InputOTPSlot index={4} />
+            <InputOTPSlot index={5} />
+          </InputOTPGroup>
+        </InputOTP>
         <div className="flex gap-2 items-center">
           <button
             type="button"
@@ -132,7 +129,7 @@ const VerifyEmail = () => {
           </button>
           {timeoutSeconds > 0 && <label>{timeoutSeconds}</label>}
         </div>
-      </form>
+      </div>
     </div>
   );
 };

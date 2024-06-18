@@ -45,12 +45,12 @@ const Signup = () => {
     },
   });
 
-  useEffect(() => {
-    // require confirmed email to be on this page
-    if (!formData.email && !formData.isAccountConfirmed) {
-      navigate("/email-lookup");
-    }
-  }, []);
+  // useEffect(() => {
+  //   // require confirmed email to be on this page
+  //   if (!formData.email && !formData.isAccountConfirmed) {
+  //     navigate("/email-lookup");
+  //   }
+  // }, []);
 
   const isTosAccepted = watch("isTosAccepted", false);
 
@@ -71,7 +71,7 @@ const Signup = () => {
       });
       if (response.status === 200) {
         setAccountSetupCompleted(true);
-        await apiClient.post(
+        const loginResponse = await apiClient.post(
           "auth/login/store",
           {
             email: formData.email,
@@ -82,18 +82,18 @@ const Signup = () => {
             headers: { "Content-Type": "application/json" },
           },
         );
+
+        const decodedToken = jwtDecode<TokenPayload>(loginResponse.data.token);
+
+        setAuth({
+          tokenResponse: loginResponse.data,
+          id: decodedToken.jti,
+          email: decodedToken.email,
+          firstname: decodedToken.sub,
+        });
+
+        localStorage.setItem("persist", "true");
       }
-
-      const decodedToken = jwtDecode<TokenPayload>(response.data.token);
-
-      setAuth({
-        tokenResponse: response.data,
-        id: decodedToken.jti,
-        email: decodedToken.email,
-        firstname: decodedToken.sub,
-      });
-
-      localStorage.setItem("persist", "true");
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response) {
@@ -114,7 +114,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="mx-auto w-full py-8 sm:w-[400px] p-6 space-y-4 sm:p-8">
+    <div className="mx-auto w-full py-8 sm:w-[400px] p-6 grid gap-4 sm:p-8">
       {accountSetupCompleted ? (
         <div className="items-center justify-center text-center grid gap-6">
           <div className="grid gap-2">

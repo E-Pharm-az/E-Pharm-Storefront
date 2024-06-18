@@ -1,19 +1,23 @@
 import {Link, Outlet} from "react-router-dom";
-import {ChevronLeft} from "lucide-react";
+import Logo from "@/assets/logo.png";
+import LanguageSelector from "@/components/LanguageSelector.tsx";
 
 const AuthLayout = () => {
     return (
-        <main>
-            <div className="fixed top-2 left-2">
-                <Link to="/" className="flex items-center rounded-full px-4 py-2 transition space-x-4 hover:bg-neutral-200">
-                    <ChevronLeft className="h-6 w-6"/>
-                    Home
-                </Link>
+      <main>
+        <nav className="fixed z-10 left-0 top-0 right-0 bg-white border p-2 justify-between flex px-2 sm:px-10 items-center">
+          <Link to="/">
+            <div className="flex flex-shrink-0 items-center space-x-1">
+              <img src={Logo} alt="logo" className="h-10 pointer-events-none" />
+              <h1 className="text-2xl font-medium sm:text-2xl">E-Pharm</h1>
             </div>
-            <div className="flex h-screen items-center justify-center">
-                <Outlet/>
-            </div>
-        </main>
+          </Link>
+          <LanguageSelector />
+        </nav>
+        <div className="sm:flex sm:h-screen sm:items-center mt-12 sm:mt-0 sm:justify-center">
+          <Outlet />
+        </div>
+      </main>
     );
 };
 

@@ -1,4 +1,14 @@
 {
+  "common": {
+    "required": "Required",
+    "continue": "Continue"
+  },
+  "errors": {
+    "invalidEmailOrPassword": "Invalid email or password",
+    "noServerResponse": "No server response",
+    "loginFailed": "Login failed",
+    "unexpectedError": "An unexpected error occurred"
+  },
   "home": {
     "title": "Search for medication",
     "description": "Just type the name of the medication you are looking for and we will find it for you",
@@ -9,40 +19,72 @@
     "login": "Sign in",
     "signup": "Signup",
     "cart": "Cart",
-    "hi" : "Hi"
+    "hi": "Hi"
+  },
+  "email-lookup": {
+    "title": "Enter your email to join us or sign in.",
+    "placeholder": "Email",
+    "tos": "By continuing, I agree to E-Pharm's Privacy Policy and Terms of Use.",
+    "cta": "Continue"
+  },
+  "verify-email": {
+    "title": "Lets verify your email.",
+    "detail": "We've sent a code to",
+    "code": "Code",
+    "edit": "Edit",
+    "resend": "Resend",
+    "continue": "Continue"
   },
   "signup": {
-    "firstname": "Name",
-    "lastname": "Family name",
-    "title": "Create an account",
-    "fin": "Fin",
-    "email": "Your email",
-    "phone": "Phone number",
-    "password": "Password",
-    "confirm": "Confirm password",
-    "cta": "Create an account",
-    "login": "Already have an account? Login",
-    "passwordError": "The password must contain at least 8 characters, including one capital letter, one number, and one special character (for example, !@#$%^&*).",
-    "invalidEmailOrPassword": "Invalid email or password",
-    "noServerResponse": "No server response",
-    "loginFailed": "Login failed",
-    "unexpectedError": "An unexpected error occurred",
-    "passwordsDoNotMatch": "Passwords do not match"
-    
+    "title": "Lets finish setting up your account.",
+    "firstname": "Name*",
+    "lastname": "Family name*",
+    "password": "Password*",
+    "first-pswd-req": "Minimum 8 characters",
+    "second-pswd-req": "Uppercase, lowercase letters, and one number",
+    "address": "Address",
+    "tos": "I agree to E-Pharm's Privacy Policy and Terms of Use.",
+    "continue": "Continue",
+    "account-created-title": "Welcome to E-Pharm",
+    "account-created-subtitle": "Discover a wide range of health products and pharmaceuticals delivered to your door.",
+    "account-created-cta": "Continue"
   },
   "login": {
-    "title": "Login",
+    "title": "Whats your password?",
+    "edit": "Edit",
+    "forgot-password": "Forgot password?",
+    "password": "Password",
     "signup": "Not a user? Create an account here"
   },
-  "footer":{
+  "forgot-password": {
+    "title": "Forgot password?",
+    "detail": "Enter your email address and we will send you instructions to reset your password.",
+    "cta": "Continue",
+    "placeholder": "Enter your email",
+    "back": "Back to login",
+    "email-sent": "Email was sent.",
+    "email-sent-detail": "We've sent you an email containing instructions on how to reset your password."
+  },
+  "change-password": {
+    "title": "Reset password",
+    "subtitle": "We've sent a code to",
+    "edit": "Edit",
+    "code": "Code*",
+    "new-password": "New password*",
+    "first-pswd-req": "Minimum 8 characters",
+    "second-pswd-req": "Uppercase, lowercase letters, and one number",
+    "cancel": "Cancel",
+    "cto": "Reset password"
+  },
+  "footer": {
     "about": "About",
-    "help" : "Help",
+    "help": "Help",
     "doctors-advice": "Doctor`s advice",
     "contacts": "Contacts",
     "Terms & Conditions": "Terms & Conditions",
     "Privacy Policy": "Privacy Policy",
     "About Us": "About Us",
-    "License and details" : "License and details",
+    "License and details": "License and details",
     "Our partners": "Our partners",
     "Our team and doctors": "Our team and doctors",
     "FAQ": "FAQ",
@@ -62,7 +104,7 @@
     "form-input-placeholder": "Enter your e-mail address",
     "form-button-text": "Sign Up"
   },
-  "cart":{
+  "cart": {
     "item": "Item",
     "items": "Items",
     "in-your-cart": "in your cart",
@@ -72,18 +114,18 @@
     "cart-total": "Cart total",
     "cart-btn-text": "Proceed to Checkout"
   },
-  "cart-provider":{
+  "cart-provider": {
     "item-added-to-cart": "Item added to cart",
     "quanity": "Quanity",
     "price": "Price",
     "proceed-to-checkout": "Proceed to Checkout",
     "continue-shopping": "Continue shopping"
   },
-  "products":{
+  "products": {
     "no-products-found": "No products found",
     "add-to-cart-btn": "Add to cart"
   },
-  "product-page":{
+  "product-page": {
     "product-not-found": "Product not found",
     "product-add-to-cart-btn": "Add to cart"
   }

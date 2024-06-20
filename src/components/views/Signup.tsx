@@ -45,12 +45,12 @@ const Signup = () => {
     },
   });
 
-  // useEffect(() => {
-  //   // require confirmed email to be on this page
-  //   if (!formData.email && !formData.isAccountConfirmed) {
-  //     navigate("/email-lookup");
-  //   }
-  // }, []);
+  useEffect(() => {
+    // require confirmed email to be on this page
+    if (!formData.email && !formData.isAccountConfirmed) {
+      navigate("/email-lookup");
+    }
+  }, []);
 
   const isTosAccepted = watch("isTosAccepted", false);
 

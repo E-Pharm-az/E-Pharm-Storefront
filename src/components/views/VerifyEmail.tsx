@@ -45,12 +45,12 @@ const VerifyEmail = () => {
     return () => clearInterval(secondsInterval); // Cleanup on component unmount
   }, [timeoutSeconds]);
 
-  // useEffect(() => {
-  //   // require email to be on this page
-  //   if (!formData.email) {
-  //     navigate("/email-lookup");
-  //   }
-  // }, []);
+  useEffect(() => {
+    // require email to be on this page
+    if (!formData.email) {
+      navigate("/email-lookup");
+    }
+  }, []);
 
   useEffect(() => {
     if (code.length === CODE_LENGTH) {

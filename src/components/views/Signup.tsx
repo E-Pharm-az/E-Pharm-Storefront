@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Eye, EyeOff, X } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
-import { Button } from "@/components/ui/Button.tsx";
+import { Button } from "@/components/ui/button.tsx";
 import FormContext from "@/context/AuthFormProvider.tsx";
 import ErrorContext from "@/context/ErrorProvider.tsx";
 import { useForm } from "react-hook-form";

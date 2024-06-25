@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Button } from "@/components/ui/Button.tsx";
+import { Button } from "@/components/ui/button.tsx";
 import { useContext, useEffect } from "react";
 import FormContext from "@/context/AuthFormProvider.tsx";
 import { useForm } from "react-hook-form";

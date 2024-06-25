@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import apiClient from "../../services/api-client.ts";
 import CartContext from "../../context/CartProvider.tsx";
 import { Image, Loader, ShoppingCart } from "lucide-react";
-import {Button} from "@/components/ui/Button.tsx";
+import {Button} from "@/components/ui/button.tsx";
 
 export interface Product {
   id: number;

@@ -2,7 +2,7 @@ import CartContext, { CartItem } from "../../context/CartProvider.tsx";
 import { ChangeEvent, useContext, useState } from "react";
 import { Pin, ShoppingCart, Trash } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { Button } from "@/components/ui/Button.tsx";
+import { Button } from "@/components/ui/button.tsx";
 
 const Cart = () => {
   const { cart, updateCart, removeFromCart } = useContext(CartContext);

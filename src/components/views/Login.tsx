@@ -8,7 +8,7 @@ import AuthContext, {
 } from "../../context/AuthProvider.tsx";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
-import { Button } from "@/components/ui/Button.tsx";
+import { Button } from "@/components/ui/button.tsx";
 import FormContext from "@/context/AuthFormProvider.tsx";
 import ErrorContext from "@/context/ErrorProvider.tsx";
 import { Input } from "@/components/ui/Input.tsx";

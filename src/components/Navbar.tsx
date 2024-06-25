@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import Logo from "../assets/logo.png";
 import LanguageSelector from "./LanguageSelector.tsx";
 import { useTranslation } from "react-i18next";
@@ -50,11 +50,13 @@ export const Navbar = () => {
   return (
     <nav
       ref={navBarRef}
-      className={`bg-white hidden items-center justify-between ease-in-out z-10 px-4 py-2 transition-all space-x-2 md:flex md:fixed md:top-0 md:right-0 md:left-0 ${isNavBarScrolled && "shadow-md border-b"}`}
+      className={`bg-white hidden items-center justify-between ease-in-out z-10 px-10 py-2 transition-all space-x-2 md:flex md:fixed md:top-0 md:right-0 md:left-0 ${isNavBarScrolled && "shadow-md border-b"}`}
     >
-      <NavLink to={"/"} className="flex flex-shrink-0 items-center space-x-1">
-        <img src={Logo} alt="logo" className="h-12" />
-        <h1 className="text-2xl font-medium sm:text-2xl">E-Pharm</h1>
+      <NavLink to="/">
+        <div className="flex flex-shrink-0 items-center space-x-1">
+          <img src={Logo} alt="logo" className="h-10 pointer-events-none" />
+          <h1 className="text-2xl font-medium sm:text-2xl">E-Pharm</h1>
+        </div>
       </NavLink>
       {showSearch && (
         <div className="w-2/3">

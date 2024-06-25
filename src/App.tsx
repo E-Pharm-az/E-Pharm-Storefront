@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "@/components/views/Home.tsx";
 import Products from "@/components/views/Products.tsx";
 import NotFound from "@/components/views/NotFound.tsx";
@@ -17,37 +17,42 @@ import ScrollToTop from "./utils/scrollToTop.ts";
 import ChangePassword from "@/components/views/ChangePassword.tsx";
 import EmailLookup from "@/components/views/EmailLookup.tsx";
 import VerifyEmail from "@/components/views/VerifyEmail.tsx";
+import { AnimatePresence } from "framer-motion";
 
 function App() {
+  const location = useLocation();
+
   return (
     <>
       <ScrollToTop />
       <SpeedInsights />
       <Analytics />
-      <Routes>
-        <Route element={<PersistLogin />}>
-          <Route path={"/"} element={<Layout />}>
-            <Route path="/" element={<Home />} />
-            <Route path={"/products"} element={<Products />} />
-            <Route path={"/product-page"} element={<ProductPage />} />
-            <Route path="/cart" element={<Cart />} />
+      <AnimatePresence mode="wait">
+        <Routes key={location.pathname} location={location}>
+          <Route element={<PersistLogin />}>
+            <Route path={"/"} element={<Layout />}>
+              <Route path="/" element={<Home />} />
+              <Route path={"/products"} element={<Products />} />
+              <Route path={"/product-page"} element={<ProductPage />} />
+              <Route path="/cart" element={<Cart />} />
 
-            <Route element={<RequireAuth />}>
-              <Route path="/profile" element={<Profile />} />
+              <Route element={<RequireAuth />}>
+                <Route path="/profile" element={<Profile />} />
+              </Route>
+
+              <Route path="*" element={<NotFound />} />
             </Route>
 
-            <Route path="*" element={<NotFound />} />
+            <Route element={<AuthLayout />}>
+              <Route path="/email-lookup" element={<EmailLookup />} />
+              <Route path="/verify-email" element={<VerifyEmail />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/change-password" element={<ChangePassword />} />
+            </Route>
           </Route>
-
-          <Route element={<AuthLayout />}>
-            <Route path="/email-lookup" element={<EmailLookup />} />
-            <Route path="/verify-email" element={<VerifyEmail />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/change-password" element={<ChangePassword />} />
-          </Route>
-        </Route>
-      </Routes>
+        </Routes>
+      </AnimatePresence>
     </>
   );
 }

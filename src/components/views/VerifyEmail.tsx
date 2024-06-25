@@ -12,6 +12,7 @@ import { REGEXP_ONLY_DIGITS } from "input-otp";
 import apiClient from "@/services/api-client.ts";
 import { AxiosError } from "axios";
 import LoaderContext from "@/context/LoaderProvider.tsx";
+import SlidePage from "@/components/SlidePage.tsx";
 
 export const CODE_LENGTH = 6;
 const TIMEOUT_SECONDS = 15;
@@ -89,48 +90,50 @@ const VerifyEmail = () => {
   };
 
   return (
-    <div className="mx-auto w-full py-8 sm:w-[400px] p-6 grid gap-4 sm:p-8">
-      <h1 className="text-3xl font-medium leading-tight tracking-tight text-gray-900">
-        {t("verify-email.title")}
-      </h1>
-      <div className="flex flex-wrap gap-2">
-        <p>{t("verify-email.detail")}</p>
-        <p>{formData.email}</p>
-        <Link to="/email-lookup" className="underline text-muted-foreground">
-          {t("verify-email.edit")}
-        </Link>
-      </div>
-      <div className="grid gap-6">
-        <InputOTP
-          value={code}
-          onChange={(value) => setCode(value)}
-          disabled={loading}
-          className="mx-auto"
-          pattern={REGEXP_ONLY_DIGITS}
-          maxLength={CODE_LENGTH}
-        >
-          <InputOTPGroup>
-            <InputOTPSlot index={0} />
-            <InputOTPSlot index={1} />
-            <InputOTPSlot index={2} />
-            <InputOTPSlot index={3} />
-            <InputOTPSlot index={4} />
-            <InputOTPSlot index={5} />
-          </InputOTPGroup>
-        </InputOTP>
-        <div className="flex gap-2 items-center">
-          <button
-            type="button"
-            onClick={resendOTP}
-            disabled={loading || timeoutSeconds > 0}
-            className="flex gap-2 items-center bg-muted px-3 py-2 font-medium rounded-full w-fit text-sm transition-all disabled:cursor-not-allowed disabled:text-muted-foreground"
+    <SlidePage>
+      <div className="mx-auto w-full py-8 sm:w-[400px] p-6 grid gap-4 sm:p-8">
+        <h1 className="text-3xl font-medium leading-tight tracking-tight text-gray-900">
+          {t("verify-email.title")}
+        </h1>
+        <div className="flex flex-wrap gap-2">
+          <p>{t("verify-email.detail")}</p>
+          <p>{formData.email}</p>
+          <Link to="/email-lookup" className="underline text-muted-foreground">
+            {t("verify-email.edit")}
+          </Link>
+        </div>
+        <div className="grid gap-6">
+          <InputOTP
+            value={code}
+            onChange={(value) => setCode(value)}
+            disabled={loading}
+            className="mx-auto"
+            pattern={REGEXP_ONLY_DIGITS}
+            maxLength={CODE_LENGTH}
           >
-            <p>{t("verify-email.resend")}</p>
-          </button>
-          {timeoutSeconds > 0 && <label>{timeoutSeconds}</label>}
+            <InputOTPGroup>
+              <InputOTPSlot index={0} />
+              <InputOTPSlot index={1} />
+              <InputOTPSlot index={2} />
+              <InputOTPSlot index={3} />
+              <InputOTPSlot index={4} />
+              <InputOTPSlot index={5} />
+            </InputOTPGroup>
+          </InputOTP>
+          <div className="flex gap-2 items-center">
+            <button
+              type="button"
+              onClick={resendOTP}
+              disabled={loading || timeoutSeconds > 0}
+              className="flex gap-2 items-center bg-muted px-3 py-2 font-medium rounded-full w-fit text-sm transition-all disabled:cursor-not-allowed disabled:text-muted-foreground"
+            >
+              <p>{t("verify-email.resend")}</p>
+            </button>
+            {timeoutSeconds > 0 && <label>{timeoutSeconds}</label>}
+          </div>
         </div>
       </div>
-    </div>
+    </SlidePage>
   );
 };
 

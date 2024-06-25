@@ -9,6 +9,7 @@ import ErrorContext from "@/context/ErrorProvider.tsx";
 import axios from "axios";
 import { Input } from "@/components/ui/Input.tsx";
 import LoaderContext from "@/context/LoaderProvider.tsx";
+import SlidePage from "@/components/SlidePage.tsx";
 
 interface EmailFormData {
   email: string;
@@ -51,6 +52,8 @@ const EmailLookup = () => {
       if (axios.isAxiosError(error)) {
         if (error.response?.status === 409) {
           navigate("/login");
+        } else {
+          setError(t("errors.unexpectedError"));
         }
       } else {
         setError(t("errors.unexpectedError"));
@@ -61,31 +64,35 @@ const EmailLookup = () => {
   };
 
   return (
-    <div className="mx-auto w-fit py-8 sm:py-0 grid gap-6 p-6 sm:p-0 sm:max-w-[400px]">
-      <h1 className="text-3xl font-medium leading-tight tracking-tight text-gray-900">
-        {t("email-lookup.title")}
-      </h1>
-      <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
-        <div className="grid gap-1">
-          <Input
-            type="email"
-            label={t("email-lookup.placeholder")}
-            autoCorrect="off"
-            autoComplete="email"
-            disabled={loading}
-            className={errors.email && "border-red-500 focus:border-red-500"}
-            {...register("email", { required: true })}
-          />
-          <label className="w-full h-3 text-xs text-red-500">
-            {errors.email?.type === "required" && t("common.required")}
-          </label>
-        </div>
-        <p className="text-sm text-muted-foreground">{t("email-lookup.tos")}</p>
-        <Button type="submit" disabled={loading}>
-          {t("email-lookup.cta")}
-        </Button>
-      </form>
-    </div>
+    <SlidePage>
+      <div className="mx-auto w-fit py-8 sm:py-0 grid gap-6 p-6 sm:p-0 sm:max-w-[400px]">
+        <h1 className="text-3xl font-medium leading-tight tracking-tight text-gray-900">
+          {t("email-lookup.title")}
+        </h1>
+        <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
+          <div className="grid gap-1">
+            <Input
+              type="email"
+              label={t("email-lookup.placeholder")}
+              autoCorrect="off"
+              autoComplete="email"
+              disabled={loading}
+              className={errors.email && "border-red-500 focus:border-red-500"}
+              {...register("email", { required: true })}
+            />
+            <label className="w-full h-3 text-xs text-red-500">
+              {errors.email?.type === "required" && t("common.required")}
+            </label>
+          </div>
+          <p className="text-sm text-muted-foreground">
+            {t("email-lookup.tos")}
+          </p>
+          <Button type="submit" disabled={loading}>
+            {t("email-lookup.cta")}
+          </Button>
+        </form>
+      </div>
+    </SlidePage>
   );
 };
 

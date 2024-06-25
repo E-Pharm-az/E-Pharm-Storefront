@@ -14,6 +14,7 @@ import ErrorContext from "@/context/ErrorProvider.tsx";
 import { Input } from "@/components/ui/Input.tsx";
 import LoaderContext from "@/context/LoaderProvider.tsx";
 import { useForm } from "react-hook-form";
+import SlidePage from "@/components/SlidePage.tsx";
 
 interface PasswordFormData {
   password: string;
@@ -91,49 +92,56 @@ const Login = () => {
   };
 
   return (
-    <div className="mx-auto py-8 sm:py-0 w-full grid gap-6 p-6 sm:p-0 sm:w-[400px]">
-      <div className="grid gap-2">
-        <h1 className="text-3xl font-medium leading-tight tracking-tight text-gray-900">
-          {t("login.title")}
-        </h1>
-        <div className="flex flex-wrap gap-x-1">
-          <label>{formData.email}</label>
-          <Link to="/email-lookup" className="underline text-muted-foreground">
-            {t("login.edit")}
-          </Link>
-        </div>
-      </div>
-      <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
+    <SlidePage>
+      <div className="mx-auto py-8 sm:py-0 w-full grid gap-6 p-6 sm:p-0 sm:w-[400px]">
         <div className="grid gap-2">
-          <input
-            className="hidden"
-            disabled={true}
-            type="email"
-            value={formData.email}
-          />
-          <Input
-            label={t("login.password")}
-            type="password"
-            autoCorrect="off"
-            autoComplete="new-password"
-            disabled={loading}
-            className={errors.password && "border-red-500 focus:border-red-500"}
-            {...register("password", { required: true })}
-          />
-          <label className="w-full h-3 text-xs text-red-500">
-            {errors.password?.type === "required" && t("common.required")}
-          </label>
-          <Link to="/change-password">
-            <p className="text-sm text-gray-500 font-medium text-primary-600 hover:underline">
-              {t("login.forgot-password")}
-            </p>
-          </Link>
+          <h1 className="text-3xl font-medium leading-tight tracking-tight text-gray-900">
+            {t("login.title")}
+          </h1>
+          <div className="flex flex-wrap gap-x-1">
+            <label>{formData.email}</label>
+            <Link
+              to="/email-lookup"
+              className="underline text-muted-foreground"
+            >
+              {t("login.edit")}
+            </Link>
+          </div>
         </div>
-        <Button type="submit" disabled={loading}>
-          {t("common.continue")}
-        </Button>
-      </form>
-    </div>
+        <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
+          <div className="grid gap-2">
+            <input
+              className="hidden"
+              disabled={true}
+              type="email"
+              value={formData.email}
+            />
+            <Input
+              label={t("login.password")}
+              type="password"
+              autoCorrect="off"
+              autoComplete="new-password"
+              disabled={loading}
+              className={
+                errors.password && "border-red-500 focus:border-red-500"
+              }
+              {...register("password", { required: true })}
+            />
+            <label className="w-full h-3 text-xs text-red-500">
+              {errors.password?.type === "required" && t("common.required")}
+            </label>
+            <Link to="/change-password">
+              <p className="text-sm text-gray-500 font-medium text-primary-600 hover:underline">
+                {t("login.forgot-password")}
+              </p>
+            </Link>
+          </div>
+          <Button type="submit" disabled={loading}>
+            {t("common.continue")}
+          </Button>
+        </form>
+      </div>
+    </SlidePage>
   );
 };
 

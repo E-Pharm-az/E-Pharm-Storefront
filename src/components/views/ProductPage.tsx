@@ -23,7 +23,7 @@ const ProductPage = () => {
     setLoading(true);
     if (productId) {
       apiClient
-        .get<Product>(`/product/${productId}`)
+        .get<Product>(`/products/${productId}`)
         .then((response) => {
           setProduct(response.data);
           setLoading(false);

@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import apiClient from "../../services/api-client.ts";
 import CartContext from "../../context/CartProvider.tsx";
 import { Image, Loader, ShoppingCart } from "lucide-react";
-import {Button} from "@/components/ui/button.tsx";
+import { Button } from "@/components/ui/button.tsx";
 
 export interface Product {
   id: number;
@@ -31,19 +31,22 @@ const Products = () => {
   const [t] = useTranslation("global");
 
   useEffect(() => {
-    setLoading(true);
-    if (searchQuery) {
-      apiClient
-        .get<Product[]>(`/product/search/${searchQuery}/1`)
-        .then((response) => {
+    (async () => {
+      if (searchQuery) {
+        setLoading(true);
+        try {
+          const response = await apiClient.get<Product[]>("/products/search", {
+            params: { query: searchQuery, page: 1 },
+          });
           setProducts(response.data);
           setLoading(false);
-        })
-        .catch((error) => {
+        } catch (error) {
           console.error(error);
+        } finally {
           setLoading(false);
-        });
-    }
+        }
+      }
+    })();
   }, [searchQuery]);
 
   const HandleSelectProduct = (id: number) => {
@@ -117,5 +120,4 @@ const Products = () => {
     </div>
   );
 };
-
 export default Products;

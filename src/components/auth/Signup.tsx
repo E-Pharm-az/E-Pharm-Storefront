@@ -7,7 +7,7 @@ import FormContext from "@/context/AuthFormProvider.tsx";
 import ErrorContext from "@/context/ErrorProvider.tsx";
 import { useForm } from "react-hook-form";
 import { Checkbox } from "@/components/ui/checkbox.tsx";
-import { Input } from "@/components/ui/Input.tsx";
+import { Input } from "@/components/ui/input.tsx";
 import Logo from "@/assets/logo.png";
 import apiClient from "@/services/api-client.ts";
 import axios from "axios";

@@ -10,10 +10,18 @@
     "unexpectedError": "An unexpected error occurred"
   },
   "home": {
-    "title": "Search for medication",
-    "description": "Just type the name of the medication you are looking for and we will find it for you",
+    "title": "Your Health, Delivered.",
+    "description": "Discover fast, affordable, and easy-to-use pharmacy products.",
     "placeholder": "Search for medication",
-    "cta": "Search"
+    "cta": "Search",
+    "categories": {
+      "coldFlu": "Cold & Flu",
+      "painRelief": "Pain Relief",
+      "allergy": "Allergy",
+      "digestiveHealth": "Digestive Health",
+      "skinCare": "Skin Care",
+      "vitamins": "Vitamins & Supplements"
+    }
   },
   "nav": {
     "login": "Sign in",

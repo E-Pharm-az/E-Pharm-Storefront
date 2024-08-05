@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import apiClient from "@/services/api-client.ts";
 import ErrorContext from "@/context/ErrorProvider.tsx";
 import axios from "axios";
-import { Input } from "@/components/ui/Input.tsx";
+import { Input } from "@/components/ui/input.tsx";
 import LoaderContext from "@/context/LoaderProvider.tsx";
 import SlidePage from "@/components/SlidePage.tsx";
 

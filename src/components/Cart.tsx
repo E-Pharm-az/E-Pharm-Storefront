@@ -1,4 +1,4 @@
-import CartContext, { CartItem } from "../../context/CartProvider.tsx";
+import CartContext, { CartItem } from "../context/CartProvider.tsx";
 import { ChangeEvent, useContext, useState } from "react";
 import { Pin, ShoppingCart, Trash } from "lucide-react";
 import { useTranslation } from "react-i18next";

@@ -11,7 +11,7 @@ import axios from "axios";
 import { Button } from "@/components/ui/button.tsx";
 import FormContext from "@/context/AuthFormProvider.tsx";
 import ErrorContext from "@/context/ErrorProvider.tsx";
-import { Input } from "@/components/ui/Input.tsx";
+import { Input } from "@/components/ui/input.tsx";
 import LoaderContext from "@/context/LoaderProvider.tsx";
 import { useForm } from "react-hook-form";
 import SlidePage from "@/components/SlidePage.tsx";

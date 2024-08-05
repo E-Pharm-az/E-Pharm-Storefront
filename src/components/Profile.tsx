@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
-import apiClient from "../../services/api-client.ts";
-import AuthContext from "../../context/AuthProvider.tsx";
+import apiClient from "../services/api-client.ts";
+import AuthContext from "../context/AuthProvider.tsx";
 
 interface Order {
   Id: number;

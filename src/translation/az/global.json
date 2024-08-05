@@ -10,10 +10,18 @@
     "unexpectedError": "Gözlənilməz xəta baş verdi"
   },
   "home": {
-    "title": "Dərman axtar",
-    "description": "Axtardığınız dərmanın adını yalnızca yazın və biz onu tapacağıq",
-    "placeholder": "Dərman axtar",
-    "cta": "Axtar"
+    "title": "Sağlamlığınız, çatdırıldı.",
+    "description": "Sürətli, münasib qiymətə və istifadəsi asan apteka məhsullarını kəşf edin.",
+    "placeholder": "Dərman axtarışı",
+    "cta": "Axtar",
+    "categories": {
+      "coldFlu": "Soyuqdəymə və qrip",
+      "painRelief": "Ağrıkəsici",
+      "allergy": "Allergiya",
+      "digestiveHealth": "Həzm sağlamlığı",
+      "skinCare": "Dəri qulluğu",
+      "vitamins": "Vitaminlər"
+    }
   },
   "nav": {
     "login": "Daxil ol",

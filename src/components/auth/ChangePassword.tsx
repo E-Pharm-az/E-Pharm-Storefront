@@ -7,7 +7,7 @@ import apiClient from "@/services/api-client.ts";
 import axios from "axios";
 import FormContext from "@/context/AuthFormProvider.tsx";
 import ErrorContext from "@/context/ErrorProvider.tsx";
-import { Input } from "@/components/ui/Input.tsx";
+import { Input } from "@/components/ui/input.tsx";
 import { useForm } from "react-hook-form";
 import LoaderContext from "@/context/LoaderProvider.tsx";
 import SlidePage from "@/components/SlidePage.tsx";

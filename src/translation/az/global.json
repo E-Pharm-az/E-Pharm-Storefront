@@ -23,6 +23,11 @@
       "vitamins": "Vitaminlər"
     }
   },
+  "comingSoon": {
+    "title": "Tezliklə",
+    "description": "Sizə möhtəşəm bir şey təqdim etmək üçün səylə çalışırıq. Yenilikləri izləyin!",
+    "backButton": "Geri qayıt"
+  },
   "nav": {
     "login": "Daxil ol",
     "signup": "Qeydiyyat",

@@ -10,7 +10,7 @@ const Footer = () => {
   const [t] = useTranslation("global");
 
   return (
-    <footer className="bg-white py-8">
+    <footer className="bg-white py-8 max-w-[1200px] mx-auto">
       <div className="container mb-10 grid grid-cols-1 gap-8 px-4 md:mb-20 md:grid-cols-4 md:gap-4">
         <div className="flex flex-col gap-4">
           <div
@@ -36,22 +36,22 @@ const Footer = () => {
             } md:block`}
           >
             <li>
-              <a href="#!" className="text-gray-600">
+              <a href="/coming-soon" className="text-gray-600">
                 {t("footer.About Us")}
               </a>
             </li>
             <li>
-              <a href="#!" className="text-gray-600">
+              <a href="/coming-soon" className="text-gray-600">
                 {t("footer.License and details")}
               </a>
             </li>
             <li>
-              <a href="#!" className="text-gray-600">
+              <a href="/coming-soon" className="text-gray-600">
                 {t("footer.Our partners")}
               </a>
             </li>
             <li>
-              <a href="#!" className="text-gray-600">
+              <a href="/coming-soon" className="text-gray-600">
                 {t("footer.Our team and doctors")}
               </a>
             </li>
@@ -82,22 +82,22 @@ const Footer = () => {
             } md:block`}
           >
             <li>
-              <a href="#!" className="text-gray-600">
+              <a href="/coming-soon" className="text-gray-600">
                 {t("footer.FAQ")}
               </a>
             </li>
             <li>
-              <a href="#!" className="text-gray-600">
+              <a href="/coming-soon" className="text-gray-600">
                 {t("footer.How to make an order")}
               </a>
             </li>
             <li>
-              <a href="#!" className="text-gray-600">
+              <a href="/coming-soon" className="text-gray-600">
                 {t("footer.Delivery rules")}
               </a>
             </li>
             <li>
-              <a href="#!" className="text-gray-600">
+              <a href="/coming-soon" className="text-gray-600">
                 {t("footer.Payment Methods")}
               </a>
             </li>
@@ -128,17 +128,17 @@ const Footer = () => {
             } md:block`}
           >
             <li>
-              <a href="#!" className="text-gray-600">
+              <a href="/coming-soon" className="text-gray-600">
                 {t("footer.Articles about health")}
               </a>
             </li>
             <li>
-              <a href="#!" className="text-gray-600">
+              <a href="/coming-soon" className="text-gray-600">
                 {t("footer.Doctors' recommendations")}
               </a>
             </li>
             <li>
-              <a href="#!" className="text-gray-600">
+              <a href="/coming-soon" className="text-gray-600">
                 {t("footer.Healthy lifestyle")}
               </a>
             </li>
@@ -169,22 +169,22 @@ const Footer = () => {
             } md:block`}
           >
             <li>
-              <a href="#!" className="text-gray-600">
+              <a href="/coming-soon" className="text-gray-600">
                 {t("footer.Pharmacy addresses")}
               </a>
             </li>
             <li>
-              <a href="#!" className="text-gray-600">
+              <a href="/coming-soon" className="text-gray-600">
                 {t("footer.Feedback form")}
               </a>
             </li>
             <li>
-              <a href="#!" className="text-gray-600">
+              <a href="/coming-soon" className="text-gray-600">
                 {t("footer.Contact doctor")}
               </a>
             </li>
             <li>
-              <a href="#!" className="text-gray-600">
+              <a href="/coming-soon" className="text-gray-600">
                 {t("footer.Working hours")}
               </a>
             </li>
@@ -192,39 +192,16 @@ const Footer = () => {
           <div className="block rounded-full bg-neutral-200 h-0.5 md:hidden"></div>
         </div>
       </div>
-      <div className="mb-10 rounded-lg bg-gray-100 px-6 py-10 md:mb-20 md:px-12">
-        <div className="mx-auto max-w-2xl">
-          <h2 className="mb-4 font-semibold text-gray-800 text-md md:text-lg">
-            {t("footer.form-title")}
-          </h2>
-          <form className="flex flex-col gap-4 md:flex-row">
-            <input
-              type="text"
-              placeholder={t("footer.form-input-placeholder")}
-              autoComplete="off"
-              className="flex-grow rounded-lg border border-gray-400 bg-white px-4 py-3 placeholder-gray-500 focus:border-gray-600 focus:outline-none"
-            />
-            <button className="py-3 px-6 bg-accent text-white font-medium rounded-lg transition duration-300 focus:outline-none focus:bg-green-600">
-              {t("footer.form-button-text")}
-            </button>
-          </form>
-          <p className="mt-4 text-sm text-gray-600">
-            {t("footer.form-subtitle")}{" "}
-            <a href="#!" className="text-accent underline">
-              {t("footer.form-privacy-policy-link")}.
-            </a>
-          </p>
-        </div>
-      </div>
+
       <div className="container flex flex-col-reverse items-start justify-between gap-4 px-4 pb-20 sm:flex-row sm:items-center md:pb-0">
         <div className="text-sm font-medium text-gray-600">
           Copyright © E-Pharm 2024
         </div>
         <div className="flex flex-col gap-4 text-sm sm:flex-row">
-          <a href="#!" className="font-medium text-gray-600">
+          <a href="/coming-soon" className="font-medium text-gray-600">
             {t("footer.Terms & Conditions")}
           </a>
-          <a href="#!" className="font-medium text-gray-600">
+          <a href="/coming-soon" className="font-medium text-gray-600">
             {t("footer.Privacy Policy")}
           </a>
         </div>

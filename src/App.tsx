@@ -19,6 +19,7 @@ import EmailLookup from "@/components/auth/EmailLookup.tsx";
 import VerifyEmail from "@/components/auth/VerifyEmail.tsx";
 import { AnimatePresence } from "framer-motion";
 import { RemoveTrailingSlash } from "@/components/RemoveTrailingSlash.tsx";
+import ComingSoon from "@/components/marketing/CommingSoon.tsx";
 
 function App() {
   const location = useLocation();
@@ -32,12 +33,12 @@ function App() {
       <AnimatePresence mode="wait">
         <Routes key={location.pathname} location={location}>
           <Route element={<PersistLogin />}>
-            <Route path={"/"} element={<Layout />}>
+            <Route path="/" element={<Layout />}>
               <Route path="/" element={<Home />} />
-              <Route path={"/products"} element={<Products />} />
-              <Route path={"/product-page"} element={<ProductPage />} />
+              <Route path="/coming-soon" element={<ComingSoon />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/product-page" element={<ProductPage />} />
               <Route path="/cart" element={<Cart />} />
-
               <Route element={<RequireAuth />}>
                 <Route path="/profile" element={<Profile />} />
               </Route>

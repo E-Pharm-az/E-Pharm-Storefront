@@ -51,7 +51,7 @@ export const Navbar = () => {
   return (
     <nav
       ref={navBarRef}
-      className={`bg-white hidden items-center justify-between ease-in-out z-10 px-10 py-2 transition-all space-x-2 md:flex md:fixed md:top-0 md:right-0 md:left-0 ${isNavBarScrolled && "shadow-md border-b"}`}
+      className={`bg-white max-w-[1200px] mx-auto hidden items-center justify-between ease-in-out z-10 px-10 py-2 transition-all space-x-2 md:flex md:fixed md:top-0 md:right-0 md:left-0 ${isNavBarScrolled && "shadow-md border-b"}`}
     >
       <NavLink to="/">
         <div className="flex flex-shrink-0 items-center gap-1">

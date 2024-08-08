@@ -5,9 +5,11 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button.tsx";
 import { Separator } from "@/components/ui/separator.tsx";
 import { Link } from "react-router-dom";
+import AuthContext from "@/context/AuthProvider.tsx";
 
 const Cart = () => {
   const { cart, updateCart, removeFromCart } = useContext(CartContext);
+  const { isAuthenticated } = useContext(AuthContext);
   const totalPrice = cart.reduce(
     (total, item) => total + item.price * item.quantity,
     0,
@@ -20,19 +22,21 @@ const Cart = () => {
   return (
     <div className="max-w-[1080px] lg:mx-auto lg:flex grid gap-8 mx-8 px-2">
       <div className="w-full">
-        <div className="border border-muted p-2 mb-4">
-          <p className="font-semibold text-lg">{t("cart.join-us-title")}</p>
-          <p className="text-muted-foreground">
-            <Link to="/email-lookup" className="text-primary underline">
-              {t("cart.sign-in")}
-            </Link>{" "}
-            {t("cart.or")}{" "}
-            <Link to="/email-lookup" className="text-primary underline">
-              {t("cart.join")}
-            </Link>{" "}
-            {t("cart.enjoy-benefits")}
-          </p>
-        </div>
+        {!isAuthenticated() && (
+          <div className="border border-muted p-2 mb-4">
+            <p className="font-semibold text-lg">{t("cart.join-us-title")}</p>
+            <p className="text-muted-foreground">
+              <Link to="/email-lookup" className="text-primary underline">
+                {t("cart.sign-in")}
+              </Link>{" "}
+              {t("cart.or")}{" "}
+              <Link to="/email-lookup" className="text-primary underline">
+                {t("cart.join")}
+              </Link>{" "}
+              {t("cart.enjoy-benefits")}
+            </p>
+          </div>
+        )}
         <h3 className="text-2xl font-medium mb-4">{t("cart.bag")}</h3>
         {cart.length === 0 ? (
           <p>{t("cart.empty-bag")}</p>
@@ -73,7 +77,7 @@ const Cart = () => {
           </div>
         )}
       </div>
-      <Separator className="block lg:hidden"/>
+      <Separator className="block lg:hidden" />
       <div className="lg:w-[550px] grid gap-6 w-full">
         <p className="text-2xl font-medium">{t("cart.summary")}</p>
         <div className="grid gap-4">

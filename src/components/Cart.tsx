@@ -100,7 +100,7 @@ const Cart = () => {
           <p>{(totalPrice / 100).toFixed(2)} AZN</p>
         </div>
         <div className="p-4">
-          <Button disabled={cart.length === 0}>
+          <Button className="w-full"  disabled={cart.length === 0}>
             {t("cart.cart-btn-text")}
           </Button>
         </div>

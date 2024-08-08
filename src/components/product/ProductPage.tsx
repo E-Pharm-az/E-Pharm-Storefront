@@ -10,10 +10,11 @@ import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import apiClient from "../../services/api-client";
 import CartContext from "../../context/CartProvider";
-import { Image } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import LoaderContext from "@/context/LoaderProvider";
 import { Product } from "@/types/product";
+import ErrorContext from "@/context/ErrorProvider.tsx";
+import { Skeleton } from "@/components/ui/skeleton.tsx";
 
 const ProductImage: React.FC<{ product: Product | null }> = React.memo(
   ({ product }) => {
@@ -26,9 +27,7 @@ const ProductImage: React.FC<{ product: Product | null }> = React.memo(
             className="w-full h-auto"
           />
         ) : (
-          <div className="flex h-[420px] w-full items-center justify-center rounded-md bg-gray-200">
-            <Image className="text-4xl text-gray-400" />
-          </div>
+          <Skeleton className="h-[420px] w-full rounded-md" />
         )}
       </div>
     );
@@ -36,7 +35,7 @@ const ProductImage: React.FC<{ product: Product | null }> = React.memo(
 );
 
 const ProductDetails: React.FC<{
-  product: Product;
+  product: Product | null;
   onAddToCart: (count: number) => void;
 }> = React.memo(({ product, onAddToCart }) => {
   const { t } = useTranslation("global");
@@ -55,43 +54,64 @@ const ProductDetails: React.FC<{
   const handleAddToCart = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
       e.stopPropagation();
-      onAddToCart(count);
+      if (product) {
+        onAddToCart(count);
+      }
     },
-    [count, onAddToCart],
+    [count, onAddToCart, product],
   );
 
   return (
     <div className="space-y-4">
-      <p className="text-2xl">₼{((product.price ?? 0) / 100).toFixed(2)}</p>
-      <h2 className="text-5xl">{product.name}</h2>
-      <p>{product.description}</p>
-      <p>Strength: {product.strengthMg} mg</p>
-      <div className="flex gap-2 items-center">
-        <div className="flex border rounded items-center gap-2">
-          <Button
-            onClick={handleMinusClick}
-            size="icon"
-            variant="ghost"
-            className="rounded-md"
-          >
-            -
-          </Button>
-          <span className="h-7 w-7 text-center count leading-[28px]">
-            {count}
-          </span>
-          <Button
-            onClick={handleAddClick}
-            size="icon"
-            variant="ghost"
-            className="rounded-md"
-          >
-            +
-          </Button>
-        </div>
-        <Button onClick={handleAddToCart} className="w-full rounded-md">
-          {t("product-page.product-add-to-cart-btn")}
-        </Button>
-      </div>
+      {product ? (
+        <>
+          <p className="text-2xl">₼{((product.price ?? 0) / 100).toFixed(2)}</p>
+          <h2 className="text-5xl">{product.name}</h2>
+          <p>{product.description}</p>
+          <p>Strength: {product.strengthMg} mg</p>
+          <div className="flex gap-2 items-center">
+            <div className="flex border rounded items-center gap-2">
+              <Button
+                onClick={handleMinusClick}
+                size="icon"
+                variant="ghost"
+                className="rounded-md"
+              >
+                -
+              </Button>
+              <span className="h-7 w-7 text-center count leading-[28px]">
+                {count}
+              </span>
+              <Button
+                onClick={handleAddClick}
+                size="icon"
+                variant="ghost"
+                className="rounded-md"
+              >
+                +
+              </Button>
+            </div>
+            <Button onClick={handleAddToCart} className="w-full rounded-md">
+              {t("product-page.product-add-to-cart-btn")}
+            </Button>
+          </div>
+        </>
+      ) : (
+        <>
+          <Skeleton className="h-8 w-1/3" />
+          <Skeleton className="h-12 w-full" />
+          <Skeleton className="h-4 w-full" />
+          <Skeleton className="h-4 w-1/2" />
+          <div className="flex gap-2 items-center">
+            <div className="flex border rounded items-center gap-2">
+              <Skeleton className="h-8 w-8 rounded-md" />
+              <Skeleton className="h-8 w-8 rounded-md" />
+              <Skeleton className="h-8 w-8 rounded-md" />
+            </div>
+            <Skeleton className="h-8 w-full rounded-md" />
+          </div>
+        </>
+      )}
     </div>
   );
 });
@@ -107,6 +127,7 @@ const ProductPage = () => {
   const { addToCart } = useContext(CartContext);
   const [product, setProduct] = useState<Product | null>(null);
   const { setLoading } = useContext(LoaderContext);
+  const { setError } = useContext(ErrorContext);
 
   useEffect(() => {
     setLoading(true);
@@ -117,7 +138,7 @@ const ProductPage = () => {
           setProduct(response.data);
         })
         .catch((error) => {
-          console.error(error);
+          setError(error.response?.data?.message);
         })
         .finally(() => {
           setLoading(false);
@@ -137,20 +158,19 @@ const ProductPage = () => {
         };
 
         addToCart(cart, count);
-        navigate("/cart");
       }
     },
     [addToCart, navigate, product],
   );
 
-  if (!product) {
-    return null;
-  }
-
   return (
     <div className="max-w-[1200px] w-full mx-auto px-4 flex flex-col md:flex-row gap-6 justify-between">
-      <ProductImage product={product} />
+      <div className="w-3/5">
+        <ProductImage product={product} />
+      </div>
+      <div className="w-2/5">
       <ProductDetails product={product} onAddToCart={handleAddToCart} />
+      </div>
     </div>
   );
 };

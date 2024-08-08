@@ -1,109 +1,112 @@
 import CartContext, { CartItem } from "../context/CartProvider.tsx";
-import { ChangeEvent, useContext, useState } from "react";
-import { Pin, ShoppingCart, Trash } from "lucide-react";
+import { useContext } from "react";
+import { Minus, Trash } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button.tsx";
+import { Separator } from "@/components/ui/separator.tsx";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const { cart, updateCart, removeFromCart } = useContext(CartContext);
-  const [shippingAddress, setShippingAddress] = useState<string>("");
   const totalPrice = cart.reduce(
     (total, item) => total + item.price * item.quantity,
     0,
   );
   const [t] = useTranslation("global");
 
-  const handleShippingAddressChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setShippingAddress(e.target.value);
-  };
-
   const handleCountChange = (item: CartItem, count: string) =>
     updateCart(item, parseInt(count));
 
   return (
-    <div className="container py-8 space-y-4 md:space-y-0 md:grid md:grid-cols-5 md:gap-8">
-      <div className="col-span-3 rounded-md border border-gray-200">
-        <div className="flex items-center p-4 space-x-1">
-          <p>{cart.length}</p>
-          <p>
-            {cart.length === 1 ? t("cart.item") : t("cart.items")}{" "}
-            {t("cart.in-your-cart")}
+    <div className="max-w-[1080px] lg:mx-auto lg:flex grid gap-8 mx-8 px-2">
+      <div className="w-full">
+        <div className="border border-muted p-2 mb-4">
+          <p className="font-semibold text-lg">{t("cart.join-us-title")}</p>
+          <p className="text-muted-foreground">
+            <Link to="/email-lookup" className="text-primary underline">
+              {t("cart.sign-in")}
+            </Link>{" "}
+            {t("cart.or")}{" "}
+            <Link to="/email-lookup" className="text-primary underline">
+              {t("cart.join")}
+            </Link>{" "}
+            {t("cart.enjoy-benefits")}
           </p>
         </div>
-        <div className="flex flex-col gap-2 border-t border-b border-gray-200 p-4 item-start sm:flex-row sm:items-center">
-          <div className="flex items-center gap-1">
-            <Pin className="h-5 w-5" />
-            <p className="flex-shrink-0">{t("cart.deliver")}:</p>
-          </div>
-          <input
-            type="text"
-            name="address"
-            onChange={handleShippingAddressChange}
-            value={shippingAddress}
-            className="flex-grow rounded-md border border-gray-200 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            placeholder={t("cart.deliver-address")}
-          />
-        </div>
-
+        <h3 className="text-2xl font-medium mb-4">{t("cart.bag")}</h3>
         {cart.length === 0 ? (
-          <div className="flex items-center justify-center h-[230px]">
-            <div>
-              <ShoppingCart className="mx-auto mb-2 h-12 w-12" />
-              <p className={""}>{t("cart.empty-cart")}</p>
-            </div>
-          </div>
+          <p>{t("cart.empty-bag")}</p>
         ) : (
           <div>
-            {cart.map((item, index) => (
-              <div
-                key={item.id}
-                className={`flex rounded p-4 items-center justify-between ${
-                  index !== cart.length - 1 ? "border-b border-gray-200" : ""
-                }`}
-              >
-                <div className="flex items-center space-x-2">
-                  <img
-                    src={item.imageUrl}
-                    alt={item.name}
-                    className="h-16 w-16"
-                  />
-                  <div>
+            {cart.map((item) => (
+              <div key={item.id} className="flex justify-between gap-4">
+                <img
+                  src={item.imageUrl}
+                  alt={item.name}
+                  className="h-32 w-32 border"
+                />
+                <div className="w-full flex flex-col justify-between">
+                  <div className="w-full flex justify-between">
                     <p className="font-semibold">{item.name}</p>
                     <p>{(item.price / 100).toFixed(2)} AZN</p>
                   </div>
-                </div>
-                <div className="">
-                  <Trash
-                    onClick={() => removeFromCart(item.id)}
-                    className="mb-6 ml-auto h-5 w-5 cursor-pointer text-gray-600"
-                  />
-                  <select
-                    value={item.quantity}
-                    onChange={(e) => handleCountChange(item, e.target.value)}
-                    className="rounded-md border border-gray-300 px-2 py-1 focus:outline-none focus:ring-4 focus:ring-blue-300"
-                  >
-                    {[...Array(20).keys()].map((num) => (
-                      <option key={num + 1} value={num + 1}>
-                        {num + 1}
-                      </option>
-                    ))}
-                  </select>
+                  <div className="flex items-center gap-4">
+                    <Trash
+                      onClick={() => removeFromCart(item.id)}
+                      className="h-5 w-5 cursor-pointer text-gray-600"
+                    />
+                    <select
+                      value={item.quantity}
+                      onChange={(e) => handleCountChange(item, e.target.value)}
+                      className="rounded-md border border-gray-300 px-2 py-1 focus:outline-none focus:ring-4 focus:ring-blue-300"
+                    >
+                      {[...Array(20).keys()].map((num) => (
+                        <option key={num + 1} value={num + 1}>
+                          {num + 1}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
         )}
       </div>
-      <div className="col-span-2 h-fit rounded-md border border-gray-200">
-        <div className="flex items-center border-b border-gray-200 p-4 space-x-1">
-          <p>{t("cart.cart-total")}:</p>
-          <p>{(totalPrice / 100).toFixed(2)} AZN</p>
+      <Separator className="block lg:hidden"/>
+      <div className="lg:w-[550px] grid gap-6 w-full">
+        <p className="text-2xl font-medium">{t("cart.summary")}</p>
+        <div className="grid gap-4">
+          <div className="flex justify-between w-full">
+            <p>{t("cart.subtotal")}</p>
+            {totalPrice > 0 ? (
+              <p>{(totalPrice / 100).toFixed(2)} AZN</p>
+            ) : (
+              <Minus />
+            )}
+          </div>
+          <div className="flex justify-between w-full">
+            <p>{t("cart.shipping-handling")}</p>
+            <p>{t("cart.free")}</p>
+          </div>
+          <div className="flex justify-between w-full">
+            <p>{t("cart.estimated-tax")}</p>
+            <Minus />
+          </div>
+          <Separator />
+          <div className="flex justify-between w-full">
+            <p>{t("cart.total")}</p>
+            {totalPrice > 0 ? (
+              <p>{(totalPrice / 100).toFixed(2)} AZN</p>
+            ) : (
+              <Minus />
+            )}
+          </div>
+          <Separator />
         </div>
-        <div className="p-4">
-          <Button className="w-full"  disabled={cart.length === 0}>
-            {t("cart.cart-btn-text")}
-          </Button>
-        </div>
+        <Button className="w-full h-14 text-md" disabled={cart.length === 0}>
+          {t("cart.checkout")}
+        </Button>
       </div>
     </div>
   );

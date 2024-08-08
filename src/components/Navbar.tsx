@@ -51,18 +51,14 @@ export const Navbar = () => {
   return (
     <nav
       ref={navBarRef}
-      className={`bg-white max-w-[1200px] mx-auto hidden items-center justify-between ease-in-out z-10 px-10 py-2 transition-all space-x-2 md:flex md:fixed md:top-0 md:right-0 md:left-0 ${isNavBarScrolled && "shadow-md border-b"}`}
+      className={`bg-white hidden items-center justify-between ease-in-out z-10 px-10 py-2 transition-all space-x-4 md:flex md:fixed md:top-0 md:right-0 md:left-0 ${isNavBarScrolled && "shadow-md border-b"}`}
     >
       <NavLink to="/" className="flex flex-shrink-0 items-center gap-1">
         <img src={Logo} alt="logo" className="h-12 w-12 pointer-events-none" />
         <h1 className="font-medium text-2xl">E-Pharm</h1>
       </NavLink>
-      {showSearch && (
-        <div className="w-2/3">
-          <SearchProducts />
-        </div>
-      )}
       <div className="flex items-center space-x-4">
+        {showSearch && <SearchProducts />}
         <LanguageSelector />
         <Button size="icon" variant="ghost" asChild>
           <NavLink to="/cart" className="relative">

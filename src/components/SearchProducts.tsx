@@ -37,8 +37,15 @@ export const SearchProducts = () => {
   return (
     <form
       onSubmit={handleSubmission}
-      className="flex w-full items-center rounded-xl border border-gray-300"
+      className="flex w-full items-center rounded-xl border border-muted-foreground"
     >
+      <button
+        type="submit"
+        className="p-2 disabled:cursor-default disabled:opacity-30"
+        disabled={!searchQuery?.trim()}
+      >
+        <Search />
+      </button>
       <input
         ref={inputRef}
         type="text"
@@ -48,13 +55,6 @@ export const SearchProducts = () => {
         onClick={activateInput}
         onFocus={activateInput}
       />
-      <button
-        type="submit"
-        className="p-2 disabled:cursor-default disabled:opacity-30"
-        disabled={!searchQuery?.trim()}
-      >
-        <Search />
-      </button>
     </form>
   );
 };

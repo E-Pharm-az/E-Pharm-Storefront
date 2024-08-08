@@ -109,14 +109,20 @@
     "form-button-text": "Abunə ol"
   },
   "cart": {
-    "item": "məhsul",
-    "items": "məhsul",
-    "in-your-cart": "səbətinizdə",
-    "deliver": "Çatdırmaq",
-    "deliver-address": "Ünvanınızı daxil edin...",
-    "empty-cart": "Səbətiniz boşdur",
-    "cart-total": "Səbət cəmi",
-    "cart-btn-text": "Sifarişi resmiləşdir"
+    "join-us-title": "Eksklüziv üstünlüklər üçün bizə qoşulun!",
+    "sign-in": "Daxil olun",
+    "or": "və ya",
+    "join": "Qoşul",
+    "enjoy-benefits": "sürətli ödəniş, sifariş izləmə və xüsusi üzv endirimlərindən zövq almaq üçün.",
+    "bag": "Çanta",
+    "empty-bag": "Çantanızda heç bir əşya yoxdur",
+    "summary": "Ümumi",
+    "subtotal": "Ara cəm",
+    "shipping-handling": "Təxmini Göndərmə və İdarəetmə",
+    "free": "Pulsuz",
+    "estimated-tax": "Təxmini Vergi",
+    "total": "Cəmi",
+    "checkout": "Ödəmə"
   },
   "cart-provider": {
     "item-added-to-cart": "Məhsul səbətə əlavə edildi",

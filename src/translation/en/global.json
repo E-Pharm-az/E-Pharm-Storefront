@@ -118,14 +118,20 @@
     "form-button-text": "Sign Up"
   },
   "cart": {
-    "item": "Item",
-    "items": "Items",
-    "in-your-cart": "in your cart",
-    "deliver": "Deliver to",
-    "deliver-address": "Enter your address...",
-    "empty-cart": "Your cart is empty",
-    "cart-total": "Cart total",
-    "cart-btn-text": "Proceed to Checkout"
+    "join-us-title": "Join Us Now for Exclusive Benefits!",
+    "sign-in": "Sign in",
+    "or": "or",
+    "join": "Join",
+    "enjoy-benefits": "to enjoy faster checkout, order tracking, and special member discounts.",
+    "bag": "Bag",
+    "empty-bag": "There is no items in your bag",
+    "summary": "Summary",
+    "subtotal": "Subtotal",
+    "shipping-handling": "Estimated Shipping & Handling",
+    "free": "Free",
+    "estimated-tax": "Estimated Tax",
+    "total": "Total",
+    "checkout": "Checkout"
   },
   "cart-provider": {
     "item-added-to-cart": "Item added to cart",

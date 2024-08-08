@@ -1,7 +1,9 @@
 import axios from "axios";
+import dotenv from "dotenv";
 
-const BASE_URL = "https://localhost:7074/api";
-// const BASE_URL = "https://api.e-pharm.co/api";
+dotenv.config();
+
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const apiClient = axios.create({
   baseURL: BASE_URL,
@@ -9,7 +11,7 @@ const apiClient = axios.create({
 
 export const axiosPrivate = axios.create({
   baseURL: BASE_URL,
-  headers: { 'Content-Type': 'application/json' },
+  headers: { "Content-Type": "application/json" },
   withCredentials: true,
 });
 

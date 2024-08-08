@@ -3,8 +3,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import apiClient from "../services/api-client.ts";
 import CartContext from "../context/CartProvider.tsx";
-import { Image, Loader, ShoppingCart } from "lucide-react";
+import { Image, Search, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button.tsx";
+import LoaderContext from "@/context/LoaderProvider.tsx";
 
 export interface Product {
   id: number;
@@ -22,10 +23,10 @@ export interface Product {
 
 const Products = () => {
   const { addToCart } = useContext(CartContext);
+  const { loading, setLoading } = useContext(LoaderContext);
   const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(false);
   const location = useLocation();
-  const history = useNavigate();
+  const navigate = useNavigate();
   const search = new URLSearchParams(location.search);
   const searchQuery = search.get("search");
   const [t] = useTranslation("global");
@@ -50,7 +51,7 @@ const Products = () => {
   }, [searchQuery]);
 
   const HandleSelectProduct = (id: number) => {
-    history(`/product-page?product-id=${id}`);
+    navigate(`/product-page?product-id=${id}`);
   };
 
   const handleAddToCart = (
@@ -67,20 +68,20 @@ const Products = () => {
     });
   };
 
-  return (
-    <div className="container relative grid grid-cols-1 gap-4 py-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-      {loading && (
-        <div className="fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-gray-100 bg-opacity-50">
-          <Loader className="mr-2 animate-spin text-blue-500" />
-          <span>Loading...</span>
-        </div>
-      )}
-      {products.length === 0 && !loading ? (
-        <div className="py-8 text-center text-gray-600">
+  if (products.length === 0 && !loading) {
+    return (
+      <div className="grid gap-4 py-12 px-4 text-center w-full">
+        <Search className="w-16 h-16 text-gray-400 mb-4 mx-auto" />
+        <h2 className="text-2xl font-semibold text-gray-800 mb-2">
           {t("products.no-products-found")}
-        </div>
-      ) : (
-        products.map((product) => (
+        </h2>
+      </div>
+    );
+  }
+
+  return (
+    <div className="container w-full relative grid grid-cols-1 gap-4 py-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      {products.map((product) => (
           <div
             key={product.id}
             onClick={() => HandleSelectProduct(product.id)}
@@ -116,7 +117,7 @@ const Products = () => {
             </div>
           </div>
         ))
-      )}
+      }
     </div>
   );
 };

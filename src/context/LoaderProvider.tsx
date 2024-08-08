@@ -23,7 +23,7 @@ export const LoaderProvider: FC<{ children: ReactNode }> = ({ children }) => {
       <AnimatePresence>
         {loading && (
           <motion.div
-            className="fixed top-0 left-0 h-1 z-50 bg-accent"
+            className="fixed top-0 left-0 h-1 z-50 bg-brand"
             initial={{ width: 0 }}
             animate={{
               width: ["0%", "100%"],

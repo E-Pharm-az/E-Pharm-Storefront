@@ -10,7 +10,8 @@ import {
   Thermometer,
 } from "lucide-react";
 import { Button } from "@/components/ui/button.tsx";
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {FormEvent, useRef, useState} from "react";
 
 interface CategoryButtonProps {
   icon: LucideIcon;
@@ -28,6 +29,16 @@ const CategoryButton = ({ icon: Icon, label }: CategoryButtonProps) => (
 
 const Home = () => {
   const [t] = useTranslation("global");
+  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState<string | null>("");
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleSubmission = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (searchQuery?.trim()) {
+      navigate(`/products?search=${searchQuery}`);
+    }
+  };
 
   return (
     <div className="max-w-[1200px] mx-auto">
@@ -38,7 +49,7 @@ const Home = () => {
             <p className="text-base sm:text-lg">{t("home.description")}</p>
           </div>
 
-          <form className="flex w-full p-1 items-center rounded-full border-2 border-neutral-300 h-16">
+          <form onSubmit={handleSubmission} className="flex w-full p-1 items-center rounded-full border-2 border-neutral-300 h-16">
             <div className="flex items-center gap-2 w-full max-w-full h-full">
               <Button
                 size="icon"
@@ -49,11 +60,13 @@ const Home = () => {
               </Button>
               <input
                 type="text"
+                ref={inputRef}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 className="h-full w-full text-muted-foreground text-md font-medium outline-none"
                 placeholder={t("home.placeholder")}
               />
             </div>
-            <Button variant="brand" className="h-full px-6">
+            <Button type="submit" variant="brand" className="h-full px-6">
               {t("home.cta")}
             </Button>
           </form>

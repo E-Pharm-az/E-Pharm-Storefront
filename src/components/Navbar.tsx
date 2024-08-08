@@ -53,15 +53,9 @@ export const Navbar = () => {
       ref={navBarRef}
       className={`bg-white max-w-[1200px] mx-auto hidden items-center justify-between ease-in-out z-10 px-10 py-2 transition-all space-x-2 md:flex md:fixed md:top-0 md:right-0 md:left-0 ${isNavBarScrolled && "shadow-md border-b"}`}
     >
-      <NavLink to="/">
-        <div className="flex flex-shrink-0 items-center gap-1">
-          <img
-            src={Logo}
-            alt="logo"
-            className="h-12 w-12 pointer-events-none"
-          />
-          <h1 className="font-medium text-2xl">E-Pharm</h1>
-        </div>
+      <NavLink to="/" className="flex flex-shrink-0 items-center gap-1">
+        <img src={Logo} alt="logo" className="h-12 w-12 pointer-events-none" />
+        <h1 className="font-medium text-2xl">E-Pharm</h1>
       </NavLink>
       {showSearch && (
         <div className="w-2/3">
@@ -71,9 +65,9 @@ export const Navbar = () => {
       <div className="flex items-center space-x-4">
         <LanguageSelector />
         <Button size="icon" variant="ghost" asChild>
-          <NavLink to="/cart">
+          <NavLink to="/cart" className="relative">
             {cart.length > 0 && (
-              <p className="absolute -top-2 left-2 mr-2 rounded-full bg-red-500 px-1 text-xs text-white Z-1">
+              <p className="absolute -top-2 right-0 rounded-full bg-red-500 px-1 text-xs text-white Z-1">
                 {cart.length}
               </p>
             )}

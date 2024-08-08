@@ -52,7 +52,7 @@ const Login = () => {
 
     try {
       const response = await apiClient.post<TokenResponse>(
-        "/auth/login/store",
+        "/auth/store/login",
         { email: formData.email, password: data.password },
         {
           withCredentials: true,

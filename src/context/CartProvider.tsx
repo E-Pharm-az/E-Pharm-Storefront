@@ -17,6 +17,7 @@ import {
 
 import { Link } from "react-router-dom";
 import useMediaQuery from "@/hooks/useMediaQuery.ts";
+import { Button } from "@/components/ui/button.tsx";
 
 export interface CartItem {
   id: number;
@@ -152,21 +153,16 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
                 </div>
               </div>
               <div className="space-y-2">
-                <Link
-                  to="/cart"
-                  onClick={() => setShowNotification(false)}
-                  className="w-full flex bg-accent transition font-medium rounded-lg text-sm px-5 py-2.5 text-white"
-                >
-                  <p className="mx-auto">
-                    {t("cart-provider.proceed-to-checkout")}
-                  </p>
-                </Link>
-                <button
-                  onClick={() => setShowNotification(false)}
-                  className="w-full rounded-lg border-2 border-neutral-700 bg-white px-5 text-center text-sm font-medium text-black transition py-2.5"
-                >
+                <Button className="w-full rounded-md"  asChild>
+                  <Link to="/cart" onClick={() => setShowNotification(false)}>
+                    <p>
+                      {t("cart-provider.proceed-to-checkout")}
+                    </p>
+                  </Link>
+                </Button>
+                <Button variant="outline" className="w-full rounded-md" onClick={() => setShowNotification(false)}>
                   {t("cart-provider.continue-shopping")}
-                </button>
+                </Button>
               </div>
             </SheetHeader>
           </SheetContent>
@@ -199,22 +195,17 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
                   AZN
                 </p>
               </div>
-              <Link
-                to="/cart"
-                onClick={() => setShowNotification(false)}
-                className="w-full flex bg-accent transition font-medium rounded-lg text-sm px-5 py-2.5 text-white"
-              >
-                <p className="mx-auto">
-                  {t("cart-provider.proceed-to-checkout")}
-                </p>
-              </Link>
+              <Button className="w-full rounded-md"  asChild>
+                <Link to="/cart" onClick={() => setShowNotification(false)}>
+                  <p>
+                    {t("cart-provider.proceed-to-checkout")}
+                  </p>
+                </Link>
+              </Button>
               <DrawerClose asChild>
-                <button
-                  onClick={() => setShowNotification(false)}
-                  className="w-full rounded-lg border-2 bg-white px-5 text-center text-sm font-medium text-black transition py-2.5"
-                >
+                <Button variant="outline" className="w-full rounded-md" onClick={() => setShowNotification(false)}>
                   {t("cart-provider.continue-shopping")}
-                </button>
+                </Button>
               </DrawerClose>
             </DrawerFooter>
           </DrawerContent>

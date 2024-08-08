@@ -1,8 +1,8 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "@/components/marketing/Home.tsx";
-import Products from "@/components/Products.tsx";
+import Products from "@/components/product/Products.tsx";
 import NotFound from "@/components/NotFound.tsx";
-import ProductPage from "@/components/ProductPage.tsx";
+import ProductPage from "@/components/product/ProductPage.tsx";
 import Signup from "@/components/auth/Signup.tsx";
 import Login from "@/components/auth/Login.tsx";
 import Layout from "./layouts/Layout.tsx";

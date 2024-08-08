@@ -62,7 +62,7 @@ const Signup = () => {
   const onSubmit = async (data: FormData) => {
     setLoading(true);
     try {
-      const response = await apiClient.post("/user/initialize-user", {
+      const response = await apiClient.post("/user/initialize", {
         email: formData.email,
         code: formData.code,
         firstName: data.firstName,
@@ -73,7 +73,7 @@ const Signup = () => {
       if (response.status === 200) {
         setAccountSetupCompleted(true);
         const loginResponse = await apiClient.post(
-          "auth/login/store",
+          "auth/store/login",
           {
             email: formData.email,
             password: data.password,

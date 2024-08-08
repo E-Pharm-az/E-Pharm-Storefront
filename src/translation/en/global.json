@@ -136,7 +136,7 @@
   },
   "products": {
     "no-products-found": "No products found",
-    "add-to-cart-btn": "Add to cart"
+    "select": "Select this treatment"
   },
   "product-page": {
     "product-not-found": "Product not found",

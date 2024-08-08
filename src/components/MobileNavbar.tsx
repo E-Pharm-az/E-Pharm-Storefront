@@ -24,13 +24,13 @@ export const MobileNavbar = () => {
       <div className="fixed right-0 bottom-0 left-0 z-40 w-full mobile-bottom">
         <div className="flex h-20 w-full items-center justify-between gap-4 rounded-t-xl border border-gray-300 bg-white px-8">
           <NavLink to={"/"} className="flex h-full items-center justify-center">
-            <Home className="text-accent" size={28} />
+            <Home className="text-brand" size={28} />
           </NavLink>
           <NavLink
             to={"/?setSearch=true"}
             className="flex h-full items-center justify-center"
           >
-            <Search className="text-accent" size={28} />
+            <Search className="text-brand" size={28} />
           </NavLink>
           <NavLink
             to={"/cart"}
@@ -41,14 +41,14 @@ export const MobileNavbar = () => {
                 {cart.length}
               </p>
             )}
-            <ShoppingCart className="text-accent" size={28} />
+            <ShoppingCart className="text-brand" size={28} />
           </NavLink>
 
           <NavLink
             to={auth ? "/profile" : "/email-lookup"}
             className="flex h-full items-center justify-center"
           >
-            <UserRound className="text-accent" size={28} />
+            <UserRound className="text-brand" size={28} />
           </NavLink>
         </div>
       </div>

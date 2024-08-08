@@ -121,9 +121,13 @@ const SearchBar = () => {
   return (
     <form
       onSubmit={handleSubmission}
-      className={`relative w-full p-1 items-center border-2 border-neutral-300 shadow-lg ${showSearchModal ? "rounded-md border-b-0 rounded-b-none" : "rounded-full"}`}
+      className={`relative w-full p-1 items-center border-2 border-neutral-300 shadow-lg ${
+        showSearchModal
+          ? "rounded-md border-b-0 rounded-b-none"
+          : "rounded-full"
+      }`}
     >
-      <div className="flex items-center gap-2 w-full max-w-full h-14">
+      <div className="flex items-center gap-2 w-full max-w-full sm:h-14 h-10">
         <Button size="icon" variant="ghost" className="h-full hover:bg-white">
           <Search className="w-6 h-6 text-muted-foreground" />
         </Button>
@@ -137,7 +141,11 @@ const SearchBar = () => {
           />
         </div>
         {!showSearchModal && (
-          <Button type="submit" variant="brand" className="h-full px-6">
+          <Button
+            type="submit"
+            variant="brand"
+            className="h-10 px-4 sm:h-full sm:px-6"
+          >
             {t("home.cta")}
           </Button>
         )}
@@ -159,15 +167,17 @@ const Home = () => {
   const [t] = useTranslation("global");
 
   return (
-    <div className="max-w-[1200px] mx-auto">
+    <div className="px-4 sm:px-8 md:max-w-[1200px] mx-auto">
       <div className="mx-auto my-8 sm:my-16 md:my-64 max-w-4xl">
         <div className="grid gap-6">
-          <div className="grid gap-2 text-center">
-            <h1 className="text-5xl font-bold">{t("home.title")}</h1>
-            <p className="text-base sm:text-lg">{t("home.description")}</p>
+          <div className="grid gap-3 text-center">
+            <h1 className="text-4xl sm:text-5xl font-bold">
+              {t("home.title")}
+            </h1>
+            <p className="text-sm sm:text-base">{t("home.description")}</p>
           </div>
           <SearchBar />
-          <div className="flex justify-between">
+          <div className="grid grid-cols-3 sm:grid-cols-6 gap-4">
             <CategoryButton
               icon={Thermometer}
               label={t("home.categories.coldFlu")}

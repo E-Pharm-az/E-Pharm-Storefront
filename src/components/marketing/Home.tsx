@@ -31,11 +31,12 @@ const CategoryButton = ({ icon: Icon, label }: CategoryButtonProps) => (
   </Button>
 );
 
-const RelativeSearchResults: FC<{
+export const RelativeSearchResults: FC<{
   products: Product[];
   searchQuery: string | null;
   onProductSelect: (product: Product) => void;
-}> = ({ products, searchQuery, onProductSelect }) => {
+  className?: string;
+}> = ({ products, searchQuery, onProductSelect, className }) => {
   const highlightedProductNames = useMemo(() => {
     if (!searchQuery) return products.map((p) => p.name);
 
@@ -46,7 +47,7 @@ const RelativeSearchResults: FC<{
   }, [products, searchQuery]);
 
   return (
-    <div className="bg-white w-full rounded-md rounded-t-none border-t-0 max-h-[300px] overflow-auto border-2 border-neutral-300">
+    <div className={`bg-white w-full max-h-[300px] overflow-auto ${className}`}>
       <Separator />
       {products.length > 0 ? (
         highlightedProductNames.map((name, index) => (
@@ -151,7 +152,7 @@ const SearchBar = () => {
         )}
       </div>
       {showSearchModal && (
-        <div className="absolute m-0 top-full -left-0.5 -right-0.5 z-10">
+        <div className="absolute m-0 top-full -left-0.5 -right-0.5 z-10 rounded-md rounded-t-none border-t-0 border-neutral-300 border-2">
           <RelativeSearchResults
             products={products}
             searchQuery={searchQuery}

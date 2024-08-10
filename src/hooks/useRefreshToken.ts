@@ -1,27 +1,35 @@
-import {useContext} from "react";
-import AuthContext, {TokenPayload, TokenResponse} from "../context/AuthProvider.tsx";
-import apiClient from "../services/api-client.ts";
-import {jwtDecode} from "jwt-decode";
+import { useContext } from "react";
+import AuthContext, {
+  TokenPayload,
+  TokenResponse,
+} from "../context/AuthProvider.tsx";
+import {axiosPrivate} from "../services/api-client.ts";
+import { jwtDecode } from "jwt-decode";
 
 const useRefreshToken = () => {
-    const {setAuth} = useContext(AuthContext);
+  const { setAuth } = useContext(AuthContext);
 
-    const refresh = async () => {
-        const response = await apiClient.get<TokenResponse>("/auth/refresh-token", {withCredentials: true});
-        const decodedToken = jwtDecode<TokenPayload>(response.data.token);
+  const refresh = async () => {
+    const response = await axiosPrivate.get<TokenResponse>("/auth/customer/refresh-token");
+    const decodedToken = jwtDecode<TokenPayload>(response.data.token);
 
-        setAuth(() => {
-            return {
-                tokenResponse: response.data,
-                id: decodedToken.jti,
-                email: decodedToken.email,
-                firstname: decodedToken.sub
-            };
-        });
-
-        return response.data.token;
+    if (response.status === 400) {
+      localStorage.removeItem("persist");
+      return;
     }
-    return refresh;
+
+    setAuth(() => {
+      return {
+        tokenResponse: response.data,
+        id: decodedToken.jti,
+        email: decodedToken.email,
+        firstname: decodedToken.sub,
+      };
+    });
+
+    return response.data.token;
+  };
+  return refresh;
 };
 
 export default useRefreshToken;

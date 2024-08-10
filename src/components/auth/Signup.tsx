@@ -12,8 +12,7 @@ import Logo from "@/assets/logo.png";
 import apiClient from "@/services/api-client.ts";
 import axios from "axios";
 import LoaderContext from "@/context/LoaderProvider.tsx";
-import { jwtDecode } from "jwt-decode";
-import AuthContext, { TokenPayload } from "@/context/AuthProvider.tsx";
+import AuthContext from "@/context/AuthProvider.tsx";
 import SlidePage from "@/components/SlidePage.tsx";
 
 interface FormData {
@@ -30,7 +29,7 @@ const Signup = () => {
   const { loading, setLoading } = useContext(LoaderContext);
   const { setError } = useContext(ErrorContext);
   const { formData } = useContext(FormContext);
-  const { setAuth } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const [accountSetupCompleted, setAccountSetupCompleted] = useState(false);
 
@@ -72,27 +71,7 @@ const Signup = () => {
       });
       if (response.status === 200) {
         setAccountSetupCompleted(true);
-        const loginResponse = await apiClient.post(
-          "auth/store/login",
-          {
-            email: formData.email,
-            password: data.password,
-          },
-          {
-            withCredentials: true,
-            headers: { "Content-Type": "application/json" },
-          },
-        );
-
-        const decodedToken = jwtDecode<TokenPayload>(loginResponse.data.token);
-
-        setAuth({
-          tokenResponse: loginResponse.data,
-          id: decodedToken.jti,
-          email: decodedToken.email,
-          firstname: decodedToken.sub,
-        });
-
+        await login(formData.email, data.password);
         localStorage.setItem("persist", "true");
       }
     } catch (error) {

@@ -14,7 +14,7 @@ const PersistLogin = () => {
 
     const loadPersistedData = async () => {
       const isPersisted = localStorage.getItem("persist");
-      if (isPersisted !== null) {
+      if (isPersisted) {
         try {
           if (!auth?.tokenResponse.token && isMounted) {
             await refreshToken();

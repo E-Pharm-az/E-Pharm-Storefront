@@ -9,7 +9,7 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp.tsx";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
-import apiClient from "@/services/api-client.ts";
+import apiClient, {axiosPrivate} from "@/services/api-client.ts";
 import { AxiosError } from "axios";
 import LoaderContext from "@/context/LoaderProvider.tsx";
 import SlidePage from "@/components/SlidePage.tsx";
@@ -56,31 +56,30 @@ const VerifyEmail = () => {
   useEffect(() => {
     if (code.length === CODE_LENGTH) {
       setLoading(true);
-      const sentOPT = async () => {
+      (async () => {
         try {
-          await apiClient.post("auth/confirm-email", {
+          await axiosPrivate.post("auth/customer/confirm-email", {
             email: formData.email,
             code: code,
           });
           updateFormData({ code: parseInt(code), isAccountConfirmed: true });
           navigate("/signup");
-        } catch (error: unknown) {
+        } catch (error) {
           if (error instanceof AxiosError) {
+            console.log(error.response?.data);
             setCode("");
             setError(t("errors.unexpectedError"));
           }
         } finally {
           setLoading(false);
         }
-      };
-
-      sentOPT();
+      })();
     }
   }, [code]);
 
   const resendOTP = async () => {
     try {
-      await apiClient.post("auth/resend-confirmation-email", {
+      await apiClient.post("user/resend-confirmation-email", {
         email: formData.email,
       });
       disabledButton();

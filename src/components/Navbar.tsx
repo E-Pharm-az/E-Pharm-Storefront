@@ -105,7 +105,7 @@ export const Navbar = () => {
             >
               <UserRound className="mr-2 h-5 w-5" />
               <p>
-                {t("nav.hi")} {auth.firstname}
+                {t("nav.account")}
               </p>
             </NavLink>
           </Button>

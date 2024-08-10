@@ -1,12 +1,7 @@
 import { useEffect, useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import apiClient from "../../services/api-client.ts";
-import AuthContext, {
-  TokenPayload,
-  TokenResponse,
-} from "../../context/AuthProvider.tsx";
-import { jwtDecode } from "jwt-decode";
+import AuthContext from "../../context/AuthProvider.tsx";
 import axios from "axios";
 import { Button } from "@/components/ui/button.tsx";
 import FormContext from "@/context/AuthFormProvider.tsx";
@@ -22,7 +17,7 @@ interface PasswordFormData {
 
 const Login = () => {
   const [t] = useTranslation("global");
-  const { setAuth } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -51,24 +46,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const response = await apiClient.post<TokenResponse>(
-        "/auth/store/login",
-        { email: formData.email, password: data.password },
-        {
-          withCredentials: true,
-          headers: { "Content-Type": "application/json" },
-        },
-      );
-
-      const decodedToken = jwtDecode<TokenPayload>(response.data.token);
-
-      setAuth({
-        tokenResponse: response.data,
-        id: decodedToken.jti,
-        email: decodedToken.email,
-        firstname: decodedToken.sub,
-      });
-
+      await login(formData.email, data.password);
       localStorage.setItem("persist", "true");
 
       navigate(from, { replace: true });

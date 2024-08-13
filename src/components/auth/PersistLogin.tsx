@@ -6,36 +6,35 @@ import LoaderContext from "@/context/LoaderProvider.tsx";
 
 const PersistLogin = () => {
   const refreshToken = useRefreshToken();
-  const { auth } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const { setLoading } = useContext(LoaderContext);
 
   useEffect(() => {
     let isMounted = true;
 
-    const loadPersistedData = async () => {
+    (async () => {
       const isPersisted = localStorage.getItem("persist");
       if (isPersisted) {
         try {
-          if (!auth?.tokenResponse.token && isMounted) {
+          if (!user && isMounted) {
             await refreshToken();
           }
+
+          localStorage.setItem("persist", "true");
         } catch (error) {
-            console.error("Error refreshing token", error);
+          localStorage.removeItem("persist");
         } finally {
-            localStorage.setItem("persist", "true");
           setLoading(false);
         }
       } else {
           setLoading(false);
       }
-    };
-
-    loadPersistedData();
+    })();
 
     return () => {
       isMounted = false;
     };
-  }, [auth?.tokenResponse.token, refreshToken]);
+  }, [user, refreshToken]);
 
   return <Outlet />;
 };

@@ -58,7 +58,7 @@ const VerifyEmail = () => {
       setLoading(true);
       (async () => {
         try {
-          await axiosPrivate.post("auth/customer/confirm-email", {
+          await axiosPrivate.post("/user/confirm-email", {
             email: formData.email,
             code: code,
           });

@@ -5,13 +5,13 @@ import {axiosPrivate} from "../services/api-client.ts";
 
 const useAxiosPrivate = () => {
     const refreshToken = useRefreshToken();
-    const {auth} = useContext(AuthContext);
+    const {user} = useContext(AuthContext);
 
     useEffect(() => {
         const requestInterceptor = axiosPrivate.interceptors.request.use(
             async (config) => {
                 if (!config.headers["Authorization"]) {
-                    config.headers.Authorization = `Bearer ${auth?.tokenResponse.token}`;
+                    config.headers.Authorization = `Bearer ${user?.tokenResponse.token}`;
                 }
                 return config;
             }, (error) => Promise.reject(error)
@@ -37,7 +37,7 @@ const useAxiosPrivate = () => {
             axiosPrivate.interceptors.response.eject(responseInterceptor);
             axiosPrivate.interceptors.request.eject(requestInterceptor);
         }
-    }, [auth, refreshToken]);
+    }, [user, refreshToken]);
 
     return axiosPrivate;
 };

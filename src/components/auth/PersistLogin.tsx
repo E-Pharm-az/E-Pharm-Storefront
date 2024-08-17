@@ -1,40 +1,30 @@
-import {useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import useRefreshToken from "../../hooks/useRefreshToken.ts";
 import AuthContext from "../../context/AuthProvider.tsx";
-import {Outlet} from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import LoaderContext from "@/context/LoaderProvider.tsx";
 
 const PersistLogin = () => {
-  const refreshToken = useRefreshToken();
-  const { user } = useContext(AuthContext);
+  const { isAuthenticated, setIsRefreshing } = useContext(AuthContext);
   const { setLoading } = useContext(LoaderContext);
+  const refreshToken = useRefreshToken();
 
   useEffect(() => {
     let isMounted = true;
 
-    (async () => {
-      const isPersisted = localStorage.getItem("persist");
-      if (isPersisted) {
-        try {
-          if (!user && isMounted) {
-            await refreshToken();
-          }
+    const verifyRefreshToken = async () => {
+      setLoading(true);
+      await refreshToken();
+      isMounted && setIsRefreshing(false);
+      setLoading(false);
+    };
 
-          localStorage.setItem("persist", "true");
-        } catch (error) {
-          localStorage.removeItem("persist");
-        } finally {
-          setLoading(false);
-        }
-      } else {
-          setLoading(false);
-      }
-    })();
+    !isAuthenticated() ? verifyRefreshToken() : setIsRefreshing(false);
 
     return () => {
       isMounted = false;
     };
-  }, [user, refreshToken]);
+  }, []);
 
   return <Outlet />;
 };

@@ -1,11 +1,15 @@
-import {createContext, Dispatch, ReactNode, SetStateAction, useState} from "react";
-import {jwtDecode} from "jwt-decode";
-import {axiosPrivate} from "@/services/api-client.ts";
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useState,
+} from "react";
+import { jwtDecode } from "jwt-decode";
+import apiClient, { axiosPrivate } from "@/services/api-client.ts";
 
 export interface TokenResponse {
   token: string;
-  refreshToken: string;
-  validTo: string;
 }
 
 export interface TokenPayload {
@@ -14,59 +18,67 @@ export interface TokenPayload {
   sub: string;
 }
 
-export interface AuthUser {
-  tokenResponse: TokenResponse,
-  id: string,
-  email: string,
-  firstname: string,
+export interface User {
+  id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  address: string;
 }
 
 interface AuthContextType {
-  auth: AuthUser | null;
-  setAuth: Dispatch<SetStateAction<AuthUser | null>>;
+  user: User | null;
+  setUser: Dispatch<SetStateAction<User | null>>;
   isAuthenticated: () => boolean;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
+  isRefreshing: boolean;
+  setIsRefreshing: Dispatch<SetStateAction<boolean>>;
 }
 
 const AuthContext = createContext<AuthContextType>({
-  auth: null,
-  setAuth: () => {},
+  user: null,
+  setUser: () => {},
   isAuthenticated: () => false,
   login: () => Promise.resolve(),
-  logout: () => {}
+  logout: () => {},
+  isRefreshing: true,
+  setIsRefreshing: () => {},
 });
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [auth, setAuth] = useState<AuthUser | null>(null);
+  const [user, setUser] = useState<User | null>(null);
+  const [isRefreshing, setIsRefreshing] = useState(true);
 
-  const isAuthenticated = (): boolean => {
-    return !!auth;
-  };
-  
+  const isAuthenticated = (): boolean => !!user;
+
   const login = async (email: string, password: string) => {
-    const response = await axiosPrivate.post<TokenResponse>(
-        "/auth/customer/login",
-        {email: email, password: password},
+    const tokenResponse = await axiosPrivate.post<TokenResponse>(
+      "/auth/customer/login",
+      { email: email, password: password },
     );
 
-    const decodedToken = jwtDecode<TokenPayload>(response.data.token);
+    const decodedToken = jwtDecode<TokenPayload>(tokenResponse.data.token);
+    const userResponse = await axiosPrivate.get<User>(`user/${decodedToken.jti}`);
+    setUser(userResponse.data);
+  };
 
-    setAuth({
-      tokenResponse: response.data,
-      id: decodedToken.jti,
-      email: decodedToken.email,
-      firstname: decodedToken.sub,
-    });
-  }
-
-  const logout = () => {
-    setAuth(null);
+  const logout = async () => {
+    setUser(null);
+    await apiClient.get("/auth/store/logout", { withCredentials: true });
   };
 
   return (
     <AuthContext.Provider
-      value={{ auth, setAuth, isAuthenticated, login, logout }}
+      value={{
+        user,
+        setUser,
+        isAuthenticated,
+        login,
+        logout,
+        isRefreshing,
+        setIsRefreshing,
+      }}
     >
       {children}
     </AuthContext.Provider>

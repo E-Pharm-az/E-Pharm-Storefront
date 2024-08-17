@@ -10,7 +10,7 @@ import {Button} from "@/components/ui/button.tsx";
 
 export const MobileNavbar = () => {
   const { cart } = useContext(CartContext);
-  const { auth } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [showSearch, setShowSearch] = useState(false);
   
   const handleSearch = () => {
@@ -69,7 +69,7 @@ export const MobileNavbar = () => {
             <ShoppingCart className="text-brand" size={28} />
           </NavLink>
           <NavLink
-            to={auth ? "/profile" : "/email-lookup"}
+            to={user ? "/profile" : "/email-lookup"}
             className="flex h-full items-center justify-center"
           >
             <UserRound className="text-brand" size={28} />

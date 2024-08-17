@@ -3,13 +3,14 @@ import { Button } from "@/components/ui/button.tsx";
 import { useContext, useEffect } from "react";
 import FormContext from "@/context/AuthFormProvider.tsx";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import apiClient from "@/services/api-client.ts";
 import ErrorContext from "@/context/ErrorProvider.tsx";
 import axios from "axios";
 import { Input } from "@/components/ui/input.tsx";
 import LoaderContext from "@/context/LoaderProvider.tsx";
 import SlidePage from "@/components/SlidePage.tsx";
+import AuthContext from "@/context/AuthProvider.tsx";
 
 interface EmailFormData {
   email: string;
@@ -17,10 +18,14 @@ interface EmailFormData {
 
 const EmailLookup = () => {
   const [t] = useTranslation("global");
-  const navigate = useNavigate();
   const { setError } = useContext(ErrorContext);
   const { loading, setLoading } = useContext(LoaderContext);
   const { formData, updateFormData } = useContext(FormContext);
+  const { isAuthenticated } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
   const {
     register,
     handleSubmit,
@@ -31,6 +36,12 @@ const EmailLookup = () => {
       email: formData.email,
     },
   });
+
+  useEffect(() => {
+    if (isAuthenticated()) {
+      navigate(from);
+    }
+  }, [isAuthenticated]);
 
   useEffect(() => {
     setFocus("email");

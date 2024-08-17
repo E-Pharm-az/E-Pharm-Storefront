@@ -5,12 +5,12 @@ import NotFound from "@/components/NotFound.tsx";
 import ProductPage from "@/components/product/ProductPage.tsx";
 import Signup from "@/components/auth/Signup.tsx";
 import Login from "@/components/auth/Login.tsx";
-import Layout from "./layouts/Layout.tsx";
+import Layout from "./components/Layout.tsx";
 import Profile from "@/components/Profile.tsx";
 import RequireAuth from "@/components/auth/RequireAuth.tsx";
 import PersistLogin from "@/components/auth/PersistLogin.tsx";
 import Cart from "@/components/Cart.tsx";
-import AuthLayout from "./layouts/AuthLayout.tsx";
+import AuthLayout from "./components/auth/AuthLayout.tsx";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { Analytics } from "@vercel/analytics/react";
 import ScrollToTop from "./utils/scrollToTop.ts";
@@ -20,6 +20,7 @@ import VerifyEmail from "@/components/auth/VerifyEmail.tsx";
 import { AnimatePresence } from "framer-motion";
 import { RemoveTrailingSlash } from "@/components/RemoveTrailingSlash.tsx";
 import ComingSoon from "@/components/marketing/CommingSoon.tsx";
+import Checkout from "@/components/checkout/Checkout.tsx";
 
 function App() {
   const location = useLocation();
@@ -44,6 +45,10 @@ function App() {
               </Route>
 
               <Route path="*" element={<NotFound />} />
+            </Route>
+
+            <Route element={<RequireAuth />}>
+              <Route path="/checkout" element={<Checkout />} />
             </Route>
 
             <Route element={<AuthLayout />}>

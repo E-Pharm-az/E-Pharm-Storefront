@@ -18,8 +18,8 @@ interface Order {
 }
 
 const Profile = () => {
-  const { auth } = useContext(AuthContext);
-  const userId = auth?.id;
+  const { user } = useContext(AuthContext);
+  const userId = user?.id;
   const [orders, setOrders] = useState<Order[]>([]);
 
   useEffect(() => {

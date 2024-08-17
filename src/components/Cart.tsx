@@ -108,8 +108,12 @@ const Cart = () => {
           </div>
           <Separator />
         </div>
-        <Button className="w-full h-14 text-md" disabled={cart.length === 0}>
-          {t("cart.checkout")}
+        <Button
+          className="w-full h-14 text-md"
+          disabled={cart.length === 0}
+          asChild
+        >
+          <Link to="/checkout">{t("cart.checkout")}</Link>
         </Button>
       </div>
     </div>

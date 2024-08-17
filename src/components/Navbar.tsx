@@ -41,7 +41,7 @@ const SearchBar = () => {
 };
 
 export const Navbar = () => {
-  const { auth } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const { cart } = useContext(CartContext);
   const [t] = useTranslation("global");
   const location = useLocation();
@@ -97,7 +97,7 @@ export const Navbar = () => {
             <ShoppingCart className="h-5 w-5" />
           </NavLink>
         </Button>
-        {auth ? (
+        {user ? (
           <Button asChild>
             <NavLink
               to={"/profile"}

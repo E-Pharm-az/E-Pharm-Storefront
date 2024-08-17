@@ -1,13 +1,22 @@
 {
   "common": {
     "required": "Required",
-    "continue": "Continue"
+    "continue": "Continue",
+    "edit": "Edit"
   },
   "errors": {
     "invalidEmailOrPassword": "Invalid email or password",
     "noServerResponse": "No server response",
     "loginFailed": "Login failed",
     "unexpectedError": "An unexpected error occurred"
+  },
+  "address": {
+    "firstName": "First name",
+    "lastName": "Last name",
+    "address": "Address",
+    "city": "City",
+    "district": "District",
+    "zip": "Zip"
   },
   "home": {
     "title": "Your Health, Delivered.",
@@ -132,6 +141,20 @@
     "estimated-tax": "Estimated Tax",
     "total": "Total",
     "checkout": "Checkout"
+  },
+  "checkout": {
+    "checkout": "Checkout",
+    "delivery-details": "Delivery Details",
+    "payment": "Payment",
+    "order-review": "Order Review",
+    "in-your-bag": "In Your Bag",
+    "save-and-continue": "Save & Continue",
+    "name": "Name*",
+    "address": "Address*",
+    "phone-number": "Phone Number*",
+    "firstname": "First name*",
+    "lastname": "Last name*",
+    "email": "Email*"
   },
   "cart-provider": {
     "item-added-to-cart": "Item added to cart",

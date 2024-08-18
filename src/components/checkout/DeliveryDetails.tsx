@@ -5,16 +5,13 @@ import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { Dispatch, SetStateAction, useContext, useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox.tsx";
+import { Address } from "@/types/address.ts";
 
 interface Props {
   deliveryStep: number;
   step: number;
   setStep: Dispatch<SetStateAction<number>>;
-  setDeliveryAddress: Dispatch<SetStateAction<string>>;
-}
-
-interface FormData {
-  address: string;
+  setDeliveryAddress: Dispatch<SetStateAction<Address>>;
 }
 
 const DeliveryDetails = ({
@@ -25,16 +22,28 @@ const DeliveryDetails = ({
 }: Props) => {
   const [t] = useTranslation("global");
   const { user } = useContext(AuthContext);
-  const [useDefaultAddress, setUseDefaultAddress] = useState(true);
+  const [useDefaultAddress, setUseDefaultAddress] = useState(
+    user?.address !== null,
+  );
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>();
+  } = useForm<Address>();
 
-  const onSubmit = async (data: FormData) => {
-    setDeliveryAddress(data.address);
+  const onSubmit = async (data: Address) => {
+    if (useDefaultAddress) {
+      setDeliveryAddress({
+        address: user!.address!,
+        city: user!.city!,
+        district: user!.district!,
+        zip: user!.zip!,
+      });
+    }
+    else {
+      setDeliveryAddress(data);
+    }
     setStep(2);
   };
 
@@ -66,25 +75,72 @@ const DeliveryDetails = ({
           </div>
           {useDefaultAddress ? (
             <div className="w-full mb-3 px-2 py-4 text-sm text-gray-900 bg-transparent rounded-lg border border-neutral-300 text-muted-foreground">
-              <p>{user?.address}</p>
+              <p>{`${user?.address}, ${user?.city}, ${user?.district}, ${user?.zip}`}</p>
             </div>
           ) : (
-            <div className="w-full h-min">
-              <Input
-                type="text"
-                label={t("checkout.address")}
-                autoCorrect="off"
-                autoComplete="address-line1"
-                className={`${errors.address && "border-red-500 focus:border-red-500"}`}
-                {...register("address", { required: t("common.required") })}
-              />
-              <p className="w-full h-3 text-xs text-red-500">
-                {errors.address?.message}
-              </p>
+            <div className="w-full grid gap-3">
+              <div className="w-full h-min">
+                <Input
+                  type="text"
+                  label={t("address.address")}
+                  autoCorrect="off"
+                  autoComplete="address-line1"
+                  className={`${errors.address && "border-red-500 focus:border-red-500"}`}
+                  {...register("address", {
+                    required: t("common.required"),
+                  })}
+                />
+                <p className="w-full h-3 text-xs text-red-500">
+                  {errors.address?.message}
+                </p>
+              </div>
+              <div className="flex gap-2 w-full">
+                <div className="w-full h-min">
+                  <Input
+                    type="text"
+                    label={t("address.city")}
+                    autoCorrect="off"
+                    className={`${errors.city && "border-red-500 focus:border-red-500"}`}
+                    {...register("city", {
+                      required: t("common.required"),
+                    })}
+                  />
+                  <p className="w-full h-3 text-xs text-red-500">
+                    {errors.city?.message}
+                  </p>
+                </div>
+                <div className="w-full h-min">
+                  <Input
+                    type="text"
+                    label={t("address.district")}
+                    autoCorrect="off"
+                    className={`${errors.district && "border-red-500 focus:border-red-500"}`}
+                    {...register("district", {
+                      required: t("common.required"),
+                    })}
+                  />
+                  <p className="w-full h-3 text-xs text-red-500">
+                    {errors.district?.message}
+                  </p>
+                </div>
+                <div className="w-full h-min">
+                  <Input
+                    type="text"
+                    label={t("address.zip")}
+                    autoCorrect="off"
+                    className={`${errors.zip && "border-red-500 focus:border-red-500"}`}
+                    {...register("zip", {
+                      required: t("common.required"),
+                    })}
+                  />
+                  <p className="w-full h-3 text-xs text-red-500">
+                    {errors.zip?.message}
+                  </p>
+                </div>
+              </div>
             </div>
           )}
         </div>
-
         <Button type="submit" className="w-min ml-auto p-6 mt-6">
           {t("checkout.save-and-continue")}
         </Button>

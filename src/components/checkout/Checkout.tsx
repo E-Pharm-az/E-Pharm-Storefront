@@ -9,12 +9,13 @@ import { useTranslation } from "react-i18next";
 import { Separator } from "@/components/ui/separator.tsx";
 import DeliveryDetails from "@/components/checkout/DeliveryDetails.tsx";
 import Payment from "@/components/checkout/Payment.tsx";
+import {Address} from "@/types/address.ts";
 
 const Checkout = () => {
   const [t] = useTranslation("global");
   const { cart } = useContext(CartContext);
   const [step, setStep] = useState(2);
-  const [deliveryAddress, setDeliveryAddress] = useState<string>("");
+  const [address, setAddress] = useState<Address>();
   const totalPrice = cart.reduce(
     (total, item) => total + item.price * item.quantity,
     0,
@@ -54,14 +55,14 @@ const Checkout = () => {
             deliveryStep={1}
             step={step}
             setStep={setStep}
-            setDeliveryAddress={setDeliveryAddress}
+            setDeliveryAddress={setAddress}
           />
           <Separator />
           <Payment
             paymentStep={2}
             step={step}
             setStep={setStep}
-            deliveryAddress={deliveryAddress}
+            address={address}
           />
           <Separator />
 

@@ -1,9 +1,7 @@
 import {
-  PayPalButtons,
   PayPalHostedField,
   PayPalHostedFieldsProvider,
   PayPalScriptProvider,
-  usePayPalCardFields,
   usePayPalHostedFields,
 } from "@paypal/react-paypal-js";
 import {
@@ -14,8 +12,6 @@ import {
   useRef,
   useState,
 } from "react";
-import { axiosPrivate } from "@/services/api-client.ts";
-import { OnApproveData } from "@paypal/paypal-js/types/components/buttons";
 import CartContext from "@/context/CartProvider.tsx";
 import AuthContext from "@/context/AuthProvider.tsx";
 import { useTranslation } from "react-i18next";
@@ -25,6 +21,9 @@ import { Checkbox } from "@/components/ui/checkbox.tsx";
 import { Input } from "@/components/ui/input.tsx";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button.tsx";
+import {Address} from "@/types/address.ts";
+import { HostedFieldsSubmitResponse } from "@paypal/paypal-js/types/components/hosted-fields";
+import useAxiosPrivate from "@/hooks/useAxiosPrivate.ts";
 
 interface OrderResponse {
   id: string;
@@ -34,30 +33,22 @@ interface Props {
   paymentStep: number;
   step: number;
   setStep: Dispatch<SetStateAction<number>>;
-  deliveryAddress: string;
+  address: Address;
 }
 
-interface BillingAddressFormData {
-  firstName: string;
-  lastName: string;
-  address: string;
-  city: string;
-  district: string;
-  zip: string;
-}
-
-const Payment = ({ paymentStep, step, setStep, deliveryAddress }: Props) => {
+const Payment = ({ paymentStep, step, setStep, address }: Props) => {
   const [t] = useTranslation("global");
   const { user } = useContext(AuthContext);
   const { cart } = useContext(CartContext);
+  const { cardFields } = usePayPalHostedFields();
   const { setError } = useContext(ErrorContext);
   const [clientToken, setClientToken] = useState("");
-  const [useDefaultBillingAddress, setUseDefaultBillingAddress] =
-    useState(true);
+  const [useDefaultBillingAddress, setUseDefaultBillingAddress] = useState(true);
+  const [billingAddress, setBillingAddress] = useState<Address>(address);
+  const axiosPrivate = useAxiosPrivate();
 
   const initialOptions = {
-    clientId:
-      "AV8OvxBHzdo9HsH7QpN4Ytcw5gKcN2ZegyUqnzTKC357ujOosTp3J1975mbeUtJzXRZmYv8QJe_K8FCr",
+    clientId: "AV8OvxBHzdo9HsH7QpN4Ytcw5gKcN2ZegyUqnzTKC357ujOosTp3J1975mbeUtJzXRZmYv8QJe_K8FCr",
     dataClientToken: clientToken,
     components: "hosted-fields",
   };
@@ -66,7 +57,7 @@ const Payment = ({ paymentStep, step, setStep, deliveryAddress }: Props) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<BillingAddressFormData>();
+  } = useForm<Address>();
 
   useEffect(() => {
     (async () => {
@@ -79,7 +70,7 @@ const Payment = ({ paymentStep, step, setStep, deliveryAddress }: Props) => {
     try {
       const response = await axiosPrivate.post<OrderResponse>("/orders", {
         userId: user!.id,
-        shippingAddress: deliveryAddress,
+        shippingAddress: address,
         currency: "USD",
         products: cart.map((item) => ({
           productId: item.id,
@@ -93,14 +84,26 @@ const Payment = ({ paymentStep, step, setStep, deliveryAddress }: Props) => {
     }
   };
 
-  const onApprove = async (data: OnApproveData) => {
-    const response = await axiosPrivate.post(`/orders/${data.orderID}/capture`);
+  const onApprove = async (data: HostedFieldsSubmitResponse) => {
+    const response = await axiosPrivate.post(`/orders/${data.orderId}/capture`);
     return response.data;
   };
 
   function onError(error: Record<string, unknown>) {
     console.log(error);
   }
+
+  const onSubmit = async (data: Address) => {
+    setBillingAddress(data);
+    if (typeof cardFields?.submit !== "function") return;
+    cardFields
+      .submit({
+        cardholderName: `${user?.firstName} ${user?.lastName}`,
+        address
+      })
+      .then(async (data) => await onApprove(data))
+      .catch(() => setError("Transaction could not be processed."));
+  };
 
   return (
     <div className="w-full">
@@ -148,7 +151,7 @@ const Payment = ({ paymentStep, step, setStep, deliveryAddress }: Props) => {
                 </div>
               </PayPalHostedFieldsProvider>
             </PayPalScriptProvider>
-            <div className="grid gap-4 h-min">
+            <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 h-min">
               <div className="flex gap-2 w-full items-center">
                 <Checkbox
                   checked={useDefaultBillingAddress}
@@ -156,46 +159,16 @@ const Payment = ({ paymentStep, step, setStep, deliveryAddress }: Props) => {
                     setUseDefaultBillingAddress(!useDefaultBillingAddress)
                   }
                 />
-                <p className="font-semibold">Use default address?</p>
+                <p className="font-semibold">
+                  Billing address same as shipping?
+                </p>
               </div>
               {useDefaultBillingAddress ? (
                 <div className="w-full mb-3 px-2 py-4 text-sm text-gray-900 bg-transparent rounded-lg border border-neutral-300 text-muted-foreground">
-                  <p>{user?.address}</p>
+                  <p>{`${address.address}, ${address.city}, ${address.district}, ${address.zip}`}</p>
                 </div>
               ) : (
                 <div className="w-full grid gap-3">
-                  <div className="flex gap-2 w-full">
-                    <div className="w-full h-min">
-                      <Input
-                        type="text"
-                        label={t("address.firstName")}
-                        autoCorrect="off"
-                        autoComplete="given-name"
-                        className={`${errors.firstName && "border-red-500 focus:border-red-500"}`}
-                        {...register("firstName", {
-                          required: t("common.required"),
-                        })}
-                      />
-                      <p className="w-full h-3 text-xs text-red-500">
-                        {errors.firstName?.message}
-                      </p>
-                    </div>
-                    <div className="w-full h-min">
-                      <Input
-                        type="text"
-                        label={t("address.lastName")}
-                        autoCorrect="off"
-                        autoComplete="family-name"
-                        className={`${errors.lastName && "border-red-500 focus:border-red-500"}`}
-                        {...register("lastName", {
-                          required: t("common.required"),
-                        })}
-                      />
-                      <p className="w-full h-3 text-xs text-red-500">
-                        {errors.lastName?.message}
-                      </p>
-                    </div>
-                  </div>
                   <div className="w-full h-min">
                     <Input
                       type="text"
@@ -257,7 +230,7 @@ const Payment = ({ paymentStep, step, setStep, deliveryAddress }: Props) => {
                   </div>
                 </div>
               )}
-            </div>
+            </form>
             <Button type="submit" className="w-min ml-auto p-6">
               {t("checkout.save-and-continue")}
             </Button>

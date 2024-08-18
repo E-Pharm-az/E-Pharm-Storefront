@@ -23,7 +23,10 @@ export interface User {
   email: string;
   firstName: string;
   lastName: string;
-  address: string;
+  address?: string;
+  city?: string;
+  district?: string;
+  zip?: number;
 }
 
 interface AuthContextType {

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import {Separator} from "@/components/ui/separator.tsx";
 
 const Footer = () => {
   const [showAbout, setShowAbout] = useState(false);
@@ -10,8 +11,9 @@ const Footer = () => {
   const [t] = useTranslation("global");
 
   return (
-    <footer className="bg-white py-8 max-w-[1200px] mx-auto">
-      <div className="container mb-10 grid grid-cols-1 gap-8 px-4 md:mb-20 md:grid-cols-4 md:gap-4">
+    <footer className="bg-white mx-auto my-24 grid gap-10">
+      <Separator/>
+      <div className="grid grid-cols-1 gap-8 mb-6 md:grid-cols-4 md:gap-4">
         <div className="flex flex-col gap-4">
           <div
             className="flex items-center justify-between"
@@ -193,7 +195,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="container flex flex-col-reverse items-start justify-between gap-4 px-4 pb-20 sm:flex-row sm:items-center md:pb-0">
+      <div className="flex flex-col-reverse items-start justify-between gap-4 pb-20 sm:flex-row sm:items-center md:pb-0">
         <div className="text-sm font-medium text-gray-600">
           Copyright © E-Pharm 2024
         </div>

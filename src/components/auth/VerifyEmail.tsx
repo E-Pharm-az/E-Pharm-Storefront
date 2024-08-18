@@ -66,7 +66,6 @@ const VerifyEmail = () => {
           navigate("/signup");
         } catch (error) {
           if (error instanceof AxiosError) {
-            console.log(error.response?.data);
             setCode("");
             setError(t("errors.unexpectedError"));
           }

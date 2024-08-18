@@ -20,7 +20,7 @@ export const MobileNavbar = () => {
           <Search className="text-brand" size={28} />
         </button>
         {showSearch && (
-          <div className="fixed top-0 left-0 right-0 z-50 bg-white px-4 py-2 shadow-md border-b h-[200px]">
+          <div className="fixed top-0 right-0 left-0 bottom-0 w-screen z-50 bg-white px-4 py-2 shadow-md border-b">
             <div className="flex justify-between">
               <img
                 src={Logo}

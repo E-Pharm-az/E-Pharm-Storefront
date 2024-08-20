@@ -38,7 +38,7 @@ const Footer = () => {
             } md:block`}
           >
             <li>
-              <a href="/coming-soon" className="text-gray-600">
+              <a href="/about-us" className="text-gray-600">
                 {t("footer.About Us")}
               </a>
             </li>

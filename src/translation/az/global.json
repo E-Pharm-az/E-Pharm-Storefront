@@ -23,6 +23,32 @@
       "vitamins": "Vitaminlər"
     }
   },
+  "aboutUs": {
+    "title": "Haqqımızda",
+    "description": "E-Pharm telefon və ya internet bağlantısı olan istənilən cihaz vasitəsilə sizi apteklərlə əlaqələndirən onlayn platformdur. Geniş aptek və çatdırılma əməkdaş şəbəkəsi sayəsində E-Pharm istifadəçilərinə 24/7 tez və sərfəli xidmət təklif edir.",
+    "features": {
+      "access": {
+        "title": "Ani Əlaqə",
+        "description": "Telefonunuz və ya hər hansı bir cihaz vasitəsilə apteklərə dərhal daxil olun."
+      },
+      "availability": {
+        "title": "24/7 Xidmət",
+        "description": "Biz hər zaman sizin yanınızdayıq, günün istənilən vaxtı."
+      },
+      "delivery": {
+        "title": "Tez Çatdırılma",
+        "description": "Dərmanlarınızı tez bir zamanda qapınıza çatdırırıq."
+      }
+    },
+    "howItWorks": {
+      "title": "Sifariş etmə qaydası",
+      "step1": "Hesab yaradın: Vebsaytımızda (və ya tətbiqdə) qeydiyyatdan keçin.",
+      "step2": "Məhsulu axtarın: Axtarış panelindən istifadə edərək lazımi məhsulu tapın.",
+      "step3": "Aptek seçin: Lazımi məhsulu təklif edən ən yaxın apteki seçin.",
+      "step4": "Sifariş metodunu seçin: Məhsulu özünüz götürmək və ya qapınıza çatdırılmasını seçin.",
+      "step5": "Təsdiq edin və ödəniş edin: Sifariş məlumatlarınızı təsdiq edin və ödəniş edin."
+    }
+  },
   "comingSoon": {
     "title": "Tezliklə",
     "description": "Sizə möhtəşəm bir şey təqdim etmək üçün səylə çalışırıq. Yenilikləri izləyin!",

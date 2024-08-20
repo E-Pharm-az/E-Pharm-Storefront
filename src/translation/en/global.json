@@ -32,6 +32,32 @@
       "vitamins": "Vitamins & Supplements"
     }
   },
+  "aboutUs": {
+    "title": "About E-Pharm",
+    "description": "E-Pharm is an online platform for immediate access to pharmacies via your phone or any internet-connected device. With a diverse range of pharmacy and delivery partners, E-Pharm provides fast and affordable service 24/7.",
+    "features": {
+      "access": {
+        "title": "Instant Access",
+        "description": "Access pharmacies instantly from your phone or any device"
+      },
+      "availability": {
+        "title": "24/7 Service",
+        "description": "We're here for you around the clock, every day"
+      },
+      "delivery": {
+        "title": "Fast Delivery",
+        "description": "Get your medications delivered quickly to your doorstep"
+      }
+    },
+    "howItWorks": {
+      "title": "How to Make an Order",
+      "step1": "Create an Account: Sign up on our website (or app).",
+      "step2": "Search for Products: Use the search bar to find the item you need.",
+      "step3": "Select a Pharmacy: Choose the nearest pharmacy offering your item.",
+      "step4": "Choose Pickup or Delivery: Decide whether to pick up the item yourself or have it delivered to your doorstep.",
+      "step5": "Confirm and Pay: Confirm your order details and make payment."
+    }
+  },
   "comingSoon": {
     "title": "Coming Soon",
     "description": "We're working hard to bring you something amazing. Stay tuned!",

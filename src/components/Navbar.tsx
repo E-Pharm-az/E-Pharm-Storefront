@@ -10,35 +10,13 @@ import LanguageSelector from "./LanguageSelector.tsx";
 import { useTranslation } from "react-i18next";
 import AuthContext from "../context/AuthProvider.tsx";
 import CartContext from "../context/CartProvider.tsx";
-import { Search, ShoppingCart, UserRound } from "lucide-react";
-import { SearchProducts } from "./SearchProducts.tsx";
+import { ShoppingCart, UserRound } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Button } from "@/components/ui/button.tsx";
+import {SearchBar} from "@/components/SearchBar.tsx";
 
 gsap.registerPlugin(ScrollTrigger);
-
-const SearchBar = () => {
-  const [showSearch, setShowSearch] = useState(false);
-
-  return showSearch ? (
-    <div className="fixed top-0 left-0 right-0 z-50 bg-white px-4 py-2 shadow-md border-b">
-      <div className="flex justify-between">
-        <img src={Logo} alt="logo" className="h-12 w-12 pointer-events-none" />
-        <div className="mx-24 w-full">
-          <SearchProducts />
-        </div>
-        <Button onClick={() => setShowSearch(false)} variant="ghost">
-          Cancel
-        </Button>
-      </div>
-    </div>
-  ) : (
-    <Button size="icon" variant="ghost" onClick={() => setShowSearch(true)}>
-      <Search />
-    </Button>
-  );
-};
 
 export const Navbar = () => {
   const { user } = useContext(AuthContext);

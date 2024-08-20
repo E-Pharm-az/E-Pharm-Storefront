@@ -21,6 +21,7 @@ import { AnimatePresence } from "framer-motion";
 import { RemoveTrailingSlash } from "@/components/RemoveTrailingSlash.tsx";
 import ComingSoon from "@/components/marketing/CommingSoon.tsx";
 import Checkout from "@/components/checkout/Checkout.tsx";
+import AboutUs from "@/components/marketing/AboutUs.tsx";
 
 function App() {
   const location = useLocation();
@@ -36,6 +37,7 @@ function App() {
           <Route element={<PersistLogin />}>
             <Route path="/" element={<Layout />}>
               <Route path="/" element={<Home />} />
+              <Route path="/about-us" element={<AboutUs />} />
               <Route path="/coming-soon" element={<ComingSoon />} />
               <Route path="/products" element={<Products />} />
               <Route path="/product-page" element={<ProductPage />} />

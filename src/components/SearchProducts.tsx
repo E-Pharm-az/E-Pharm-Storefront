@@ -1,56 +1,29 @@
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { Search } from "lucide-react";
-import { axiosPrivate } from "@/services/api-client.ts";
-import axios from "axios";
-import { Product } from "@/types/product.ts";
-import { RelativeSearchResults } from "@/components/marketing/Home.tsx";
+import { ProductSearchResults } from "@/components/ProductSearchResults";
+import { useProductSearch } from "@/hooks/useProductSearch";
 
 export const SearchProducts = () => {
   const navigate = useNavigate();
-  const [searchQuery, setSearchQuery] = useState<string | null>("");
   const inputRef = useRef<HTMLInputElement>(null);
   const [t] = useTranslation("global");
-  const [products, setProducts] = useState<Product[]>([]);
-  const [showSearchModal, setShowSearchModal] = useState(false);
+  const { query, setQuery, products, isLoading } = useProductSearch();
 
   const handleSubmission = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (searchQuery?.trim()) {
-      navigate(`/products?search=${searchQuery}`);
+    if (query?.trim()) {
+      navigate(`/products?search=${query}`);
     }
   };
 
-  const fetchProducts = async () => {
-    try {
-      const response = await axiosPrivate.get("/products/search", {
-        params: { query: searchQuery, page: 1 },
-      });
-
-      setProducts(response.data);
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        if (error.response?.status === 404) {
-          setProducts([]);
-        }
-      }
+  const handleProductSelect = () => {
+    if (inputRef.current) {
+      inputRef.current.value = "";
     }
+    setQuery(null);
   };
-
-  const handleProductSelect = (product: Product) => {
-    navigate(`/product-page?product-id=${product.id}`);
-    setShowSearchModal(false);
-  };
-
-  useEffect(() => {
-    if (searchQuery?.trim()) {
-      setShowSearchModal(true);
-      fetchProducts();
-    } else {
-      setShowSearchModal(false);
-    }
-  }, [searchQuery]);
 
   return (
     <form onSubmit={handleSubmission} className="w-full grid gap-1">
@@ -58,7 +31,7 @@ export const SearchProducts = () => {
         <button
           type="submit"
           className="p-2 disabled:cursor-default disabled:opacity-30"
-          disabled={!searchQuery?.trim()}
+          disabled={!query?.trim()}
         >
           <Search />
         </button>
@@ -67,15 +40,15 @@ export const SearchProducts = () => {
           type="text"
           className="w-full p-2 rounded-xl text-sm font-medium outline-none"
           placeholder={t("home.placeholder")}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          onChange={(e) => setQuery(e.target.value)}
         />
       </div>
-      {showSearchModal && (
-        <RelativeSearchResults
-          className="border border-muted-foreground rounded-md shadow-md"
+      {query && !isLoading && (
+        <ProductSearchResults
           products={products}
-          searchQuery={searchQuery}
+          query={query}
           onProductSelect={handleProductSelect}
+          className="border border-muted-foreground rounded-md shadow-md"
         />
       )}
     </form>

@@ -20,7 +20,6 @@ import VerifyEmail from "@/components/auth/VerifyEmail.tsx";
 import { AnimatePresence } from "framer-motion";
 import { RemoveTrailingSlash } from "@/components/RemoveTrailingSlash.tsx";
 import ComingSoon from "@/components/marketing/CommingSoon.tsx";
-import Checkout from "@/components/checkout/Checkout.tsx";
 import AboutUs from "@/components/marketing/AboutUs.tsx";
 
 function App() {
@@ -47,10 +46,6 @@ function App() {
               </Route>
 
               <Route path="*" element={<NotFound />} />
-            </Route>
-
-            <Route element={<RequireAuth />}>
-              <Route path="/checkout" element={<Checkout />} />
             </Route>
 
             <Route element={<AuthLayout />}>

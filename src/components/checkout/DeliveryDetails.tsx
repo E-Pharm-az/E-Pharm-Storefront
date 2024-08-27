@@ -3,28 +3,19 @@ import { Input } from "@/components/ui/input.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
-import { Dispatch, SetStateAction, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox.tsx";
 import { Address } from "@/types/address.ts";
+import CheckoutContext, {
+  DELIVERY_STEP,
+  PAYMENT_STEP,
+} from "@/context/CheckoutProvider.tsx";
 
-interface Props {
-  deliveryStep: number;
-  step: number;
-  setStep: Dispatch<SetStateAction<number>>;
-  setDeliveryAddress: Dispatch<SetStateAction<Address>>;
-}
-
-const DeliveryDetails = ({
-  deliveryStep,
-  step,
-  setStep,
-  setDeliveryAddress,
-}: Props) => {
+const DeliveryDetails = () => {
   const [t] = useTranslation("global");
   const { user } = useContext(AuthContext);
-  const [useDefaultAddress, setUseDefaultAddress] = useState(
-    user?.address !== null,
-  );
+  const { formData, updateFormData } = useContext(CheckoutContext);
+  const [useDefault, setUseDefault] = useState(true);
 
   const {
     register,
@@ -33,47 +24,51 @@ const DeliveryDetails = ({
   } = useForm<Address>();
 
   const onSubmit = async (data: Address) => {
-    if (useDefaultAddress) {
-      setDeliveryAddress({
-        address: user!.address!,
-        city: user!.city!,
-        district: user!.district!,
-        zip: user!.zip!,
+    if (user) {
+      updateFormData({
+        address: useDefault
+          ? {
+              address: user.address,
+              city: user.city,
+              district: user.district,
+              zip: user.zip,
+            }
+          : data,
+        step: PAYMENT_STEP,
       });
     }
-    else {
-      setDeliveryAddress(data);
-    }
-    setStep(2);
   };
 
   return (
     <div>
       <div
-        className={`flex items-center justify-between ${step !== deliveryStep ? "text-muted-foreground" : "mb-6"}`}
+        className={`flex items-center justify-between ${formData.step !== DELIVERY_STEP ? "text-muted-foreground" : "mb-6"}`}
       >
         <h3 className="text-2xl font-medium ">
           {t("checkout.delivery-details")}
         </h3>
-        {step !== deliveryStep && (
-          <Button variant="link" onClick={() => setStep(deliveryStep)}>
+        {formData.step !== DELIVERY_STEP && (
+          <Button
+            variant="link"
+            onClick={() => updateFormData({ step: DELIVERY_STEP })}
+          >
             Edit
           </Button>
         )}
       </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className={`w-full grid gap-4 h-min ${step !== 1 && "hidden"}`}
+        className={`w-full grid gap-4 h-min ${formData.step !== DELIVERY_STEP && "hidden"}`}
       >
         <div className="grid gap-4 h-min">
           <div className="flex gap-2 w-full items-center">
             <Checkbox
-              checked={useDefaultAddress}
-              onCheckedChange={() => setUseDefaultAddress(!useDefaultAddress)}
+              checked={useDefault}
+              onCheckedChange={() => setUseDefault(!useDefault)}
             />
             <p className="font-semibold">Use default address?</p>
           </div>
-          {useDefaultAddress ? (
+          {useDefault ? (
             <div className="w-full mb-3 px-2 py-4 text-sm text-gray-900 bg-transparent rounded-lg border border-neutral-300 text-muted-foreground">
               <p>{`${user?.address}, ${user?.city}, ${user?.district}, ${user?.zip}`}</p>
             </div>

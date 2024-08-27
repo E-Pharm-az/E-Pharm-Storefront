@@ -12,6 +12,8 @@ import { CartProvider } from "./context/CartProvider.tsx";
 import { AuthFormProvider } from "@/context/AuthFormProvider.tsx";
 import { ErrorProvider } from "@/context/ErrorProvider.tsx";
 import { LoaderProvider } from "@/context/LoaderProvider.tsx";
+import { CheckoutProvider } from "@/context/CheckoutProvider.tsx";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 i18next.init({
   interpolation: { escapeValue: false },
@@ -29,20 +31,30 @@ i18next.init({
   },
 });
 
+const initialOptions = {
+  clientId:
+    "AV8OvxBHzdo9HsH7QpN4Ytcw5gKcN2ZegyUqnzTKC357ujOosTp3J1975mbeUtJzXRZmYv8QJe_K8FCr",
+  components: "card-fields",
+};
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
-    <ErrorProvider>
-      <LoaderProvider>
-        <I18nextProvider i18n={i18next}>
-          <AuthProvider>
-            <AuthFormProvider>
-              <CartProvider>
-                <App />
-              </CartProvider>
-            </AuthFormProvider>
-          </AuthProvider>
-        </I18nextProvider>
-      </LoaderProvider>
-    </ErrorProvider>
-  </BrowserRouter>,
+    <PayPalScriptProvider options={initialOptions}>
+      <ErrorProvider>
+        <LoaderProvider>
+          <I18nextProvider i18n={i18next}>
+            <AuthProvider>
+              <AuthFormProvider>
+                <CartProvider>
+                  <CheckoutProvider>
+                    <App />
+                  </CheckoutProvider>
+                </CartProvider>
+              </AuthFormProvider>
+            </AuthProvider>
+          </I18nextProvider>
+        </LoaderProvider>
+      </ErrorProvider>
+    </PayPalScriptProvider>
+  </BrowserRouter>
 );

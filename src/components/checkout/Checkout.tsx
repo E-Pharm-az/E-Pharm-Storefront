@@ -4,21 +4,19 @@ import LanguageSelector from "@/components/LanguageSelector.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { Minus, ShoppingCart } from "lucide-react";
 import CartContext from "@/context/CartProvider.tsx";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { Separator } from "@/components/ui/separator.tsx";
 import DeliveryDetails from "@/components/checkout/DeliveryDetails.tsx";
 import Payment from "@/components/checkout/Payment.tsx";
-import {Address} from "@/types/address.ts";
+import OrderReview from "@/components/checkout/OrderReview.tsx";
 
 const Checkout = () => {
   const [t] = useTranslation("global");
   const { cart } = useContext(CartContext);
-  const [step, setStep] = useState(2);
-  const [address, setAddress] = useState<Address>();
   const totalPrice = cart.reduce(
     (total, item) => total + item.price * item.quantity,
-    0,
+    0
   );
 
   return (
@@ -46,33 +44,18 @@ const Checkout = () => {
       </nav>
       <div className="w-full p-12">
         <h1 className="text-2xl font-medium text-center">
-          {t("checkout.checkout")}{" "}
+          {t("checkout.checkout")}
         </h1>
       </div>
       <div className="max-w-[1080px] w-full md:mx-auto md:flex grid gap-12 px-2">
         <div className="w-full grid gap-6">
-          <DeliveryDetails
-            deliveryStep={1}
-            step={step}
-            setStep={setStep}
-            setDeliveryAddress={setAddress}
-          />
+          <DeliveryDetails />
           <Separator />
-          <Payment
-            paymentStep={2}
-            step={step}
-            setStep={setStep}
-            address={address}
-          />
+          <Payment />
           <Separator />
-
-          <h3 className="text-2xl font-medium text-muted-foreground">
-            {t("checkout.order-review")}
-          </h3>
-
+          <OrderReview />
           <Separator />
         </div>
-
         <div className="md:max-w-[360px] grid gap-6 w-full h-min">
           <div className="flex justify-between w-full">
             <p className="text-2xl font-medium">{t("checkout.in-your-bag")}</p>

@@ -147,7 +147,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
                     {t("cart-provider.quanity")}: {addedItem?.quantity}
                   </p>
                   <p>
-                    {t("cart-provider.price")}:
+                    {t("cart-provider.price")}:{""}
                     {formatPrice(addedItem?.price * addedItem.quantity)} AZN
                   </p>
                 </div>
@@ -192,7 +192,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
                   {t("cart-provider.quanity")}: {addedItem?.quantity}
                 </p>
                 <p>
-                  {t("cart-provider.price")}:
+                  {t("cart-provider.price")}:{""}
                   {formatPrice(addedItem?.price * addedItem.quantity)} AZN
                 </p>
               </div>

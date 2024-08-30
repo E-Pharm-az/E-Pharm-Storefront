@@ -18,6 +18,7 @@ import {
 import { Link } from "react-router-dom";
 import useMediaQuery from "@/hooks/useMediaQuery.ts";
 import { Button } from "@/components/ui/button.tsx";
+import { formatPrice } from "@/utils/priceUtils";
 
 export interface CartItem {
   id: number;
@@ -146,8 +147,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
                     {t("cart-provider.quanity")}: {addedItem?.quantity}
                   </p>
                   <p>
-                    {t("cart-provider.price")}:{" "}
-                    {addedItem?.price * addedItem.quantity} AZN
+                    {t("cart-provider.price")}:
+                    {formatPrice(addedItem?.price * addedItem.quantity)} AZN
                   </p>
                 </div>
               </div>
@@ -191,8 +192,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
                   {t("cart-provider.quanity")}: {addedItem?.quantity}
                 </p>
                 <p>
-                  {t("cart-provider.price")}:{" "}
-                  {addedItem?.price * addedItem.quantity} AZN
+                  {t("cart-provider.price")}:
+                  {formatPrice(addedItem?.price * addedItem.quantity)} AZN
                 </p>
               </div>
               <Button className="w-full rounded-md" asChild>

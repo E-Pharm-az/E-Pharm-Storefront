@@ -53,7 +53,7 @@ const Cart = () => {
                     <img
                       src={item.imageUrl}
                       alt={item.name}
-                      className="h-full w-full"
+                      className="w-full"
                     />
                   ) : (
                     <Pill className="h-8 w-8 text-muted-foreground" />

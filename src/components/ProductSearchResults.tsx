@@ -23,7 +23,7 @@ export const ProductSearchResults: FC<Props> = ({
 
     const regex = new RegExp(`(${query})`, "gi");
     return products.map((product) =>
-      product.name.replace(regex, "<strong>$1</strong>"),
+      product.name.replace(regex, "<strong>$1</strong>")
     );
   }, [products, query]);
 
@@ -52,7 +52,7 @@ export const ProductSearchResults: FC<Props> = ({
               />
               <p dangerouslySetInnerHTML={{ __html: name }} />
             </div>
-            <p>₼ {(products[index].price / 100).toFixed(2)}</p>
+            <p>₼ {products[index].price}</p>
           </div>
         ))
       ) : (

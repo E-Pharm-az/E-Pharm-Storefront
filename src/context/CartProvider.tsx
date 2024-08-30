@@ -147,20 +147,21 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
                   </p>
                   <p>
                     {t("cart-provider.price")}:{" "}
-                    {((addedItem?.price * addedItem.quantity) / 100).toFixed(2)}{" "}
-                    AZN
+                    {addedItem?.price * addedItem.quantity} AZN
                   </p>
                 </div>
               </div>
               <div className="space-y-2">
-                <Button className="w-full rounded-md"  asChild>
+                <Button className="w-full rounded-md" asChild>
                   <Link to="/cart" onClick={() => setShowNotification(false)}>
-                    <p>
-                      {t("cart-provider.proceed-to-checkout")}
-                    </p>
+                    <p>{t("cart-provider.proceed-to-checkout")}</p>
                   </Link>
                 </Button>
-                <Button variant="outline" className="w-full rounded-md" onClick={() => setShowNotification(false)}>
+                <Button
+                  variant="outline"
+                  className="w-full rounded-md"
+                  onClick={() => setShowNotification(false)}
+                >
                   {t("cart-provider.continue-shopping")}
                 </Button>
               </div>
@@ -191,19 +192,20 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
                 </p>
                 <p>
                   {t("cart-provider.price")}:{" "}
-                  {((addedItem?.price * addedItem.quantity) / 100).toFixed(2)}{" "}
-                  AZN
+                  {addedItem?.price * addedItem.quantity} AZN
                 </p>
               </div>
-              <Button className="w-full rounded-md"  asChild>
+              <Button className="w-full rounded-md" asChild>
                 <Link to="/cart" onClick={() => setShowNotification(false)}>
-                  <p>
-                    {t("cart-provider.proceed-to-checkout")}
-                  </p>
+                  <p>{t("cart-provider.proceed-to-checkout")}</p>
                 </Link>
               </Button>
               <DrawerClose asChild>
-                <Button variant="outline" className="w-full rounded-md" onClick={() => setShowNotification(false)}>
+                <Button
+                  variant="outline"
+                  className="w-full rounded-md"
+                  onClick={() => setShowNotification(false)}
+                >
                   {t("cart-provider.continue-shopping")}
                 </Button>
               </DrawerClose>

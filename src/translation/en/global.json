@@ -33,30 +33,40 @@
     }
   },
   "aboutUs": {
-    "title": "About E-Pharm",
-    "description": "E-Pharm is an online platform for immediate access to pharmacies via your phone or any internet-connected device. With a diverse range of pharmacy and delivery partners, E-Pharm provides fast and affordable service 24/7.",
-    "features": {
-      "access": {
-        "title": "Instant Access",
-        "description": "Access pharmacies instantly from your phone or any device"
-      },
-      "availability": {
-        "title": "24/7 Service",
-        "description": "We're here for you around the clock, every day"
-      },
-      "delivery": {
-        "title": "Fast Delivery",
-        "description": "Get your medications delivered quickly to your doorstep"
-      }
-    },
-    "howItWorks": {
-      "title": "How to Make an Order",
-      "step1": "Create an Account: Sign up on our website (or app).",
-      "step2": "Search for Products: Use the search bar to find the item you need.",
-      "step3": "Select a Pharmacy: Choose the nearest pharmacy offering your item.",
-      "step4": "Choose Pickup or Delivery: Decide whether to pick up the item yourself or have it delivered to your doorstep.",
-      "step5": "Confirm and Pay: Confirm your order details and make payment."
-    }
+    "title": "About Us",
+    "aboutEPharm": "About E-Pharm",
+    "description": "\"E-Pharm\" is an online platform for immediate access to pharmacies via your phone or any internet-connected device. With a diverse range of pharmacy and delivery partners, \"E-Pharm\" provides fast and affordable service 24/7. To use our service, simply create an account on our website (or future app), search for the desired item using the search bar, and locate it at the nearest pharmacy for self-pickup or doorstep delivery. Our business model is straightforward and economical—you receive all these benefits plus free delivery by paying just 1.99 AZN per order (or opting for an upcoming subscription plan). Stay updated for new features and updates from \"E-Pharm.\"",
+    "faq": "FAQ",
+    "deliveryRules": "Delivery Rules",
+    "deliveryRulesContent": "Our delivery rules ensure a smooth and efficient service for all our customers. Please check back soon for more details.",
+    "howToOrder": "How to Make an Order",
+    "orderStep1": "Create an Account: Sign up on our website (or app).",
+    "orderStep2": "Search for Products: Use the search bar to find the item you need.",
+    "orderStep3": "Select a Pharmacy: Choose the nearest pharmacy offering your item.",
+    "orderStep4": "Choose Pickup or Delivery: Decide whether to pick up the item yourself or have it delivered to your doorstep.",
+    "orderStep5": "Confirm and Pay: Confirm your order details and make payment."
+  },
+  "faq": {
+    "deliveryTime": "How long does delivery take?",
+    "deliveryTimeAnswer": "At E-Pharm, we prioritize your health and convenience by continually expanding our network of delivery partners. Delivery times can vary based on distance, but on average, our couriers are assigned within 10 minutes. Please note, during our testing period, these times may vary.",
+    "deliveryCharges": "What are the delivery charges?",
+    "deliveryChargesAnswer": "As a platform committed to providing fast and affordable service, we are delighted to offer FREE delivery 24/7. The only additional charge is a service fee of 1.99 AZN (with possible discounts) to instantly locate your desired item, provide a list of nearby pharmacies, and facilitate doorstep delivery in discreet packaging. Please feel free to contact us for further information about available discounts.",
+    "outsideHours": "Do you deliver outside regular hours?",
+    "outsideHoursAnswer": "We are proud to work for the most important thing – your health. Our dedicated couriers and support team are available around the clock to assist you. Whether you need over-the-counter medication, or any other health-related product, we are here to ensure you get what you need quickly and efficiently. Your well-being is our top priority, and we strive to provide the best service possible at any time of the day.",
+    "trackOrder": "Can I track my order?",
+    "trackOrderAnswer": "Right after your courier is assigned and picks up your order, you will be able to track their location and the estimated time of arrival. This feature is planned to be released on our app and website (as a beta version) for development purposes.",
+    "paymentMethods": "What payment methods do you accept?",
+    "paymentMethodsAnswer": "Various payment methods such as Visa, MasterCard, and Maestro are supported for your convenience. Additionally, cash payments and online wallet payments (m10 and others) will be available soon to provide you with an even more comfortable and flexible service.",
+    "notAtHome": "What if I'm not at home during delivery?",
+    "notAtHomeAnswer": "You can choose the time and address to receive your order at the most convenient time for you. If you are unable to collect your order from the chosen pickup point or do not receive it within the courier's wait time, it will be returned to the delivering pharmacy. You will then have the option for re-delivery or self-pickup. Please note that if your order is not collected or cancelled by you within 24 hours, it will be canceled without a refund.",
+    "minimumOrder": "Is there a minimum order amount for free delivery?",
+    "minimumOrderAnswer": "Regardless of your order price, you have the flexibility to either pick it up yourself or have it delivered to your chosen address, all for the same low service fee. This ensures that you receive the same level of convenience and service quality, whether you opt for self-pickup or doorstep delivery. We strive to make your experience as seamless and hassle-free as possible, providing you with options that best suit your needs and preferences.",
+    "cancelOrder": "How can I cancel or change my order?",
+    "cancelOrderAnswer": "You can cancel or change your order before the courier picks up the package. If you change your mind while your order is on its way, you can still cancel it and receive a refund for the items ordered (the service fee is non-refundable). If you wish to add or delete items from your order, please contact Customer Support for further assistance.",
+    "returnsExchanges": "Do you offer returns or exchanges?",
+    "returnsExchangesAnswer": "Returns and exchanges are provided by E-Pharm only in the case of delivering expired or incorrect items. Otherwise, you will receive a receipt from the pharmacy, allowing you to return or exchange the items within the time limit set by local regulations.",
+    "customerSupport": "Is there a customer support number I can contact?",
+    "customerSupportAnswer": "Our 24/7 chatbots are always available to assist you with any questions you may have. Additionally, you can reach us via WhatsApp or email through the \"Contact Us\" section for any inquiries. We are committed to providing prompt and helpful support whenever you need it."
   },
   "comingSoon": {
     "title": "Coming Soon",

@@ -31,7 +31,7 @@ const ProductImage: React.FC<{ product: Product | null }> = React.memo(
         )}
       </div>
     );
-  },
+  }
 );
 
 const ProductDetails: React.FC<{
@@ -58,14 +58,14 @@ const ProductDetails: React.FC<{
         onAddToCart(count);
       }
     },
-    [count, onAddToCart, product],
+    [count, onAddToCart, product]
   );
 
   return (
     <div className="space-y-4">
       {product ? (
         <>
-          <p className="text-2xl">₼{((product.price ?? 0) / 100).toFixed(2)}</p>
+          <p className="text-2xl">₼{product.price}</p>
           <h2 className="text-5xl">{product.name}</h2>
           <p>{product.description}</p>
           <p>Strength: {product.strengthMg} mg</p>
@@ -121,7 +121,7 @@ const ProductPage = () => {
   const navigate = useNavigate();
   const search = useMemo(
     () => new URLSearchParams(location.search),
-    [location.search],
+    [location.search]
   );
   const productId = search.get("product-id");
   const { addToCart } = useContext(CartContext);
@@ -160,7 +160,7 @@ const ProductPage = () => {
         addToCart(cart, count);
       }
     },
-    [addToCart, navigate, product],
+    [addToCart, navigate, product]
   );
 
   return (
@@ -169,7 +169,7 @@ const ProductPage = () => {
         <ProductImage product={product} />
       </div>
       <div className="w-2/5">
-      <ProductDetails product={product} onAddToCart={handleAddToCart} />
+        <ProductDetails product={product} onAddToCart={handleAddToCart} />
       </div>
     </div>
   );

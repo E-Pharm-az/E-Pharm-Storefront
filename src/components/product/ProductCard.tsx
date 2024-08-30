@@ -7,7 +7,8 @@ import {
   CardHeader,
 } from "@/components/ui/card.tsx";
 import { Button } from "@/components/ui/button.tsx";
-import {Product} from "@/types/product.ts";
+import { Product } from "@/types/product.ts";
+import { Pill } from "lucide-react";
 
 interface Props {
   product: Product;
@@ -31,13 +32,13 @@ const ProductCard: React.FC<Props> = React.memo(({ product, onClick }) => {
           />
         ) : (
           <div className="h-48 bg-gray-100 flex items-center justify-center rounded-t">
-            <span className="text-gray-400 text-4xl">No Image</span>
+            <Pill className="text-gray-400 w-12 h-12" />
           </div>
         )}
       </CardContent>
       <CardFooter className="grid gap-2">
         <p className="text-md text-center font-semibold text-black">
-          {(product.price / 100).toFixed(2)} AZN
+          {product.price} AZN
         </p>
         <Button
           onClick={() => onClick(product.id)}

@@ -1,7 +1,6 @@
 import { createContext, useState, ReactNode, FC } from "react";
 import { produce } from "immer";
 import { Address } from "@/types/address.ts";
-import type { PayPalCardFieldsComponent } from "@paypal/paypal-js/types/components/card-fields";
 
 export const DELIVERY_STEP = 1;
 export const PAYMENT_STEP = 2;
@@ -11,14 +10,14 @@ interface FormData {
   step: number;
   address: Address | null;
   billingAddress: Address | null;
-  cardFieldsForm: PayPalCardFieldsComponent | null;
+  orderID: string | null;
 }
 
 const defaultFormData: FormData = {
   step: 1,
   address: null,
   billingAddress: null,
-  cardFieldsForm: null,
+  orderID: null,
 };
 
 interface FormContextType {

@@ -1,5 +1,4 @@
 import {
-  PayPalScriptProvider,
   PayPalCardFieldsProvider,
   PayPalNameField,
   PayPalNumberField,
@@ -7,7 +6,7 @@ import {
   PayPalCVVField,
   usePayPalCardFields,
 } from "@paypal/react-paypal-js";
-import { useContext, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useContext, useState } from "react";
 import CartContext from "@/context/CartProvider.tsx";
 import AuthContext from "@/context/AuthProvider.tsx";
 import { useTranslation } from "react-i18next";
@@ -22,7 +21,7 @@ import CheckoutContext, {
   CONFIRMATION_STEP,
   PAYMENT_STEP,
 } from "@/context/CheckoutProvider.tsx";
-import ErrorContext from "@/context/ErrorProvider";
+import LoaderContext from "@/context/LoaderProvider";
 
 interface OrderResponse {
   id: string;
@@ -32,12 +31,12 @@ const Payment = () => {
   const [t] = useTranslation("global");
   const { user } = useContext(AuthContext);
   const { cart } = useContext(CartContext);
-  const { setError } = useContext(ErrorContext);
   const { formData, updateFormData } = useContext(CheckoutContext);
   const [useDefault, setUseDefault] = useState(true);
   const [billingAddress, setBillingAddress] = useState<Address>(
     formData.address!
   );
+  const [showError, setShowError] = useState(false);
   const axiosPrivate = useAxiosPrivate();
 
   const {
@@ -49,7 +48,10 @@ const Payment = () => {
   const createOrder = async (): Promise<string> => {
     const response = await axiosPrivate.post<OrderResponse>("/orders", {
       userId: user?.id,
-      shippingAddress: formData.address,
+      address: formData.address?.address,
+      district: formData.address?.district,
+      city: formData.address?.city,
+      zip: formData.address?.zip,
       currency: "USD",
       products: cart.map((item) => ({
         productId: item.id,
@@ -61,8 +63,7 @@ const Payment = () => {
   };
 
   const onApprove = async (data: CardFieldsOnApproveData) => {
-    const response = await axiosPrivate.post(`/orders/${data.orderID}/capture`);
-    return response.data;
+    updateFormData({ orderID: data.orderID, step: CONFIRMATION_STEP });
   };
 
   function onError(error: Record<string, unknown>) {
@@ -108,6 +109,7 @@ const Payment = () => {
                 </div>
               </div>
             </div>
+            {showError && <p>Please enter all cards fields correctly.</p>}
             <form
               onSubmit={handleSubmit(onSubmit)}
               className="grid gap-4 h-min"
@@ -197,7 +199,10 @@ const Payment = () => {
                   </div>
                 </div>
               )}
-              <SubmitPayment billingAddress={billingAddress} />
+              <SubmitPayment
+                billingAddress={billingAddress}
+                setShowError={setShowError}
+              />
             </form>
           </div>
         </PayPalCardFieldsProvider>
@@ -210,12 +215,13 @@ export default Payment;
 
 interface SubmitPaymentProps {
   billingAddress: Address;
+  setShowError: Dispatch<SetStateAction<boolean>>;
 }
 
-const SubmitPayment = ({ billingAddress }: SubmitPaymentProps) => {
+const SubmitPayment = ({ setShowError }: SubmitPaymentProps) => {
   const [t] = useTranslation("global");
   const { cardFieldsForm, fields } = usePayPalCardFields();
-  const { updateFormData } = useContext(CheckoutContext);
+  const { setLoading } = useContext(LoaderContext);
 
   const handleClick = async () => {
     if (!cardFieldsForm) {
@@ -227,14 +233,18 @@ const SubmitPayment = ({ billingAddress }: SubmitPaymentProps) => {
     const formState = await cardFieldsForm.getState();
 
     if (!formState.isFormValid) {
-      return alert("The payment form is invalid");
+      setShowError(true);
+      return;
     }
 
-    updateFormData({
-      billingAddress: billingAddress,
-      step: CONFIRMATION_STEP,
-      cardFieldsForm: cardFieldsForm,
+    setShowError(false);
+    setLoading(true);
+
+    await cardFieldsForm.submit().catch((err) => {
+      console.log(err);
     });
+
+    setLoading(false);
   };
 
   return (

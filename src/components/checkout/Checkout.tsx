@@ -66,11 +66,7 @@ const Checkout = () => {
           <div className="grid gap-4 text-sm">
             <div className="flex justify-between w-full">
               <p>{t("cart.subtotal")}</p>
-              {totalPrice > 0 ? (
-                <p>{(totalPrice / 100).toFixed(2)} AZN</p>
-              ) : (
-                <Minus />
-              )}
+              {totalPrice > 0 ? <p>{totalPrice} AZN</p> : <Minus />}
             </div>
             <div className="flex justify-between w-full">
               <p>{t("cart.shipping-handling")}</p>
@@ -82,11 +78,7 @@ const Checkout = () => {
             </div>
             <div className="flex justify-between w-full font-semibold">
               <p>{t("cart.total")}</p>
-              {totalPrice > 0 ? (
-                <p>{(totalPrice / 100).toFixed(2)} AZN</p>
-              ) : (
-                <Minus />
-              )}
+              {totalPrice > 0 ? <p>{totalPrice} AZN</p> : <Minus />}
             </div>
           </div>
         </div>

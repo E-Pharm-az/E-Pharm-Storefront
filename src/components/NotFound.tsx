@@ -10,7 +10,7 @@ const NotFound = () => {
     navigate(from, { replace: true });
   }, []);
 
-  return <></>;
+  return null;
 };
 
 export default NotFound;

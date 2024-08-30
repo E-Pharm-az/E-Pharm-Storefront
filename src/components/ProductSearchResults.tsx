@@ -2,6 +2,7 @@ import { FC, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
 import { Product } from "@/types/product";
+import { formatPrice } from "@/utils/priceUtils";
 
 interface Props {
   products: Product[];
@@ -23,7 +24,7 @@ export const ProductSearchResults: FC<Props> = ({
 
     const regex = new RegExp(`(${query})`, "gi");
     return products.map((product) =>
-      product.name.replace(regex, "<strong>$1</strong>"),
+      product.name.replace(regex, "<strong>$1</strong>")
     );
   }, [products, query]);
 
@@ -52,7 +53,7 @@ export const ProductSearchResults: FC<Props> = ({
               />
               <p dangerouslySetInnerHTML={{ __html: name }} />
             </div>
-            <p>₼ {(products[index].price / 100).toFixed(2)}</p>
+            <p>₼ {formatPrice(products[index].price)}</p>
           </div>
         ))
       ) : (

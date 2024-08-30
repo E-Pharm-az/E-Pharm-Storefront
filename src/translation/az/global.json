@@ -1,13 +1,25 @@
 {
   "common": {
     "required": "Vacibdir",
-    "continue": "Davam et"
+    "continue": "Davam et",
+    "edit": "Dəyişdir",
+    "ok": "OK"
   },
   "errors": {
     "invalidEmailOrPassword": "Yanlış e-poçt və ya şifrə",
     "noServerResponse": "Serverdən cavab yoxdur",
     "loginFailed": "Giriş uğursuz oldu",
-    "unexpectedError": "Gözlənilməz xəta baş verdi"
+    "unexpectedError": "Gözlənilməz xəta baş verdi",
+    "invalid-card-number": "Yanlış kart nömrəsi",
+    "error": "Xəta"
+  },
+  "address": {
+    "firstName": "Ad*",
+    "lastName": "Soyad*",
+    "address": "Ünvan*",
+    "city": "Şəhər*",
+    "district": "Rayon*",
+    "zip": "Poçt indeksi*"
   },
   "home": {
     "title": "Sağlamlığınız, çatdırıldı.",
@@ -25,29 +37,39 @@
   },
   "aboutUs": {
     "title": "Haqqımızda",
-    "description": "E-Pharm telefon və ya internet bağlantısı olan istənilən cihaz vasitəsilə sizi apteklərlə əlaqələndirən onlayn platformdur. Geniş aptek və çatdırılma əməkdaş şəbəkəsi sayəsində E-Pharm istifadəçilərinə 24/7 tez və sərfəli xidmət təklif edir.",
-    "features": {
-      "access": {
-        "title": "Ani Əlaqə",
-        "description": "Telefonunuz və ya hər hansı bir cihaz vasitəsilə apteklərə dərhal daxil olun."
-      },
-      "availability": {
-        "title": "24/7 Xidmət",
-        "description": "Biz hər zaman sizin yanınızdayıq, günün istənilən vaxtı."
-      },
-      "delivery": {
-        "title": "Tez Çatdırılma",
-        "description": "Dərmanlarınızı tez bir zamanda qapınıza çatdırırıq."
-      }
-    },
-    "howItWorks": {
-      "title": "Sifariş etmə qaydası",
-      "step1": "Hesab yaradın: Vebsaytımızda (və ya tətbiqdə) qeydiyyatdan keçin.",
-      "step2": "Məhsulu axtarın: Axtarış panelindən istifadə edərək lazımi məhsulu tapın.",
-      "step3": "Aptek seçin: Lazımi məhsulu təklif edən ən yaxın apteki seçin.",
-      "step4": "Sifariş metodunu seçin: Məhsulu özünüz götürmək və ya qapınıza çatdırılmasını seçin.",
-      "step5": "Təsdiq edin və ödəniş edin: Sifariş məlumatlarınızı təsdiq edin və ödəniş edin."
-    }
+    "aboutEPharm": "E-Pharm",
+    "description": "E-Pharm telefon və ya internet bağlantısı olan istənilən cihaz vasitəsilə sizi apteklərlə əlaqələndirən onlayn platformdur. Geniş aptek və çatdırılma əməkdaş şəbəkəsi sayəsində E-Pharm istifadəçilərinə 24/7 tez və sərfəli xidmət təklif edir. Sadəcə vebsaytımızda qeydiyyatdan keçərək, istədiyiniz məhsulun adını yazıb, həmin məhsulu ən yaxın aptekdə taparaq birbaşa əldə edə yaxud ünvanınıza sifariş edə bilərsiniz. Sifariş üçün sadəcə 1.99AZN ödəyərək bütün üstünlüklərə sahib ola bilərsiniz. Gələcək yeniliklər və imkanlardan xəbərdar olmaq üçün izləmədə qalın!",
+    "faq": "FAQ",
+    "deliveryRules": "Çatdırılma qaydaları",
+    "deliveryRulesContent": "Bütün istifadəçilərimizin rahat istifadəsi üçün sadə və tez çatdırılma əsas amalımızdır. Daha ətraflı məlumat üçün izləmədə qalın",
+    "howToOrder": "Sifariş etmə qaydaları",
+    "orderStep1": "Hesab yaradın: Vebsaytda (və ya tətbiqdə) qeydiyyatdan keçin.",
+    "orderStep2": "Məhsulu axtarın: Axtarış paneli ilə istədiyiniz məhsulu tapın.",
+    "orderStep3": "Aptek seçin: Sizə ən yaxın apteki seçin.",
+    "orderStep4": "Sifaiş metodunu seçin: Aptekdən və ya ünvana çatdırılma vasitəsilə sifarişinizi əldə edin.",
+    "orderStep5": "Təsdiq və ödəniş: Sifarişinizin düzgün olduğundan əmin olun və ödəniş edin."
+  },
+  "faq": {
+    "deliveryTime": "Sifariş nə qədər vaxta çatdırılır?",
+    "deliveryTimeAnswer": "Sifarişin çatdırılması qət olunan məsafə, hava şəraiti və digər amillərdən aslı olmaqla dəyişir. Sifarişin aptekdən götürülməsi üçün kuryerin təyin olunması isə ortalama 10 dəq. təşkil edir (test mərhələsində bu vaxt fərqlənə bilər).",
+    "deliveryCharges": "Çatdırılma xidməti üçün nə qədər ödəməliyəm?",
+    "deliveryChargesAnswer": "Sağlamlığınıza böyük dəyər verən E-Pharm istifadəçilərinə 24/7 ÖDƏNİŞSİZ çatdırılma xidməti təklif edir. Heç bir limit olmadan, ən yaxın aptekdə məhsul axtarışı, konfidensial bağlamalar və s. kimi xidmətlər üçün hər sifarişdə cəmi 1.99AZN (mümkün endirim fürsətləri ilə) ödəyərək E-Pharm`dan yararlana bilərsiniz.",
+    "outsideHours": "Çatdırılma yalnız iş vaxtı mümkündür?",
+    "outsideHoursAnswer": "Bizim üçün yuxudan daha önəmli olan sağlamlığınız üçün çalışmaqdan şərəf hissi duyuruq. Günün istənilən vaxtı müxtəlif məhsulların növbətçi apteklərdən əldə edilməsi 24/7 çalışan kuryerlərimiz sayəsində E-Pharmla mümkündür.",
+    "trackOrder": "Sifarişimi izləyə bilərəm mi?",
+    "trackOrderAnswer": "Sifariş kuryer tərəfindən götürüldükdən sonra izləmə imkanınız olacaqdır. Bu funksiya gələcəkdə hazır olacaq mobil tətbiqdə və vebsaytda (təkmillşdirmə məqsədilə beta-versiyada) mümkün olacaq.",
+    "paymentMethods": "Ödəniş üçün hansı üsullardan istifadə edə bilərəm?",
+    "paymentMethodsAnswer": "Rahatlığınız üçün Visa, MasterCard, Maestro kimi kredit və ya debet kartlarından istifadə edərək rahat ödəniş edə bilərsiniz. Nağd və elektron pul kisəsi (m10 və s.) vasitəsilə ödənişlərin həyata keçirilməsi tezliklə əlavə olunacaq.",
+    "notAtHome": "Çatdırılma vaxtı evdə deyiləmsə nə etməli?",
+    "notAtHomeAnswer": "Çatdırılma zamanı göstərilən ünvandan kuryerin gözləmə vaxtı dolanadək sifarişi götürə bilmədiyiniz təqdirdə sifariş təkrar çatdırılma və ya ünvandan götürmə imkanı ilə aptekə geri qaytarılır. Qeyd: 24 saat ərzində bağlama götürülmədikdə yaxud sifarişdən istifadəçi tərəfindən imtina edilmədikdə sifariş avtomatik ləğv olunur və vəsait geri qaytarılmır.",
+    "minimumOrder": "Sifariş üçün minimal məbləğ var mı?",
+    "minimumOrderAnswer": "Sifarişinizin ümumi məbləğindən asılı olmayaraq istənilən halda eyni xidmət haqqını ödəməklə istər aptekdən, istərsə də ünvana çatdırılmaqla gün ərzində əldə edə bilərsiniz. Dərman qiymətlərinin və ehtiyacların fərqli olduğunu nəzərə alaraq E-Pharm ilə hər zaman lazım olan məhsulu daha asan əldə edə bilərsiniz.",
+    "cancelOrder": "Sifarişimi necə ləğv edə və ya dəyişə bilərəm?",
+    "cancelOrderAnswer": "Kuryer sifarişinizi aptekdən götürmədən sifarişinizi ləğv edə bilərsiniz. Kuryer yola çıxdıqdan sonra belə sifarişi ləğv edərək məhsulların qiymətini geri ala bilərsiniz (xidmət haqqı geri qaytarılmır). Sifarişə əlavə və ya har hansı bir məhsuldan imtina etmək lazım olarsa Dəstək Xidmətimizlə əlaqə saxlamağınız xahiş olunur.",
+    "returnsExchanges": "Geri qaytarılma və ya dəyişdirilmə mümkündürmü?",
+    "returnsExchangesAnswer": "Aptekdən verilmiş sifarişlər üçün E-Pharm tərəfindən qaytarılma və ya dəyişdirilmə yalnız məhsulun istifadə müddəti keçdikdə və ya səhv göndərildikdə mümkündür. Bütün digər hallarda sizə təqdim olunmuş çek vasitəsilə sifariş alınmış aptekdə dəyişdirilə və ya geri qaytarıla bilər.",
+    "customerSupport": "Sualım yarandıqda hansı nömrə ilə əlaqə saxlaya bilərəm?",
+    "customerSupportAnswer": "Rahatlığınız üçün 24/7 xidmət göstərən çat-botlarımız suallarınıza cavab tapmaqda sizə kömək edəcək. Həmçinin “Əlaqə” bölməsində əks olunan mobil nömrə vasitəsilə bizimlə WhatsApp və ya elektron poçt üzərindən əlaqə saxlaya bilərsiniz."
   },
   "comingSoon": {
     "title": "Tezliklə",
@@ -149,6 +171,24 @@
     "estimated-tax": "Təxmini Vergi",
     "total": "Cəmi",
     "checkout": "Ödəmə"
+  },
+  "checkout": {
+    "checkout": "Ödəniş",
+    "delivery-details": "Çatdırılma Təfərrüatları",
+    "use-default-address": "Varsayılan ünvanı istifadə et?",
+    "payment": "Ödəniş",
+    "order-review": "Sifarişin Yoxlanılması",
+    "in-your-bag": "Çantanızda",
+    "add-card": "Kart Əlavə Et",
+    "cardholder-name": "Kart Sahibinin Adı (isteğe bağlı)",
+    "card-number": "Kart Nömrəsi",
+    "mm-yy": "AA/İİ",
+    "cvv": "CVV",
+    "use-same-billing-address": "Fatura ünvanı göndərmə ünvanı ilə eynidirmi?",
+    "card-fields-required": "Zəhmət olmasa, bütün kart sahələrini düzgün doldurun.",
+    "save-and-continue": "Yadda Saxla & Davam Et",
+    "order-review-details": "«Ödənişi Təsdiqlə» düyməsini klikləməklə, İstifadə Şərtləri, Satış Şərtləri, Məxfilik Siyasəti və Qaytarma Siyasətini oxuduğunuzu, başa düşdüyünüzü və qəbul etdiyinizi təsdiqləyirsiniz. Göndər",
+    "confirm-order": "Ödənişi Təsdiqlə"
   },
   "cart-provider": {
     "item-added-to-cart": "Məhsul səbətə əlavə edildi",

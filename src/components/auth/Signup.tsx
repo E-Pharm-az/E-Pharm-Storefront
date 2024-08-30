@@ -19,6 +19,9 @@ interface FormData {
   firstName: string;
   lastName: string;
   address: string;
+  district: string;
+  city: string;
+  zip: number;
   password: string;
   isTosAccepted: boolean;
 }
@@ -67,6 +70,9 @@ const Signup = () => {
         firstName: data.firstName,
         lastName: data.lastName,
         address: data.address,
+        city: data.city,
+        district: data.district,
+        zip: data.zip,
         password: data.password,
       });
       if (response.status === 200) {
@@ -95,7 +101,7 @@ const Signup = () => {
 
   return (
     <SlidePage>
-      <div className="mx-auto w-full py-8 sm:w-[400px] p-6 grid gap-4 sm:p-8">
+      <div className="mx-auto w-fit py-8 sm:py-0 grid gap-6 p-6 sm:p-0 sm:max-w-[400px]">
         {accountSetupCompleted ? (
           <div className="items-center justify-center text-center grid gap-6">
             <div className="grid gap-2">
@@ -119,8 +125,8 @@ const Signup = () => {
               {t("signup.title")}
             </h1>
             <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
-              <div className="flex gap-2">
-                <div>
+              <div className="flex gap-2 w-full">
+                <div className="w-full">
                   <Input
                     type="text"
                     label={t("signup.firstname")}
@@ -129,20 +135,24 @@ const Signup = () => {
                     autoCapitalize="on"
                     disabled={loading}
                     {...register("firstName", { required: "Required" })}
-                    className={`${errors.firstName && "border-red-500 focus:border-red-500"}`}
+                    className={`${
+                      errors.firstName && "border-red-500 focus:border-red-500"
+                    }`}
                   />
                   <label className="w-full h-3 text-xs text-red-500">
                     {errors.firstName?.message}
                   </label>
                 </div>
-                <div>
+                <div className="w-full">
                   <Input
                     type="text"
                     label={t("signup.lastname")}
                     autoCorrect="off"
                     autoComplete="family-name"
                     disabled={loading}
-                    className={`${errors.lastName && "border-red-500 focus:border-red-500"}`}
+                    className={`${
+                      errors.lastName && "border-red-500 focus:border-red-500"
+                    }`}
                     {...register("lastName", { required: "Required" })}
                   />
                   <p className="w-full h-3 text-xs text-red-500">
@@ -172,7 +182,9 @@ const Signup = () => {
                           /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])/.test(value),
                       },
                     })}
-                    className={`${errors.password && "border-red-500 focus:border-red-500"}`}
+                    className={`${
+                      errors.password && "border-red-500 focus:border-red-500"
+                    }`}
                   />
                   <button
                     type="button"
@@ -183,7 +195,12 @@ const Signup = () => {
                   </button>
                 </div>
                 <div
-                  className={`ml-2 flex gap-1 ${errors.password?.type === "required" || errors.password?.type === "minLength" ? "text-red-500" : "text-muted-foreground"}`}
+                  className={`ml-2 flex gap-1 ${
+                    errors.password?.type === "required" ||
+                    errors.password?.type === "minLength"
+                      ? "text-red-500"
+                      : "text-muted-foreground"
+                  }`}
                 >
                   <X className="h-4 w-4" />
                   <label className="text-xs">
@@ -191,7 +208,12 @@ const Signup = () => {
                   </label>
                 </div>
                 <div
-                  className={`ml-2 flex gap-1 ${errors.password?.type === "required" || errors.password?.type === "complex" ? "text-red-500" : "text-muted-foreground"}`}
+                  className={`ml-2 flex gap-1 ${
+                    errors.password?.type === "required" ||
+                    errors.password?.type === "complex"
+                      ? "text-red-500"
+                      : "text-muted-foreground"
+                  }`}
                 >
                   <X className="h-4 w-4" />
                   <label className="text-xs">
@@ -201,12 +223,46 @@ const Signup = () => {
               </div>
               <Input
                 type="text"
-                label={t("signup.address")}
+                label={t("address.address")}
                 autoComplete="address-line1"
                 disabled={loading}
-                className={`${errors.address && "border-red-500 focus:border-red-500"}`}
+                className={`${
+                  errors.address && "border-red-500 focus:border-red-500"
+                }`}
                 {...register("address", { required: true })}
               />
+              <div className="flex gap-2 w-full">
+                <Input
+                  type="text"
+                  label={t("address.city")}
+                  autoComplete="city"
+                  disabled={loading}
+                  className={`${
+                    errors.address && "border-red-500 focus:border-red-500"
+                  }`}
+                  {...register("city", { required: true })}
+                />
+                <Input
+                  type="text"
+                  label={t("address.district")}
+                  autoComplete="district"
+                  disabled={loading}
+                  className={`${
+                    errors.address && "border-red-500 focus:border-red-500"
+                  }`}
+                  {...register("district", { required: true })}
+                />
+                <Input
+                  type="text"
+                  label={t("address.zip")}
+                  autoComplete="zip"
+                  disabled={loading}
+                  className={`${
+                    errors.address && "border-red-500 focus:border-red-500"
+                  }`}
+                  {...register("zip", { required: true })}
+                />
+              </div>
               <div className="flex gap-2 items-start">
                 <Checkbox
                   {...register("isTosAccepted", { required: true })}
@@ -215,7 +271,9 @@ const Signup = () => {
                   disabled={loading}
                 />
                 <p
-                  className={`text-sm ${errors.isTosAccepted && "text-red-500"}`}
+                  className={`text-sm ${
+                    errors.isTosAccepted && "text-red-500"
+                  }`}
                 >
                   {t("signup.tos")}
                 </p>

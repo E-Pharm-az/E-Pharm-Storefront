@@ -1,29 +1,33 @@
 import CartContext, { CartItem } from "../context/CartProvider.tsx";
 import { useContext } from "react";
-import { Minus, Trash } from "lucide-react";
+import { Minus, Pill, Trash } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button.tsx";
 import { Separator } from "@/components/ui/separator.tsx";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "@/context/AuthProvider.tsx";
+import { formatPrice } from "@/utils/priceUtils.ts";
 
 const Cart = () => {
   const { cart, updateCart, removeFromCart } = useContext(CartContext);
   const { isAuthenticated } = useContext(AuthContext);
+  const navigate = useNavigate();
   const totalPrice = cart.reduce(
     (total, item) => total + item.price * item.quantity,
-    0,
+    0
   );
   const [t] = useTranslation("global");
 
   const handleCountChange = (item: CartItem, count: string) =>
     updateCart(item, parseInt(count));
 
+  const handleGoToCart = () => navigate("/checkout");
+
   return (
     <div className="max-w-[1080px] lg:mx-auto lg:flex grid gap-8 mx-8 px-2">
       <div className="w-full">
         {!isAuthenticated() && (
-          <div className="border border-muted p-2 mb-4">
+          <div className="border border-muted-foreground p-3 mb-4">
             <p className="font-semibold text-lg">{t("cart.join-us-title")}</p>
             <p className="text-muted-foreground">
               <Link to="/email-lookup" className="text-primary underline">
@@ -44,15 +48,21 @@ const Cart = () => {
           <div>
             {cart.map((item) => (
               <div key={item.id} className="flex justify-between gap-4">
-                <img
-                  src={item.imageUrl}
-                  alt={item.name}
-                  className="h-32 w-32 border"
-                />
+                <div className="border h-32 w-32 flex justify-center items-center">
+                  {item.imageUrl ? (
+                    <img
+                      src={item.imageUrl}
+                      alt={item.name}
+                      className="h-full w-full"
+                    />
+                  ) : (
+                    <Pill className="h-8 w-8 text-muted-foreground" />
+                  )}
+                </div>
                 <div className="w-full flex flex-col justify-between">
                   <div className="w-full flex justify-between">
                     <p className="font-semibold">{item.name}</p>
-                    <p>{(item.price / 100).toFixed(2)} AZN</p>
+                    <p>{item.price} AZN</p>
                   </div>
                   <div className="flex items-center gap-4">
                     <Trash
@@ -83,11 +93,7 @@ const Cart = () => {
         <div className="grid gap-4">
           <div className="flex justify-between w-full">
             <p>{t("cart.subtotal")}</p>
-            {totalPrice > 0 ? (
-              <p>{(totalPrice / 100).toFixed(2)} AZN</p>
-            ) : (
-              <Minus />
-            )}
+            {totalPrice > 0 ? <p>{formatPrice(totalPrice)} AZN</p> : <Minus />}
           </div>
           <div className="flex justify-between w-full">
             <p>{t("cart.shipping-handling")}</p>
@@ -100,21 +106,17 @@ const Cart = () => {
           <Separator />
           <div className="flex justify-between w-full">
             <p>{t("cart.total")}</p>
-            {totalPrice > 0 ? (
-              <p>{(totalPrice / 100).toFixed(2)} AZN</p>
-            ) : (
-              <Minus />
-            )}
+            {totalPrice > 0 ? <p>{formatPrice(totalPrice)} AZN</p> : <Minus />}
           </div>
           <Separator />
         </div>
         <Button
+          onClick={handleGoToCart}
           className="w-full h-14 text-md"
           disabled={cart.length === 0}
-          asChild
         >
-          <Link to="/checkout">{t("cart.checkout")}</Link>
-        </Button>
+          {t("cart.checkout")}
+        </Button>{" "}
       </div>
     </div>
   );

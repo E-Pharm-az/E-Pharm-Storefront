@@ -71,7 +71,7 @@ const Login = () => {
 
   return (
     <SlidePage>
-      <div className="mx-auto py-8 sm:py-0 w-full grid gap-6 p-6 sm:p-0 sm:w-[400px]">
+      <div className="mx-auto w-fit py-8 sm:py-0 grid gap-6 p-6 sm:p-0 sm:max-w-[400px]">
         <div className="grid gap-2">
           <h1 className="text-3xl font-medium leading-tight tracking-tight text-gray-900">
             {t("login.title")}

@@ -1,11 +1,18 @@
-import {FC, useCallback, useContext, useEffect, useMemo, useState} from "react";
+import {
+  FC,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import apiClient from "../../services/api-client.ts";
 import { Search } from "lucide-react";
 import LoaderContext from "@/context/LoaderProvider.tsx";
 import ProductCard from "@/components/product/ProductCard.tsx";
-import {Product} from "@/types/product.ts";
+import { Product } from "@/types/product.ts";
 
 const Products: FC = () => {
   const { loading, setLoading } = useContext(LoaderContext);
@@ -14,7 +21,7 @@ const Products: FC = () => {
   const navigate = useNavigate();
   const search = useMemo(
     () => new URLSearchParams(location.search),
-    [location.search],
+    [location.search]
   );
   const searchQuery = search.get("search");
   const { t } = useTranslation("global");
@@ -41,7 +48,7 @@ const Products: FC = () => {
     (id: number) => {
       navigate(`/product-page?product-id=${id}`);
     },
-    [navigate],
+    [navigate]
   );
 
   if (products.length === 0 && !loading) {

@@ -199,7 +199,12 @@ const ChangePassword = () => {
                   </button>
                 </div>
                 <div
-                  className={`ml-2 flex gap-1 ${errors.password?.type === "required" || errors.password?.type === "minLength" ? "text-red-500" : "text-muted-foreground"}`}
+                  className={`ml-2 flex gap-1 ${
+                    errors.password?.type === "required" ||
+                    errors.password?.type === "minLength"
+                      ? "text-red-500"
+                      : "text-muted-foreground"
+                  }`}
                 >
                   <X className="h-4 w-4" />
                   <label className="text-xs">
@@ -207,7 +212,12 @@ const ChangePassword = () => {
                   </label>
                 </div>
                 <div
-                  className={`ml-2 flex gap-1 ${errors.password?.type === "required" || errors.password?.type === "complex" ? "text-red-500" : "text-muted-foreground"}`}
+                  className={`ml-2 flex gap-1 ${
+                    errors.password?.type === "required" ||
+                    errors.password?.type === "complex"
+                      ? "text-red-500"
+                      : "text-muted-foreground"
+                  }`}
                 >
                   <X className="h-4 w-4" />
                   <label className="text-xs">

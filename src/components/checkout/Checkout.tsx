@@ -10,6 +10,7 @@ import { Separator } from "@/components/ui/separator.tsx";
 import DeliveryDetails from "@/components/checkout/DeliveryDetails.tsx";
 import Payment from "@/components/checkout/Payment.tsx";
 import OrderReview from "@/components/checkout/OrderReview.tsx";
+import { formatPrice } from "@/utils/priceUtils";
 
 const Checkout = () => {
   const [t] = useTranslation("global");
@@ -66,7 +67,11 @@ const Checkout = () => {
           <div className="grid gap-4 text-sm">
             <div className="flex justify-between w-full">
               <p>{t("cart.subtotal")}</p>
-              {totalPrice > 0 ? <p>{totalPrice} AZN</p> : <Minus />}
+              {totalPrice > 0 ? (
+                <p>{formatPrice(totalPrice)} AZN</p>
+              ) : (
+                <Minus />
+              )}
             </div>
             <div className="flex justify-between w-full">
               <p>{t("cart.shipping-handling")}</p>
@@ -78,7 +83,11 @@ const Checkout = () => {
             </div>
             <div className="flex justify-between w-full font-semibold">
               <p>{t("cart.total")}</p>
-              {totalPrice > 0 ? <p>{totalPrice} AZN</p> : <Minus />}
+              {totalPrice > 0 ? (
+                <p>{formatPrice(totalPrice)} AZN</p>
+              ) : (
+                <Minus />
+              )}
             </div>
           </div>
         </div>

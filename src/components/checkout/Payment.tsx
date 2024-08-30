@@ -1,6 +1,5 @@
 import {
   PayPalCardFieldsProvider,
-  PayPalNameField,
   PayPalNumberField,
   PayPalExpiryField,
   PayPalCVVField,
@@ -22,6 +21,8 @@ import CheckoutContext, {
   PAYMENT_STEP,
 } from "@/context/CheckoutProvider.tsx";
 import LoaderContext from "@/context/LoaderProvider";
+import ErrorContext from "@/context/ErrorProvider";
+import { AxiosError } from "axios";
 
 interface OrderResponse {
   id: string;
@@ -32,6 +33,8 @@ const Payment = () => {
   const { user } = useContext(AuthContext);
   const { cart } = useContext(CartContext);
   const { formData, updateFormData } = useContext(CheckoutContext);
+  const { setLoading } = useContext(LoaderContext);
+  const { setError } = useContext(ErrorContext);
   const [useDefault, setUseDefault] = useState(true);
   const [billingAddress, setBillingAddress] = useState<Address>(
     formData.address!
@@ -46,20 +49,30 @@ const Payment = () => {
   } = useForm<Address>();
 
   const createOrder = async (): Promise<string> => {
-    const response = await axiosPrivate.post<OrderResponse>("/orders", {
-      userId: user?.id,
-      address: formData.address?.address,
-      district: formData.address?.district,
-      city: formData.address?.city,
-      zip: formData.address?.zip,
-      currency: "USD",
-      products: cart.map((item) => ({
-        productId: item.id,
-        quantity: item.quantity,
-      })),
-    });
+    try {
+      setLoading(true);
+      const response = await axiosPrivate.post<OrderResponse>("/orders", {
+        userId: user?.id,
+        address: formData.address?.address,
+        district: formData.address?.district,
+        city: formData.address?.city,
+        zip: formData.address?.zip,
+        currency: "USD",
+        products: cart.map((item) => ({
+          productId: item.id,
+          quantity: item.quantity,
+        })),
+      });
 
-    return response.data.id;
+      return response.data.id;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        setError(error.response?.data);
+      }
+      return "";
+    } finally {
+      setLoading(false);
+    }
   };
 
   const onApprove = async (data: CardFieldsOnApproveData) => {
@@ -67,7 +80,19 @@ const Payment = () => {
   };
 
   function onError(error: Record<string, unknown>) {
-    console.log(error);
+    try {
+      const errorMessage = error.message as string;
+      const jsonStartIndex = errorMessage.indexOf("{");
+      const jsonString = errorMessage.slice(jsonStartIndex);
+      const errorObject = JSON.parse(jsonString);
+
+      const description = errorObject.details[0].description;
+      if (description === "Invalid card number") {
+        setError(t("errors.invalid-card-number"));
+      }
+    } catch (parseError) {
+      console.log("Failed to parse error message:", error.message);
+    }
   }
 
   const onSubmit = async (data: Address) => {
@@ -78,16 +103,16 @@ const Payment = () => {
     <div className="w-full">
       <div
         className={`flex items-center justify-between ${
-          formData.step !== PAYMENT_STEP ? "text-muted-foreground" : "mb-6"
+          formData.step === PAYMENT_STEP ? "mb-6" : "text-muted-foreground"
         }`}
       >
         <h3 className="text-2xl font-medium ">{t("checkout.payment")}</h3>
-        {formData.step !== PAYMENT_STEP && (
+        {formData.step > PAYMENT_STEP && (
           <Button
             variant="link"
             onClick={() => updateFormData({ step: PAYMENT_STEP })}
           >
-            Edit
+            {t("common.edit")}
           </Button>
         )}
       </div>
@@ -98,18 +123,28 @@ const Payment = () => {
           onError={onError}
         >
           <div className="grid gap-8 w-full">
-            <div className="p-6 border border-accent-foreground rounded-md">
-              <p className="font-semibold">Add Card</p>
-              <div className="my-8 grid gap-2 w-full">
-                <PayPalNameField className="w-full" />
-                <div className="grid gap-2 md:flex w-full">
-                  <PayPalNumberField className="w-full" />
-                  <PayPalExpiryField className="w-full md:w-[200px]" />
-                  <PayPalCVVField className="w-full md:w-[200px]" />
-                </div>
+            <div className="p-6 border  rounded-md border-accent-foreground">
+              <p className="font-semibold">{t("checkout.add-card")}</p>
+              <div className="grid gap-2 md:flex w-full my-8">
+                <PayPalNumberField
+                  className="w-full"
+                  placeholder={t("checkout.card-number")}
+                />
+                <PayPalExpiryField
+                  className="w-full md:w-[200px]"
+                  placeholder={t("checkout.mm-yy")}
+                />
+                <PayPalCVVField
+                  className="w-full md:w-[200px]"
+                  placeholder={t("checkout.cvv")}
+                />
               </div>
             </div>
-            {showError && <p>Please enter all cards fields correctly.</p>}
+            {showError && (
+              <p className="text-red-500">
+                {t("checkout.card-fields-required")}
+              </p>
+            )}
             <form
               onSubmit={handleSubmit(onSubmit)}
               className="grid gap-4 h-min"
@@ -120,7 +155,7 @@ const Payment = () => {
                   onCheckedChange={() => setUseDefault(!useDefault)}
                 />
                 <p className="font-semibold">
-                  Billing address same as shipping?
+                  {t("checkout.use-same-billing-address")}
                 </p>
               </div>
               {useDefault ? (
@@ -220,7 +255,7 @@ interface SubmitPaymentProps {
 
 const SubmitPayment = ({ setShowError }: SubmitPaymentProps) => {
   const [t] = useTranslation("global");
-  const { cardFieldsForm, fields } = usePayPalCardFields();
+  const { cardFieldsForm } = usePayPalCardFields();
   const { setLoading } = useContext(LoaderContext);
 
   const handleClick = async () => {

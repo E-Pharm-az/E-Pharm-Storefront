@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button.tsx";
 import { Separator } from "@/components/ui/separator.tsx";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "@/context/AuthProvider.tsx";
+import { formatPrice } from "@/utils/priceUtils.ts";
 
 const Cart = () => {
   const { cart, updateCart, removeFromCart } = useContext(CartContext);
@@ -92,7 +93,7 @@ const Cart = () => {
         <div className="grid gap-4">
           <div className="flex justify-between w-full">
             <p>{t("cart.subtotal")}</p>
-            {totalPrice > 0 ? <p>{totalPrice} AZN</p> : <Minus />}
+            {totalPrice > 0 ? <p>{formatPrice(totalPrice)} AZN</p> : <Minus />}
           </div>
           <div className="flex justify-between w-full">
             <p>{t("cart.shipping-handling")}</p>
@@ -105,7 +106,7 @@ const Cart = () => {
           <Separator />
           <div className="flex justify-between w-full">
             <p>{t("cart.total")}</p>
-            {totalPrice > 0 ? <p>{totalPrice} AZN</p> : <Minus />}
+            {totalPrice > 0 ? <p>{formatPrice(totalPrice)} AZN</p> : <Minus />}
           </div>
           <Separator />
         </div>

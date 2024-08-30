@@ -1,6 +1,13 @@
 import { createContext, useState, useEffect, ReactNode, FC } from "react";
-import { CircleAlert, X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
 
 interface FormContextType {
   error: string;
@@ -13,47 +20,35 @@ const ErrorContext = createContext<FormContextType>({
 });
 
 export const ErrorProvider: FC<{ children: ReactNode }> = ({ children }) => {
+  const [t] = useTranslation("global");
   const [error, setError] = useState<string>("");
   const [visible, setVisible] = useState<boolean>(false);
 
   useEffect(() => {
     if (error) {
       setVisible(true);
-      const timer = setTimeout(() => {
-        setVisible(false);
-        setError("");
-      }, 5000);
-
-      return () => clearTimeout(timer);
+    } else {
+      setVisible(false);
     }
   }, [error]);
 
-  const handleDismiss = () => {
-    setVisible(false);
-    setError("");
+  const handleSetError = (msg: string) => {
+    setError(msg);
   };
 
   return (
-    <ErrorContext.Provider value={{ error, setError }}>
-      <AnimatePresence>
-        {visible && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.1 }}
-            className="w-full fixed left-0 top-2 right-0 z-50"
-          >
-            <div className="bg-red-300 border border-red-400 rounded-md mx-auto flex p-4 w-[500px] justify-between items-center">
-              <div className="flex gap-2 items-center">
-                <CircleAlert />
-                <p>{error}</p>
-              </div>
-              <X onClick={handleDismiss} className="cursor-pointer" />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+    <ErrorContext.Provider value={{ error, setError: handleSetError }}>
+      <Dialog open={visible} onOpenChange={setVisible}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{t("errors.error")}</DialogTitle>
+            <DialogDescription>{error}</DialogDescription>
+          </DialogHeader>
+          <Button onClick={() => setVisible(false)} className="ml-auto">
+            {t("common.ok")}
+          </Button>
+        </DialogContent>
+      </Dialog>
       {children}
     </ErrorContext.Provider>
   );

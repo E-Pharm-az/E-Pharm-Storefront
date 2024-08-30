@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button.tsx";
 import { useContext, useEffect } from "react";
 import FormContext from "@/context/AuthFormProvider.tsx";
 import { useForm } from "react-hook-form";
-import {useLocation, useNavigate} from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import apiClient from "@/services/api-client.ts";
 import ErrorContext from "@/context/ErrorProvider.tsx";
 import axios from "axios";

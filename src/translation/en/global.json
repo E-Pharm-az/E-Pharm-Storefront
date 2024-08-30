@@ -2,21 +2,24 @@
   "common": {
     "required": "Required",
     "continue": "Continue",
-    "edit": "Edit"
+    "edit": "Edit",
+    "ok": "OK"
   },
   "errors": {
     "invalidEmailOrPassword": "Invalid email or password",
     "noServerResponse": "No server response",
     "loginFailed": "Login failed",
-    "unexpectedError": "An unexpected error occurred"
+    "unexpectedError": "An unexpected error occurred",
+    "invalid-card-number": "Invalid card number",
+    "error": "Error"
   },
   "address": {
-    "firstName": "First name",
-    "lastName": "Last name",
-    "address": "Address",
-    "city": "City",
-    "district": "District",
-    "zip": "Zip"
+    "firstName": "First name*",
+    "lastName": "Last name*",
+    "address": "Address*",
+    "city": "City*",
+    "district": "District*",
+    "zip": "Zip*"
   },
   "home": {
     "title": "Your Health, Delivered.",
@@ -181,16 +184,20 @@
   "checkout": {
     "checkout": "Checkout",
     "delivery-details": "Delivery Details",
+    "use-default-address": "Use default address?",
     "payment": "Payment",
     "order-review": "Order Review",
     "in-your-bag": "In Your Bag",
+    "add-card": "Add Card",
+    "cardholder-name": "Cardholder Name (optional)",
+    "card-number": "Card number",
+    "mm-yy": "MM/YY",
+    "cvv": "CVV",
+    "use-same-billing-address": "Billing address same as shipping?",
+    "card-fields-required": "Please enter all cards fields correctly.",
     "save-and-continue": "Save & Continue",
-    "name": "Name*",
-    "address": "Address*",
-    "phone-number": "Phone Number*",
-    "firstname": "First name*",
-    "lastname": "Last name*",
-    "email": "Email*"
+    "order-review-details": "By clicking the \"Submit Payment\" button, you confirm that you have read, understand, and accept our Terms of Use, Terms of Sale, Privacy Policy, and Return Policy. Submit",
+    "confirm-order": "Submit Payment"
   },
   "cart-provider": {
     "item-added-to-cart": "Item added to cart",

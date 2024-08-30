@@ -15,6 +15,7 @@ import LoaderContext from "@/context/LoaderProvider";
 import { Product } from "@/types/product";
 import ErrorContext from "@/context/ErrorProvider.tsx";
 import { Skeleton } from "@/components/ui/skeleton.tsx";
+import { formatPrice } from "@/utils/priceUtils";
 
 const ProductImage: React.FC<{ product: Product | null }> = React.memo(
   ({ product }) => {
@@ -65,7 +66,7 @@ const ProductDetails: React.FC<{
     <div className="space-y-4">
       {product ? (
         <>
-          <p className="text-2xl">₼{product.price}</p>
+          <p className="text-2xl">₼{formatPrice(product.price)}</p>
           <h2 className="text-5xl">{product.name}</h2>
           <p>{product.description}</p>
           <p>Strength: {product.strengthMg} mg</p>

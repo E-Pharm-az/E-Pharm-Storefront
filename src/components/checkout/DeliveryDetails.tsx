@@ -42,7 +42,9 @@ const DeliveryDetails = () => {
   return (
     <div>
       <div
-        className={`flex items-center justify-between ${formData.step !== DELIVERY_STEP ? "text-muted-foreground" : "mb-6"}`}
+        className={`flex items-center justify-between ${
+          formData.step === DELIVERY_STEP ? "mb-6" : "text-muted-foreground"
+        }`}
       >
         <h3 className="text-2xl font-medium ">
           {t("checkout.delivery-details")}
@@ -52,13 +54,15 @@ const DeliveryDetails = () => {
             variant="link"
             onClick={() => updateFormData({ step: DELIVERY_STEP })}
           >
-            Edit
+            {t("common.edit")}
           </Button>
         )}
       </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className={`w-full grid gap-4 h-min ${formData.step !== DELIVERY_STEP && "hidden"}`}
+        className={`w-full grid gap-4 h-min ${
+          formData.step !== DELIVERY_STEP && "hidden"
+        }`}
       >
         <div className="grid gap-4 h-min">
           <div className="flex gap-2 w-full items-center">
@@ -66,7 +70,7 @@ const DeliveryDetails = () => {
               checked={useDefault}
               onCheckedChange={() => setUseDefault(!useDefault)}
             />
-            <p className="font-semibold">Use default address?</p>
+            <p className="font-semibold">{t("checkout.use-default-address")}</p>
           </div>
           {useDefault ? (
             <div className="w-full mb-3 px-2 py-4 text-sm text-gray-900 bg-transparent rounded-lg border border-neutral-300 text-muted-foreground">
@@ -80,7 +84,9 @@ const DeliveryDetails = () => {
                   label={t("address.address")}
                   autoCorrect="off"
                   autoComplete="address-line1"
-                  className={`${errors.address && "border-red-500 focus:border-red-500"}`}
+                  className={`${
+                    errors.address && "border-red-500 focus:border-red-500"
+                  }`}
                   {...register("address", {
                     required: t("common.required"),
                   })}
@@ -95,7 +101,9 @@ const DeliveryDetails = () => {
                     type="text"
                     label={t("address.city")}
                     autoCorrect="off"
-                    className={`${errors.city && "border-red-500 focus:border-red-500"}`}
+                    className={`${
+                      errors.city && "border-red-500 focus:border-red-500"
+                    }`}
                     {...register("city", {
                       required: t("common.required"),
                     })}
@@ -109,7 +117,9 @@ const DeliveryDetails = () => {
                     type="text"
                     label={t("address.district")}
                     autoCorrect="off"
-                    className={`${errors.district && "border-red-500 focus:border-red-500"}`}
+                    className={`${
+                      errors.district && "border-red-500 focus:border-red-500"
+                    }`}
                     {...register("district", {
                       required: t("common.required"),
                     })}
@@ -123,7 +133,9 @@ const DeliveryDetails = () => {
                     type="text"
                     label={t("address.zip")}
                     autoCorrect="off"
-                    className={`${errors.zip && "border-red-500 focus:border-red-500"}`}
+                    className={`${
+                      errors.zip && "border-red-500 focus:border-red-500"
+                    }`}
                     {...register("zip", {
                       required: t("common.required"),
                     })}

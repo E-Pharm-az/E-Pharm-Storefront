@@ -9,6 +9,7 @@ import {
 import { Button } from "@/components/ui/button.tsx";
 import { Product } from "@/types/product.ts";
 import { Pill } from "lucide-react";
+import { formatPrice } from "@/utils/priceUtils";
 
 interface Props {
   product: Product;
@@ -38,7 +39,7 @@ const ProductCard: React.FC<Props> = React.memo(({ product, onClick }) => {
       </CardContent>
       <CardFooter className="grid gap-2">
         <p className="text-md text-center font-semibold text-black">
-          {product.price} AZN
+          {formatPrice(product.price)} AZN
         </p>
         <Button
           onClick={() => onClick(product.id)}

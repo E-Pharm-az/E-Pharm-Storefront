@@ -76,7 +76,7 @@ const Payment = () => {
   };
 
   const onApprove = async (data: CardFieldsOnApproveData) => {
-    updateFormData({ orderID: data.orderID, step: CONFIRMATION_STEP });
+    updateFormData({ orderID: data.orderID });
   };
 
   function onError(error: Record<string, unknown>) {
@@ -257,6 +257,7 @@ const SubmitPayment = ({ setShowError }: SubmitPaymentProps) => {
   const [t] = useTranslation("global");
   const { cardFieldsForm } = usePayPalCardFields();
   const { setLoading } = useContext(LoaderContext);
+  const { updateFormData } = useContext(CheckoutContext);
 
   const handleClick = async () => {
     if (!cardFieldsForm) {
@@ -280,6 +281,7 @@ const SubmitPayment = ({ setShowError }: SubmitPaymentProps) => {
     });
 
     setLoading(false);
+    updateFormData({ step: CONFIRMATION_STEP });
   };
 
   return (

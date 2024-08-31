@@ -23,6 +23,7 @@ import CheckoutContext, {
 import LoaderContext from "@/context/LoaderProvider";
 import ErrorContext from "@/context/ErrorProvider";
 import { AxiosError } from "axios";
+import { useNavigate } from "react-router-dom";
 
 interface OrderResponse {
   id: string;
@@ -41,6 +42,7 @@ const Payment = () => {
   );
   const [showError, setShowError] = useState(false);
   const axiosPrivate = useAxiosPrivate();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -69,6 +71,7 @@ const Payment = () => {
       if (error instanceof AxiosError) {
         setError(error.response?.data);
       }
+      navigate("/cart");
       return "";
     } finally {
       setLoading(false);

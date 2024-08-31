@@ -79,22 +79,24 @@ const Payment = () => {
   };
 
   const onApprove = async (data: CardFieldsOnApproveData) => {
-    updateFormData({ orderID: data.orderID });
+    updateFormData({ orderID: data.orderID, step: CONFIRMATION_STEP });
   };
 
-  function onError(error: Record<string, unknown>) {
+  function onError(error: any) {
     try {
-      const errorMessage = error.message as string;
-      const jsonStartIndex = errorMessage.indexOf("{");
-      const jsonString = errorMessage.slice(jsonStartIndex);
-      const errorObject = JSON.parse(jsonString);
+      const errorJsonStartIndex = error.message.indexOf("{");
+      const errorJson = error.message.substring(errorJsonStartIndex);
 
-      const description = errorObject.details[0].description;
-      if (description === "Invalid card number") {
-        setError(t("errors.invalid-card-number"));
+      const errorObject = JSON.parse(errorJson);
+
+      if (errorObject.details && errorObject.details.length > 0) {
+        const description = errorObject.details[0].description;
+        setError(description);
+      } else {
+        setError("No description found in error details.");
       }
-    } catch (parseError) {
-      console.log("Failed to parse error message:", error.message);
+    } catch (e) {
+      console.log("Failed to parse the error message.");
     }
   }
 
@@ -260,7 +262,6 @@ const SubmitPayment = ({ setShowError }: SubmitPaymentProps) => {
   const [t] = useTranslation("global");
   const { cardFieldsForm } = usePayPalCardFields();
   const { setLoading } = useContext(LoaderContext);
-  const { updateFormData } = useContext(CheckoutContext);
 
   const handleClick = async () => {
     if (!cardFieldsForm) {
@@ -279,12 +280,9 @@ const SubmitPayment = ({ setShowError }: SubmitPaymentProps) => {
     setShowError(false);
     setLoading(true);
 
-    await cardFieldsForm.submit().catch((err) => {
-      console.log(err);
-    });
+    await cardFieldsForm.submit().catch(() => {});
 
     setLoading(false);
-    updateFormData({ step: CONFIRMATION_STEP });
   };
 
   return (

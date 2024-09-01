@@ -7,6 +7,7 @@ import {
 } from "react";
 import { jwtDecode } from "jwt-decode";
 import apiClient, { axiosPrivate } from "@/services/api-client.ts";
+import { useNavigate } from "react-router-dom";
 
 export interface TokenResponse {
   token: string;
@@ -53,23 +54,27 @@ const AuthContext = createContext<AuthContextType>({
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isRefreshing, setIsRefreshing] = useState(true);
+  const navigate = useNavigate();
 
   const isAuthenticated = (): boolean => !!user;
 
   const login = async (email: string, password: string) => {
     const tokenResponse = await axiosPrivate.post<TokenResponse>(
       "/auth/customer/login",
-      { email: email, password: password },
+      { email: email, password: password }
     );
 
     const decodedToken = jwtDecode<TokenPayload>(tokenResponse.data.token);
-    const userResponse = await axiosPrivate.get<User>(`user/${decodedToken.jti}`);
+    const userResponse = await axiosPrivate.get<User>(
+      `user/${decodedToken.jti}`
+    );
     setUser(userResponse.data);
   };
 
   const logout = async () => {
+    navigate("/");
+    await axiosPrivate.post("/auth/store/logout");
     setUser(null);
-    await apiClient.get("/auth/store/logout", { withCredentials: true });
   };
 
   return (

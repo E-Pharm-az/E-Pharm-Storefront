@@ -36,11 +36,14 @@ const Profile = () => {
   useEffect(() => {
     (async () => {
       try {
-        const response = await axiosPrivate.get<Order[]>(`/orders/user/${user?.id}`,);
+        const response = await axiosPrivate.get<Order[]>(
+          `/orders/user/${user?.id}`
+        );
         setOrders(response.data);
       } catch (error) {
         if (error instanceof AxiosError) {
-          setError(t("errors.unexpectedError"));
+          if (error.response?.status !== 404)
+            setError(t("errors.unexpectedError"));
         }
       }
     })();
@@ -73,14 +76,14 @@ const Profile = () => {
         <div className="w-full h-min md:w-min border rounded-md p-4">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-4">
-              <User className="h-8 w-8"/>
+              <User className="h-8 w-8" />
               <div>
                 <p>{`${user?.firstName} ${user?.lastName}`}</p>
                 <p className="text-sm text-muted-foreground">{user?.email}</p>
               </div>
             </div>
             <Button variant="destructive" size="icon" onClick={logout}>
-              <LogOut className="h-4 w-4"/>
+              <LogOut className="h-4 w-4" />
             </Button>
           </div>
         </div>

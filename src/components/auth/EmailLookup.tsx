@@ -76,7 +76,7 @@ const EmailLookup = () => {
 
   return (
     <SlidePage>
-      <div className="mx-auto w-fit py-8 sm:py-0 grid gap-6 p-6 sm:p-0 sm:max-w-[400px]">
+      <div className="mx-auto w-full py-8 sm:py-0 grid gap-6 p-6 sm:p-0 sm:max-w-[400px]">
         <h1 className="text-3xl font-medium leading-tight tracking-tight text-gray-900">
           {t("email-lookup.title")}
         </h1>

@@ -6,7 +6,7 @@ import {
   useState,
 } from "react";
 import { jwtDecode } from "jwt-decode";
-import apiClient, { axiosPrivate } from "@/services/api-client.ts";
+import { axiosPrivate } from "@/services/api-client.ts";
 import { useNavigate } from "react-router-dom";
 
 export interface TokenResponse {

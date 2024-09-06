@@ -20,7 +20,7 @@ const ProductCard: React.FC<Props> = React.memo(({ product, onClick }) => {
   const { t } = useTranslation("global");
 
   return (
-    <Card>
+    <Card className="relative">
       <CardHeader>
         <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
       </CardHeader>
@@ -42,6 +42,7 @@ const ProductCard: React.FC<Props> = React.memo(({ product, onClick }) => {
           {formatPrice(product.price)} AZN
         </p>
         <Button
+          disabled={product.stock < 1}
           onClick={() => onClick(product.id)}
           variant="default"
           size="sm"
@@ -50,6 +51,12 @@ const ProductCard: React.FC<Props> = React.memo(({ product, onClick }) => {
           {t("products.select")}
         </Button>
       </CardFooter>
+      {product.stock < 1 && (
+        <div className="fixed top-0 right-0 left-0 bottom-0 flex items-center justify-center blur-sm bg-gray-500 opacity-30">
+          <p>Out of stock</p>
+          <Button size="sm">Notify when in stock</Button>
+        </div>
+      )}
     </Card>
   );
 });

@@ -52,8 +52,8 @@ const ProductCard: React.FC<Props> = React.memo(({ product, onClick }) => {
         </Button>
       </CardFooter>
       {product.stock < 1 && (
-        <div className="fixed top-0 right-0 left-0 bottom-0 flex items-center justify-center blur-sm bg-gray-500 opacity-30">
-          <p>Out of stock</p>
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-500 bg-opacity-30 rounded-md backdrop-blur-sm">
+          <p className="text-white font-semibold mb-2">Out of stock</p>
           <Button size="sm">Notify when in stock</Button>
         </div>
       )}

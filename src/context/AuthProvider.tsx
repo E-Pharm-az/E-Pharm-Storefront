@@ -5,13 +5,8 @@ import {
   SetStateAction,
   useState,
 } from "react";
-import { jwtDecode } from "jwt-decode";
 import { axiosPrivate } from "@/services/api-client.ts";
 import { useNavigate } from "react-router-dom";
-
-export interface TokenResponse {
-  token: string;
-}
 
 export interface TokenPayload {
   jti: string;
@@ -59,16 +54,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const isAuthenticated = (): boolean => !!user;
 
   const login = async (email: string, password: string) => {
-    const tokenResponse = await axiosPrivate.post<TokenResponse>(
-      "/auth/customer/login",
-      { email: email, password: password }
-    );
+    const response = await axiosPrivate.post<User>("/auth/customer/login", {
+      email: email,
+      password: password,
+    });
 
-    const decodedToken = jwtDecode<TokenPayload>(tokenResponse.data.token);
-    const userResponse = await axiosPrivate.get<User>(
-      `user/${decodedToken.jti}`
-    );
-    setUser(userResponse.data);
+    setUser(response.data);
   };
 
   const logout = async () => {

@@ -70,32 +70,37 @@ const ProductDetails: React.FC<{
           <h2 className="text-5xl">{product.name}</h2>
           <p>{product.description}</p>
           <p>Strength: {product.strengthMg} mg</p>
-          <div className="flex gap-2 items-center">
-            <div className="flex border rounded items-center gap-2">
-              <Button
-                onClick={handleMinusClick}
-                size="icon"
-                variant="ghost"
-                className="rounded-md"
-              >
-                -
-              </Button>
-              <span className="h-7 w-7 text-center count leading-[28px]">
-                {count}
-              </span>
-              <Button
-                onClick={handleAddClick}
-                size="icon"
-                variant="ghost"
-                className="rounded-md"
-              >
-                +
+
+          {product.stock > 0 ? (
+            <div className="flex gap-2 items-center">
+              <div className="flex border rounded items-center gap-2">
+                <Button
+                  onClick={handleMinusClick}
+                  size="icon"
+                  variant="ghost"
+                  className="rounded-md"
+                >
+                  -
+                </Button>
+                <span className="h-7 w-7 text-center count leading-[28px]">
+                  {count}
+                </span>
+                <Button
+                  onClick={handleAddClick}
+                  size="icon"
+                  variant="ghost"
+                  className="rounded-md"
+                >
+                  +
+                </Button>
+              </div>
+              <Button onClick={handleAddToCart} className="w-full rounded-md">
+                {t("product-page.product-add-to-cart-btn")}
               </Button>
             </div>
-            <Button onClick={handleAddToCart} className="w-full rounded-md">
-              {t("product-page.product-add-to-cart-btn")}
-            </Button>
-          </div>
+          ) : (
+            <Button className="w-full">Notify me when in stock</Button>
+          )}
         </>
       ) : (
         <>

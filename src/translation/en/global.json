@@ -35,6 +35,26 @@
       "vitamins": "Vitamins & Supplements"
     }
   },
+  "profile": {
+    "title": "Your profile"
+  },
+  "orders": {
+    "title": "Your orders",
+    "status": {
+      "pending": "Order pending",
+      "confirmed": "Preparing your shipment",
+      "rejected": "Order rejected",
+      "shipped": "We've shipped your order",
+      "delivered": "Order delivered",
+      "cancelled": "Order cancelled by you",
+      "returned": "Order returned"
+    },
+    "qty": "Quantity",
+    "tracking-number": "Tracking number",
+    "shipping-address": "Shipping address",
+    "total-price": "Total price",
+    "no-orders": "No orders"
+  },
   "aboutUs": {
     "title": "About Us",
     "aboutEPharm": "About E-Pharm",

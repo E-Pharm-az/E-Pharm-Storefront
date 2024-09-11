@@ -35,6 +35,26 @@
       "vitamins": "Витамины"
     }
   },
+  "profile": {
+    "title": "Ваш профиль"
+  },
+  "orders": {
+    "title": "Ваши заказы",
+    "status": {
+      "pending": "Заказ ожидает",
+      "confirmed": "Готовим вашу посылку",
+      "rejected": "Заказ отклонен",
+      "shipped": "Мы отправили ваш заказ",
+      "delivered": "Заказ доставлен",
+      "cancelled": "Заказ отменен вами",
+      "returned": "Заказ возвращен"
+    },
+    "qty": "Количество",
+    "tracking-number": "Номер отслеживания",
+    "shipping-address": "Адрес доставки",
+    "total-price": "Общая цена",
+    "no-orders": "Заказов нет"
+  },
   "aboutUs": {
     "title": "О нас",
     "aboutEPharm": "E-Pharm",

@@ -35,6 +35,26 @@
       "vitamins": "Vitaminlər"
     }
   },
+  "profile": {
+    "title": "Profiliniz"
+  },
+  "orders": {
+    "title": "Sifarişləriniz",
+    "status": {
+      "pending": "Sifariş gözləyir",
+      "confirmed": "Göndərməyiniz hazırlanır",
+      "rejected": "Sifariş rədd edildi",
+      "shipped": "Sifarişiniz göndərildi",
+      "delivered": "Sifariş çatdırıldı",
+      "cancelled": "Sifarişiniz ləğv edildi",
+      "returned": "Sifariş geri qaytarıldı"
+    },
+    "qty": "Miqdar",
+    "tracking-number": "İzləmə nömrəsi",
+    "shipping-address": "Göndərmə ünvanı",
+    "total-price": "Ümumi qiymət",
+    "no-orders": "Sifariş yoxdur"
+  },
   "aboutUs": {
     "title": "Haqqımızda",
     "aboutEPharm": "E-Pharm",

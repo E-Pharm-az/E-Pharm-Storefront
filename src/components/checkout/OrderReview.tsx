@@ -80,29 +80,27 @@ const OrderReview = () => {
                 <Check className="text-green-500 h-8 w-8" />
               </div>
               <AlertDialogTitle className="text-2xl font-semibold">
-                Payment Successful!
+                {t("checkout.payment_success")}
               </AlertDialogTitle>
             </AlertDialogHeader>
             <Alert className="mt-4">
               <ShoppingBag className="h-4 w-4" />
-              <AlertTitle>Order Created</AlertTitle>
-              <AlertDescription>
-                Your order has been successfully placed and is being processed.
-              </AlertDescription>
+              <AlertTitle>{t("checkout.order_created")}</AlertTitle>
+              <AlertDescription>{t("checkout.order_placed")}</AlertDescription>
             </Alert>
             <AlertDialogFooter className="mt-6 flex flex-col sm:flex-row sm:justify-center gap-3">
               <Button
                 onClick={() => navigate("/profile")}
                 className="w-full sm:w-auto"
               >
-                View Order
+                {t("checkout.view_order")}
               </Button>
               <Button
                 variant="outline"
                 onClick={() => handleOpenChange(false)}
                 className="w-full sm:w-auto"
               >
-                Close
+                {t("checkout.close")}
               </Button>
             </AlertDialogFooter>
           </AlertDialogContent>

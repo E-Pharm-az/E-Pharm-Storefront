@@ -208,7 +208,12 @@
     "card-fields-required": "Zəhmət olmasa, bütün kart sahələrini düzgün doldurun.",
     "save-and-continue": "Yadda Saxla & Davam Et",
     "order-review-details": "«Ödənişi Təsdiqlə» düyməsini klikləməklə, İstifadə Şərtləri, Satış Şərtləri, Məxfilik Siyasəti və Qaytarma Siyasətini oxuduğunuzu, başa düşdüyünüzü və qəbul etdiyinizi təsdiqləyirsiniz. Göndər",
-    "confirm-order": "Ödənişi Təsdiqlə"
+    "confirm-order": "Ödənişi Təsdiqlə",
+    "payment_success": "Ödəniş uğurla tamamlandı!",
+    "order_created": "Sifariş yaradıldı",
+    "order_placed": "Sifarişiniz uğurla yerləşdirildi və emal olunur.",
+    "view_order": "Sifarişi göstər",
+    "close": "Bağla"
   },
   "cart-provider": {
     "item-added-to-cart": "Məhsul səbətə əlavə edildi",

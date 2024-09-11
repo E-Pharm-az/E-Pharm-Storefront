@@ -217,7 +217,12 @@
     "card-fields-required": "Please enter all cards fields correctly.",
     "save-and-continue": "Save & Continue",
     "order-review-details": "By clicking the \"Submit Payment\" button, you confirm that you have read, understand, and accept our Terms of Use, Terms of Sale, Privacy Policy, and Return Policy. Submit",
-    "confirm-order": "Submit Payment"
+    "confirm-order": "Submit Payment",
+    "payment_success": "Payment Successful!",
+    "order_created": "Order Created",
+    "order_placed": "Your order has been successfully placed and is being processed.",
+    "view_order": "View Order",
+    "close": "Close"
   },
   "cart-provider": {
     "item-added-to-cart": "Item added to cart",

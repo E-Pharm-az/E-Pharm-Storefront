@@ -227,7 +227,22 @@
     "select": "Bu müalicəni seçin"
   },
   "product-page": {
-    "product-not-found": "Məhsul tapılmayıb",
-    "product-add-to-cart-btn": "Səbətə at"
+    "product-not-found": "Məhsul tapılmadı",
+    "product-add-to-cart-btn": "Səbətə əlavə et",
+    "for": "Üçün",
+    "supports-you": "Sizi dəstəkləyir",
+    "take": "Al",
+    "subsribe": "Abunə ol",
+    "one-time-purchase": "Bir dəfəlik alış",
+    "select-dosage-form": "Dozaj formasını seçin",
+    "notify-when-stock": "Stokda olduqda xəbər ver",
+    "storage-descend": "Saxlama təsviri",
+    "active-ingredients": "Aktiv maddələr",
+    "dosage-forms": "Dozaj formaları",
+    "route-of-administration": "Tətbiq yolu",
+    "side-effects": "Yan təsirlər",
+    "usage-warnings": "İstifadə xəbərdarlıqları",
+    "allergies": "Allergiyalar",
+    "indications": "Göstərişlər"
   }
 }

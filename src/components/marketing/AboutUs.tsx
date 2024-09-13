@@ -38,22 +38,6 @@ const AboutUsPage: React.FC = () => {
 
       <Card className="mb-8">
         <CardHeader>
-          <CardTitle>{t("aboutUs.faq")}</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Accordion type="single" collapsible className="w-full">
-            {faqItems.map((item, index) => (
-              <AccordionItem key={index} value={`item-${index}`}>
-                <AccordionTrigger>{t(`faq.${item.question}`)}</AccordionTrigger>
-                <AccordionContent>{t(`faq.${item.answer}`)}</AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </CardContent>
-      </Card>
-
-      <Card className="mb-8">
-        <CardHeader>
           <CardTitle>{t("aboutUs.deliveryRules")}</CardTitle>
         </CardHeader>
         <CardContent>
@@ -73,6 +57,22 @@ const AboutUsPage: React.FC = () => {
             <li>{t("aboutUs.orderStep4")}</li>
             <li>{t("aboutUs.orderStep5")}</li>
           </ol>
+        </CardContent>
+      </Card>
+
+      <Card className="mb-8">
+        <CardHeader>
+          <CardTitle>{t("aboutUs.faq")}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Accordion type="single" collapsible className="w-full">
+            {faqItems.map((item, index) => (
+              <AccordionItem key={index} value={`item-${index}`}>
+                <AccordionTrigger>{t(`faq.${item.question}`)}</AccordionTrigger>
+                <AccordionContent>{t(`faq.${item.answer}`)}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </CardContent>
       </Card>
     </div>

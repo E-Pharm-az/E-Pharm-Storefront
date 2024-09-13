@@ -237,6 +237,21 @@
   },
   "product-page": {
     "product-not-found": "Товар не найден",
-    "product-add-to-cart-btn": "Добавить в корзину"
+    "product-add-to-cart-btn": "Добавить в корзину",
+    "for": "Для",
+    "supports-you": "Поддерживает вас",
+    "take": "Принять",
+    "subsribe": "Подписаться",
+    "one-time-purchase": "Одноразовая покупка",
+    "select-dosage-form": "Выбрать форму выпуска",
+    "notify-when-stock": "Уведомить, когда будет в наличии",
+    "storage-descend": "Описание хранения",
+    "active-ingredients": "Активные ингредиенты",
+    "dosage-forms": "Формы дозировки",
+    "route-of-administration": "Способ применения",
+    "side-effects": "Побочные эффекты",
+    "usage-warnings": "Предупреждения по использованию",
+    "allergies": "Аллергии",
+    "indications": "Показания"
   }
 }

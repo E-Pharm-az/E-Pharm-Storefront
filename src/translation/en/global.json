@@ -237,6 +237,21 @@
   },
   "product-page": {
     "product-not-found": "Product not found",
-    "product-add-to-cart-btn": "Add to cart"
+    "product-add-to-cart-btn": "Add to cart",
+    "for": "For",
+    "supports-you": "Supports you",
+    "take": "Take",
+    "subsribe": "Subscribe",
+    "one-time-purchase": "One-time purchase",
+    "select-dosage-form": "Select dosage form",
+    "notify-when-stock": "Notify me when in stock",
+    "storage-descend": "Storage description",
+    "active-ingredients": "Active ingredients",
+    "dosage-forms": "Dosage forms",
+    "route-of-administration": "Route of administration",
+    "side-effects": "Side effects",
+    "usage-warnings": "Usage warnings",
+    "allergies": "Allergies",
+    "indications": "Indications"
   }
 }

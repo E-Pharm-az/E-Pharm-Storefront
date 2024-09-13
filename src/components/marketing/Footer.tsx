@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import {Separator} from "@/components/ui/separator.tsx";
+import { Separator } from "@/components/ui/separator.tsx";
 
 const Footer = () => {
   const [showAbout, setShowAbout] = useState(false);
@@ -12,7 +12,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-white mx-auto my-24 grid gap-10">
-      <Separator/>
+      <Separator />
       <div className="grid grid-cols-1 gap-8 mb-6 md:grid-cols-4 md:gap-4">
         <div className="flex flex-col gap-4">
           <div

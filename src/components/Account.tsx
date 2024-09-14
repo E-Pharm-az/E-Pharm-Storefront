@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import AuthContext from "../context/AuthProvider";
-import { LogOut, Pill } from "lucide-react";
+import { Edit, LogOut, Minus, Pill } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import useAxiosPrivate from "@/hooks/useAxiosPrivate";
@@ -164,6 +164,62 @@ const Profile = () => {
         </div>
       </div>
 
+      <div className="grid gap-4">
+        <p className="text-xl md:text-2xl font-medium text-muted-foreground">
+          {t("profile.payment-details")}
+        </p>
+        <div className="w-full border rounded-md p-4 md:p-6 flex flex-col md:flex-row gap-4 md:gap-1">
+          <div className="w-full">
+            <p className="text-sm md:text-md font-medium text-muted-foreground">
+              {t("profile.default-card")}
+            </p>
+            <Minus className="mt-2" />
+          </div>
+          <div className="w-full md:w-auto">
+            <Button variant="outline" className="w-full md:w-auto">
+              <p className="text-sm md:text-base">
+                {t("profile.add-payment-method")}
+              </p>
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid gap-4">
+        <p className="text-xl md:text-2xl font-medium text-muted-foreground">
+          {t("profile.shipping-address")}
+        </p>
+        <div className="w-full border rounded-md p-4 md:p-6 flex flex-col md:flex-row gap-4">
+          <div className="w-full grid gap-4">
+            <div>
+              <p className="text-sm md:text-md font-medium text-muted-foreground">
+                {t("profile.default-shipping-address")}
+              </p>
+              <p className="font-medium text-base md:text-lg">
+                {user?.address} {user?.district} {user?.city} {user?.zip}
+              </p>
+            </div>
+            <div>
+              <p className="text-sm md:text-md font-medium text-muted-foreground">
+                {t("profile.subscriptions")}
+              </p>
+              <p className="font-medium text-destructive text-sm md:text-base">
+                {t("profile.change-subscription")}{" "}
+                <Link to="/account/subscription" className="underline">
+                  {t("profile.subscriptions-page")}
+                </Link>
+              </p>
+            </div>
+          </div>
+
+          <div className="w-full md:w-auto">
+            <Button variant="outline" className="w-full md:w-auto">
+              <Edit className="mr-2 h-4 w-4" />
+              <p className="text-sm md:text-base">{t("common.edit")}</p>
+            </Button>
+          </div>
+        </div>
+      </div>
       <Button
         variant="destructive"
         onClick={logout}

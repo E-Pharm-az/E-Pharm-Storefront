@@ -10,7 +10,7 @@ const Layout = () => {
   }, []);
 
   return (
-    <main className="px-1 md:px-4 mx-auto max-w-[1400px]">
+    <main className="px-3 md:px-4 mx-auto max-w-[1400px]">
       <div className="md:mb-[64px]">
         <Navbar />
       </div>

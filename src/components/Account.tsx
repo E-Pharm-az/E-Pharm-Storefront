@@ -110,7 +110,7 @@ const Profile = () => {
   );
 
   const OrderDetails = ({ order }: { order: Order }) => (
-    <div className="w-full text-sm md:text-base grid gap-4 mt-4 md:mt-0">
+    <div className="w-fit text-sm md:text-base grid gap-4 mt-4 md:mt-0">
       <div>
         <p className="text-muted-foreground font-medium">
           {t("orders.tracking-number")}

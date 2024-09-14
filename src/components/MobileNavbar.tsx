@@ -1,18 +1,18 @@
-import {useContext, useState} from "react";
+import { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import Logo from "../assets/logo.png";
 import LanguageSelector from "./LanguageSelector.tsx";
 import CartContext from "../context/CartProvider.tsx";
 import { Home, ShoppingCart, UserRound, Search } from "lucide-react";
 import AuthContext from "../context/AuthProvider.tsx";
-import {SearchProducts} from "@/components/SearchProducts.tsx";
-import {Button} from "@/components/ui/button.tsx";
+import { SearchProducts } from "@/components/SearchProducts.tsx";
+import { Button } from "@/components/ui/button.tsx";
 
 export const MobileNavbar = () => {
   const { cart } = useContext(CartContext);
   const { user } = useContext(AuthContext);
   const [showSearch, setShowSearch] = useState(false);
-  
+
   const handleSearch = () => {
     return (
       <>
@@ -69,7 +69,7 @@ export const MobileNavbar = () => {
             <ShoppingCart className="text-brand" size={28} />
           </NavLink>
           <NavLink
-            to={user ? "/profile" : "/email-lookup"}
+            to={user ? "/account" : "/email-lookup"}
             className="flex h-full items-center justify-center"
           >
             <UserRound className="text-brand" size={28} />

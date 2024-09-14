@@ -75,23 +75,23 @@ const Profile = () => {
   }: {
     orderProduct: OrderProduct;
   }) => (
-    <div className="flex gap-2 items-center w-full mb-2">
+    <div className="flex gap-3 items-center w-full mb-3">
       {orderProduct.product.imageUrl ? (
         <img
-          className="w-16 h-16 md:w-24 md:h-24 rounded-md object-cover"
+          className="w-20 h-20 md:w-24 md:h-24 rounded-md object-cover"
           src={orderProduct.product.imageUrl}
           alt="Product image"
         />
       ) : (
-        <div className="w-16 h-16 md:w-24 md:h-24 rounded-md flex items-center justify-center bg-muted">
-          <Pill className="text-xl" />
+        <div className="w-20 h-20 md:w-24 md:h-24 rounded-md flex items-center justify-center bg-muted">
+          <Pill className="text-2xl" />
         </div>
       )}
       <div>
         <p className="text-base md:text-lg font-medium">
           {orderProduct.product.name}
         </p>
-        <p className="text-sm">
+        <p className="text-sm md:text-base">
           {t("orders.qty")}: {orderProduct.quantity}
         </p>
       </div>
@@ -99,21 +99,27 @@ const Profile = () => {
   );
 
   const OrderDetails = ({ order }: { order: Order }) => (
-    <div className="w-full md:w-[250px] text-sm md:text-base grid gap-3">
+    <div className="w-full text-sm md:text-base grid gap-4 mt-4 md:mt-0">
       <div>
-        <p className="text-muted-foreground">{t("orders.tracking-number")}</p>
+        <p className="text-muted-foreground font-medium">
+          {t("orders.tracking-number")}
+        </p>
         <p>{order.trackingId}</p>
       </div>
       <div>
-        <p className="text-muted-foreground">{t("orders.shipping-address")}</p>
+        <p className="text-muted-foreground font-medium">
+          {t("orders.shipping-address")}
+        </p>
         <p>{order.address}</p>
         <p>{order.district}</p>
         <p>{order.city}</p>
         <p>{order.zip}</p>
       </div>
       <div>
-        <p className="text-muted-foreground">{t("orders.total-price")}</p>
-        <p>{formatPrice(order.totalPrice)} ₼</p>
+        <p className="text-muted-foreground font-medium">
+          {t("orders.total-price")}
+        </p>
+        <p className="font-medium">{formatPrice(order.totalPrice)} ₼</p>
       </div>
     </div>
   );
@@ -121,7 +127,9 @@ const Profile = () => {
   const OrderItem = ({ order }: { order: Order }) => (
     <div key={order.id} className="border p-4 md:p-6 rounded-md grid gap-4">
       <div className="bg-muted p-2 rounded-md">
-        <p className="text-center font-medium">{mapStatus(order.status)}</p>
+        <p className="text-center font-medium text-sm md:text-base">
+          {mapStatus(order.status)}
+        </p>
       </div>
       <div className="w-full grid md:flex gap-4">
         <div className="w-full">
@@ -136,39 +144,45 @@ const Profile = () => {
 
   const UserProfile = () => (
     <div className="grid gap-8">
-      <div className="grid gap-3">
-        <p className="text-2xl font-medium text-muted-foreground">
+      <div className="grid gap-4">
+        <p className="text-xl md:text-2xl font-medium text-muted-foreground">
           {t("profile.account-details")}
         </p>
-        <div className="w-full border rounded-md p-6 grid gap-4">
+        <div className="w-full border rounded-md p-4 md:p-6 grid gap-4">
           <div>
-            <p className="text-md font-medium text-muted-foreground">
+            <p className="text-sm md:text-md font-medium text-muted-foreground">
               {t("profile.name")}
             </p>
-            <p className="font-medium">{`${user?.firstName} ${user?.lastName}`}</p>
+            <p className="font-medium text-base md:text-lg">{`${user?.firstName} ${user?.lastName}`}</p>
           </div>
           <div>
-            <p className="text-md font-medium text-muted-foreground">
+            <p className="text-sm md:text-md font-medium text-muted-foreground">
               {t("profile.email")}
             </p>
-            <p className="font-medium">{user?.email}</p>
+            <p className="font-medium text-base md:text-lg">{user?.email}</p>
           </div>
         </div>
       </div>
 
-      <Button variant="destructive" onClick={logout} className="w-fit mx-auto">
-        <LogOut className="h-4 w-4" />
-        <p>{t("profile.logout")}</p>
+      <Button
+        variant="destructive"
+        onClick={logout}
+        className="w-full md:w-fit mx-auto"
+      >
+        <LogOut className="mr-2 h-4 w-4" />
+        <p className="text-sm md:text-base">{t("profile.logout")}</p>
       </Button>
     </div>
   );
 
   const OrderHistory = () => (
-    <div className="grid gap-8">
+    <div className="grid gap-6 md:gap-8">
       {orders.length > 0 ? (
         orders.map((order) => <OrderItem key={order.id} order={order} />)
       ) : (
-        <p>{t("orders.no-orders")}</p>
+        <p className="text-center text-base md:text-lg">
+          {t("orders.no-orders")}
+        </p>
       )}
     </div>
   );
@@ -191,21 +205,26 @@ const Profile = () => {
     <Tabs
       value={currentTab}
       onValueChange={handleTabChange}
-      className="max-w-[700px] mx-auto"
+      className="max-w-[700px] mx-auto px-2 md:px-0"
     >
-      <TabsList className="grid w-full grid-cols-3 mb-8">
-        <TabsTrigger value="orders">{t("orders.title")}</TabsTrigger>
-        <TabsTrigger value="subscription">
+      <TabsList className="grid w-full grid-cols-3 mb-6 md:mb-8">
+        <TabsTrigger value="orders" className="text-sm md:text-base">
+          {t("orders.title")}
+        </TabsTrigger>
+        <TabsTrigger value="subscription" className="text-sm md:text-base">
           {t("subscription.title")}
         </TabsTrigger>
-
-        <TabsTrigger value="profile">{t("profile.title")}</TabsTrigger>
+        <TabsTrigger value="profile" className="text-sm md:text-base">
+          {t("profile.title")}
+        </TabsTrigger>
       </TabsList>
       <TabsContent value="orders">
         <OrderHistory />
       </TabsContent>
       <TabsContent value="subscription">
-        <p>{t("subscription.comming-soon")}</p>
+        <p className="text-center text-base md:text-lg">
+          {t("subscription.comming-soon")}
+        </p>
       </TabsContent>
       <TabsContent value="profile">
         <UserProfile />

@@ -253,7 +253,7 @@ const Signup = () => {
                   {...register("district", { required: true })}
                 />
                 <Input
-                  type="text"
+                  type="number"
                   label={t("address.zip")}
                   autoComplete="zip"
                   disabled={loading}

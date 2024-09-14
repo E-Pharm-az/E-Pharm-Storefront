@@ -130,9 +130,10 @@ const DeliveryDetails = () => {
                 </div>
                 <div className="w-full h-min">
                   <Input
-                    type="text"
                     label={t("address.zip")}
                     autoCorrect="off"
+                    autoComplete="postal-code"
+                    type="number"
                     className={`${
                       errors.zip && "border-red-500 focus:border-red-500"
                     }`}

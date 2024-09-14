@@ -43,7 +43,7 @@ const ProductImage: React.FC<{ product: Product | null }> = React.memo(
             className="w-full h-auto"
           />
         ) : (
-          <Skeleton className="h-[420px] w-full rounded-md" />
+          <Skeleton className="h-[250px] md:h-[420px] w-full rounded-md" />
         )}
       </div>
     );
@@ -68,50 +68,58 @@ const ProductDetails: React.FC<{
   );
 
   return (
-    <div className="grid gap-6 w-full">
+    <div className="grid gap-4 md:gap-6 w-full">
       {product ? (
         <>
-          <div className="grid gap-4 w-full">
-            <div className="flex justify-between w-full text-neutral-800">
-              <h2 className="text-4xl font-semibold">{product.name}</h2>
-              <p className="text-lg font-semibold mt-3">
+          <div className="grid gap-2 md:gap-4 w-full">
+            <div className="flex flex-col md:flex-row justify-between w-full text-neutral-800">
+              <h2 className="text-2xl md:text-4xl font-semibold">
+                {product.name}
+              </h2>
+              <p className="text-xl md:text-2xl font-semibold mt-2 md:mt-3">
                 ₼&nbsp;{formatPrice(product.price)}
               </p>
             </div>
-            <p>{product.description}</p>
+            <p className="text-sm md:text-base">{product.description}</p>
           </div>
 
-          <div className="rounded-md border border-muted-foreground flex gap-2  p-2">
+          <div className="rounded-md border border-muted-foreground flex flex-col md:flex-row gap-2 p-2 text-sm">
             <div className="w-full">
-              <p className="text-sm font-muted-foreground">
+              <p className="text-xs md:text-sm font-muted-foreground">
                 {t("product-page.for")}
               </p>
-              <Minus />
+              <Minus className="w-4 h-4 md:w-5 md:h-5" />
             </div>
-            <Separator className="bg-muted-foreground" orientation="vertical" />
+            <Separator
+              className="bg-muted-foreground hidden md:block"
+              orientation="vertical"
+            />
             <div className="w-full">
-              <p className="text-sm font-muted-foreground">
+              <p className="text-xs md:text-sm font-muted-foreground">
                 {t("product-page.supports-you")}
               </p>
-              <Minus />
+              <Minus className="w-4 h-4 md:w-5 md:h-5" />
             </div>
-            <Separator className="bg-muted-foreground" orientation="vertical" />
+            <Separator
+              className="bg-muted-foreground hidden md:block"
+              orientation="vertical"
+            />
             <div className="w-full">
-              <p className="text-sm font-muted-foreground">
+              <p className="text-xs md:text-sm font-muted-foreground">
                 {t("product-page.take")}
               </p>
-              <Minus />
+              <Minus className="w-4 h-4 md:w-5 md:h-5" />
             </div>
           </div>
 
-          <div className="flex w-full gap-4">
+          <div className="flex w-full gap-2 md:gap-4">
             <Button
               disabled={true}
               onClick={() => setIsSubscribed(true)}
               variant="outline"
               className={`${
                 isSubscribed && "bg-white hover:bg-white border-black"
-              } rounded-md p-6 w-full`}
+              } rounded-md p-2 md:p-6 w-full text-xs md:text-sm`}
             >
               {t("product-page.subsribe")}
             </Button>
@@ -120,18 +128,18 @@ const ProductDetails: React.FC<{
               variant="outline"
               className={`${
                 !isSubscribed && "bg-white hover:bg-white border-black"
-              } rounded-md p-6 w-full`}
+              } rounded-md p-2 md:p-6 w-full text-xs md:text-sm`}
             >
               {t("product-page.one-time-purchase")}
             </Button>
           </div>
 
           <div className="grid gap-2">
-            <p className="font-medium">
+            <p className="font-medium text-sm md:text-base">
               {t("product-page.select-dosage-form")}
             </p>
             <Select defaultValue={product.dosageForms[0].name}>
-              <SelectTrigger className="h-14">
+              <SelectTrigger className="h-10 md:h-14">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -139,7 +147,7 @@ const ProductDetails: React.FC<{
                   <SelectItem
                     value={dosageForm.name}
                     key={dosageForm.id}
-                    className="h-14"
+                    className="h-10 md:h-14"
                   >
                     {dosageForm.name}
                   </SelectItem>
@@ -319,7 +327,7 @@ const ProductPage = () => {
   );
 
   return (
-    <div className="w-full mx-auto px-4 flex flex-col md:flex-row gap-6 justify-between">
+    <div className="w-full mx-auto flex flex-col md:flex-row gap-6 justify-between">
       <div className="w-full md:w-2/3">
         <ProductImage product={product} />
       </div>

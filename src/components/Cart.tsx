@@ -1,122 +1,141 @@
-import CartContext, { CartItem } from "../context/CartProvider.tsx";
-import { useContext } from "react";
-import { Minus, Pill, Trash } from "lucide-react";
+import React, { useContext } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Button } from "@/components/ui/button.tsx";
-import { Separator } from "@/components/ui/separator.tsx";
-import { Link, useNavigate } from "react-router-dom";
-import AuthContext from "@/context/AuthProvider.tsx";
-import { formatPrice } from "@/utils/priceUtils.ts";
+import { Minus, Pill, Trash } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import CartContext, { CartItem } from "../context/CartProvider";
+import AuthContext from "@/context/AuthProvider";
+import { formatPrice } from "@/utils/priceUtils";
 
 const Cart = () => {
   const { cart, updateCart, removeFromCart } = useContext(CartContext);
   const { isAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [t] = useTranslation("global");
+
   const totalPrice = cart.reduce(
     (total, item) => total + item.price * item.quantity,
     0
   );
-  const [t] = useTranslation("global");
 
   const handleCountChange = (item: CartItem, count: string) =>
     updateCart(item, parseInt(count));
 
   const handleGoToCart = () => navigate("/checkout");
 
-  return (
-    <div className="max-w-[1080px] lg:mx-auto lg:flex grid gap-8 mx-8 px-2">
-      <div className="w-full">
-        {!isAuthenticated() && (
-          <div className="border border-muted-foreground p-3 mb-4">
-            <p className="font-semibold text-lg">{t("cart.join-us-title")}</p>
-            <p className="text-muted-foreground">
-              <Link to="/email-lookup" className="text-primary underline">
-                {t("cart.sign-in")}
-              </Link>{" "}
-              {t("cart.or")}{" "}
-              <Link to="/email-lookup" className="text-primary underline">
-                {t("cart.join")}
-              </Link>{" "}
-              {t("cart.enjoy-benefits")}
-            </p>
-          </div>
-        )}
-        <h3 className="text-2xl font-medium mb-4">{t("cart.bag")}</h3>
-        {cart.length === 0 ? (
-          <p>{t("cart.empty-bag")}</p>
+  const CartItem = ({ item }: { item: CartItem }) => (
+    <div className="flex gap-4 border-b pb-4 mb-4">
+      <div className="h-24 w-24 flex-shrink-0 border flex justify-center items-center">
+        {item.imageUrl ? (
+          <img
+            src={item.imageUrl}
+            alt={item.name}
+            className="w-full h-full object-cover"
+          />
         ) : (
-          <div>
-            {cart.map((item) => (
-              <div key={item.id} className="flex justify-between gap-4">
-                <div className="border h-32 w-32 flex justify-center items-center">
-                  {item.imageUrl ? (
-                    <img
-                      src={item.imageUrl}
-                      alt={item.name}
-                      className="w-full"
-                    />
-                  ) : (
-                    <Pill className="h-8 w-8 text-muted-foreground" />
-                  )}
-                </div>
-                <div className="w-full flex flex-col justify-between">
-                  <div className="w-full flex justify-between">
-                    <p className="font-semibold">{item.name}</p>
-                    <p>{item.price} AZN</p>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <Trash
-                      onClick={() => removeFromCart(item.id)}
-                      className="h-5 w-5 cursor-pointer text-gray-600"
-                    />
-                    <select
-                      value={item.quantity}
-                      onChange={(e) => handleCountChange(item, e.target.value)}
-                      className="rounded-md border border-gray-300 px-2 py-1 focus:outline-none focus:ring-4 focus:ring-blue-300"
-                    >
-                      {[...Array(20).keys()].map((num) => (
-                        <option key={num + 1} value={num + 1}>
-                          {num + 1}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          <Pill className="h-8 w-8 text-muted-foreground" />
         )}
       </div>
-      <Separator className="block lg:hidden" />
-      <div className="lg:w-[550px] grid gap-6 w-full">
-        <p className="text-2xl font-medium">{t("cart.summary")}</p>
-        <div className="grid gap-4">
-          <div className="flex justify-between w-full">
-            <p>{t("cart.subtotal")}</p>
-            {totalPrice > 0 ? <p>{formatPrice(totalPrice)} AZN</p> : <Minus />}
-          </div>
-          <div className="flex justify-between w-full">
-            <p>{t("cart.shipping-handling")}</p>
-            <p>{t("cart.free")}</p>
-          </div>
-          <div className="flex justify-between w-full">
-            <p>{t("cart.estimated-tax")}</p>
-            <Minus />
-          </div>
-          <Separator />
-          <div className="flex justify-between w-full">
-            <p>{t("cart.total")}</p>
-            {totalPrice > 0 ? <p>{formatPrice(totalPrice)} AZN</p> : <Minus />}
-          </div>
-          <Separator />
+      <div className="flex flex-col justify-between flex-grow">
+        <div className="flex justify-between w-full">
+          <p className="font-semibold text-sm">{item.name}</p>
+          <p className="text-sm">{formatPrice(item.price)} AZN</p>
         </div>
-        <Button
-          onClick={handleGoToCart}
-          className="w-full h-14 text-md"
-          disabled={cart.length === 0}
-        >
-          {t("cart.checkout")}
-        </Button>{" "}
+        <div className="flex items-center justify-between mt-2">
+          <select
+            value={item.quantity}
+            onChange={(e) => handleCountChange(item, e.target.value)}
+            className="rounded-md border border-gray-300 px-2 py-1 text-sm"
+          >
+            {[...Array(20).keys()].map((num) => (
+              <option key={num + 1} value={num + 1}>
+                {num + 1}
+              </option>
+            ))}
+          </select>
+          <button
+            onClick={() => removeFromCart(item.id)}
+            className="text-gray-600 flex items-center"
+          >
+            <Trash className="h-4 w-4 mr-1" />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+
+  const Summary = () => (
+    <div className="bg-gray-50 p-4 rounded-md mt-4 md:mt-0">
+      <p className="text-xl font-medium mb-4">{t("cart.summary")}</p>
+      <div className="space-y-2 text-sm">
+        <div className="flex justify-between">
+          <p>{t("cart.subtotal")}</p>
+          {totalPrice > 0 ? (
+            <p>{formatPrice(totalPrice)} AZN</p>
+          ) : (
+            <Minus className="h-4 w-4" />
+          )}
+        </div>
+        <div className="flex justify-between">
+          <p>{t("cart.shipping-handling")}</p>
+          <p>{t("cart.free")}</p>
+        </div>
+        <div className="flex justify-between">
+          <p>{t("cart.estimated-tax")}</p>
+          <Minus className="h-4 w-4" />
+        </div>
+        <Separator className="my-2" />
+        <div className="flex justify-between font-medium">
+          <p>{t("cart.total")}</p>
+          {totalPrice > 0 ? (
+            <p>{formatPrice(totalPrice)} AZN</p>
+          ) : (
+            <Minus className="h-4 w-4" />
+          )}
+        </div>
+      </div>
+      <Button
+        onClick={handleGoToCart}
+        className="w-full h-12 mt-4 text-sm"
+        disabled={cart.length === 0}
+      >
+        {t("cart.checkout")}
+      </Button>
+    </div>
+  );
+
+  return (
+    <div className="w-full max-w-[1080px] mx-auto">
+      {!isAuthenticated() && (
+        <div className="border border-muted-foreground p-3 mb-4 text-sm">
+          <p className="font-semibold">{t("cart.join-us-title")}</p>
+          <p className="text-muted-foreground">
+            <Link to="/email-lookup" className="text-primary underline">
+              {t("cart.sign-in")}
+            </Link>{" "}
+            {t("cart.or")}{" "}
+            <Link to="/email-lookup" className="text-primary underline">
+              {t("cart.join")}
+            </Link>{" "}
+            {t("cart.enjoy-benefits")}
+          </p>
+        </div>
+      )}
+
+      <div className="md:flex md:gap-8">
+        <div className="w-full md:w-2/3">
+          <h3 className="text-xl font-medium mb-4">{t("cart.bag")}</h3>
+          {cart.length === 0 ? (
+            <p className="text-center py-8">{t("cart.empty-bag")}</p>
+          ) : (
+            cart.map((item) => <CartItem key={item.id} item={item} />)
+          )}
+        </div>
+
+        <div className="md:w-1/3">
+          <Summary />
+        </div>
       </div>
     </div>
   );

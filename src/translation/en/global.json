@@ -35,9 +35,6 @@
       "vitamins": "Vitamins & Supplements"
     }
   },
-  "profile": {
-    "title": "Your profile"
-  },
   "orders": {
     "title": "Your orders",
     "status": {
@@ -54,6 +51,31 @@
     "shipping-address": "Shipping address",
     "total-price": "Total price",
     "no-orders": "No orders"
+  },
+  "subscription": {
+    "title": "Your subscriptions",
+    "comming-soon": "Subscriptions are comming soon..."
+  },
+  "profile": {
+    "title": "Your profile",
+    "account-details": "Account Details",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "birthday": "Birthday",
+    "gender": "Gender",
+    "payment-details": "Payment Details",
+    "default-card": "Default card",
+    "add-payment-method": "Add payment method",
+    "shipping-address": "Shipping Address",
+    "default-shipping-address": "Default shipping address",
+    "orders": "Orders",
+    "change-shipping-address": "To change your shipping address for an order, visit",
+    "orders-page": "orders page",
+    "subscriptions": "Subscriptions",
+    "change-subscription": "To change your shipping address for an subscription, visit",
+    "subscriptions-page": "subscriptions page",
+    "logout": "Logout"
   },
   "aboutUs": {
     "title": "About Us",

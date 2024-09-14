@@ -35,9 +35,6 @@
       "vitamins": "Vitaminlər"
     }
   },
-  "profile": {
-    "title": "Profiliniz"
-  },
   "orders": {
     "title": "Sifarişləriniz",
     "status": {
@@ -54,6 +51,31 @@
     "shipping-address": "Göndərmə ünvanı",
     "total-price": "Ümumi qiymət",
     "no-orders": "Sifariş yoxdur"
+  },
+  "subscription": {
+    "title": "Sizin abunəlikləriniz",
+    "comming-soon": "Abunəliklər tezliklə gəlir..."
+  },
+  "profile": {
+    "title": "Sizin profiliniz",
+    "account-details": "Hesab detalları",
+    "name": "Ad",
+    "email": "Email",
+    "phone": "Telefon",
+    "birthday": "Doğum günü",
+    "gender": "Cinsiyyət",
+    "payment-details": "Ödəniş detalları",
+    "default-card": "Varsayılan kart",
+    "add-payment-method": "Ödəniş üsulu əlavə et",
+    "shipping-address": "Çatdırılma ünvanı",
+    "default-shipping-address": "Varsayılan çatdırılma ünvanı",
+    "orders": "Sifarişlər",
+    "change-shipping-address": "Sifariş üçün çatdırılma ünvanını dəyişmək üçün ziyarət edin",
+    "orders-page": "sifarişlər səhifəsi",
+    "subscriptions": "Abunəliklər",
+    "change-subscription": "Abunəlik üçün çatdırılma ünvanını dəyişmək üçün ziyarət edin",
+    "subscriptions-page": "abunəliklər səhifəsi",
+    "logout": "Çıxış"
   },
   "aboutUs": {
     "title": "Haqqımızda",

@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import Home from "@/components/marketing/Home.tsx";
 import Products from "@/components/product/Products.tsx";
 import NotFound from "@/components/NotFound.tsx";
@@ -6,7 +6,7 @@ import ProductPage from "@/components/product/ProductPage.tsx";
 import Signup from "@/components/auth/Signup.tsx";
 import Login from "@/components/auth/Login.tsx";
 import Layout from "./components/Layout.tsx";
-import Profile from "@/components/Profile.tsx";
+import Profile from "@/components/Account.tsx";
 import RequireAuth from "@/components/auth/RequireAuth.tsx";
 import PersistLogin from "@/components/auth/PersistLogin.tsx";
 import Cart from "@/components/Cart.tsx";
@@ -43,7 +43,11 @@ function App() {
               <Route path="/product-page" element={<ProductPage />} />
               <Route path="/cart" element={<Cart />} />
               <Route element={<RequireAuth />}>
-                <Route path="/profile" element={<Profile />} />
+                <Route
+                  path="/account"
+                  element={<Navigate to="/account/orders" replace />}
+                />
+                <Route path="/account/:tab" element={<Profile />} />
               </Route>
 
               <Route path="*" element={<NotFound />} />

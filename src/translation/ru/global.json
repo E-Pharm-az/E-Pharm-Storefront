@@ -35,9 +35,6 @@
       "vitamins": "Витамины"
     }
   },
-  "profile": {
-    "title": "Ваш профиль"
-  },
   "orders": {
     "title": "Ваши заказы",
     "status": {
@@ -54,6 +51,31 @@
     "shipping-address": "Адрес доставки",
     "total-price": "Общая цена",
     "no-orders": "Заказов нет"
+  },
+  "subscription": {
+    "title": "Ваши подписки",
+    "comming-soon": "Подписки скоро появятся..."
+  },
+  "profile": {
+    "title": "Ваш профиль",
+    "account-details": "Данные аккаунта",
+    "name": "Имя",
+    "email": "Электронная почта",
+    "phone": "Телефон",
+    "birthday": "Дата рождения",
+    "gender": "Пол",
+    "payment-details": "Платежные данные",
+    "default-card": "Карта по умолчанию",
+    "add-payment-method": "Добавить способ оплаты",
+    "shipping-address": "Адрес доставки",
+    "default-shipping-address": "Адрес доставки по умолчанию",
+    "orders": "Заказы",
+    "change-shipping-address": "Чтобы изменить адрес доставки для заказа, посетите",
+    "orders-page": "страницу заказов",
+    "subscriptions": "Подписки",
+    "change-subscription": "Чтобы изменить адрес доставки для подписки, посетите",
+    "subscriptions-page": "страницу подписок",
+    "logout": "Выйти"
   },
   "aboutUs": {
     "title": "О нас",

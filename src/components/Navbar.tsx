@@ -1,9 +1,4 @@
-import {
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import Logo from "../assets/logo.png";
 import LanguageSelector from "./LanguageSelector.tsx";
@@ -14,7 +9,7 @@ import { ShoppingCart, UserRound } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Button } from "@/components/ui/button.tsx";
-import {SearchBar} from "@/components/SearchBar.tsx";
+import { SearchBar } from "@/components/SearchBar.tsx";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -30,7 +25,7 @@ export const Navbar = () => {
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     setShowSearch(
-      location.pathname !== "/" || queryParams.get("search") !== null,
+      location.pathname !== "/" || queryParams.get("search") !== null
     );
   }, [location]);
 
@@ -56,7 +51,9 @@ export const Navbar = () => {
   return (
     <nav
       ref={navBarRef}
-      className={`bg-white hidden items-center justify-between ease-in-out z-10 px-10 py-2 transition-all space-x-4 md:flex md:fixed md:top-0 md:right-0 md:left-0 ${isNavBarScrolled && "shadow-md border-b"}`}
+      className={`bg-white hidden items-center justify-between ease-in-out z-10 px-10 py-2 transition-all space-x-4 md:flex md:fixed md:top-0 md:right-0 md:left-0 ${
+        isNavBarScrolled && "shadow-md border-b"
+      }`}
     >
       <NavLink to="/" className="flex flex-shrink-0 items-center gap-1">
         <img src={Logo} alt="logo" className="h-12 w-12 pointer-events-none" />
@@ -78,13 +75,11 @@ export const Navbar = () => {
         {user ? (
           <Button asChild>
             <NavLink
-              to={"/profile"}
+              to={"/account"}
               className="flex flex-shrink-0 items-center transition hover:opacity-70"
             >
               <UserRound className="mr-2 h-5 w-5" />
-              <p>
-                {t("nav.account")}
-              </p>
+              <p>{t("nav.account")}</p>
             </NavLink>
           </Button>
         ) : (

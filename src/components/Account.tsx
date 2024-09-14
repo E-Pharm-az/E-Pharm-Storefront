@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
-import { useNavigate, useLocation, Link } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import AuthContext from "../context/AuthProvider";
-import { Edit, LogOut, Minus, Pill } from "lucide-react";
+import { LogOut, Pill } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import useAxiosPrivate from "@/hooks/useAxiosPrivate";

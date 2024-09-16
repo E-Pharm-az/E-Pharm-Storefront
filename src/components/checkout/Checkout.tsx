@@ -2,8 +2,8 @@ import Logo from "@/assets/logo.png";
 import { Link } from "react-router-dom";
 import LanguageSelector from "@/components/LanguageSelector.tsx";
 import { Button } from "@/components/ui/button.tsx";
-import { Minus, ShoppingCart } from "lucide-react";
-import CartContext from "@/context/CartProvider.tsx";
+import { Minus, Pill, ShoppingCart } from "lucide-react";
+import CartContext, { CartItem } from "@/context/CartProvider.tsx";
 import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { Separator } from "@/components/ui/separator.tsx";
@@ -11,6 +11,33 @@ import DeliveryDetails from "@/components/checkout/DeliveryDetails.tsx";
 import Payment from "@/components/checkout/Payment.tsx";
 import OrderReview from "@/components/checkout/OrderReview.tsx";
 import { formatPrice } from "@/utils/priceUtils";
+
+const CartProduct = ({ item }: { item: CartItem }) => {
+  return (
+    <div className="flex w-full justify-between items-center">
+      <div className="flex gap-4 w-full">
+        <div className="h-16 w-16 flex-shrink-0 border flex justify-center items-center">
+          {item.imageUrl ? (
+            <img
+              src={item.imageUrl}
+              alt={item.name}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <Pill className="h-8 w-8 text-muted-foreground" />
+          )}
+        </div>
+        <div className="flex items-center">
+          <div>
+            <p className="font-semibold text-sm">{item.name}</p>
+            <p className="text-sm">{formatPrice(item.price)} ₼</p>
+          </div>
+        </div>
+      </div>
+      <p className="font-medium text-md">{item.quantity}x</p>
+    </div>
+  );
+};
 
 const Checkout = () => {
   const [t] = useTranslation("global");
@@ -57,6 +84,7 @@ const Checkout = () => {
           <OrderReview />
           <Separator />
         </div>
+
         <div className="md:max-w-[360px] grid gap-6 w-full h-min">
           <div className="flex justify-between w-full">
             <p className="text-2xl font-medium">{t("checkout.in-your-bag")}</p>
@@ -81,6 +109,9 @@ const Checkout = () => {
               <p>{t("cart.estimated-tax")}</p>
               <Minus />
             </div>
+            {cart.map((item) => (
+              <CartProduct key={item.id} item={item} />
+            ))}
             <div className="flex justify-between w-full font-semibold">
               <p>{t("cart.total")}</p>
               {totalPrice > 0 ? (

@@ -24,7 +24,7 @@ const Cart = () => {
 
   const handleGoToCart = () => navigate("/checkout");
 
-  const CartItem = ({ item }: { item: CartItem }) => (
+  const CartProduct = ({ item }: { item: CartItem }) => (
     <div className="flex gap-4 border-b pb-4 mb-4">
       <div className="h-24 w-24 flex-shrink-0 border flex justify-center items-center">
         {item.imageUrl ? (
@@ -129,7 +129,7 @@ const Cart = () => {
           {cart.length === 0 ? (
             <p className="text-center py-8">{t("cart.empty-bag")}</p>
           ) : (
-            cart.map((item) => <CartItem key={item.id} item={item} />)
+            cart.map((item) => <CartProduct key={item.id} item={item} />)
           )}
         </div>
 

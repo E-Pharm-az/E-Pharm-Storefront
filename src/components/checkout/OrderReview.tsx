@@ -90,7 +90,7 @@ const OrderReview = () => {
             </Alert>
             <AlertDialogFooter className="mt-6 flex flex-col sm:flex-row sm:justify-center gap-3">
               <Button
-                onClick={() => navigate("/profile")}
+                onClick={() => navigate("/account/order")}
                 className="w-full sm:w-auto"
               >
                 {t("checkout.view_order")}
